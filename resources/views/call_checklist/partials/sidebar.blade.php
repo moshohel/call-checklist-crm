@@ -60,7 +60,7 @@
             </ul>
         </li>
 
-        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "KPR"))
+        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
                 <li>
                     <a class="app-menu__item"
                         href="{{ route('call_checklist.kpr.dashboard') }}">

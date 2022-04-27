@@ -68,7 +68,7 @@ class LoginController extends Controller
             $redirectPath = 'call-checklist/index';
         }
         else if(($user->user_level == 8) && ($user->user_group == 'SHOJON') ){
-            $redirectPath = 'call-checklist/shojon/index';
+            $redirectPath = 'call-checklist/shojon/dashboard';
         }else if(($user->user_level == 8) && ($user->user_group == 'KPR')){
             $redirectPath = 'call-checklist/kpr/index';
         }

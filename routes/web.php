@@ -31,7 +31,7 @@ Route::group(['prefix' => 'call-checklist'], function () {
     Route::group(['middleware' => 'super_admin'], function () {
 
         Route::get('index', 'CallChecklist\KprController@index')->name('call_checklist.kpr.index');
-        Route::get('dashboard', 'CallChecklist\KprController@dashboard')->name('call_checklist.kpr.dashboard');
+        
 
     });
 
@@ -65,6 +65,9 @@ Route::group(['prefix' => 'call-checklist'], function () {
     Route::group(['prefix' => 'shojon'], function () {
 
         Route::get('create/{referrence_id}/{phone_number}', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
+        // Route::get('create', function(){
+        //     echo '------test';
+        // })->name('call_checklist.shojon.create');
         Route::post('store', 'CallChecklist\ShojonController@store')->name('call_checklist.shojon.store');
         Route::resource('questionair', 'QuestionairController');
 
@@ -72,6 +75,12 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('index', 'CallChecklist\ShojonController@index')->name('call_checklist.shojon.index');
             Route::get('/report/excel', 'CallChecklist\ShojonController@exportExcel')->name('shojon_excel');
             Route::get('/report/pdf/{range_type?}', 'CallChecklist\ShojonController@exportPdf');
+           
+            Route::get('dashboard', 'CallChecklist\KprController@dashboard')->name('call_checklist.kpr.dashboard');
+            // Route::get('dashboard', function()
+            // {
+            //     echo " test ------------";
+            // })->name('call_checklist.kpr.dashboard');
 
             Route::group(['middleware' => 'shojon_admin'], function () {
 

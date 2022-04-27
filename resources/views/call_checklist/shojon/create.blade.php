@@ -499,7 +499,7 @@
                         @error('client_referral') {{ $message }} @enderror
                     </div>
 
-                    <div class="form-group" id="financialAffordibilityBox" style="display: none;">
+                    <div class="form-group" id="financialAffordibilityBox" >
                         @include('call_checklist.shojon.financial_affordability_form')
                     </div>
 

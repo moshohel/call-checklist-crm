@@ -18,10 +18,28 @@
                                 <a class="btn btn-success btn-sm" href="{{ URL::to('call-checklist/kpr/report/excel/all') }}" target="_blank"><i class="fa fa-download"></i>Excel</a>
                             </span>-->
                             {{-- @include('call_checklist._date_range_label') --}}
-                            <span class="text-bold">
+                            {{-- <span class="text-bold" id="headerId">
                                 <strong> Last 10 days </strong>
-                                
-                            </span>
+                            </span> --}}
+
+                            <form action="{{ route('call_checklist.kpr.dashboard') }}" method="get" enctype="multipart/form-data" id="search">
+                              @csrf
+                              <div class="row card-body pt-0 pb-5 position-relative">
+
+                                  <div class="form-group col-3" id="from_date">
+                                    <label for="exampleFormControlInput6">Start Date</label>
+                                    <input type="datetime-local" class="form-control"  name="start_time" id="exampleFormControlInput6" placeholder="Chamber Time">
+                                  </div>
+                                  <div class="form-group col-3" id="to_date">
+                                    <label for="exampleFormControlInput5"> End Date</label>
+                                    <input type="datetime-local" class="form-control"  name="end_time" id="exampleFormControlInput5" placeholder="Chamber Time">
+                                  </div>
+                                  
+                                  <div class="form-group col-3 m-4 pt-2">
+                                    <button type="submit" class="btn btn-info btn-default" id="search-btn">Search</button>    
+                                  </div>
+                                </div>
+                            </form>
                         </div>
 
                         
@@ -60,7 +78,7 @@
                         <div class="col-xl-3 col-sm-6">
                             <div class="card widget-block p-4 rounded bg-success ">
                                 <div class="card-block">
-                                    <h3 class="text-white">9,503</h3>
+                                    <h3 class="text-white">{{ $total_call_cnt }}</h3>
                                     <p class="py-2">TOTAL CALLS</p>
                                 </div>
                                 
@@ -141,7 +159,7 @@
                         <h2 class="text-center">Financial Affordability </h2>
                     </div>
                     <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                        <canvas id="myChart" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
+                        <canvas id="FinancialAffordability" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
                     </div>
                 </div>
             </div>
@@ -154,9 +172,13 @@
 <div style="display: none;" id="call_type"> {{$call_type}} </div>
 <div style="display: none;" id="sex_cnt"> {{$sex_cnt}} </div>
 <div style="display: none;" id="call_age"> {{$call_age}} </div>
+<div style="display: none;" id="hearing_source"> {{$hearing_source}} </div>
+<div style="display: none;" id="financial_aff"> {{$financial_aff}} </div>
+<div style="display: none;" id="call_status"> {{$call_status}} </div>
 
 @endsection
 @push('scripts')
+
     <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>
     {{-- <script type="text/javascript" src="{{ asset('backend/js/chart.js') }}"></script> --}}
     {{-- <script type="text/javascript" src="{{ asset('backend/js/Chart1.min.js') }}"></script> --}}
@@ -164,6 +186,13 @@
     {{-- <script type="text/javascript" src="{{ asset('backend/js/plugins/chart.js') }}"></script> --}}
     <script type="text/javascript" src="{{ asset('backend/js/plugins/dataTables.bootstrap.min.js') }}"></script>
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
+    <script>
+      $(document).ready(function(){
+      $("#search-btn").click(function(){
+        $("#headerId").hide();
+      });
+    });
+    </script>
 
 <script>
     /*========  DEVICE - DOUGHNUT CHART For id="deviceChart========*/
@@ -229,6 +258,9 @@
 
 <script>
     /*========  DEVICE - DOUGHNUT CHART For id="deviceChart2 ========*/
+
+    var data = JSON.parse(document.getElementById("call_status").innerHTML);
+
     var deviceChart = document.getElementById("deviceChart2");
     if (deviceChart !== null) {
         var mydeviceChart = new Chart(deviceChart, {
@@ -238,7 +270,7 @@
             datasets: [
             {
                 label: ["In-Time Call", "After Hour Call", "Drop Out Cal", "Time Out Call"],
-                data: [6000, 1000, 776, 965],
+                data: data,
                 backgroundColor: [
                 "rgba(60, 179, 113, 1)",
                 "rgba(60, 60, 60, 1)",
@@ -264,7 +296,7 @@
                 },
                 label: function(tooltipItem, data) {
                 return (
-                    data["datasets"][0]["data"][tooltipItem["index"]] + " Sessions"
+                    data["datasets"][0]["data"][tooltipItem["index"]] + " Calls"
                 );
                 }
             },
@@ -359,7 +391,7 @@
 <script>
     /*======== 14. CURRENT USER BAR CHART ========*/
     var data = JSON.parse(document.getElementById("call_age").innerHTML);
-    console.log(data);
+    // console.log(data);
     var cUser = document.getElementById("currentUser");
     var xValues = [ "41-65", "31-40", "20-30", "13-19"];
     var yValues = [data.age40_65, data.age31_40, data.age20_30, data.age13_19];
@@ -463,16 +495,18 @@
 
 <script>
   /*========  DEVICE - DOUGHNUT CHART For id="deviceChart2 ========*/
+
+  var data = JSON.parse(document.getElementById("hearing_source").innerHTML);
   var deviceChart = document.getElementById("ReferralSource");
   if (deviceChart !== null) {
       var mydeviceChart = new Chart(deviceChart, {
       type: "doughnut",
       data: {
-          labels: ["In-Time Call", "After Hour Call", "Drop Out Cal", "Time Out Call"],
+          labels: ["Social Media", "Word of mouth", "KPR", "Don't know"],
           datasets: [
           {
-              label: ["In-Time Call", "After Hour Call", "Drop Out Cal", "Time Out Call"],
-              data: [6000, 1000, 776, 965],
+              label: ["Social Media", "Word of mouth", "KPR", "Don't know"],
+              data: [data.social_medial, data.word_of_mouth, data.shojon_counselor, data.dont_know],
               backgroundColor: [
               "rgba(60, 179, 113, 1)",
               "rgba(60, 60, 60, 1)",
@@ -498,7 +532,7 @@
               },
               label: function(tooltipItem, data) {
               return (
-                  data["datasets"][0]["data"][tooltipItem["index"]] + " Sessions"
+                  data["datasets"][0]["data"][tooltipItem["index"]] + " "
               );
               }
           },
@@ -522,12 +556,101 @@
 </script>
 
 <script>
-  var ctx = document.getElementById("myChart");
+  /*======== 14. CURRENT USER BAR CHART ========*/
+  var data = JSON.parse(document.getElementById("financial_aff").innerHTML);
+  // console.log(data);
+  var cUser = document.getElementById("FinancialAffordability");
+  var xValues = [ "<0-50", "51-100", "101-200"];
+  var yValues = data;
+  var barColors = ["blue","orange","brown"];
+  var data = {
+    labels: xValues,
+    datasets: [{
+      label:  [ "41-65", "31-40", "20-30"],
+      data: yValues,
+      backgroundColor: barColors
+    }]
+  }
+if (cUser !== null) {
+  var myUChart = new Chart(cUser, {
+    type: "horizontalBar",
+    data: {
+      labels: xValues,
+      datasets: [
+        {
+          
+          // label: "Italy",
+          data: yValues,
+          // data: [2, 3.2, 1.8, 2.1, 1.5, 3.5, 4, 2.3, 2.9, 4.5, 1.8, 3.4, 2.8],
+          backgroundColor: barColors
+          // backgroundColor: "#4c84ff"
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      scales: {
+        xAxes: [
+          {
+            gridLines: {
+              drawBorder: true,
+              display: false,
+            },
+            ticks: {
+              max: Math.max(...data.datasets[0].data) + 10,
+              fontColor: "#8a909d",
+              fontFamily: "Roboto, sans-serif",
+              display: true, // hide main x-axis line
+              beginAtZero: true,
+              callback: function(tick, index, array) {
+                return index % 2 ? "" : tick;
+              }
+            },
+            barPercentage: 1.8,
+            categoryPercentage: 0.2
+          }
+        ],
+        yAxes: [
+          {
+            
+            gridLines: {
+              drawBorder: true,
+              display: true,
+              color: "#eee",
+              zeroLineColor: "#eee"
+            },
+            ticks: {
+              fontColor: "#8a909d",
+              fontFamily: "Roboto, sans-serif",
+              display: true,
+              beginAtZero: true
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'IN TAKA',
+
+            }
+            
+          }
+        ]
+      },
+
+    }
+  });
+}
+</script>
+
+<script>
+  var ctx = document.getElementById("mmyChart");
   // debugger;
   var data = {
     labels: ["2 Jan", "9 Jan", "16 Jan", "23 Jan", "30 Jan", "6 Feb", "13 Feb"],
     datasets: [{
-      data: [150, 87, 56, 50, 88, 60, 45],
+      data: [15, 87, 56, 50, 88, 60, 45],
       backgroundColor: "#4082c4"
     }]
   }
@@ -574,7 +697,12 @@
             max: Math.max(...data.datasets[0].data) + 10,
             display: false,
             beginAtZero: true
-          }
+          },
+          scaleLabel: {
+                display: true,
+                labelString: 'IN Taka',
+
+              }
         }],
         xAxes: [{
           gridLines: {
