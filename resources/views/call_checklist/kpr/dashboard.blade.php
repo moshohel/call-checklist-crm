@@ -28,11 +28,11 @@
 
                                   <div class="form-group col-3" id="from_date">
                                     <label for="exampleFormControlInput6">Start Date</label>
-                                    <input type="datetime-local" class="form-control"  name="start_time" id="exampleFormControlInput6" placeholder="Chamber Time">
+                                    <input type="date" class="form-control"  name="start_time" id="exampleFormControlInput6" placeholder="Chamber Time">
                                   </div>
                                   <div class="form-group col-3" id="to_date">
                                     <label for="exampleFormControlInput5"> End Date</label>
-                                    <input type="datetime-local" class="form-control"  name="end_time" id="exampleFormControlInput5" placeholder="Chamber Time">
+                                    <input type="date" class="form-control"  name="end_time" id="exampleFormControlInput5" placeholder="Chamber Time">
                                   </div>
                                   
                                   <div class="form-group col-3 m-4 pt-2">
@@ -165,6 +165,18 @@
             </div>
 
 
+            <div class="col-12 col-lg-6">
+              <div class="card card-default">
+                  <div class="card-header justify-content-center">
+                      <h2 class="text-center">Test </h2>
+                  </div>
+                  <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                      <canvas id="mmyChart" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
+                  </div>
+              </div>
+          </div>
+
+
         </div>
     </div>
 </div>
@@ -266,17 +278,17 @@
         var mydeviceChart = new Chart(deviceChart, {
         type: "doughnut",
         data: {
-            labels: ["In-Time Call", "After Hour Call", "Drop Out Cal", "Time Out Call"],
+            labels: ["In-Time Call", "After Hour Call", "Drop Out Cal", "Time Out Call", "Recived Call"],
             datasets: [
             {
-                label: ["In-Time Call", "After Hour Call", "Drop Out Cal", "Time Out Call"],
+                label: ["In-Time Call", "After Hour Call", "Drop Out Cal", "Time Out Call", "Recived Call"],
                 data: data,
                 backgroundColor: [
                 "rgba(60, 179, 113, 1)",
                 "rgba(60, 60, 60, 1)",
                 "rgba(255, 99, 71, 1)",
                 "rgba(106, 90, 205, 1)",
-                
+                "rgba(2, 5, 73, 0.89)",
                 ],
                 borderWidth: 1
             }
@@ -571,77 +583,77 @@
       backgroundColor: barColors
     }]
   }
-if (cUser !== null) {
-  var myUChart = new Chart(cUser, {
-    type: "horizontalBar",
-    data: {
-      labels: xValues,
-      datasets: [
-        {
-          
-          // label: "Italy",
-          data: yValues,
-          // data: [2, 3.2, 1.8, 2.1, 1.5, 3.5, 4, 2.3, 2.9, 4.5, 1.8, 3.4, 2.8],
-          backgroundColor: barColors
-          // backgroundColor: "#4c84ff"
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {
-        display: false
-      },
-      scales: {
-        xAxes: [
-          {
-            gridLines: {
-              drawBorder: true,
-              display: false,
-            },
-            ticks: {
-              max: Math.max(...data.datasets[0].data) + 10,
-              fontColor: "#8a909d",
-              fontFamily: "Roboto, sans-serif",
-              display: true, // hide main x-axis line
-              beginAtZero: true,
-              callback: function(tick, index, array) {
-                return index % 2 ? "" : tick;
-              }
-            },
-            barPercentage: 1.8,
-            categoryPercentage: 0.2
-          }
-        ],
-        yAxes: [
+  if (cUser !== null) {
+    var myUChart = new Chart(cUser, {
+      type: "horizontalBar",
+      data: {
+        labels: xValues,
+        datasets: [
           {
             
-            gridLines: {
-              drawBorder: true,
-              display: true,
-              color: "#eee",
-              zeroLineColor: "#eee"
-            },
-            ticks: {
-              fontColor: "#8a909d",
-              fontFamily: "Roboto, sans-serif",
-              display: true,
-              beginAtZero: true
-            },
-            scaleLabel: {
-              display: true,
-              labelString: 'IN TAKA',
-
-            }
-            
+            // label: "Italy",
+            data: yValues,
+            // data: [2, 3.2, 1.8, 2.1, 1.5, 3.5, 4, 2.3, 2.9, 4.5, 1.8, 3.4, 2.8],
+            backgroundColor: barColors
+            // backgroundColor: "#4c84ff"
           }
         ]
       },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                drawBorder: true,
+                display: false,
+              },
+              ticks: {
+                max: Math.max(...data.datasets[0].data) + 10,
+                fontColor: "#8a909d",
+                fontFamily: "Roboto, sans-serif",
+                display: true, // hide main x-axis line
+                beginAtZero: true,
+                callback: function(tick, index, array) {
+                  return index % 2 ? "" : tick;
+                }
+              },
+              barPercentage: 1.8,
+              categoryPercentage: 0.2
+            }
+          ],
+          yAxes: [
+            {
+              
+              gridLines: {
+                drawBorder: true,
+                display: true,
+                color: "#eee",
+                zeroLineColor: "#eee"
+              },
+              ticks: {
+                fontColor: "#8a909d",
+                fontFamily: "Roboto, sans-serif",
+                display: true,
+                beginAtZero: true
+              },
+              scaleLabel: {
+                display: true,
+                labelString: 'IN TAKA',
 
-    }
-  });
-}
+              }
+              
+            }
+          ]
+        },
+
+      }
+    });
+  }
 </script>
 
 <script>

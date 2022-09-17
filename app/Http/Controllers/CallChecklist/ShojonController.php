@@ -32,8 +32,8 @@ class ShojonController extends Controller
         $shojonData = $this->ShojonFilteredData($request, $data);
 
         // $shojonData = CallChecklistForShojon::whereBetween('created_at', [$data['start'], $data['end']])->get();
-		//dd($shojonData);
-		//dd($data);
+        //dd($shojonData);
+        //dd($data);
 
         return view('call_checklist.shojon.index', compact('pageTitle', 'shojonData', 'data'));
     }
@@ -58,13 +58,11 @@ class ShojonController extends Controller
             $mental_illness = ShojonMentalIllnessDiagnosis::all()->pluck('illness');
 
             return view('call_checklist.shojon.create', compact('pageTitle', 'districts', 'main_reason', 'secondary_reason', 'mental_illness', 'refId', 'phone', 'is_phone_no', 'previous_data', 'last'));
-
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
-
     }
 
     public function store(Request $request)
@@ -189,7 +187,7 @@ class ShojonController extends Controller
 
         $data['start'] = $request->start ? Carbon::parse($request->start) : Carbon::now()->subMonths($this->monthDuration);
         $data['end'] = $request->end ? Carbon::parse($request->end . " 23:59:59") : Carbon::now();
-        
+
         $data['sex'] = ['Male', 'Female', 'Intersex', 'Others'];
         $data['age'] = ['0-12', '13-19', '20-30', '31-40', '41-65', '65+', 'Do not know', 'Do not want to share'];
         $data['occupation'] = ['Student', 'Job holder', 'Businessperson', 'Housewife', 'Unemployed', 'Retired', 'Could not tell'];
@@ -206,7 +204,7 @@ class ShojonController extends Controller
         $data['suicidal_risk'] = ['No', 'Don\'t know', 'Mild', 'Moderate', 'Severe', 'Medical emergency'];
         $data['post_mood_rating'] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
         $data['call_effectivenes'] = ['Not at all effective', 'Slightly effective', 'Effective', 'Considerably effective', 'Very effective'];
-        $data['client_referral'] = ['No', 'Health Hotline 09678771511', 'Kaan Pete Roi 9612119911', 'Inner Circle 01777772215', 'SHOJON Tier 2 for Psychotherapy', ' SHOJON Tier 3 for Psychiatric Consultation','Others'];
+        $data['client_referral'] = ['No', 'Health Hotline 09678771511', 'Kaan Pete Roi 9612119911', 'Inner Circle 01777772215', 'SHOJON Tier 2 for Psychotherapy', ' SHOJON Tier 3 for Psychiatric Consultation', 'Others'];
         $data['volunteer_id'] = User::pluck('user')->all();
         return $data;
     }
@@ -215,7 +213,7 @@ class ShojonController extends Controller
     {
         $query = CallChecklistForShojon::query();
 
-        $Data = $query->select('agent', 'created_at', 'customer_sec','call_started',  'call_ended','phone_number', 'caller_name', 'sex','age','occupation', 'socio_economic_status', 'location', 'hearing_source', 'is_recordable', 'call_type', 'caller', 'service', 'pre_mood_rating', 'main_reason_for_calling', 'secondary_reason_for_calling', 'mental_illness_diagnosis', 'suicidal_risk', 'post_mood_rating', 'call_effectivenes', 'client_referral', 'ref_client_name','ref_age', 'ref_therapy_reason','ref_phone_number','ref_preferred_time','ref_emergency_number','ref_financial_affort','ref_therapist_preference', 'caller_description');
+        $Data = $query->select('agent', 'created_at', 'customer_sec', 'call_started',  'call_ended', 'phone_number', 'caller_name', 'sex', 'age', 'occupation', 'socio_economic_status', 'location', 'hearing_source', 'is_recordable', 'call_type', 'caller', 'service', 'pre_mood_rating', 'main_reason_for_calling', 'secondary_reason_for_calling', 'mental_illness_diagnosis', 'suicidal_risk', 'post_mood_rating', 'call_effectivenes', 'client_referral', 'ref_client_name', 'ref_age', 'ref_therapy_reason', 'ref_phone_number', 'ref_preferred_time', 'ref_emergency_number', 'ref_financial_affort', 'ref_therapist_preference', 'caller_description');
 
         $Data = $query->whereBetween('created_at', [$data['start'], $data['end']]);
 
@@ -224,7 +222,6 @@ class ShojonController extends Controller
             $endttime = Carbon::createFromTimeString($request->end_time);
             $Data = $query->whereTime('created_at', '>', $starttime);
             $Data = $query->whereTime('created_at', '<', $endttime);
-
         }
 
         if (auth()->user()->user_level == 1) {
@@ -266,7 +263,7 @@ class ShojonController extends Controller
         if ($request->client_referral)
             $Data = $query->where('client_referral', $request->client_referral);
         if ($request->volunteer_id)
-            $Data = $query->where('agent',$request->volunteer_id);
+            $Data = $query->where('agent', $request->volunteer_id);
 
         return $Data->get();
     }
@@ -296,7 +293,9 @@ class ShojonController extends Controller
         $data = $this->setFilterParams($request);
 
         $filtered_data = $this->ShojonFilteredData($request, $data);
-
+        // print_r(gettype($filtered_data));
+        // print_r($filtered_data);
+        // dd($filtered_data->items);
         return Excel::download(new ShojonCallChecklistExport($filtered_data), 'ShojonCallChecklistReport.xlsx');
     }
 }
