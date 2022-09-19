@@ -337,58 +337,58 @@ class KprController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'caller_name' => 'required|max:191',
-            'sex' => 'required',
-            'age' => 'required',
-            'occupation' => 'required',
-            // 'is_recordable' => 'required',
-            'call_type' => 'required',
-            'caller' => 'required',
-            'risk_level' => 'required',
-            'main_reason_for_calling' => 'required',
-            'caller_experience' => 'required',
-            'client_referral' => 'required',
-            'caller_description' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'caller_name' => 'required|max:191',
+        //     'sex' => 'required',
+        //     'age' => 'required',
+        //     'occupation' => 'required',
+        //     // 'is_recordable' => 'required',
+        //     'call_type' => 'required',
+        //     'caller' => 'required',
+        //     'risk_level' => 'required',
+        //     'main_reason_for_calling' => 'required',
+        //     'caller_experience' => 'required',
+        //     'client_referral' => 'required',
+        //     'caller_description' => 'required',
+        // ]);
 
         $params = $request->except('_token');
 
-        if ($params['caller_name'] == "on") {
-            $params['caller_name'] = $params['name'];
-        }
-        if ($params['occupation'] == "on") {
-            $params['occupation'] = $params['other_occupation'];
-        }
-        if ($params['main_reason_for_calling'] == "on") {
-            $params['main_reason_for_calling'] = $params['main_reason'];
-        }
-        if ($params['client_referral'] == "on") {
-            $params['client_referral'] = $params['referral'];
-        }
+        // if ($params['caller_name'] == "on") {
+        //     $params['caller_name'] = $params['name'];
+        // }
+        // if ($params['occupation'] == "on") {
+        //     $params['occupation'] = $params['other_occupation'];
+        // }
+        // if ($params['main_reason_for_calling'] == "on") {
+        //     $params['main_reason_for_calling'] = $params['main_reason'];
+        // }
+        // if ($params['client_referral'] == "on") {
+        //     $params['client_referral'] = $params['referral'];
+        // }
 
 
 
         $data = [
-            'referrence_id' => $params['referrence_id'],
-            'phone_number' => $params['phone_number'],
+            'referrence_id' => $request['referrence_id'],
+            'phone_number' => $request['phone_number'],
             'agent' => (auth()->user() != null) ? auth()->user()->user : "vicidial",
-            'call_received' => isset($params['call_received']) ? strftime('%Y-%m-%d %H:%M:%S', strtotime($request->call_received)) : null,
-            'call_started' => isset($params['call_started']) ? strftime('%Y-%m-%d %H:%M:%S', strtotime($request->call_started)) : null,
-            'call_ended' => isset($params['call_ended']) ? strftime('%Y-%m-%d %H:%M:%S', strtotime($request->call_ended)) : null,
-            'caller_name' => $params['caller_name'],
-            'sex' => $params['sex'],
-            'age' => $params['age'],
-            'occupation' => $params['occupation'],
-            'location' => isset($params['district']) ? $params['district'] : null,
-            'call_type' => $params['call_type'],
-            'caller' => $params['caller'],
-            'risk_level' => $params['risk_level'],
-            'main_reason_for_calling' => $params['main_reason_for_calling'],
-            'secondary_reason_for_calling' => isset($params['secondary_reason_for_calling']) ? implode("; ", $params['secondary_reason_for_calling']) : null,
-            'caller_experience' => $params['caller_experience'],
-            'client_referral' => $params['client_referral'],
-            'caller_description' => $params['caller_description'],
+            'call_received' => isset($request['call_received']) ? strftime('%Y-%m-%d %H:%M:%S', strtotime($request->call_received)) : null,
+            'call_started' => isset($request['call_started']) ? strftime('%Y-%m-%d %H:%M:%S', strtotime($request->call_started)) : null,
+            'call_ended' => isset($request['call_ended']) ? strftime('%Y-%m-%d %H:%M:%S', strtotime($request->call_ended)) : null,
+            'caller_name' => $request['caller_name'],
+            'sex' => $request['sex'],
+            'age' => $request['age'],
+            'occupation' => $request['occupation'],
+            'location' => isset($request['district']) ? $request['district'] : null,
+            'call_type' => $request['call_type'],
+            'caller' => $request['caller'],
+            'risk_level' => $request['risk_level'],
+            'main_reason_for_calling' => $request['main_reason_for_calling'],
+            'secondary_reason_for_calling' => isset($request['secondary_reason_for_calling']) ? implode("; ", $request['secondary_reason_for_calling']) : null,
+            'caller_experience' => $request['caller_experience'],
+            'client_referral' => $request['client_referral'],
+            'caller_description' => $request['caller_description'],
             'created_by' => 1,
             'updated_by' => 1
         ];

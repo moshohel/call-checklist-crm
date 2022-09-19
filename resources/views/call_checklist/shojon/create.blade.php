@@ -38,7 +38,7 @@
 
 
                         <div class="form-group">
-                            <label class="control-label" for="sex"><b>Sex: <span class="required">*</span></b></label>
+                            <label class="control-label" for="sex"><b>Sex:</label>
                             @php $types = ['Male', 'Female', 'Intersex', 'Others']; @endphp
                             <select name="sex" id="sex" list="sex_list"
                                     class="form-control @error('sex') is-invalid @enderror">
@@ -57,8 +57,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="age"><b>Age: <span
-                                        class="required">*</span></b></label><br>
+                            <label class="control-label" for="age"><b>Age: </label><br>
                             @php $types = ['0-12','13-19', '20-30', '31-40', '41-65', '65+', 'Do not know', 'Do not want to share']; @endphp
                             <select name="age" id="age" list="age_list"
                                     class="form-control @error('age') is-invalid @enderror">
@@ -77,7 +76,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="occupation"><b>Occupation: <span class="required">*</span></b></label>
+                            <label class="control-label" for="occupation"><b>Occupation:</label>
                             @php $types = ['Student', 'Job holder', 'Businessperson', 'Housewife', 'Unemployed', 'Retired', 'Could not tell']; @endphp
                             <div class="form-control @error('occupation') is-invalid @enderror">
                                 <label>
@@ -127,7 +126,7 @@
                         </div>
 
                         <div>
-                            <label class="control-label" for="district"><b>Location: <span class="required">*</span></b></label>
+                            <label class="control-label" for="district"><b>Location:</label>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group" @error('district') is-invalid @enderror">
@@ -146,7 +145,7 @@
 
                     <div class="form-group">
                         <label class="control-label" for="hearing_source"><b>Where/how did the Client hear about SHOJON:
-                                <span class="required">*</span></b></label><br>
+                               </label><br>
                         @php $types = ['Search Engine', 'KPR', 'Social Media', 'Word of mouth', 'SUEPP', 'SF Microfinance', 'Radio', 'TV', 'Print Media', 'Don\'t know']; @endphp
                         <div class="form-control @error('hearing_source') is-invalid @enderror">
                             <label>
@@ -175,8 +174,7 @@
                     </div>
 
                     <div class="form-group" style="display: none">
-                        <label class="control-label" for="yes_no_radio"><b>Consent for Recording: <span
-                                    class="required">*</span></b></label>
+                        <label class="control-label" for="yes_no_radio"><b>Consent for Recording: </label>
                         <div class="form-control @error('is_recordable') is-invalid @enderror">
                             <div>
                                 <input type="radio" id="yes" name="is_recordable" value=1>
@@ -193,8 +191,7 @@
 
 
                     <div class="form-group">
-                        <label class="control-label" for="call_type"><b>Call Type: <span
-                                    class="required">*</span></b></label>
+                        <label class="control-label" for="call_type"><b>Call Type: </label>
                         @php $types = ['Received Service', 'Referral', 'Information related call', 'Inappropriate', 'Information', 'Wrong Number', 'Hang up', 'Got Disconnected']; @endphp
                         <select name="call_type" id="call_type" list="call_type_list"
                                 class="form-control @error('call_type') is-invalid @enderror">
@@ -213,8 +210,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="caller"><b>Caller type: <span
-                                    class="required">*</span></b></label>
+                        <label class="control-label" for="caller"><b>Caller type: </label>
                         @php $types = ['First Time', 'Regular Caller', 'Follow up', 'Continuation of previous call', 'Don\'t know']; @endphp
                         <select name="caller" id="caller" list="caller_type_list"
                                 class="form-control @error('caller') is-invalid @enderror">
@@ -233,8 +229,7 @@
                     </div>
 
                     <div class="form-group" style="display: none">
-                        <label class="control-label" for="service"><b>Need Of the service: <span
-                                    class="required">*</span></b></label>
+                        <label class="control-label" for="service"><b>Need Of the service: </label>
                         @php $types = ['Ventilation & Emotional Support', 'Psychotherapy/counseling', 'Medication/psychiatric consultation', 'Referral', 'Hospitalization', 'Rehabilitation', 'Don\'t know']; @endphp
                         <div class="form-control @error('service') is-invalid @enderror">
                             <label>
@@ -279,8 +274,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="main_reason_for_calling"><b>Primary Reason for Calling: <span
-                                    class="required">*</span></b></label>
+                        <label class="control-label" for="main_reason_for_calling"><b>Primary Reason for Calling: </label>
                         <div class="form-control @error('main_reason_for_calling') is-invalid @enderror">
                             <label>
                                 @foreach($main_reason as $item)
@@ -312,7 +306,7 @@
                     <div class="form-group">
                         <label class="control-label" for="secondary_reason_for_calling"><b>Secondary Reason for Calling:
                                 (Select Multiple)
-                                <span class="required">*</span></b></label>
+                              </label>
                         <div class="form-control @error('secondary_reason_for_calling') is-invalid @enderror">
                             <label>
                                 @foreach($secondary_reason as $item)
@@ -342,7 +336,7 @@
 
                     <div class="form-group">
                         <label class="control-label" for="mental_illness_diagnosis"><b>Does the client have any mental
-                                illness diagnosis? (Select Multiple) <span class="required">*</span></b></label>
+                                illness diagnosis? (Select Multiple)
                         <div class="form-control @error('mental_illness_diagnosis') is-invalid @enderror">
                             <label>
 
@@ -427,7 +421,7 @@
 
                     <div class="form-group">
                         <label class="control-label" for="call_effectivenes"><b>How effective do you think the call was
-                                for the client at the end of the call? <span class="required">*</span></b></label>
+                                for the client at the end of the call?</label>
                         @php $types = ['Not at all effective', 'Slightly effective', 'Effective', 'Considerably effective', 'Very effective','Not applicable']; @endphp
                         <select name="call_effectivenes" id="call_effectivenes" list="call_effectivenes_list"
                                 class="form-control @error('call_effectivenes') is-invalid @enderror">
@@ -446,8 +440,7 @@
                     </div>
 
                     <div class="form-group" id="referred">
-                        <label class="control-label" for="client_referral"><b>Was the client referred elsewhere? <span
-                                    class="required">*</span></b></label>
+                        <label class="control-label" for="client_referral"><b>Was the client referred elsewhere? </label>
                         @php $types = ['No', 'Health Hotline 09678771511', 'Kaan Pete Roi 9612119911', 'Inner Circle 01777772215']; @endphp
                         <div class="form-control @error('client_referral') is-invalid @enderror">
                             <label>
@@ -503,7 +496,7 @@
                         @include('call_checklist.shojon.financial_affordability_form')
                     </div>
 
-                    {{-- <label class="control-label" for="financial_affordability"><b>If referred to 2/3 Tier of SHOJON – Financial affordability: <span class="required">*</span></b></label>
+                    {{-- <label class="control-label" for="financial_affordability"><b>If referred to 2/3 Tier of SHOJON – Financial affordability:</label>
                         @php $types = ['Free', '50 - 100', '100 - 200', '200 - 300', '300-500', '500 – 800', '800 – 1000', 'Not referred to SHOJON tier 2/3']; @endphp
                         <select name="financial_affordability" id="financial_affordability" class="form-control @error('financial_affordability') is-invalid @enderror">
                             <option disabled selected>Select Financial affordability</option>
@@ -514,8 +507,7 @@
                         @error('financial_affordability') {{ $message }} @enderror --}}
 
                     <div class="form-group">
-                        <label class="control-label" for="caller_description"><b>Call Description: <span
-                                    class="required">*</span></b></label>
+                        <label class="control-label" for="caller_description"><b>Call Description: </label>
                         <textarea rows="5" cols="50"
                                   class="form-control
                                 @error('caller_description') is-invalid @enderror"

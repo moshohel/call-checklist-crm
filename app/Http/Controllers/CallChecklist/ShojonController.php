@@ -67,86 +67,86 @@ class ShojonController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'referrence_id' => 'required',
-            'phone_number' => 'required',
-            'sex' => 'required',
-            'age' => 'required',
-            'occupation' => 'required',
-            'location' => 'required',
-            'hearing_source' => 'required',
-            'call_type' => 'required',
-            'caller' => 'required',
-            'main_reason_for_calling' => 'required',
-            'secondary_reason_for_calling' => 'required',
-            'mental_illness_diagnosis' => 'required',
-            'ghq' => 'required',
-            'call_effectivenes' => 'required',
-            'client_referral' => 'required',
-            'caller_description' => 'required',
-        ]);
+        // $this->validate($request, [
+        //     'referrence_id' => 'required',
+        //     'phone_number' => 'required',
+        //     'sex' => 'required',
+        //     'age' => 'required',
+        //     'occupation' => 'required',
+        //     'location' => 'required',
+        //     'hearing_source' => 'required',
+        //     'call_type' => 'required',
+        //     'caller' => 'required',
+        //     'main_reason_for_calling' => 'required',
+        //     'secondary_reason_for_calling' => 'required',
+        //     'mental_illness_diagnosis' => 'required',
+        //     'ghq' => 'required',
+        //     'call_effectivenes' => 'required',
+        //     'client_referral' => 'required',
+        //     'caller_description' => 'required',
+        // ]);
 
         if ($request->message) {
             $this->sendSms($request->message, $request->phone_number);
         }
 
-        $params = $request->except('_token');
+        // $params = $request->except('_token');
 
-        if ($params['occupation'] == "on") {
-            $params['occupation'] = $params['other_occupation'];
-        }
-        if ($params['hearing_source'] == "on") {
-            $params['hearing_source'] = $params['other_hearing_source'];
-        }
-        if ($params['main_reason_for_calling'] == "on") {
-            $params['main_reason_for_calling'] = $params['other_main_reason_for_calling'];
-        }
-        if ($params['secondary_reason_for_calling'] == "on") {
-            $params['secondary_reason_for_calling'] = $params['other_secondary_reason_for_calling'];
-        } elseif ($params['other_secondary_reason_for_calling'][0] != null) {
-            $params['secondary_reason_for_calling'] = array_merge($params['secondary_reason_for_calling'], $params['other_secondary_reason_for_calling']);
-        }
-        if ($params['mental_illness_diagnosis'] == "on") {
-            $params['mental_illness_diagnosis'] = $params['other_mental_illness_diagnosis'];
-        } elseif ($params['mental_illness_diagnosis'][0] != null) {
-            $params['mental_illness_diagnosis'] = array_merge($params['mental_illness_diagnosis'], $params['other_mental_illness_diagnosis']);
-        }
-        if ($params['client_referral'] == "on") {
-            $params['client_referral'] = $params['other_client_referral'];
-        }
+        // if ($params['occupation'] == "on") {
+        //     $params['occupation'] = $params['other_occupation'];
+        // }
+        // if ($params['hearing_source'] == "on") {
+        //     $params['hearing_source'] = $params['other_hearing_source'];
+        // }
+        // if ($params['main_reason_for_calling'] == "on") {
+        //     $params['main_reason_for_calling'] = $params['other_main_reason_for_calling'];
+        // }
+        // if ($params['secondary_reason_for_calling'] == "on") {
+        //     $params['secondary_reason_for_calling'] = $params['other_secondary_reason_for_calling'];
+        // } elseif ($params['other_secondary_reason_for_calling'][0] != null) {
+        //     $params['secondary_reason_for_calling'] = array_merge($params['secondary_reason_for_calling'], $params['other_secondary_reason_for_calling']);
+        // }
+        // if ($params['mental_illness_diagnosis'] == "on") {
+        //     $params['mental_illness_diagnosis'] = $params['other_mental_illness_diagnosis'];
+        // } elseif ($params['mental_illness_diagnosis'][0] != null) {
+        //     $params['mental_illness_diagnosis'] = array_merge($params['mental_illness_diagnosis'], $params['other_mental_illness_diagnosis']);
+        // }
+        // if ($params['client_referral'] == "on") {
+        //     $params['client_referral'] = $params['other_client_referral'];
+        // }
 
         $data = [
-            'referrence_id' => $params['referrence_id'],
-            'phone_number' => $params['phone_number'],
+            'referrence_id' => $request['referrence_id'],
+            'phone_number' => $request['phone_number'],
             'agent' => (auth()->user() != null) ? auth()->user()->user : "vicidia",
-            'caller_name' => isset($params['caller_name']) ? $params['caller_name'] : null,
+            'caller_name' => isset($request['caller_name']) ? $request['caller_name'] : null,
             'caller_id' => 1,
-            'sex' => $params['sex'],
-            'age' => $params['age'],
-            'occupation' => $params['occupation'],
-            'socio_economic_status' => isset($params['socio_economic_status']) ? $params['socio_economic_status'] : null,
-            'location' => $params['location'],
-            'hearing_source' => $params['hearing_source'],
-            'call_type' => $params['call_type'],
-            'caller' => $params['caller'],
-            'pre_mood_rating' => $params['pre_mood_rating'],
-            'main_reason_for_calling' => $params['main_reason_for_calling'],
-            'secondary_reason_for_calling' => implode("; ", $params['secondary_reason_for_calling']),
-            'mental_illness_diagnosis' => implode("; ", $params['mental_illness_diagnosis']),
-            'ghq' => $params['ghq'],
-            'suicidal_risk' => isset($params['suicidal_risk']) ? $params['suicidal_risk'] : null,
-            'post_mood_rating' => $params['post_mood_rating'],
-            'call_effectivenes' => $params['call_effectivenes'],
-            'client_referral' => $params['client_referral'],
-            'caller_description' => $params['caller_description'],
-            'ref_client_name' => $params['ref_client_name'] ? $params['ref_client_name'] : null,
-            'ref_age' => $params['ref_age'] ? $params['ref_age'] : null,
-            'ref_therapy_reason' => $params['ref_therapy_reason'] ? $params['ref_therapy_reason'] : null,
-            'ref_phone_number' => $params['ref_phone_number'] ? $params['ref_phone_number'] : null,
-            'ref_preferred_time' => $params['ref_preferred_time'] ? $params['ref_preferred_time'] : null,
-            'ref_emergency_number' => $params['ref_emergency_number'] ? $params['ref_emergency_number'] : null,
-            'ref_financial_affort' => $params['ref_financial_affort'] ? $params['ref_financial_affort'] : null,
-            'ref_therapist_preference' => $params['ref_therapist_preference'] ? $params['ref_therapist_preference'] : null,
+            'sex' => $request['sex'],
+            'age' => $request['age'],
+            'occupation' => $request['occupation'],
+            'socio_economic_status' => isset($request['socio_economic_status']) ? $request['socio_economic_status'] : null,
+            'location' => $request['location'],
+            'hearing_source' => $request['hearing_source'],
+            'call_type' => $request['call_type'],
+            'caller' => $request['caller'],
+            'pre_mood_rating' => $request['pre_mood_rating'],
+            'main_reason_for_calling' => $request['main_reason_for_calling'],
+            'secondary_reason_for_calling' => implode("; ", $request['secondary_reason_for_calling']),
+            'mental_illness_diagnosis' => implode("; ", $request['mental_illness_diagnosis']),
+            'ghq' => $request['ghq'],
+            'suicidal_risk' => isset($request['suicidal_risk']) ? $request['suicidal_risk'] : null,
+            'post_mood_rating' => $request['post_mood_rating'],
+            'call_effectivenes' => $request['call_effectivenes'],
+            'client_referral' => $request['client_referral'],
+            'caller_description' => $request['caller_description'],
+            'ref_client_name' => $request['ref_client_name'] ? $request['ref_client_name'] : null,
+            'ref_age' => $request['ref_age'] ? $request['ref_age'] : null,
+            'ref_therapy_reason' => $params['ref_therapy_reason'] ? $request['ref_therapy_reason'] : null,
+            'ref_phone_number' => $request['ref_phone_number'] ? $request['ref_phone_number'] : null,
+            'ref_preferred_time' => $request['ref_preferred_time'] ? $request['ref_preferred_time'] : null,
+            'ref_emergency_number' => $request['ref_emergency_number'] ? $request['ref_emergency_number'] : null,
+            'ref_financial_affort' => $request['ref_financial_affort'] ? $request['ref_financial_affort'] : null,
+            'ref_therapist_preference' => $request['ref_therapist_preference'] ? $request['ref_therapist_preference'] : null,
             'created_by' => 1,
             'updated_by' => 1
         ];
