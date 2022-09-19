@@ -29,7 +29,7 @@ Auth::routes();
 Route::group(['prefix' => 'call-checklist'], function () {
 
 
-    Route::get('/pupup', 'CallChecklist\ShojonController@pupup')->name('call_checklist.shojon.pupup');
+    Route::get('/pupup/{number}', 'CallChecklist\ShojonController@pupup')->name('call_checklist.shojon.pupup');
 
 
     Route::group(['middleware' => 'super_admin'], function () {
