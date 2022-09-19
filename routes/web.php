@@ -28,44 +28,41 @@ Auth::routes();
 
 Route::group(['prefix' => 'call-checklist'], function () {
 
+
+    Route::get('/pupup', 'CallChecklist\ShojonController@pupup')->name('call_checklist.shojon.pupup');
+
+
     Route::group(['middleware' => 'super_admin'], function () {
-
-        Route::get('index', 'CallChecklist\KprController@index')->name('call_checklist.kpr.index');
-        
-
+        Route::get('index', 'CallChecklist\KprController@index')->name('call_checklist.kpr.index'); // same as /call-checklist/kpr/index
     });
 
 
     Route::group(['prefix' => 'kpr'], function () {
 
         // open for asterisk and all
-        Route::get('create/{referrence_id}/{phone?}', 'CallChecklist\KprController@create')->name('call_checklist.kpr.create');
+        Route::get('create/{referrence_id}/{phone?}', 'CallChecklist\KprController@create')->name('call_checklist.kpr.create'); // Same as /call-checklist/kpr/create
         Route::post('store', 'CallChecklist\KprController@store')->name('call_checklist.kpr.store');
 
         Route::group(['middleware' => 'auth.kpr'], function () {
 
-            Route::get('index', 'CallChecklist\KprController@index')->name('call_checklist.kpr.index');
-            Route::get('/report/excel', 'CallChecklist\KprController@exportExcel')->name('kpr_excel');;
+            Route::get('index', 'CallChecklist\KprController@index')->name('call_checklist.kpr.index'); // /call-checklist/kpr/index
+            Route::get('/report/excel', 'CallChecklist\KprController@exportExcel')->name('kpr_excel'); // /call-checklist/kpr/report/excel
             Route::get('/report/pdf/{range_type?}', 'CallChecklist\KprController@exportPdf');
 
-            Route::get('create', 'CallChecklist\KprController@create');
+            Route::get('create', 'CallChecklist\KprController@create'); // /call-checklist/kpr/create
 
             Route::group(['middleware' => 'kpr_admin'], function () {
-
             });
             Route::group(['middleware' => 'kpr_agent'], function () {
-
             });
         });
-
-
-
     });
 
     Route::group(['prefix' => 'shojon'], function () {
 
         Route::get('create/{referrence_id}/{phone_number}', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
-        // Route::get('create', function(){
+        Route::get('create', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
+        // Route::get('create', function () {
         //     echo '------test';
         // })->name('call_checklist.shojon.create');
         Route::post('store', 'CallChecklist\ShojonController@store')->name('call_checklist.shojon.store');
@@ -75,7 +72,7 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('index', 'CallChecklist\ShojonController@index')->name('call_checklist.shojon.index');
             Route::get('/report/excel', 'CallChecklist\ShojonController@exportExcel')->name('shojon_excel');
             Route::get('/report/pdf/{range_type?}', 'CallChecklist\ShojonController@exportPdf');
-           
+
             Route::get('dashboard', 'CallChecklist\KprController@dashboard')->name('call_checklist.kpr.dashboard');
             // Route::get('dashboard', function()
             // {
@@ -83,15 +80,11 @@ Route::group(['prefix' => 'call-checklist'], function () {
             // })->name('call_checklist.kpr.dashboard');
 
             Route::group(['middleware' => 'shojon_admin'], function () {
-
             });
 
             Route::group(['middleware' => 'shojon_agent'], function () {
-
             });
         });
-
-
     });
 
     Route::get('sms_test/{message}/{phone_number}', 'CallChecklist\ShojonController@sendSms');

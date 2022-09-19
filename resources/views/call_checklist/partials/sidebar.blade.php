@@ -10,23 +10,22 @@
             <ul class="treeview-menu">
 
                 <li>
-                    <a class="app-menu__item"
-                        href="{{ url('call-checklist/kpr/create/123321405060987') }}">
+                    <a class="app-menu__item" href="{{ url('call-checklist/kpr/create/123321405060987') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">KPR Manual Entry</span>
                     </a>
                 </li>
 
             </ul>
-            {{-- <ul class="treeview-menu">
+            <ul class="treeview-menu">
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.create') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Shojon</span>
+                        <span class="app-menu__label">Shojon Manual Entry</span>
                     </a>
                 </li>
-            </ul> --}}
+            </ul>
         </li>
 
         @endif
@@ -39,8 +38,7 @@
             <ul class="treeview-menu">
                 @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "KPR"))
                 <li>
-                    <a class="app-menu__item"
-                        href="{{ route('call_checklist.kpr.index') }}">
+                    <a class="app-menu__item" href="{{ route('call_checklist.kpr.index') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">KPR Report</span>
                     </a>
@@ -50,7 +48,8 @@
             <ul class="treeview-menu">
                 @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
                 <li>
-                    <a class="app-menu__item {{ (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") ? 'active' : '' }}"
+                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                        == "SHOJON") ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.index') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Shojon Report</span>
@@ -61,13 +60,12 @@
         </li>
 
         @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
-                <li>
-                    <a class="app-menu__item"
-                        href="{{ route('call_checklist.kpr.dashboard') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Dashboard</span>
-                    </a>
-                </li>
+        <li>
+            <a class="app-menu__item" href="{{ route('call_checklist.kpr.dashboard') }}">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">Dashboard</span>
+            </a>
+        </li>
         @endif
     </ul>
 </aside>
