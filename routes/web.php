@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,22 @@ Route::get('success', function () {
 Route::post('login','Auth\LoginController@login');*/
 
 Auth::routes();
+
+// client Routes
+Route::get('generate-pdf-patient/{query}', 'Client\ClientController@generatePDF')->name('pdf.client');
+Route::group(['prefix' => 'client'], function () {
+    Route::get('/', 'Client\ClientController@index')->name('clients')->middleware('auth');
+    Route::get('/show/{id}', 'Client\ClientController@show')->name('client.show')->middleware('auth');
+    Route::get('/showInfo/{phone}', 'Client\ClientController@showInfo')->name('client.showInfo')->middleware('auth');
+    Route::post('/paging', 'Client\ClientController@paging')->name('client.paging')->middleware('auth');
+    Route::post('/search', 'Client\ClientController@search')->name('client.search')->middleware('auth');
+
+    Route::get('/create', 'Client\ClientController@create')->name('client.create');
+    Route::get('/edit/{id}', 'Client\ClientController@edit')->name('client.edit');
+    Route::post('/create', 'Client\ClientController@store')->name('client.store');
+    Route::post('/edit/{id}', 'Client\ClientController@update')->name('client.update');
+    Route::get('/delete/{id}', 'Client\ClientController@delete')->name('patient.delete');
+});
 
 Route::group(['prefix' => 'call-checklist'], function () {
 
