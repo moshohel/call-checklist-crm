@@ -27,20 +27,20 @@ Route::post('login','Auth\LoginController@login');*/
 
 Auth::routes();
 
-// client Routes
-Route::get('generate-pdf-patient/{query}', 'Client\ClientController@generatePDF')->name('pdf.client');
-Route::group(['prefix' => 'client'], function () {
-    Route::get('/', 'Client\ClientController@index')->name('clients')->middleware('auth');
-    Route::get('/show/{id}', 'Client\ClientController@show')->name('client.show')->middleware('auth');
-    Route::get('/showInfo/{phone}', 'Client\ClientController@showInfo')->name('client.showInfo')->middleware('auth');
-    Route::post('/paging', 'Client\ClientController@paging')->name('client.paging')->middleware('auth');
-    Route::post('/search', 'Client\ClientController@search')->name('client.search')->middleware('auth');
+// patient Routes
+Route::get('generate-pdf-patient/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');
+Route::group(['prefix' => 'patient'], function () {
+    Route::get('/', 'Patient\PatientController@index')->name('patients')->middleware('auth');
+    Route::get('/show/{id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');
+    Route::get('/showInfo/{phone}', 'Patient\PatientController@showInfo')->name('patient.showInfo')->middleware('auth');
+    Route::post('/paging', 'Patient\PatientController@paging')->name('patient.paging')->middleware('auth');
+    Route::post('/search', 'Patient\PatientController@search')->name('patient.search')->middleware('auth');
 
-    Route::get('/create', 'Client\ClientController@create')->name('client.create');
-    Route::get('/edit/{id}', 'Client\ClientController@edit')->name('client.edit');
-    Route::post('/create', 'Client\ClientController@store')->name('client.store');
-    Route::post('/edit/{id}', 'Client\ClientController@update')->name('client.update');
-    Route::get('/delete/{id}', 'Client\ClientController@delete')->name('patient.delete');
+    Route::get('/create', 'Patient\PatientController@create')->name('patient.create');
+    Route::get('/edit/{id}', 'Patient\PatientController@edit')->name('patient.edit');
+    Route::post('/create', 'Patient\PatientController@store')->name('patient.store');
+    Route::post('/edit/{id}', 'Patient\PatientController@update')->name('patient.update');
+    Route::get('/delete/{id}', 'Patient\PatientController@delete')->name('patient.delete');
 });
 
 Route::group(['prefix' => 'call-checklist'], function () {

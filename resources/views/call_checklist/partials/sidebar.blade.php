@@ -70,14 +70,14 @@
 
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
-                <span class="app-menu__label">Shojon Client</span>
+                <span class="app-menu__label">Shojon Patient</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="app-menu__item" href="{{ route('clients') }}">
+                    <a class="app-menu__item" href="{{ route('patients') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Clients</span>
+                        <span class="app-menu__label">Patients</span>
                     </a>
                 </li>
             </ul>
@@ -86,9 +86,9 @@
                 <li>
                     <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
                         == "SHOJON") ? 'active' : '' }}"
-                        href="{{ route('client.create') }}">
+                        href="{{ route('patient.create') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">New Client</span>
+                        <span class="app-menu__label">New Patient</span>
                     </a>
                 </li>
                 @endif

@@ -6,7 +6,7 @@
     <!-- Product Table -->
     <div class="card card-table-border-none" id="recent-orders">
       <div class="card-header justify-content-between">
-        <h2 class="pb-4">All clients</h2>
+        <h2 class="pb-4">All patients</h2>
         <div class="btn-group">
           <a id="print_excel" href="#" class="btn btn-sm btn-secondary" style="display: none">
             <i class="mdi mdi-content-save"></i> Download Excel</a>
@@ -15,7 +15,7 @@
         </div>
       </div>
       {{-- Filter --}}
-      <form class="pt-4" action="{{ route('client.search') }}" method="post" enctype="multipart/form-data" id="search">
+      <form class="pt-4" action="{{ route('patient.search') }}" method="post" enctype="multipart/form-data" id="search">
         @csrf
         <div class="row card-body pt-0 pb-5 position-relative">
           <div class="form-group col-4">
@@ -69,21 +69,22 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($clients as $client)
+            @foreach ($patients as $patient)
             <tr>
               <td>
-                <a class="text-dark" href="{{ route('client.show', $client->id) }}">{{ $client->name }}</a>
+                <a class="text-dark" href="{{ route('patient.show', $patient->id) }}">{{ $patient->name }}</a>
               </td>
-              <td class="d-none d-md-table-cell text-dark">{{ $client->phone_number }}</td>
-              <td class="d-none d-md-table-cell text-dark">{{ $client->sex }}</td>
-              <td class="d-none d-md-table-cell text-dark">{{ $client->age }}</td>
-              <td class="d-none d-md-table-cell text-dark">{{ $client->location }}</td>
-              <td class="d-none d-md-table-cell text-dark">{{ $client->occupation }}</td>
-              <td class="d-none d-md-table-cell text-dark">{{ $client->created_by }}</td>
+              <td class="d-none d-md-table-cell text-dark">{{ $patient->phone_number }}</td>
+              <td class="d-none d-md-table-cell text-dark">{{ $patient->sex }}</td>
+              <td class="d-none d-md-table-cell text-dark">{{ $patient->age }}</td>
+              <td class="d-none d-md-table-cell text-dark">{{ $patient->location }}</td>
+              <td class="d-none d-md-table-cell text-dark">{{ $patient->occupation }}</td>
+              <td class="d-none d-md-table-cell text-dark">{{ $patient->created_by }}</td>
               <td>
-                <a href="{{ route('client.show', $client->id) }}" class="btn btn-info btn-default">View</a>
-                <a href="{{ route('client.edit', $client->id) }}" class="btn btn-info btn-default">Edit</a>
-                <a href="{{ route('client.showInfo', $client->unique_id) }}" class="btn btn-info btn-default">V & Q</a>
+                <a href="{{ route('patient.show', $patient->id) }}" class="btn btn-info btn-default">Details</a>
+                <a href="{{ route('patient.edit', $patient->id) }}" class="btn btn-info btn-default">Edit</a>
+                <a href="{{ route('patient.showInfo', $patient->phone_number) }}"
+                  class="btn btn-info btn-default">History</a>
               </td>
             </tr>
             @endforeach
@@ -124,8 +125,8 @@
     serverSide: true,
     "scrollX": true,
     ajax: {
-        url: "http://127.0.0.1:8000/client/paging"
-        // url: '{{ route("client.paging") }}'
+        url: "http://127.0.0.1:8000/patient/paging"
+        // url: '{{ route("patient.paging") }}'
         ,type: 'POST'
         ,data:{_token: CSRF_TOKEN,additional_query: additional_query} //,'records_total': records_total
     }
@@ -153,7 +154,7 @@ $( "#search" ).submit(function( e ) {
             .done(function( response ) {
                 var additional_query=response.additional_query;
                 load_datatable(additional_query);
-                var url = '{{ route("pdf.client", ":id") }}';
+                var url = '{{ route("pdf.patient", ":id") }}';
                 url = url.replace(':id', additional_query);
                 document.getElementById("print_pdf").setAttribute("href",url);
                 
