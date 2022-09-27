@@ -31,7 +31,7 @@
 
                     <div class="tile-body">
                         <div class="form-group">
-                            <label class="control-label" for="caller_name"><b>Caller Name: </label>
+                            <label class="control-label" for="caller_name"><b>Caller Name: <span class="required">*</span></b></label>
                             <div class="form-control @error('caller_name') is-invalid @enderror">
                                 <label for="chkAnnonymous">
                                     <input type="radio" id="chkAnnonymous" name="caller_name" value="Annonymous" onclick="ShowNameBox()" />
@@ -51,7 +51,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="sex"><b>Sex:</label>
+                            <label class="control-label" for="sex"><b>Sex: <span class="required">*</span></b></label>
                             @php $types = ['Male', 'Female', 'Intersex', 'Others']; @endphp
                             <select name="sex" id="sex" class="form-control @error('sex') is-invalid @enderror">
                                 <option disabled selected>Select Sex</option>
@@ -63,7 +63,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="age"><b>Age: </label><br>
+                            <label class="control-label" for="age"><b>Age: <span class="required">*</span></b></label><br>
                             @php $types = ['0-12', '13-19', '20-39', '40-65', '65+', 'Don\'t know']; @endphp
                             <select name="age" id="age" class="form-control @error('age') is-invalid @enderror">
                                 <option disabled selected>Select Age</option>
@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="occupation"><b>Occupation:</label>
+                            <label class="control-label" for="occupation"><b>Occupation: <span class="required">*</span></b></label>
                             @php $types = ['Student', 'Has a job', 'Housewife', 'Unemployed', 'Don\'t know']; @endphp
                             <div class="form-control @error('occupation') is-invalid @enderror">
                                 <label>
@@ -111,7 +111,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="call_type"><b>Call Type: </label>
+                            <label class="control-label" for="call_type"><b>Call Type: <span class="required">*</span></b></label>
                             @php $types = ['Befriended Call', 'Inappropriate', 'Information', 'Wrong Number', 'Hang up', 'Got disconnected']; @endphp
                             <select name="call_type" id="call_type" class="form-control @error('call_type') is-invalid @enderror">
                                 <option disabled selected>Select Call Type</option>
@@ -123,7 +123,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="caller"><b>Caller: </label>
+                            <label class="control-label" for="caller"><b>Caller: <span class="required">*</span></b></label>
                             @php $types = ['First time', 'Regular Caller', 'Continuation of previous call', 'Don\'t know']; @endphp
                             <select name="caller" id="caller" class="form-control @error('caller') is-invalid @enderror">
                                 <option disabled selected>Select Caller</option>
@@ -135,7 +135,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="risk_level"><b>Risk Level: </label>
+                            <label class="control-label" for="risk_level"><b>Risk Level: <span class="required">*</span></b></label>
                             @php $types = ['No Risk', 'Slight Risk', 'Moderate Risk', 'Acute Risk', 'Medical Emergency', 'Didn\'t Ask', 'Didn\'t Respond']; @endphp
                             <select name="risk_level" id="risk_level" class="form-control @error('risk_level') is-invalid @enderror">
                                 <option disabled selected>Select Risk Level</option>
@@ -147,7 +147,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="main_reason_for_calling"><b>Main Reason for Calling:</label>
+                            <label class="control-label" for="main_reason_for_calling"><b>Main Reason for Calling: <span class="required">*</span></b></label>
 
                             <div class="form-control @error('main_reason_for_calling') is-invalid @enderror">
                                 <label>
@@ -181,7 +181,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label name="control-label" for="caller_experience"><b>Caller Experience:</label>
+                            <label name="control-label" for="caller_experience"><b>Caller Experience: <span class="required">*</span></b></label>
                             <select name="caller_experience" id="caller_experience" class="form-control @error('caller_experience') is-invalid @enderror">
                                 <option disabled selected>Select Experience</option>
                                 @foreach ($caller_experience as $item)
@@ -192,7 +192,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="client_referral"><b>Was the client referred elsewhere? </label>
+                            <label class="control-label" for="client_referral"><b>Was the client referred elsewhere? <span class="required">*</span></b></label>
                             @php $client_referral = ['No', 'Health Hotline', 'Shojon']; @endphp
 
                             <div class="form-control @error('client_referral') is-invalid @enderror">
@@ -213,7 +213,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="caller_description"><b>Call Description: </label>
+                            <label class="control-label" for="caller_description"><b>Call Description: <span class="required">*</span></b></label>
                             <textarea rows = "5" cols = "50"
                                 class="form-control
                                 @error('caller_description') is-invalid @enderror"
@@ -229,23 +229,23 @@
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label class="control-label" for="phone_number"><b>Phone Number:</b></label>
-                                    <input class="form-control" type="tel" id="phone_number" name="phone_number" placeholder="01698221144" pattern="01[3-9]{1}[0-9]{8}" >
+                                    <input class="form-control" type="tel" id="phone_number" name="phone_number" placeholder="01698221144" pattern="01[3-9]{1}[0-9]{8}" required>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label class="control-label" for="call_started"><b>Call started Time:</b></label>
-                                    <input class="form-control" type="time" id="call_started" name="call_started">
+                                    <input class="form-control" type="time" id="call_started" name="call_started"required>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-md-6">
                                     <label class="control-label" for="call_received"><b>Call Received Date:</b></label>
-                                    <input class="form-control" type="date" id="call_received" name="call_received">
+                                    <input class="form-control" type="date" id="call_received" name="call_received"required>
                                 </div>
 
                                 <div class="form-group col-md-6">
                                     <label class="control-label" for="call_ended"><b>Call Ended Time:</b></label>
-                                    <input class="form-control" type="time" id="call_ended" name="call_ended">
+                                    <input class="form-control" type="time" id="call_ended" name="call_ended"required>
                                 </div>
                             </div>
                         @endif

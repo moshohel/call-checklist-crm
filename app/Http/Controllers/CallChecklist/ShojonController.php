@@ -101,7 +101,11 @@ class ShojonController extends Controller
         // if ($params['main_reason_for_calling'] == "on") {
         //     $params['main_reason_for_calling'] = $params['other_main_reason_for_calling'];
         // }
-        // if ($params['secondary_reason_for_calling'] == "on") {
+        // if($params['secondary_reason_for_calling']==null)
+        // {
+
+        // }
+        // elseif ($params['secondary_reason_for_calling'] == "on") {
         //     $params['secondary_reason_for_calling'] = $params['other_secondary_reason_for_calling'];
         // } elseif ($params['other_secondary_reason_for_calling'][0] != null) {
         //     $params['secondary_reason_for_calling'] = array_merge($params['secondary_reason_for_calling'], $params['other_secondary_reason_for_calling']);
@@ -114,7 +118,6 @@ class ShojonController extends Controller
         // if ($params['client_referral'] == "on") {
         //     $params['client_referral'] = $params['other_client_referral'];
         // }
-
         $data = [
             'referrence_id' => $request['referrence_id'],
             'phone_number' => $request['phone_number'],
@@ -131,8 +134,8 @@ class ShojonController extends Controller
             'caller' => $request['caller'],
             'pre_mood_rating' => $request['pre_mood_rating'],
             'main_reason_for_calling' => $request['main_reason_for_calling'],
-            'secondary_reason_for_calling' => implode("; ", $request['secondary_reason_for_calling']),
-            'mental_illness_diagnosis' => implode("; ", $request['mental_illness_diagnosis']),
+            'secondary_reason_for_calling' => implode("; ",$request['secondary_reason_for_calling']),
+            'mental_illness_diagnosis' => implode("; ",$request['mental_illness_diagnosis']),
             'ghq' => $request['ghq'],
             'suicidal_risk' => isset($request['suicidal_risk']) ? $request['suicidal_risk'] : null,
             'post_mood_rating' => $request['post_mood_rating'],
@@ -141,7 +144,7 @@ class ShojonController extends Controller
             'caller_description' => $request['caller_description'],
             'ref_client_name' => $request['ref_client_name'] ? $request['ref_client_name'] : null,
             'ref_age' => $request['ref_age'] ? $request['ref_age'] : null,
-            'ref_therapy_reason' => $params['ref_therapy_reason'] ? $request['ref_therapy_reason'] : null,
+            'ref_therapy_reason' => $request['ref_therapy_reason'] ? $request['ref_therapy_reason'] : null,
             'ref_phone_number' => $request['ref_phone_number'] ? $request['ref_phone_number'] : null,
             'ref_preferred_time' => $request['ref_preferred_time'] ? $request['ref_preferred_time'] : null,
             'ref_emergency_number' => $request['ref_emergency_number'] ? $request['ref_emergency_number'] : null,

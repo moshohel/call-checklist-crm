@@ -313,10 +313,10 @@
                                     @if(old('secondary_reason_for_calling') && is_array(old('secondary_reason_for_calling')) && in_array($item,old('secondary_reason_for_calling')))
                                         <input type="checkbox" name="secondary_reason_for_calling[]" value="{{ $item }}"
                                                onclick="ShowSecondaryReasonBox()" checked="checked"/>
-
                                     @else
                                         <input type="checkbox" name="secondary_reason_for_calling[]" value="{{ $item }}"
                                                onclick="ShowSecondaryReasonBox()"/>
+
                                     @endif
                                     {{ $item }}
                                     <br>
