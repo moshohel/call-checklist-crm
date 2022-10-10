@@ -272,6 +272,69 @@
                         {{-- </div> --}}
                         @error('pre_mood_rating') {{ $message }} @enderror
                     </div>
+                    <div class="form-group">
+                        <label class="control-label" for="mental_illness_diagnosis"><b>Does the client have any mental
+                                illness diagnosis? (Select Multiple)
+                        <div class="form-control @error('mental_illness_diagnosis') is-invalid @enderror">
+                            <label>
+
+                                <label>
+                                    @foreach($mental_illness as $item)
+                                        @if(old('mental_illness_diagnosis') && is_array('mental_illness_diagnosis')) && in_array($item,old('mental_illness_diagnosis')))
+                                            <input type="checkbox" name="mental_illness_diagnosis[]" value="{{ $item }}"
+                                                   onclick="ShowSecondaryReasonBox()" checked="checked"/>
+
+                                        @else
+                                            <input type="checkbox" name="mental_illness_diagnosis[]" value="{{ $item }}"
+                                                   onclick="ShowSecondaryReasonBox()"/>
+                                        @endif
+                                        {{ $item }}
+                                        <br>
+                                    @endforeach
+                                    <input type="hidden" name="mental_illness_diagnosis[]" value="" checked="checked">
+                                    <input type="checkbox" id="chkMentalIllness" name="mental_illness_diagnosis"
+                                           onclick="ShowMentalIllnessBox()"/>
+                                    Other (please explain)
+                                </label>
+                                <span id="MentalIllnessBox" style="display: none;">
+                                    <input class="form-control" type="text" name="other_mental_illness_diagnosis[]"
+                                           placeholder="Explain"/>
+                                    <!-- MUST BE A PROBLEM FOR ARRAY TO SHOW OLD VALUE-->
+                            </span>
+                        </div>
+                        @error('mental_illness_diagnosis') {{ $message }} @enderror
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="secondary_reason_for_calling"><b>Secondary Reason for Calling:
+                                (Select Multiple)
+                              </label>
+                        <div class="form-control @error('secondary_reason_for_calling') is-invalid @enderror">
+                            <label>
+                                @foreach($secondary_reason as $item)
+                                    @if(old('secondary_reason_for_calling') && is_array(old('secondary_reason_for_calling')) && in_array($item,old('secondary_reason_for_calling')))
+                                        <input type="checkbox" name="secondary_reason_for_calling[]" value="{{ $item }}"
+                                               onclick="ShowSecondaryReasonBox()" checked="checked"/>
+                                    @else
+                                        <input type="checkbox" name="secondary_reason_for_calling[]" value="{{ $item }}"
+                                               onclick="ShowSecondaryReasonBox()"/>
+
+                                    @endif
+                                    {{ $item }}
+                                    <br>
+                                @endforeach
+                                <input type="hidden" name="secondary_reason_for_calling[]" value="" checked="checked">
+                                <input type="checkbox" id="chkSecondaryReason" name="secondary_reason_for_calling"
+                                       onclick="ShowSecondaryReasonBox()"/>
+                                Other (please explain)
+                            </label>
+                            <span id="SecondaryReasonBox" style="display: none;">
+                                    <input class="form-control" type="text" name="other_secondary_reason_for_calling[]"
+                                           placeholder="Explain"/>
+                                <!-- MUST BE A PROBLEM FOR ARRAY TO SHOW OLD VALUE-->
+                            </span>
+                        </div>
+                        @error('secondary_reason_for_calling') {{ $message }} @enderror
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label" for="main_reason_for_calling"><b>Primary Reason for Calling: </label>
@@ -301,69 +364,6 @@
                                 </span>
                         </div>
                         @error('main_reason_for_calling') {{ $message }} @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="secondary_reason_for_calling"><b>Secondary Reason for Calling:
-                                (Select Multiple)
-                              </label>
-                        <div class="form-control @error('secondary_reason_for_calling') is-invalid @enderror">
-                            <label>
-                                @foreach($secondary_reason as $item)
-                                    @if(old('secondary_reason_for_calling') && is_array(old('secondary_reason_for_calling')) && in_array($item,old('secondary_reason_for_calling')))
-                                        <input type="checkbox" name="secondary_reason_for_calling[]" value="{{ $item }}"
-                                               onclick="ShowSecondaryReasonBox()" checked="checked"/>
-                                    @else
-                                        <input type="checkbox" name="secondary_reason_for_calling[]" value="{{ $item }}"
-                                               onclick="ShowSecondaryReasonBox()"/>
-
-                                    @endif
-                                    {{ $item }}
-                                    <br>
-                                @endforeach
-                                <input type="checkbox" id="chkSecondaryReason" name="secondary_reason_for_calling"
-                                       onclick="ShowSecondaryReasonBox()"/>
-                                Other (please explain)
-                            </label>
-                            <span id="SecondaryReasonBox" style="display: none;">
-                                    <input class="form-control" type="text" name="other_secondary_reason_for_calling[]"
-                                           placeholder="Explain"/>
-                                <!-- MUST BE A PROBLEM FOR ARRAY TO SHOW OLD VALUE-->
-                            </span>
-                        </div>
-                        @error('secondary_reason_for_calling') {{ $message }} @enderror
-                    </div>
-
-                    <div class="form-group">
-                        <label class="control-label" for="mental_illness_diagnosis"><b>Does the client have any mental
-                                illness diagnosis? (Select Multiple)
-                        <div class="form-control @error('mental_illness_diagnosis') is-invalid @enderror">
-                            <label>
-
-                                <label>
-                                    @foreach($mental_illness as $item)
-                                        @if(old('mental_illness_diagnosis') && is_array('mental_illness_diagnosis')) && in_array($item,old('mental_illness_diagnosis')))
-                                            <input type="checkbox" name="mental_illness_diagnosis[]" value="{{ $item }}"
-                                                   onclick="ShowSecondaryReasonBox()" checked="checked"/>
-
-                                        @else
-                                            <input type="checkbox" name="mental_illness_diagnosis[]" value="{{ $item }}"
-                                                   onclick="ShowSecondaryReasonBox()"/>
-                                        @endif
-                                        {{ $item }}
-                                        <br>
-                                    @endforeach
-                                    <input type="checkbox" id="chkMentalIllness" name="mental_illness_diagnosis"
-                                           onclick="ShowMentalIllnessBox()"/>
-                                    Other (please explain)
-                                </label>
-                                <span id="MentalIllnessBox" style="display: none;">
-                                    <input class="form-control" type="text" name="other_mental_illness_diagnosis[]"
-                                           placeholder="Explain"/>
-                                    <!-- MUST BE A PROBLEM FOR ARRAY TO SHOW OLD VALUE-->
-                            </span>
-                        </div>
-                        @error('mental_illness_diagnosis') {{ $message }} @enderror
                     </div>
 
                     <div class="form-group">
