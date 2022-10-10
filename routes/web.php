@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CallChecklist\Tier2Controller;
+use App\Http\Controllers\CallChecklist\shojonTierThree;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +92,21 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('/report/pdf/{range_type?}', 'CallChecklist\ShojonController@exportPdf');
 
             Route::get('dashboard', 'CallChecklist\KprController@dashboard')->name('call_checklist.kpr.dashboard');
-            // Route::get('dashboard', function()
+            //tire 2 route 
+            Route::get('/add_patient', [Tier2Controller::class, 'tire2fromblade'])->name('call_checklist.shojon.tier2');
+
+            Route::post('store/patient', [Tier2Controller::class, 'store'])->name('call_checklist.shojontier2.store');
+            // Route::post('/question/store',[Tier2Controller::class,'tireTow_question_store'])->name('tireTow.question.store');
+            Route::get('/patientList', [Tier2Controller::class, 'tire2patientlist'])->name('call_checklist.shojon.Patientlist');
+            Route::post('/submit', [Tier2Controller::class, 'TerminationSave_form'])->name('call_checklist.shojon.termination_form');
+            //Shojon tier Three route
+            Route::get('/add/patient', [shojonTierThree::class, 'tireThreefromblade'])->name('call_checklist.shojon.tierThree');
+            Route::get('/patient/List/', [shojonTierThree::class, 'tireThreepatientlist'])->name('call_checklist.shojon.TierThreePatientlist');
+            ///test route
+            Route::post('/save/data/', [shojonTierThree::class, 'tireThreepatient_save_data'])->name('call_checklist.shojon.save_data');
+
+            // Route::get('/user/info',[AygasController::class,'userInfo'])->name('user.info');
+            // Route::get('dashboard', function()call_checklist.shojon.Patientlist
             // {
             //     echo " test ------------";
             // })->name('call_checklist.kpr.dashboard');

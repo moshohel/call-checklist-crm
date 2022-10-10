@@ -35,6 +35,55 @@
                         <span class="app-menu__label">Shojon Manual Entry</span>
                     </a>
                 </li>
+
+            </ul>
+        </li>
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
+                <span class="app-menu__label">Tier 2</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+
+                <li>
+                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+                        href="{{ route('call_checklist.shojon.tier2') }}">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">Add Patient - Tier 2 </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+                        href="{{ route('call_checklist.shojon.Patientlist') }}">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">Patient List - Tier 2 </span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
+                <span class="app-menu__label">Tier 3</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+
+                <li>
+                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+                        href="{{ route('call_checklist.shojon.tierThree') }}">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">Add Patient - Tier 3 </span>
+                    </a>
+                </li>
+                <li>
+                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+                        href="{{ route('call_checklist.shojon.TierThreePatientlist') }}">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">Patient List - Tier 3</span>
+                    </a>
+                </li>
+
             </ul>
         </li>
         @endif
