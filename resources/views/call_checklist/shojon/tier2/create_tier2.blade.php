@@ -21,10 +21,12 @@
                     <div class="tile-body">
 
                         <!-- Auto generated field -->
+                        <input type="hidden" name="project_name" value="#">
                         <input type="hidden" name="service_providers_name" value="#">
-                        <input type="hidden" name="Programer_name" value="#">
                         <input type="hidden" name="service_providers_id" value="#">
-                        <input type="hidden" name="caller" value="#">
+                        <input type="hidden" name="call_started" value="#">
+                        <input type="hidden" name="call_end" value="#">
+                        <input type="hidden" name="duration" value="#">
 
                         <div class="form-group">
                             <label class="control-label" for="phone_number"><b>Phone Number:</b></label><br>
@@ -196,21 +198,31 @@
 
                         <div class="form-group">
                             <label class="control-label" for="Session_Number"><b>Session Number (mandatory single select )</b></label>
-                            @php $types = ['1st session', '2nd session', '3rd session', '4th session', '6th session', '7th session','8th session','8th session','9th session','10th session']; @endphp
-                            <select name="Session_Number" list="Session_Number"
-                                    id="Session_Number" class="form-control">
-
-                                <datalist id="Session_Number">
-                                    <option value="" selected disabled>Select Session Number</option>
+                            @php $types = ['1st session', '2nd session', '3rd session', '4th session', '6th session', '7th session','8th session','8th session','9th session','10th session','Last session']; @endphp
+                            <div class="form-control @error('Session_Number') is-invalid @enderror">
+                                <label>
                                     @foreach($types as $item)
-                                        @if( old('Session_Number') == $item))
-                                        <option value="{{ $item }}">{{ $item }}</option>
+                                        @if((old('Session_Number') == $item))
+                                            <input type="radio" name="Session_Number" value="{{ $item }}" checked="checked"
+                                                   onclick="ShowSessionBox()"/>
                                         @else
-                                            <option value="{{ $item }}">{{ $item }}</option>
+                                            <input type="radio" name="Session_Number" value="{{ $item }}"
+                                                   onclick="ShowSessionBox()"/>
                                         @endif
+                                        {{ $item }}
+                                        <br>
                                     @endforeach
-                                </datalist>
-                            </select>
+                                    <input type="radio" id="chkSession" name="Session_Number"
+                                           onclick="ShowSessionBox()"/>
+                                    Other (please explain)
+                                </label>
+                                <span id="SessionBox" style="display: none;">
+                                    <input class="form-control" type="text" name="other_Session_Number"
+                                           value="{{ old('other_occupation',$last ? $last->other_occupation : null) }}"
+                                           placeholder="Explain"/>
+                                </span>
+                            </div>
+                            @error('Session_Number') {{ $message }} @enderror
                         </div>
 
                         <div class="form-group">
@@ -237,11 +249,13 @@
                     </div>
 
                      <div class="form-group">
+                        <div class="" id="notiDiv">
+                            
+                        </div>
                         <label class="control-label" for="ghq"><b>GHQ (appendix - questionnaire and
                                 scoring):</b></label>
-                        <span class="btn btn-success" data-toggle="modal" data-target="#ghq-questionnaire-modal"
-                              style="margin: 5px">Qiestionniare</span>
-                        @include('call_checklist.shojon._question_form')
+                        <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Qiestionniare</a>
+                        @include('call_checklist.shojon.tier2.questrion_from')
                         <input type="text" id="ghq" name="ghq" value="{{old('ghq','Incomplete')}}"
                                style="text-align:center;" readonly>
                     </div>
@@ -338,13 +352,13 @@
                     </div>
 
                         <div class="form-group">
-                        <label class="control-label" for="mental_illness_diagnosis"><b>Does the client have any mental
-                                illness diagnosis? (Select Multiple)
+                        <label class="control-label" for="mental_illness_diagnosis"><b>Previous psychiatric diagnosis? (Multiple select)  
+                        @php $types = ['Major Depressive Disorder', 'Anxiety Disorder', 'Panic Disorder','Obsessive Compulsive Disorder','Social Anxiety Disorder','Eating Disorder','Insomnia','Schizophrenia','Bipolar Disorder ','Personality Disorder','Autism spectrum disorder','Attention deficit hyperactivity disorder','Learning disorder (LD)','Phobia','Post-traumatic stress disorder (PTSD)','Substance Abuse Disorder','Sexual disorder','Gender Identity disorder','Conversion disorder','Conduct','No']; @endphp        
                         <div class="form-control @error('mental_illness_diagnosis') is-invalid @enderror">
                             <label>
 
                                 <label>
-                                    @foreach($mental_illness as $item)
+                                    @foreach($types as $item)
                                         @if(old('mental_illness_diagnosis') && is_array('mental_illness_diagnosis')) && in_array($item,old('mental_illness_diagnosis')))
                                             <input type="checkbox" name="mental_illness_diagnosis[]" value="{{ $item}}"
                                                    onclick="ShowSecondaryReasonBox()" checked="checked"/>
@@ -358,7 +372,8 @@
                                     @endforeach
                                     <input type="checkbox" id="chkMentalIllness" name="mental_illness_diagnosis"
                                            onclick="ShowMentalIllnessBox()"/>
-                                    Other (please explain)
+                                    Other (please explain)<br>
+                                    <input type="hidden" name="mental_illness_diagnosis[]" value="" checked="checked">
                                 </label>
                                 <span id="MentalIllnessBox" style="display: none;">
                                     <input class="form-control" type="text" name="other_mental_illness_diagnosis[]"
@@ -419,7 +434,8 @@
                                 @endforeach
                                 <input type="checkbox" id="chkSecondaryReason" name="Physical_Concern_history"
                                        onclick="ShowSecondaryReasonBox()"/>
-                                Others (please explain)
+                                Others (please explain)<br>
+                                    <input type="hidden" name="Physical_Concern_history[]" value="" checked="checked">
                             </label>
                             <span id="SecondaryReasonBox" style="display: none;">
                                     <input class="form-control" type="text" name="other_Physical_Concern_history[]"
@@ -431,13 +447,62 @@
                     </div>
 
                     <div class="form-group">
+                        <label class="control-label" for="current_differential_diagnosis"><b>Current Differential Diagnosis: (Mandatory multiple select) 
+                        @php $types = ['Major Depressive Disorder', 'Anxiety Disorder', 'Panic Disorder','Obsessive Compulsive Disorder','Social Anxiety Disorder','Eating Disorder','Insomnia/sleep related disorder','Schizophrenia','Bipolar Disorder ','Personality Disorder','Autism spectrum disorder','Attention deficit hyperactivity disorder','Learning disorder (LD)','Dementia','Alzheimer','Phobia','Post-traumatic stress disorder (PTSD)','Substance Abuse Disorder','Sexual disorder','Gender Identity disorder','Conversion disorder','Conduct','No']; @endphp        
+                        <div class="form-control @error('current_differential_diagnosis') is-invalid @enderror">
+                            <label>
+
+                                <label>
+                                    @foreach($types as $item)
+                                        @if(old('current_differential_diagnosis') && is_array('current_differential_diagnosis')) && in_array($item,old('current_differential_diagnosis')))
+                                            <input type="checkbox" name="current_differential_diagnosis[]" value="{{ $item}}"
+                                                   onclick="ShowCurrentDiagnosis()" checked="checked"/>
+
+                                        @else
+                                            <input type="checkbox" name="current_differential_diagnosis[]" value="{{ $item}}"
+                                                   onclick="ShowCurrentDiagnosis()"/>
+                                        @endif
+                                        {{ $item }}
+                                        <br>
+                                    @endforeach
+                                    <input type="checkbox" id="chkCurrentDiagnosis" name="current_differential_diagnosis"
+                                           onclick="ShowCurrentDiagnosis()"/>
+                                    Other (please explain)<br>
+                                    <input type="hidden" name="current_differential_diagnosis[]" value="" checked="checked">
+                                </label>
+                                <span id="CurrentDiagnosisBox" style="display: none;">
+                                    <input class="form-control" type="text" name="other_current_differential_diagnosis[]"
+                                           placeholder="Explain"/>
+                                    <!-- MUST BE A PROBLEM FOR ARRAY TO SHOW OLD VALUE-->
+                            </span>
+                        </div>
+                        @error('current_differential_diagnosis') {{ $message }} @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label class="control-label" for="PsychometricToolscore"><b>Psychometric Tool score & Interpretation:
                                </label><br>
+                        @php $types = ['Depression scale','Anxiety','Social Interaction Anxiety scale ','Obsessive- compulsive disorder ','Beck hopelessness scale','Cognitive distortion scale','Depression, Anxiety, stress scale','Somatic complaint scale','Event'];@endphp       
                         <div class="form-control @error('PsychometricToolscore') is-invalid @enderror">
                             <label class="control-label">Tool Name:</label><br>
                             <label class="control-label"style="width: 90%;">
-                                <input type="text" name="PsychometricTool" class="form-control">
-                                
+                                <div class="form-control @error('PsychometricTool') is-invalid @enderror">
+                            <label>
+                                @foreach($types as $item)
+                                    @if( old('hearing_source') == $item)
+                                        <input type="radio" name="PsychometricTool" value="{{ $item }}"
+                                               onclick="showPresentCotinuation()" checked="checked"/>
+                                    @else
+                                        <input type="radio" name="PsychometricTool" value="{{ $item }}"
+                                               onclick="showPresentCotinuation()"/>
+                                    @endif
+                                    {{ $item }}
+                                    <br>
+                                @endforeach
+                               
+                            </label>
+                            
+                        </div>
                             </label><br>
                             <label class="control-label">Score:</label><br>
                             <label class="control-label" style="width: 90%;">
@@ -456,7 +521,7 @@
                      </div>
                    <div class="form-group">
                     <label class="control-label">Formulation:</label><br>
-                    <table class="table table-bordered border-primary" id="dynamic_field_two">
+                    <table class="table table-bordered border-primary" id="dynamic_field_formulation">
                         <thead>
                             <tr>
                               <th scope="col">Predisposing Factor</th>
@@ -472,7 +537,7 @@
                               <td><input type="text" name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td> 
                               <td><input type="text" name="Perpetuating[]" placeholder="Perpetuating factor" class="form-control name_list" /></td> 
                               <td><input type="text" name="Protective[]" placeholder="ProtectiveFactor" class="form-control name_list" /></td> 
-                              <td><button type="button" name="add" id="addmore" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
+                              <td><button type="button" name="addmore" id="addmore_formulation" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
                             </tr>
                           </tbody> 
                     </table>  
@@ -547,11 +612,38 @@
                         </div>
                         @error('is_recordable') {{ $message }} @enderror
                     </div>
-
                     <div class="form-group" id="referred">
-                        <label class="control-label" for="client_referral"><b>Was the client referred elsewhere? </label>
-                        @php $types = ['Reason for Referral', 'Health Hotline 09678771511', 'Name of the Agency and contact details: ', 'KPR 01777772215']; @endphp
-                        <div class="form-control @error('client_referral') is-invalid @enderror">
+                        <label class="control-label" for="client_referral">Referral</label>
+                        <div class="form-control">
+                            <label class="control-label">Internal Referral:( single select )</label><br>
+                        <label class="control-label">
+                            @if(old('client_referral') == "SHOJON Tier 3 for Psychiatric Consultation" )
+                                    <input type="radio" id="group2" name="client_referral"
+                                           value="SHOJON Tier 3 for Psychiatric Consultation" checked="checked"/>
+                                @else
+                                    <input type="radio" id="group2" name="client_referral"
+                                           value="SHOJON Tier 3 for Psychiatric Consultation"/>
+                                @endif
+                                SHOJON Tier 3 for Psychiatric Consultation
+                                <br>
+                        </label>
+                        </div>
+                        <div class="form-control">
+                            <label class="control-label" for="client_referral"><b>External referral:  </label>
+                        <div class="form-control @error('TreatmentGoal') is-invalid @enderror">
+                            <label class="control-label">Reason for referral:</label><br>
+                            <label class="control-label"style="width: 90%;">
+                                <input type="text" name="ReasonForReferral" class="form-control">
+                                
+                            </label><br>
+                            <label class="control-label">Name of the Agency:</label><br>
+                            <label class="control-label" style="width: 90%;">
+                                <input type="text" name="NameOfAgency" class="form-control">
+                                
+                            </label>
+                        </div>
+                            @php $types = ['Health Hotline 09678771511','KPR 01777772215']; @endphp
+                            <div class="form-control @error('client_referral') is-invalid @enderror">
                             <label>
                                 @foreach($types as $item)
                                     @if(old('client_referral') == $item)
@@ -563,28 +655,6 @@
                                     {{ $item }}
                                     <br>
                                 @endforeach
-
-                                @if(old('client_referral') == "SHOJON Tier 2 for Psychotherapy")
-                                    <input type="radio" id="group2" name="client_referral"
-                                           value="SHOJON Tier 2 for Psychotherapy" checked="checked"/>
-                                @else
-                                    <input type="radio" id="group2" name="client_referral"
-                                           value="SHOJON Tier 2 for Psychotherapy"/>
-                                @endif
-                                SHOJON Tier 2 for Psychotherapy
-
-                                <br>
-
-                                @if(old('client_referral') == "SHOJON Tier 3 for Psychiatric Consultation" )
-                                    <input type="radio" id="group2" name="client_referral"
-                                           value="SHOJON Tier 3 for Psychiatric Consultation" checked="checked"/>
-                                @else
-                                    <input type="radio" id="group2" name="client_referral"
-                                           value="SHOJON Tier 3 for Psychiatric Consultation"/>
-                                @endif
-                                SHOJON Tier 3 for Psychiatric Consultation
-                                <br>
-
                                 @if(old('client_referral') == "other")
                                     <input type="radio" id="group3" name="client_referral" value="other"
                                            checked="checked"/>
@@ -599,13 +669,15 @@
                                 </span>
                         </div>
                         @error('client_referral') {{ $message }} @enderror
+                            
+                        </div>
                     </div>
 
                     <div class="form-group" id="financialAffordibilityBox" >
                         @include('call_checklist.shojon.financial_affordability_form')
                     </div>
 
-                    {{-- <label class="control-label" for="financial_affordability"><b>If referred to 2/3 Tier of SHOJON – Financial affordability:</label>
+                    <!-- {{-- <label class="control-label" for="financial_affordability"><b>If referred to 2/3 Tier of SHOJON – Financial affordability:</label>
                         @php $types = ['Free', '50 - 100', '100 - 200', '200 - 300', '300-500', '500 – 800', '800 – 1000', 'Not referred to SHOJON tier 2/3']; @endphp
                         <select name="financial_affordability" id="financial_affordability" class="form-control @error('financial_affordability') is-invalid @enderror">
                             <option disabled selected>Select Financial affordability</option>
@@ -613,11 +685,10 @@
                                 <option value="{{ $item }}">{{ $item }}</option>
                             @endforeach
                         </select>
-                        @error('financial_affordability') {{ $message }} @enderror --}}
-
+                        @error('financial_affordability') {{ $message }} @enderror --}} -->
                     <div class="form-group">
-                        <label class="control-label" for="caller_description"><b>Session summary : </label>
-                        <textarea rows="5" cols="50"
+                        <label class="control-label" for="caller_description"><b>Next session plan</label>
+                        <textarea rows="2" cols="50"
                                   class="form-control
                                 @error('caller_description') is-invalid @enderror"
                                   name="caller_description"
@@ -626,6 +697,36 @@
                         </textarea>
 
                         @error('caller_description') {{ $message }} @enderror
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="caller_description"><b>Session summary : </label>
+                        <textarea rows="2" cols="50"
+                                  class="form-control
+                                @error('caller_description') is-invalid @enderror"
+                                  name="caller_description"
+                                  id="caller_description"
+                                  value="{{ old('caller_description') }}">{{ old('caller_description')}}
+                        </textarea>
+
+                        @error('caller_description') {{ $message }} @enderror
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label" for="TreatmentGoal"><b>Session Outcomes
+                               </label><br>
+                        <div class="form-control @error('TreatmentGoal') is-invalid @enderror">
+                            <label class="control-label">Schedule next session</label><br>
+                            <label class="control-label"style="width: 90%;">
+                                <input type="date" name="ShorttermGoal" class="form-control">
+                                
+                            </label><br>
+                            <label class="control-label"> 
+                            <a href="#" class="btn btn-primary btn-sm Termination_form " data-id="#" data-toggle="modal" data-target="#TerminationModal" >Termination</a>
+                                </label>
+                             @include('call_checklist.shojon.tier2.Termination_form')    
+                            </label>
+                        </div>
+                        @error('TreatmentGoal') {{ $message }} @enderror
                     </div>
 
                     <span class="btn btn-success" id="messageButton" style="margin: 5px" onclick="showMessageBox()">Message</span>
@@ -665,8 +766,7 @@
                     </div>
 
                     <div class="tile-footer">
-                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
-                            Shojon
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Shojon
                         </button>
                         &nbsp;&nbsp;&nbsp;
                         <a class="btn btn-secondary" onclick="cancel()"><i
@@ -742,6 +842,7 @@
         }
     }
 </script>
+
 <script>
     $(document).ready(function(){      
        var postURL = "<?php echo url('addmore'); ?>";
@@ -759,15 +860,15 @@
 
 <script>
     $(document).ready(function(){      
-       var postURL = "<?php echo url('multipulField'); ?>";
+       var postURL = "<?php echo url('multipulField_formulation'); ?>";
        var i=1;  
-       $('#addmore').click(function(){  
+       $('#addmore_formulation').click(function(){  
             i++;  
-            $('#dynamic_field_two').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text"  name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td><td><input type="text"  name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td><td><input type="text"  name="Perpetuating[]" placeholder="Perpetuating  factor" class="form-control name_list" /></td><td><input type="text"  name="Protective[]" placeholder="Protective Factor" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+            $('#dynamic_field_formulation').append('<tr id="row_formulation'+i+'" class="dynamic-added"><td><input type="text"  name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td><td><input type="text"  name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td><td><input type="text"  name="Perpetuating[]" placeholder="Perpetuating  factor" class="form-control name_list" /></td><td><input type="text"  name="Protective[]" placeholder="Protective Factor" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove_formulation">X</button></td></tr>');  
        });  
-       $(document).on('click', '.btn_remove', function(){  
-            var button_id = $(this).attr("id");   
-            $('#row'+button_id+'').remove();  
+       $(document).on('click', '.btn_remove_formulation', function(){  
+            var button_id_formulation = $(this).attr("id");   
+            $('#row_formulation'+button_id_formulation+'').remove();  
        });  
      }); 
 </script>
@@ -775,14 +876,15 @@
 
     $(document).ready(function () {
         ShowOccupationBox();
-        ShowHearingSourceBox();
-        ShowServiceBox();
-        ShowMainReasonBox();
+        ShowSessionBox();
+        ShowCurrentDiagnosis();
+       // ShowServiceBox();
+        //ShowMainReasonBox();
         ShowSecondaryReasonBox();
         showPresentCotinuation();
         ShowMentalIllnessBox();
-        ShowClientReferralBox();
-        showFinancialAffordability();
+       // ShowClientReferralBox();
+        //showFinancialAffordability();
         showMessageBox();
     });
 
@@ -793,30 +895,44 @@
         var other = Box.getElementsByTagName('input')[0];
         radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
     }
-
-    function ShowHearingSourceBox() {
-        var radio = document.getElementById("chkHearingSource");
-        var Box = document.getElementById("HearingSourceBox");
+    function ShowSessionBox() {
+        var radio = document.getElementById("chkSession");
+        var Box = document.getElementById("SessionBox");
+        Box.style.display = radio.checked ? "block" : "none";
+        var other = Box.getElementsByTagName('input')[0];
+        radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
+    }
+     function ShowCurrentDiagnosis() {
+        var radio = document.getElementById("chkCurrentDiagnosis");
+        var Box = document.getElementById("CurrentDiagnosisBox");
         Box.style.display = radio.checked ? "block" : "none";
         var other = Box.getElementsByTagName('input')[0];
         radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
     }
 
-    function ShowServiceBox() {
-        var radio = document.getElementById("chkService");
-        var Box = document.getElementById("ServiceBox");
-        Box.style.display = radio.checked ? "block" : "none";
-        var other = Box.getElementsByTagName('input')[0];
-        radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
-    }
+    // function ShowHearingSourceBox() {
+    //     var radio = document.getElementById("chkHearingSource");
+    //     var Box = document.getElementById("HearingSourceBox");
+    //     Box.style.display = radio.checked ? "block" : "none";
+    //     var other = Box.getElementsByTagName('input')[0];
+    //     radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
+    // }
 
-    function ShowMainReasonBox() {
-        var radio = document.getElementById("chkMainReason");
-        var Box = document.getElementById("MainReasonBox");
-        Box.style.display = radio.checked ? "block" : "none";
-        var other = Box.getElementsByTagName('input')[0];
-        radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
-    }
+    // function ShowServiceBox() {
+    //     var radio = document.getElementById("chkService");
+    //     var Box = document.getElementById("ServiceBox");
+    //     Box.style.display = radio.checked ? "block" : "none";
+    //     var other = Box.getElementsByTagName('input')[0];
+    //     radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
+    // }
+
+    // function ShowMainReasonBox() {
+    //     var radio = document.getElementById("chkMainReason");
+    //     var Box = document.getElementById("MainReasonBox");
+    //     Box.style.display = radio.checked ? "block" : "none";
+    //     var other = Box.getElementsByTagName('input')[0];
+    //     radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
+    // }
 
     function ShowSecondaryReasonBox() {
         var radio = document.getElementById("chkSecondaryReason");
@@ -841,17 +957,17 @@
         radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
     }
 
-    function ShowClientReferralBox() {
-        var chkClientReferral = document.getElementById("chkClientReferral");
-        var ClientReferralBox = document.getElementById("ClientReferralBox");
-        ClientReferralBox.style.display = chkClientReferral.checked ? "block" : "none";
-    }
+    // function ShowClientReferralBox() {
+    //     var chkClientReferral = document.getElementById("chkClientReferral");
+    //     var ClientReferralBox = document.getElementById("ClientReferralBox");
+    //     ClientReferralBox.style.display = chkClientReferral.checked ? "block" : "none";
+    // }
 
-    function showFinancialAffordability() {
-        var chkTier = document.getElementById("chkTier");
-        var financialAffordibilityBox = document.getElementById("financialAffordibilityBox");
-        financialAffordibilityBox.style.display = chkTier.checked ? "block" : "none";
-    }
+    // function showFinancialAffordability() {
+    //     var chkTier = document.getElementById("chkTier");
+    //     var financialAffordibilityBox = document.getElementById("financialAffordibilityBox");
+    //     financialAffordibilityBox.style.display = chkTier.checked ? "block" : "none";
+    // }
 
     function showMessageBox() {
         var messageButton = document.getElementById("messageButton");

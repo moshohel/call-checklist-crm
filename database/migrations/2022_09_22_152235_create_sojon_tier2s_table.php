@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('sojon_tier2s', function (Blueprint $table) {
             $table->id();
+            $table->string('project_name')->nullable();
             $table->string('service_providers_name')->nullable();
-            $table->string('program_name')->nullable();
             $table->string('service_providers_di')->nullable();
             $table->string('date')->nullable();
             $table->string('time_call_started')->nullable();
             $table->string('time_call_ended')->nullable();
             $table->string('duration')->nullable();
-            $table->string('caller')->nullable();
+            $table->string('phone_number')->nullable();
             $table->string('caller_id')->nullable();
             $table->string('caller_name')->nullable();
             $table->string('sex')->nullable();
@@ -45,6 +45,7 @@ return new class extends Migration
             $table->string('diagnosis')->nullable();
             $table->string('psychiatric_medication')->nullable();
             $table->string('concern_history')->nullable();
+            $table->string('differential_diagnosis')->nullable();
             $table->string('tool_name')->nullable();
             $table->string('score')->nullable();
             $table->text('therapy')->nullable();

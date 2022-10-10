@@ -19,13 +19,15 @@
     <input class="form-control" type="text" name="ref_emergency_number" id="ref_emergency_number" value="{{ old('ref_emergency_number') }}" placeholder="Enter emergency number"/>
 
     <label class="control-label"  for="ref_financial_affort"><b>Financial affordability:</b></label>
-    <input class="form-control" list="ref_financial_affort_list"  type="text" name="ref_financial_affort" id="ref_financial_affort" value="{{ old('ref_financial_affort') }}" placeholder="Enter financial affordability"/>
+    <select class="form-control" list="ref_financial_affort_list"  type="text" name="ref_financial_affort" id="ref_financial_affort" value="{{ old('ref_financial_affort') }}" placeholder="Enter financial affordability"/>
     <datalist id="ref_financial_affort_list">
         @php $options = ['Free of cost','200'] @endphp
+        <option disabled selected>Select Option</option>
         @foreach($options as $option)
             <option value="{{ $option }}">{{ $option }}</option>
         @endforeach
     </datalist>
+    </select>
 
     <label class="control-label" for="ref_therapist_preference"><b>Therapist preference:</b></label>
     <input class="form-control" type="text" name="ref_therapist_preference" id="ref_therapist_preference" value="{{ old('ref_therapist_preference') }}" placeholder="Enter therapist_preference"/>
