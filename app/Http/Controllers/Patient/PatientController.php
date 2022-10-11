@@ -60,11 +60,12 @@ class PatientController extends Controller
         $patient = new Patient();
         $data = $request->only($patient->getFillable());
         $patient->fill($data);
-        $patient->created_by = Auth::user()->id;
-
-        $patient->created_time = Carbon::now();
-        $patient->created_date = Carbon::today();
-
+        $patient->created_by = auth()->id();
+        // print_r(auth()->id());
+        $patient->created_at = Carbon::now();
+        // $patient->created_date = Carbon::today();
+        $patient->unique_id = rand(100000, 999999);
+        // dd($patient);
         $patient->save();
         session()->flash('success', 'New patient has added successfully !!');
         // return redirect()->route('admin.products');
@@ -109,9 +110,16 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function edit(Patient $patient)
+    public function edit($id)
     {
-        //
+        $pageTitle = $this->pageTitle;
+        $patient = Patient::find($id);
+        // $consultants = Consultant::orderBy('id', 'desc')->get();
+        $districts = District::orderBy('name')->pluck('name');
+        $main_reason = ShojonMainReasonForCalling::all()->pluck('reason');
+        $secondary_reason = ShojonSecondaryReasonForCalling::all()->pluck('reason');
+        $mental_illness = ShojonMentalIllnessDiagnosis::all()->pluck('illness');
+        return view('call_checklist.patient.edit', compact('pageTitle', 'patient', 'districts', 'main_reason', 'secondary_reason', 'mental_illness'));
     }
 
     /**
@@ -121,9 +129,17 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Patient $patient)
+    public function update(Request $request, $id)
     {
-        //
+        $patient = Patient::find($id);
+        //   dd($patient);
+        $data = $request->only($patient->getFillable());
+        $patient->fill($data);
+        $patient->updated_by = auth()->id();
+        $patient->save();
+        session()->flash('success', 'Patient Edited successfully !!');
+        // return redirect()->route('admin.products');
+        return redirect()->route('patients');
     }
 
     /**
@@ -132,8 +148,16 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Patient $patient)
+    public function delete($id)
     {
-        //
+        $patient = Patient::find($id);
+        if (!is_null($patient)) {
+            $patient->delete();
+        }
+
+        session()->flash('success', 'Patient has deleted successfully !!');
+
+        //   return back();
+        return redirect()->route('patients');
     }
 }

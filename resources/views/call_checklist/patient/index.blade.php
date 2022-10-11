@@ -14,20 +14,18 @@
             <i class="mdi mdi-printer" id="print_icon"></i> Download PDF</a>
         </div>
       </div>
+      @include('call_checklist.partials.messages')
       {{-- Filter --}}
       <form class="pt-4" action="{{ route('patient.search') }}" method="post" enctype="multipart/form-data" id="search">
         @csrf
         <div class="row card-body pt-0 pb-5 position-relative">
-          <div class="form-group col-4">
+          {{-- <div class="form-group col-4">
             <label for="exampleFormControlSelect3">Consultant</label>
             <select class="form-control" name="consultant_id" id="exampleFormControlSelect3">
               <option value="" disabled selected hidden>consultant</option>
-              {{-- @foreach ($consultants as $consultant)
-              <option value="{{ $consultant->id }}">{{ $consultant->name }}</option>
-              @endforeach --}}
             </select>
-          </div>
-          <div class="form-group col-4">
+          </div> --}}
+          {{-- <div class="form-group col-4">
             <label for="exampleFormControlSelect3">Department</label>
             <select class="form-control" name="department" id="exampleFormControlSelect3">
               <option value="" disabled selected hidden>department</option>
@@ -35,7 +33,7 @@
               <option value="Cardiologist">Cardiologist</option>
               <option value="Urologist">Urologist</option>
             </select>
-          </div>
+          </div> --}}
           <div class="form-group col-3" id="from_date">
             <label for="exampleFormControlInput6">Start Date</label>
             <input type="date" class="form-control" name="from_date" id="exampleFormControlInput6"
