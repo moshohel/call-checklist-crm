@@ -2,6 +2,7 @@
 @section('title') {{ $pageTitle }} @endsection
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <div class="app-title">
         <div>
             <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
@@ -617,15 +618,10 @@
                         <div class="form-control">
                             <label class="control-label">Internal Referral:( single select )</label><br>
                         <label class="control-label">
-                            @if(old('client_referral') == "SHOJON Tier 3 for Psychiatric Consultation" )
-                                    <input type="radio" id="group2" name="client_referral"
-                                           value="SHOJON Tier 3 for Psychiatric Consultation" checked="checked"/>
-                                @else
-                                    <input type="radio" id="group2" name="client_referral"
-                                           value="SHOJON Tier 3 for Psychiatric Consultation"/>
-                                @endif
-                                SHOJON Tier 3 for Psychiatric Consultation
-                                <br>
+                           <a href="#" class="btn btn-primary btn-sm Referral_form " data-id="#" data-toggle="modal" data-target="#ReferralModal" >Referral Tier 3</a>
+
+                                </label>
+                             @include('call_checklist.shojon.tier2._referral')
                         </label>
                         </div>
                         <div class="form-control">
@@ -673,10 +669,6 @@
                         </div>
                     </div>
 
-                    <div class="form-group" id="financialAffordibilityBox" >
-                        @include('call_checklist.shojon.financial_affordability_form')
-                    </div>
-
                     <!-- {{-- <label class="control-label" for="financial_affordability"><b>If referred to 2/3 Tier of SHOJON – Financial affordability:</label>
                         @php $types = ['Free', '50 - 100', '100 - 200', '200 - 300', '300-500', '500 – 800', '800 – 1000', 'Not referred to SHOJON tier 2/3']; @endphp
                         <select name="financial_affordability" id="financial_affordability" class="form-control @error('financial_affordability') is-invalid @enderror">
@@ -687,28 +679,28 @@
                         </select>
                         @error('financial_affordability') {{ $message }} @enderror --}} -->
                     <div class="form-group">
-                        <label class="control-label" for="caller_description"><b>Next session plan</label>
+                        <label class="control-label" for="next_session_plan"><b>Next session plan</label>
                         <textarea rows="2" cols="50"
                                   class="form-control
-                                @error('caller_description') is-invalid @enderror"
-                                  name="caller_description"
-                                  id="caller_description"
-                                  value="{{ old('caller_description') }}">{{ old('caller_description')}}
+                                @error('next_session_plan') is-invalid @enderror"
+                                  name="next_session_plan"
+                                  id="next_session_plan"
+                                  value="{{ old('next_session_plan') }}">{{ old('next_session_plan')}}
                         </textarea>
 
-                        @error('caller_description') {{ $message }} @enderror
+                        @error('next_session_plan') {{ $message }} @enderror
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="caller_description"><b>Session summary : </label>
+                        <label class="control-label" for="session_summary"><b>Session summary : </label>
                         <textarea rows="2" cols="50"
                                   class="form-control
-                                @error('caller_description') is-invalid @enderror"
-                                  name="caller_description"
-                                  id="caller_description"
-                                  value="{{ old('caller_description') }}">{{ old('caller_description')}}
+                                @error('session_summary') is-invalid @enderror"
+                                  name="session_summary"
+                                  id="session_summary"
+                                  value="{{ old('session_summary') }}">{{ old('session_summary')}}
                         </textarea>
 
-                        @error('caller_description') {{ $message }} @enderror
+                        @error('session_summary') {{ $message }} @enderror
                     </div>
 
                     <div class="form-group">
@@ -717,7 +709,7 @@
                         <div class="form-control @error('TreatmentGoal') is-invalid @enderror">
                             <label class="control-label">Schedule next session</label><br>
                             <label class="control-label"style="width: 90%;">
-                                <input type="date" name="ShorttermGoal" class="form-control">
+                                <input type="date" name="next_session" class="form-control">
                                 
                             </label><br>
                             <label class="control-label"> 
@@ -779,6 +771,7 @@
 @endsection
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
 <script>
     function change_sms() {

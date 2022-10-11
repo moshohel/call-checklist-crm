@@ -134,8 +134,8 @@ class ShojonController extends Controller
             'caller' => $request['caller'],
             'pre_mood_rating' => $request['pre_mood_rating'],
             'main_reason_for_calling' => $request['main_reason_for_calling'],
-            'secondary_reason_for_calling' => implode("; ",$request['secondary_reason_for_calling']),
-            'mental_illness_diagnosis' => implode("; ",$request['mental_illness_diagnosis']),
+            'secondary_reason_for_calling' => implode("; ", $request['secondary_reason_for_calling']),
+            'mental_illness_diagnosis' => implode("; ", $request['mental_illness_diagnosis']),
             'ghq' => $request['ghq'],
             'suicidal_risk' => isset($request['suicidal_risk']) ? $request['suicidal_risk'] : null,
             'post_mood_rating' => $request['post_mood_rating'],
@@ -156,9 +156,10 @@ class ShojonController extends Controller
 
         CallChecklistForShojon::create($data);
 
-        $status = 'Checklist for Shojon created successfully';
+        // $status = 'Checklist for Shojon created successfully';
+        session()->flash('success', 'Added successfully !!');
 
-        return redirect(route('success'));
+        return redirect(route('call_checklist.shojon.index'));
     }
 
     private function sendSms($message, $phone)

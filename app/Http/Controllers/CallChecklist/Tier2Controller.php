@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\District;
 use App\Models\Termination;
+use App\Models\Referral;
 use DB;
 class Tier2Controller extends Controller
 {
@@ -56,6 +57,9 @@ class Tier2Controller extends Controller
          if ($request['Physical_Concern_history'] == "on") {
             $request['Physical_Concern_history'] = $request['other_Physical_Concern_history'];
         }
+        if ($request['client_referral'] == "on") {
+            $request['client_referral'] = $request['other_client_referral'];
+        }
 
         $data=array();
         $data['program_name']=$request->project_name;
@@ -101,8 +105,12 @@ class Tier2Controller extends Controller
         $data['intervention']=$request->Intervention;
         $data['homework']=$request->Homework;
         $data['effective']=$request->useful_effective;
-        $data['session_summary']=$request->caller_description;
-        //dd($data);
+        $data['ReasonForReferral']=$request->ReasonForReferral;
+        $data['NameOfAgency']=$request->NameOfAgency;
+        $data['client_referral']=$request->client_referral;
+        $data['session_plan']=$request->next_session_plan;
+        $data['session_summary']=$request->session_summary;
+        $data['session_date']=$request->next_session;
 
         DB::table('sojon_tier2s')->insert($data);
         return redirect()->back()->with('success','insert successfull');
@@ -124,10 +132,6 @@ class Tier2Controller extends Controller
         $pageTitle = $this->pageTitle;
 
         return view('call_checklist.shojon.tier2.index',compact('data','pageTitle'));
-    }
-    public function save_data(Request $request)
-    {
-        dd($request->all());
     }
 
     public function TerminationSave_form(Request $request)
@@ -161,5 +165,22 @@ class Tier2Controller extends Controller
        $data->feedback = $request->feedback;
        $data->learning = $request->learning_session;
        $data->save();
+    }
+    public function ReferralSave_form(Request $request)
+    {
+        $data = new Referral;
+        $data->referr_to = $request->referral_to;
+        $data->referr_from = $request->referral_from;
+        $data->client_name = $request->client_id;
+        $data->client_id = $request->client_name;
+        $data->age = $request->age;
+        $data->phone_number = $request->phone_number;
+        $data->phone_number_two = $request->Emergency_number;
+        $data->reason_for_therapy = $request->reason_for_therapy;
+        $data->preferred_time = $request->preferred_time;
+        $data->financial = $request->Financial;
+        $data->therapist = $request->Therapist;
+        $data->save();
+
     }
 }

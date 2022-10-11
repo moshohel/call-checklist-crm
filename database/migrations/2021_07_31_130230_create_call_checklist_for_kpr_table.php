@@ -21,6 +21,7 @@ class CreateCallChecklistForKprTable extends Migration
             $table->dateTime('call_received')->nullable();
             $table->dateTime('call_started')->nullable();
             $table->dateTime('call_ended')->nullable();
+            $table->integer('customer_sec')->nullable();
             $table->string('caller_name')->nullable();
             $table->enum('sex', ['Male', 'Female', 'Intersex', 'Others']);
             $table->string('age');
