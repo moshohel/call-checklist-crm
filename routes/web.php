@@ -80,15 +80,16 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('/add_patient',[Tier2Controller::class,'tire2fromblade'])->name('call_checklist.shojon.tier2');
 
             Route::post('store/patient', [Tier2Controller::class ,'store'])->name('call_checklist.shojontier2.store');
-            // Route::post('/question/store',[Tier2Controller::class,'tireTow_question_store'])->name('tireTow.question.store');
+  
             Route::get('/patientList',[Tier2Controller::class,'tire2patientlist'])->name('call_checklist.shojon.Patientlist');
             Route::post('/submit',[Tier2Controller::class,'TerminationSave_form'])->name('call_checklist.shojon.termination_form');
             Route::post('/referral_t_two',[Tier2Controller::class,'ReferralSave_form'])->name('call_checklist.shojon.Referral_form');
-            //Shojon tier Three route
-            Route::get('/add/patient',[shojonTierThree::class,'tireThreefromblade'])->name('call_checklist.shojon.tierThree');
-            Route::get('/patient/List/',[shojonTierThree::class,'tireThreepatientlist'])->name('call_checklist.shojon.TierThreePatientlist');
+            //Shojon tier Three route  call_checklist.shojontierThree.store
+            Route::get('/add_patientt3',[shojonTierThree::class,'tireThreefromblade'])->name('call_checklist.shojon.tierThree');
+            Route::post('store_tier3', [shojonTierThree::class ,'store'])->name('call_checklist.shojontierThree.store');
+            Route::get('/patientListt3',[shojonTierThree::class,'tireThreepatientlist'])->name('call_checklist.shojon.TierThreePatientlist');
             ///test route
-            Route::post('/save/data/',[shojonTierThree::class,'tireThreepatient_save_data'])->name('call_checklist.shojon.save_data');
+            // Route::post('/referral_t_three',[shojonTierThree::class,'tireThreerelerral_save_data'])->name('call_checklist.shojon.Referral_form');
 
             // Route::get('/user/info',[AygasController::class,'userInfo'])->name('user.info');
             // Route::get('dashboard', function()call_checklist.shojon.Patientlist

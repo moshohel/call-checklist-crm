@@ -24,13 +24,8 @@ class Tier2Controller extends Controller
                 $previous_data = DB::table('call_checklist_for_shojon')->where('phone_number', $phone)->get();
                 $last = $previous_data->last();
             }
-
             $districts = DB::table('districts')->get();
-            $main_reason = DB::table('shojon_main_reason_for_calling')->pluck('reason');
-            $secondary_reason = DB::table('shojon_secondary_reason_for_calling')->pluck('reason');
-            $mental_illness = DB::table('shojon_mental_illness_diagnosis')->get();
-
-            return view('call_checklist.shojon.tier2.create_tier2', compact('pageTitle', 'districts', 'main_reason', 'secondary_reason', 'mental_illness', 'refId', 'phone', 'is_phone_no', 'previous_data', 'last'));
+            return view('call_checklist.shojon.tier2.create_tier2', compact('pageTitle', 'districts','refId', 'phone', 'is_phone_no', 'previous_data', 'last'));
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         } catch (\Exception $e) {
@@ -91,6 +86,7 @@ class Tier2Controller extends Controller
         $data['self_harm_history']=$request->self_harm_history;
         $data['diagnosis']=implode("; ",$request['mental_illness_diagnosis']);
         $data['psychiatric_medication']=$request->PresentCotinuation;
+        $data['name_of_medicine']=$request->name_of_medicine;
         $data['concern_history']=implode("; ",$request['Physical_Concern_history']);
         $data['differential_diagnosis']=implode("; ",$request['current_differential_diagnosis']);
         $data['tool_name']=$request->PsychometricTool;
@@ -183,4 +179,5 @@ class Tier2Controller extends Controller
         $data->save();
 
     }
+    
 }

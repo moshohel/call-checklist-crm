@@ -4,7 +4,7 @@ namespace App\Http\Controllers\CallChecklist;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Referral;
 use DB;
 
 class shojonTierThree extends Controller
@@ -13,36 +13,35 @@ class shojonTierThree extends Controller
 
     public function tireThreefromblade()
     { 
-        $mental_illness = DB::table('shojon_mental_illness_diagnosis')->get();
+
         $pageTitle = $this->pageTitle;
-        return view('call_checklist.shojon.tierThree.create',compact('pageTitle','mental_illness'));
+        $last = null;
+        $districts = DB::table('districts')->get();
+        return view('call_checklist.shojon.tierThree.create',compact('pageTitle','last','districts'));
     }
     public function tireThreepatientlist()
     {
         return view('call_checklist.shojon.tierThree.index');
     }
-    public function tireThreefrombladequestrion()
-    {
-        return view('call_checklist.shojon.tierThree.questrion_from');
-    }
-
-    // public function tireTow_question_store(Request $request)
-    // {
-    //     $data=array();
-    //     $data['value0']=$request->value1_1;
-    //     $data['value1']=$request->value1_2;
-    //     $data['value2']=$request->value1_3;
-    //     $data['value3']=$request->value1_4;
-    //     $data['value4']=$request->value1_5;
-    //     $data['value5']=$request->value1_6;
-    //     //dd($data);
-    //     DB::table('questionairs')->update($data);
-
-    //     return redirect()->back();
-    // }
-
-    public function tireThreepatient_save_data(Request $request)
+    public function store(Request $request)
     {
         dd($request->all());
     }
+    public function tireThreerelerral_save_data(Request $request)
+    {
+        $data = new Referral;
+        $data->referr_to = $request->referral_to;
+        $data->referr_from = $request->referral_from;
+        $data->client_name = $request->client_id;
+        $data->client_id = $request->client_name;
+        $data->age = $request->age;
+        $data->phone_number = $request->phone_number;
+        $data->phone_number_two = $request->Emergency_number;
+        $data->reason_for_therapy = $request->reason_for_therapy;
+        $data->preferred_time = $request->preferred_time;
+        $data->financial = $request->Financial;
+        $data->therapist = $request->Therapist;
+        $data->save();
+    }
+   
 }

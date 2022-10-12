@@ -44,6 +44,7 @@ return new class extends Migration
             $table->string('self_harm_history')->nullable();
             $table->string('diagnosis')->nullable();
             $table->string('psychiatric_medication')->nullable();
+            $table->string('name_of_medicine')->nullable();  
             $table->string('concern_history')->nullable();
             $table->string('differential_diagnosis')->nullable();
             $table->string('tool_name')->nullable();
