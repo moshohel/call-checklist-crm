@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
 use Illuminate\Database\Eloquent\Model;
 
 class SojonTier2 extends Model
 {
-    use HasFactory;
+    protected $table = 'sojon_tier2s';
 }

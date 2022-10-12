@@ -99,6 +99,9 @@ Route::group(['prefix' => 'call-checklist'], function () {
             // Route::post('/question/store',[Tier2Controller::class,'tireTow_question_store'])->name('tireTow.question.store');
             Route::get('/patientList', [Tier2Controller::class, 'tire2patientlist'])->name('call_checklist.shojon.Patientlist');
             Route::post('/submit', [Tier2Controller::class, 'TerminationSave_form'])->name('call_checklist.shojon.termination_form');
+            // Route::post('/submit', function () {
+            //     return "Hello World";
+            // })->name('call_checklist.shojon.termination_form');
             Route::post('/referral_t_two', [Tier2Controller::class, 'ReferralSave_form'])->name('call_checklist.shojon.Referral_form');
             //Shojon tier Three route
             Route::get('/add/patient', [shojonTierThree::class, 'tireThreefromblade'])->name('call_checklist.shojon.tierThree');

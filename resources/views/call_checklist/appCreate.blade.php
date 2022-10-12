@@ -17,7 +17,7 @@
         @yield('content')
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" defer></script>
-    <script src="{{ asset('backend/js/jquery-3.2.1.min.js') }}"></script>
+    {{-- <script src="{{ asset('backend/js/jquery-3.2.1.min.js') }}"></script> --}}
     <script src="{{ asset('backend/js/popper.min.js') }}"></script>
     <script src="{{ asset('backend/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('backend/js/main.js') }}"></script>
