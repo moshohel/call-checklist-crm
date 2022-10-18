@@ -29,26 +29,36 @@
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Service Providers Name</th>
-                            <th>Program Name</th>
-                            <th>Service Providers ID</th>
-                            <th>Time Call Started</th>
                             <th>Date</th>
-                            <th>Time Call Ended</th>
-                            <th>Duration of Call</th>
                             <th>Phone No</th>
-                            <th>Caller</th>
-                            <th>Caller ID</th>
+                            <th>Time Call Started</th>
                             <th>Caller Name</th>
                             <th> Sex </th>
                             <th> Age </th>
+                            <th class="text-center"> Location </th>
+                            <th class="text-center"> Session Number </th>
+                            <th class="text-center">Actio</th>
+                             <!-- <th>Program Name</th>
+                             <th class="text-center"> Location </th>
+
+                            <th>Service Providers Name</th>
+                            <th>Service Providers ID</th>
+                            
+                            <th>Time Call Started</th>
+                            
+                            <th>Time Call Ended</th>
+                            <th>Duration of Call</th>
+                            
+                            <th>Caller ID</th>
+                            
                             <th class="text-center"> Occupation </th>
                             <th class="text-center"> Location </th>
                             <th class="text-center"> SES </th>
                             <th class="text-center"> Educational Qualification </th>
                             <th class="text-center"> Marital Status </th>
-                            <th class="text-center"> Session Number </th>
+                           
                             <th class="text-center"> Distress Rating </th>
+                            <th class="text-center"> GHQ </th>
                             <th class="text-center"> Problem duration </th>
                             <th class="text-center"> Hearing Source </th>
                             <th class="text-center"> Call Type </th>
@@ -57,7 +67,7 @@
                             <th class="text-center"> Main Reason </th>
                             <th class="text-center"> Secondary Reason </th>
                             <th class="text-center"> MID </th>
-                            <th class="text-center"> GHQ </th>
+                            
                             <th class="text-center"> Suicidal Risk </th>
                             <th class="text-center"> Mood Rating (Post) </th>
                             <th class="text-center"> Caller Effectiveness </th>
@@ -71,13 +81,24 @@
                             <th class="text-center"> Emergency Number </th>
                             <th class="text-center"> Financial Effort </th>
                             <th class="text-center"> Therapist Prefrrence </th>
+                            <th class="text-center">Actio</th> -->
                         </tr>
                         </thead>
                         <tbody>
+                             @foreach($data as $key=>$row)
                             <tr>
-                            	<td></td>
+                                <td>{{$key}}</td>
+                                <td>{{$row->date}}</td>
+                                <td>{{$row->time_call_started}}</td>
+                                <td>{{$row->phone_number}}</td>
+                                <td>{{$row->caller_name}}</td>
+                                <td>{{$row->sex}}</td>
+                                <td>{{$row->age}}</td>
+                                <td>{{$row->location}}</td>
+                                <td>{{$row->session}}</td>
+                                <td><a href="{{ route('call_checklist.shojon.view',$row->id) }}">View</a></td>
                             </tr>
-                           
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -90,3 +111,4 @@
     <script type="text/javascript" src="{{ asset('backend/js/plugins/dataTables.bootstrap.min.js') }}"></script>
     <script type="text/javascript">$('#sampleTable').DataTable();</script>
 @endpush
+

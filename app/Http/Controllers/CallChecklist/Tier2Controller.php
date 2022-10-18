@@ -111,23 +111,19 @@ class Tier2Controller extends Controller
         DB::table('sojon_tier2s')->insert($data);
         return redirect()->back()->with('success','insert successfull');
     }
-    public function tireTow_question_store(Request $request)
-    {
-        $data=array();
-        $data['value5']=$request->value;
-        
-        //dd($data);
-        DB::table('questionairs')->update($data);
+   
 
-        return redirect()->back();
-    }
 
-    public function tire2patientlist()
+    public function tire2patientlist(Request $request)
     {
         $data = DB::table('sojon_tier2s')->get();
         $pageTitle = $this->pageTitle;
-
         return view('call_checklist.shojon.tier2.index',compact('data','pageTitle'));
+    }
+    public function clientDetails($id){
+       // $pageTitle = $this->pageTitle;
+        $data=DB::table('sojon_tier2s')->where('id',$id)->first();
+        return view('call_checklist.shojon.tier2.client_details',compact('data'));
     }
 
     public function TerminationSave_form(Request $request)
