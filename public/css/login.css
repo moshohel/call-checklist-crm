@@ -1,5 +1,6 @@
 body {
-    background-color: #F3EBF6;
+    background-color: #affef6;
+    /* background: linear-gradient(to right, #62f8a1, #affef6); */
     font-family: 'Ubuntu', sans-serif;
 }
 
@@ -14,7 +15,7 @@ body {
 
 .sign {
     padding-top: 40px;
-    color: #8C55AA;
+    color: #009688;
     font-family: 'Ubuntu', sans-serif;
     font-weight: bold;
     font-size: 23px;
@@ -75,7 +76,7 @@ form.form1 {
     cursor: pointer;
     border-radius: 5em;
     color: #fff;
-    background: linear-gradient(to right, #9C27B0, #E040FB);
+    background: linear-gradient(to right, #3e948c, #008175);
     border: 0;
     padding-left: 40px;
     padding-right: 40px;

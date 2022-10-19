@@ -15,9 +15,9 @@ use App\Http\Controllers\CallChecklist\shojonTierThree;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('success', function () {
     return view('success');
@@ -26,7 +26,15 @@ Route::get('success', function () {
 /*Route::get('login','Auth\LoginController@showLoginForm');
 Route::post('login','Auth\LoginController@login');*/
 
+Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+// Route::get('/login', 'Auth\LoginController@login')->name('login');
+Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
+Route::get('users', 'Auth\RegisterController@showAllUser')->name('users');
+
 Auth::routes();
+
+
 
 // patient Routes
 Route::get('generate-pdf-patient/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');

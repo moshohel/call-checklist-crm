@@ -144,6 +144,33 @@
             </ul>
         </li>
 
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
+                <span class="app-menu__label">User</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a class="app-menu__item" href="{{ route('users') }}">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">User List</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="treeview-menu">
+                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+                <li>
+                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                        == "SHOJON") ? 'active' : '' }}"
+                        href="{{ route('register') }}">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">New User</span>
+                    </a>
+                </li>
+                @endif
+            </ul>
+        </li>
+
 
     </ul>
 </aside>

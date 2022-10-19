@@ -8,6 +8,10 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -29,7 +33,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = RouteServiceProvider::USERS;
 
     /**
      * Create a new controller instance.
@@ -38,7 +42,15 @@ class RegisterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest');
+        $this->middleware('auth');
+    }
+
+    public function showAllUser()
+    {
+        // $users = User::orderBy('user_id', 'desc')->get();
+        $users = DB::select("SELECT * FROM `vicidial_users` ORDER BY `user_id` DESC");
+        // dd($users);
+        return view('call_checklist.shojon.users')->with('users', $users);
     }
 
     /**
@@ -50,7 +62,10 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'full_name' => ['required', 'string', 'max:255'],
+            'user' => ['required', 'unique:vicidial_users', 'string', 'max:255'],
+            // 'user_type' => ['required', 'string', 'max:255'],
+            'user_group' => ['required', 'string', 'max:255'],
             // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -66,10 +81,31 @@ class RegisterController extends Controller
     {
         // dd($data);
         return User::create([
-            'user' => $data['name'],
-            // 'email' => $data['email'],
+            'full_name' => $data['full_name'],
+            'user' => $data['user'],
             'pass' => $data['password'],
+            'user_group' => $data['user_group'],
+            'user_level' => 8,
             // 'password' => Hash::make($data['password']),
         ]);
+        session()->flash('success', 'New User has added successfully !!');
+    }
+
+    public function register(Request $request)
+    {
+        // dd($request);
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request->all())));
+
+        // $this->guard()->login($user); //The line: $this->guard()->login($user); is where the user gets logged in auto
+
+        if ($response = $this->registered($request, $user)) {
+            return $response;
+        }
+
+        return $request->wantsJson()
+            ? new JsonResponse([], 201)
+            : redirect($this->redirectPath());
     }
 }
