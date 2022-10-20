@@ -91,15 +91,15 @@
               success:function(response){
                 console.log(response)
                 $('#ReferralModal').modal('hide')
-                alert("Termination save successfully");
+                alert("Referral save successfully");
               },
               error:function(error)
               {
                 console.log(error)
-                alert("Termination not save");
+                alert("Referral not save");
               }
 
             });
-     })
-  })
+     });
+  });
 </script>

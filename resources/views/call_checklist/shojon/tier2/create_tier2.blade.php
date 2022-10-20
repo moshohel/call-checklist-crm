@@ -1,6 +1,8 @@
 @extends('call_checklist.appCreate')
+@include('call_checklist.partials.sidebar')
 @section('title') {{ $pageTitle }} @endsection
 @section('content')
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <div class="app-title">
@@ -414,6 +416,10 @@
                         </div>
                         @error('Present_Continuation') {{ $message }} @enderror
                     </div>
+                    <div class="form-group">
+                        <label class="control-label">Mantion the name of medicine if any :</label>
+                        <textarea class="form-control" name="name_of_medicine"></textarea>
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label" for="Physical_Concern_history"><b>Physical Concern history: (multiple select) 
@@ -642,30 +648,19 @@
                             <div class="form-control @error('client_referral') is-invalid @enderror">
                             <label>
                                 @foreach($types as $item)
-                                    @if(old('client_referral') == $item)
-                                        <input type="radio" id="group1" name="client_referral" value="{{ $item }}"
-                                               checked="checked"/>
-                                    @else
-                                        <input type="radio" id="group1" name="client_referral" value="{{ $item }}"/>
-                                    @endif
+                                        <input type="radio" name="client_referral" value="{{ $item }}"/>
                                     {{ $item }}
                                     <br>
                                 @endforeach
-                                @if(old('client_referral') == "other")
-                                    <input type="radio" id="group3" name="client_referral" value="other"
-                                           checked="checked"/>
-                                @else
-                                    <input type="radio" id="group3" name="client_referral" value="other"/>
-                                @endif
+                                    <input type="radio" id="CliKReferral" name="client_referral" value="other" onclick="ShowReferralBox()" />
                                 Other (please explain)
                             </label>
-                            <span id="ClientReferralBox" style="display: none;">
+                            <span id="ReferralBox" style="display: none;">
                                     <input class="form-control" type="text" name="other_client_referral"
                                            value="{{ old('client_referral') }}" placeholder="Explain"/>
                                 </span>
                         </div>
-                        @error('client_referral') {{ $message }} @enderror
-                            
+                        @error('client_referral') {{ $message }} @enderror   
                         </div>
                     </div>
 
@@ -805,35 +800,31 @@
     }
 
     $(document).ready(function () {
-        show_hide_referral();
         $('#myForm input').on('change', function () {
-            show_hide_referral();
         });
-
         change_sms();
-
     });
 
 
-    function show_hide_referral() {
-        let checked_item = $('input[name=client_referral]:checked', '#myForm');
-        let id = checked_item.attr('id');
+    // function show_hide_referral() {
+    //     let checked_item = $('input[name=client_referral]:checked', '#myForm');
+    //     let id = checked_item.attr('id');
 
-        var financialAffordibilityBox = document.getElementById("financialAffordibilityBox");
-        var clientReferralBox = document.getElementById("ClientReferralBox");
+    //     var financialAffordibilityBox = document.getElementById("financialAffordibilityBox");
+    //     var clientReferralBox = document.getElementById("ClientReferralBox");
 
-        if (id == 'group1') {
-            financialAffordibilityBox.style.display = "none";
-            clientReferralBox.style.display = "none";
-        } else if (id == 'group2') {
-            financialAffordibilityBox.style.display = "block";
-            clientReferralBox.style.display = "none";
-        } else if (id == 'group3') {
-            financialAffordibilityBox.style.display = "none";
-            clientReferralBox.style.display = "block";
+    //     if (id == 'group1') {
+    //         financialAffordibilityBox.style.display = "none";
+    //         clientReferralBox.style.display = "none";
+    //     } else if (id == 'group2') {
+    //         financialAffordibilityBox.style.display = "block";
+    //         clientReferralBox.style.display = "none";
+    //     } else if (id == 'group3') {
+    //         financialAffordibilityBox.style.display = "none";
+    //         clientReferralBox.style.display = "block";
 
-        }
-    }
+    //     }
+    // }
 </script>
 
 <script>
@@ -871,6 +862,7 @@
         ShowOccupationBox();
         ShowSessionBox();
         ShowCurrentDiagnosis();
+        ShowReferralBox();
        // ShowServiceBox();
         //ShowMainReasonBox();
         ShowSecondaryReasonBox();
@@ -880,6 +872,13 @@
         //showFinancialAffordability();
         showMessageBox();
     });
+     function ShowReferralBox() {
+        var radio = document.getElementById("CliKReferral");
+        var Box = document.getElementById("ReferralBox");
+        Box.style.display = radio.checked ? "block" : "none";
+        var other = Box.getElementsByTagName('input')[0];
+        radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
+    }
 
     function ShowOccupationBox() {
         var radio = document.getElementById("chkOccupation");

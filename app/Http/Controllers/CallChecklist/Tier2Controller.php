@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\District;
 use App\Models\Termination;
 use App\Models\Referral;
-use DB;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Tier2Controller extends Controller
 {
@@ -25,13 +26,8 @@ class Tier2Controller extends Controller
                 $previous_data = DB::table('call_checklist_for_shojon')->where('phone_number', $phone)->get();
                 $last = $previous_data->last();
             }
-
             $districts = DB::table('districts')->get();
-            $main_reason = DB::table('shojon_main_reason_for_calling')->pluck('reason');
-            $secondary_reason = DB::table('shojon_secondary_reason_for_calling')->pluck('reason');
-            $mental_illness = DB::table('shojon_mental_illness_diagnosis')->get();
-
-            return view('call_checklist.shojon.tier2.create_tier2', compact('pageTitle', 'districts', 'main_reason', 'secondary_reason', 'mental_illness', 'refId', 'phone', 'is_phone_no', 'previous_data', 'last'));
+            return view('call_checklist.shojon.tier2.create_tier2', compact('pageTitle', 'districts', 'refId', 'phone', 'is_phone_no', 'previous_data', 'last'));
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         } catch (\Exception $e) {
@@ -92,6 +88,7 @@ class Tier2Controller extends Controller
         $data['self_harm_history'] = $request->self_harm_history;
         $data['diagnosis'] = implode("; ", $request['mental_illness_diagnosis']);
         $data['psychiatric_medication'] = $request->PresentCotinuation;
+        $data['name_of_medicine'] = $request->name_of_medicine;
         $data['concern_history'] = implode("; ", $request['Physical_Concern_history']);
         $data['differential_diagnosis'] = implode("; ", $request['current_differential_diagnosis']);
         $data['tool_name'] = $request->PsychometricTool;
@@ -116,23 +113,20 @@ class Tier2Controller extends Controller
         DB::table('sojon_tier2s')->insert($data);
         return redirect()->back()->with('success', 'insert successfull');
     }
-    public function tireTow_question_store(Request $request)
-    {
-        $data = array();
-        $data['value5'] = $request->value;
 
-        //dd($data);
-        DB::table('questionairs')->update($data);
 
-        return redirect()->back();
-    }
 
-    public function tire2patientlist()
+    public function tire2patientlist(Request $request)
     {
         $data = DB::table('sojon_tier2s')->get();
         $pageTitle = $this->pageTitle;
-
         return view('call_checklist.shojon.tier2.index', compact('data', 'pageTitle'));
+    }
+    public function clientDetails($id)
+    {
+        // $pageTitle = $this->pageTitle;
+        $data = DB::table('sojon_tier2s')->where('id', $id)->first();
+        return view('call_checklist.shojon.tier2.client_details', compact('data'));
     }
 
     public function TerminationSave_form(Request $request)

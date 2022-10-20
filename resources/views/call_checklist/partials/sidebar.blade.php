@@ -70,14 +70,14 @@
             <ul class="treeview-menu">
 
                 <li>
-                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+                    <a class="app-menu__item"
                         href="{{ route('call_checklist.shojon.tierThree') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Add Patient - Tier 3 </span>
                     </a>
                 </li>
                 <li>
-                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+                    <a class="app-menu__item"
                         href="{{ route('call_checklist.shojon.TierThreePatientlist') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Patient List - Tier 3</span>

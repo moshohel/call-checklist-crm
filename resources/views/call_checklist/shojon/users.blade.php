@@ -19,8 +19,8 @@
                 <tr>
                   <th>Last Login</th>
                   <th>User Name</th>
-                  <th class="d-none d-md-table-cell">User Type</th>
                   <th>Name</th>
+                  <th class="d-none d-md-table-cell">User Type</th>
                   {{-- <th>Options</th> --}}
                 </tr>
               </thead>
@@ -31,8 +31,8 @@
                           <a class="text-dark" href="{{ route('user.show', $user->id) }}">{{ $user->name }}</a>
                         </td> --}}
                         <td class="d-none d-md-table-cell text-dark">{{ $user->last_login_date }}</td>
-                        <td class="d-none d-md-table-cell text-dark">{{ $user->full_name }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $user->user }}</td>
+                        <td class="d-none d-md-table-cell text-dark">{{ $user->full_name }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $user->user_group }}</td>
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $user->department }}</td> --}}
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $user->con_name }}</td> --}}
