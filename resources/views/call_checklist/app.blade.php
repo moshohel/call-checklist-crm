@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/font-awesome/4.7.0/css/font-awesome.min.css') }}"/>
     <link rel="stylesheet" type="text/css" href="{{ asset('plugins/slider/css/rSlider.min.css') }}"/>
     <link rel="stylesheet" type="text/css"  href="{{ asset('plugins/date-picker/css/bootstrap-datetimepicker.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/style.css') }}" />
+
 </head>
 <body class="app sidebar-mini rtl">
     @include('call_checklist.partials.header')

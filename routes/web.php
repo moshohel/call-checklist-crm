@@ -31,7 +31,11 @@ Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 // Route::get('/login', 'Auth\LoginController@login')->name('login');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
-Route::get('users', 'Auth\RegisterController@showAllUser')->name('users');
+
+Route::get('users', 'Auth\RegisterController@showAllUser')->name('users')->middleware('auth');;
+Route::get('/show/{user_id}', 'Auth\UserController@show')->name('user.show')->middleware('auth');
+Route::get('/edit/{user_id}', 'Auth\UserController@edit')->name('user.edit')->middleware('auth');;
+Route::post('/edit/{user_id}', 'Auth\UserController@update')->name('user.update')->middleware('auth');;
 
 Auth::routes();
 

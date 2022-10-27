@@ -21,6 +21,7 @@
                   <th>User Name</th>
                   <th>Name</th>
                   <th class="d-none d-md-table-cell">User Type</th>
+                  <th class="d-none d-md-table-cell">Options</th>
                   {{-- <th>Options</th> --}}
                 </tr>
               </thead>
@@ -34,6 +35,10 @@
                         <td class="d-none d-md-table-cell text-dark">{{ $user->user }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $user->full_name }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $user->user_group }}</td>
+                        <td>
+                          <a href="{{ route('user.show', $user->user_id) }}" class="btn btn-info btn-default">Details</a>
+                          <a href="{{ route('user.edit', $user->user_id) }}" class="btn btn-info btn-default">Edit</a>
+                        </td>
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $user->department }}</td> --}}
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $user->con_name }}</td> --}}
                         

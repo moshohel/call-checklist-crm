@@ -12,6 +12,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use date;
 
 class RegisterController extends Controller
 {
@@ -50,7 +51,7 @@ class RegisterController extends Controller
         // $users = User::orderBy('user_id', 'desc')->get();
         $users = DB::select("SELECT * FROM `vicidial_users` ORDER BY `user_id` DESC");
         // dd($users);
-        return view('call_checklist.shojon.users')->with('users', $users);
+        return view('call_checklist.shojon.user.users')->with('users', $users);
     }
 
     /**
@@ -79,12 +80,15 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // dd($data);
+        // dd($data['image']->getClientOriginalName());
+        // dd($data['image']);
+
         return User::create([
             'full_name' => $data['full_name'],
             'user' => $data['user'],
             'pass' => $data['password'],
             'user_group' => $data['user_group'],
+            'image' => date('YmdHi') . $data['image']->getClientOriginalName(),
             'user_level' => 8,
             // 'password' => Hash::make($data['password']),
         ]);
@@ -93,7 +97,13 @@ class RegisterController extends Controller
 
     public function register(Request $request)
     {
-        // dd($request);
+        // dd($request->file('image'));
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('Image/Profile'), $filename);
+        }
+
         $this->validator($request->all())->validate();
 
         event(new Registered($user = $this->create($request->all())));
