@@ -69,11 +69,11 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                    aria-controls="profile" aria-selected="true">Profile</a>
+                                    aria-controls="profile" aria-selected="true">Sessions</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab"
-                                    aria-controls="settings" aria-selected="false">Cliests</a>
+                                    aria-controls="settings" aria-selected="false">Clients</a>
                             </li>
                         </ul>
                         <div class="tab-content px-3 px-xl-5" id="myTabContent">
@@ -84,8 +84,8 @@
                                         {{-- <img src="assets/img/user/u3.jpg" alt="Generic placeholder image"> --}}
                                     </div>
                                     <div class="media-body">
-                                        <h6 class="mt-0 text-dark">Larissa Gebhardt</h6>
-                                        <span>Designer</span>
+                                        <h6 class="mt-0 text-dark"> Refferls </h6>
+                                        <span> Larissa Gebhardt</span>
                                         <span class="float-right">5 mins ago</span>
                                         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
                                             tempor incididunt ut labore et dolore
@@ -104,9 +104,55 @@
                                 </div>
                                 
                             </div>
-                            <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">...
+                            <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="media mt-5 profile-timeline-media">
+                                    <div class="align-self-start iconbox-45 overflow-hidden mr-3">
+                                        {{-- <img src="assets/img/user/u3.jpg" alt="Generic placeholder image"> --}}
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="mt-0 text-dark"> Sessions </h6>
+                                        <span> Larissa Gebhardt</span>
+                                        <span class="float-right">5 mins ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                            tempor incididunt ut labore et dolore
+                                            magna aliqua. ut enim ad minim veniam quis nostrud exercitation ullamco
+                                            laboris nisi ut aliquip.</p>
+                                        <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
+                                            
+                                        </div>
+                                        <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
+                                            
+                                        </div>
+                                        <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">...
+                            <div class="tab-pane fade" id="settings" role="tabpanel" aria-labelledby="settings-tab">
+                                <div class="media mt-5 profile-timeline-media">
+                                    <div class="align-self-start iconbox-45 overflow-hidden mr-3">
+                                        {{-- <img src="assets/img/user/u3.jpg" alt="Generic placeholder image"> --}}
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="mt-0 text-dark"> Clients </h6>
+                                        <span> Larissa Gebhardt</span>
+                                        <span class="float-right">5 mins ago</span>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+                                            tempor incididunt ut labore et dolore
+                                            magna aliqua. ut enim ad minim veniam quis nostrud exercitation ullamco
+                                            laboris nisi ut aliquip.</p>
+                                        <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
+                                            
+                                        </div>
+                                        <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
+                                            
+                                        </div>
+                                        <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

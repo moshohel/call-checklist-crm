@@ -48,7 +48,8 @@
                         <div class="form-group row">
                             <label class="col-md-4 col-form-label text-md-right" for="image"> Image</label>
                             <div class="col-md-6">
-                                <input type="file" class="form-control" name="image" id="image">
+                                <input type="file" class="form-control" name="image" id="image" accept="image/png, image/gif, image/jpeg">
+                                <p class="text-muted mb-0">Allowed JPG, GIF or PNG.</p>
                             </div>
                           </div>
                         

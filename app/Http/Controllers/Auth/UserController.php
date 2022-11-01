@@ -13,66 +13,11 @@ use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
 use phpDocumentor\Reflection\Types\Null_;
 use App\Http\Controllers\Controller;
+use FontLib\Table\Type\post;
 
 class UserController extends Controller
 {
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('admin');
-    // }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function index()
-    // {
-    //     $users = User::orderBy('id', 'desc')->get();
-    //     return view('pages.user.index')->with('users', $users);
-    // }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    // public function create()
-    // {
-    //     // dd('-------------create----------');
-    //     return view('pages.user.create');
-    // }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreUserRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    // public function store(Request $request)
-    // {
-
-    //     $user = new User();
-    //     $data = $request->only($user->getFillable());
-    //     $data['password'] =  Hash::make($request->password);
-    //     $data['conf_room'] = 0;
-    //     $data['created_by'] = Auth::user()->id;      
-    //     date_default_timezone_set('Asia/Dhaka');
-    //     $date = date('Y-m-d H:i:s');
-    //     $data['created_date'] = $date;
-    //     $user->fill($data);
-    //     $user->save();
-    //     session()->flash('success', 'New User has added successfully !!');
-
-    //     return  redirect('/user');
-    // }
-
+    public $image = '';
     /**
      * Display the specified resource.
      *
@@ -114,53 +59,62 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $user_id)
     {
-        // dd($request);
-        $user = User::find($id);
-        $data = $request->only($user->getFillable());
-        print_r($data['name'], '\n');
-        $name = $data['name'];
-        $rowPass = $data['password'];
-        if ($data['password'] != '') {
-            print($data['password']);
-            echo '</br>';
-            // $data['password'] =  Hash::make($request->password);
-            $options = [
-                'cost' => 10,
-            ];
-            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT, $options);
-            print_r($data['password']);
-            echo '</br>';
+        global $image;
 
-            // echo password_hash($data['password'], PASSWORD_BCRYPT, $options);
-        } else {
-            unset($data['password']);
+        // Post::where('id', 3)->$data = array();
+        if ($request->file('image')) {
+            $file = $request->file('image');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('Image/Profile'), $filename);
         }
+
+        // if ($request->image) {
+        //     $image = $request->image;
+        // }
+
+        // $full_name = $request->full_name;
+        // $user_name = $request->user;
+        // $pass = $request->client_name;
+        // $user_group = $request->user_group;
+
+        // $data = array('image' => $image, "full_name" => $full_name, "user" => $user_name, "user_group" => $user_group);
+
+        // $user = User::find($user_id);
+        // $user = User::whereUserId($user_id)->get();
+        $user = User::where('user_id', $user_id)->first();
+        // dd($user);
+        // dd($user->user_id);
+        $data = $request->only($user->getFillable());
+        if ($request->file('image')) {
+            $data['image'] = date('YmdHi') . $data['image']->getClientOriginalName();
+        }
+        // print_r($data['name'], '\n');
+        // dd($data);
+        // $name = $data['name'];
+        // $rowPass = $data['password'];
+        // if ($data['password'] != '') {
+        //     print($data['password']);
+        //     echo '</br>';
+        //     // $data['password'] =  Hash::make($request->password);
+        //     $options = [
+        //         'cost' => 10,
+        //     ];
+        //     $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT, $options);
+        //     print_r($data['password']);
+        //     echo '</br>';
+
+        //     // echo password_hash($data['password'], PASSWORD_BCRYPT, $options);
+        // } else {
+        //     unset($data['password']);
+        // }
         $user->fill($data);
         $user->save();
 
-        // $hash = row('SELECT PASSWORD FROM `user` WHERE name = 'user3');
-        $hash = DB::table('user')
-            ->select('password')
-            ->where('name', $data['name'])
-            ->get();
-        $pass = DB::select("SELECT password FROM user WHERE name = '$name' ");
-        // $pass = DB::select("SELECT password FROM user WHERE name = '$data['name']");
-        echo gettype($pass) . "<br>";
-
-        if (password_verify($rowPass, $pass[0]->password)) {
-
-            echo 'Password is valid!';
-        } else {
-            echo 'Invalid password.';
-        }
-
-        // dd($pass[0]->password);
-        // dd($data);
         session()->flash('success', 'User credentials changed successfully !!');
         // redirect('/edit/{{$id}}');
-        return redirect()->to('user/edit/' . $id);
+        return redirect()->to('edit/' . $user_id);
     }
 
     /**
