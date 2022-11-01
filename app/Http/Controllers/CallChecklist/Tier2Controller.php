@@ -13,6 +13,8 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 class Tier2Controller extends Controller
 {
     protected $pageTitle = 'Shojon Tier 2 Service';
+    protected $pageTitleUpdate = 'Shojon Tier 2 Update';
+  
 
     public function tire2fromblade($refId = 0, $phone = '')
     {
@@ -73,7 +75,7 @@ class Tier2Controller extends Controller
         $data['age'] = $request->age;
         $data['occupation'] = $request->occupation;
         $data['location'] = $request->location;
-        $data['socio-economic'] = $request->socio_economic_status;
+        $data['socio_economic'] = $request->socio_economic_status;
         $data['education'] = $request->Educational_Qualification;
         $data['marital'] = $request->Marital_Status;
         $data['session'] = $request->Session_Number;
@@ -114,7 +116,28 @@ class Tier2Controller extends Controller
         return redirect()->back()->with('success', 'insert successfull');
     }
 
+    public function clientUpdate($id, $phone = '')
+    {
+         $pageTitleUpdate = $this->pageTitleUpdate;
+        $data = DB::table('sojon_tier2s')->where('id', $id)->first();
+        $previous_data = null;
+        $last = null;
 
+        try {
+            $is_phone_no = DB::table('sojon_tier2s')->where('phone_number', $phone)->first();
+            if ($is_phone_no) {
+                $previous_data = DB::table('sojon_tier2s')->where('id', $id)->get();
+                $last = $previous_data->last();
+            }
+            $districts = DB::table('districts')->get();
+            return view('call_checklist.shojon.tier2.editTierTwo', compact('pageTitleUpdate', 'districts', 'phone', 'is_phone_no', 'previous_data', 'last','data'));
+        } catch (ModelNotFoundException $exception) {
+            return back()->withError($exception->getMessage())->withInput();
+        } catch (\Exception $e) {
+            return back()->withError($e->getMessage());
+        }
+        return view('', compact('pageTitleUpdate','districts'));
+    }
 
     public function tire2patientlist(Request $request)
     {

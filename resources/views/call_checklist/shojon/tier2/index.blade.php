@@ -1,6 +1,7 @@
 @extends('call_checklist.app')
 @section('title') {{ $pageTitle }} @endsection
 @section('content')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
     <div class="app-title">
         <div>
             <h1><i class="fa fa-tags"></i> <a href="{{ route('call_checklist.shojon.index') }}">{{ $pageTitle }}</span></a>
@@ -37,7 +38,7 @@
                             <th> Age </th>
                             <th class="text-center"> Location </th>
                             <th class="text-center"> Session Number </th>
-                            <th class="text-center">Actio</th>
+                            <th class="text-center">Action</th>
                              <!-- <th>Program Name</th>
                              <th class="text-center"> Location </th>
 
@@ -96,7 +97,9 @@
                                 <td>{{$row->age}}</td>
                                 <td>{{$row->location}}</td>
                                 <td>{{$row->session}}</td>
-                                <td><a href="{{ route('call_checklist.shojon.view',$row->id) }}">View</a></td>
+                                <td><a href="{{ route('call_checklist.shojon.view',$row->id) }}"><i class="fa-solid fa-eye"></i></a>
+                                 <a href="{{ route('call_checklist.shojon.edit',$row->id) }}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
+                                </td>
                             </tr>
                             @endforeach
                         </tbody>
