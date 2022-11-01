@@ -1,57 +1,42 @@
 @extends('call_checklist.app')
-@section('title') {{ $pageTitle }} @endsection
+@section('title') {{ $data->caller_name }} @endsection
 @section('content')
-
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
+            <h1><i class="fa fa-tags"></i> {{ $pageTitleUpdate }}</h1>
         </div>
     </div>
-
-
-
     <div class="row">
         <div class="col-md-12 mx-auto">
             <div class="tile">
                 <h3 class="tile-title">Create Checklist for Shojon</h3>
-                <form id="myForm" action="{{ route('call_checklist.shojontier2.store') }}" method="POST" role="form"
+                <form id="myForm" action="#" method="POST" role="form"
                       enctype="multipart/form-data" autocomplete="off">
                     @csrf
 
                     <div class="tile-body">
 
                         <!-- Auto generated field -->
-                        <input type="hidden" name="project_name" value="#">
-                        <input type="hidden" name="service_providers_name" value="#">
-                        <input type="hidden" name="service_providers_id" value="#">
-                        <input type="hidden" name="call_started" value="#">
-                        <input type="hidden" name="call_end" value="#">
-                        <input type="hidden" name="duration" value="#">
 
                         <div class="form-group">
                             <label class="control-label" for="phone_number"><b>Phone Number:</b></label><br>
                             <input class="form-control" type="text" name="phone_number" id="phone_number"
-                                   value="1">
+                                   value="{{ $data->phone_number }}">
                         </div>
 
                         <div class="form-group">
                             <label class="control-label" for="caller_id"><b>Caller ID:</b></label>
                             <input class="form-control" type="text" name="caller_id" id="caller_id"
-                                   value="{{ old('caller_id',$last? $last->caller_id : null) }}"
-                                   placeholder="Enter caller name"/>
+                                   value="{{ $data->caller_id }}"/>
                         </div>
 
                         <div class="form-group">
                             <label class="control-label" for="caller_name"><b>Caller Name:</b></label>
                             <input class="form-control" type="text" name="caller_name" id="caller_name"
-                                   value="{{ old('caller_name',$last? $last->caller_name : null) }}"
-                                   placeholder="Enter caller name"/>
+                                   value="{{ $data->caller_name }}"/>
                         </div>
-
-                        <input type="hidden" name="referrence_id" value="1">
-
 
                         <div class="form-group">
                             <label class="control-label" for="sex"><b>Sex:</label>
@@ -59,7 +44,7 @@
                             <select name="sex" id="sex" list="sex_list"
                                     class="form-control @error('sex') is-invalid @enderror">
                                 <datalist id="sex_list">
-                                    <option value="">Select Sex</option>
+                                    <option value="{{ $data->sex }}">{{ $data->sex }}</option>
                                     @foreach($types as $item)
                                         @if($last && ($last->sex == $item))
                                             <option value="{{ $item }}" selected>{{ $item }}</option>
@@ -78,7 +63,7 @@
                             <select name="age" id="age" list="age_list"
                                     class="form-control @error('age') is-invalid @enderror">
                                 <datalist id="age_list">
-                                    <option value="">Select Age</option>
+                                    <option value="{{ $data->age }}">{{ $data->age }}</option>
                                     @foreach($types as $item)
                                         @if( $last && ($last->age == $item))
                                             <option selected value="{{ $item }}">{{ $item }}</option>
@@ -763,7 +748,6 @@
         </div>
     </div>
 @endsection
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
@@ -996,5 +980,3 @@
         window.onload = init;
     })();
 </script>
-
-

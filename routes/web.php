@@ -112,6 +112,7 @@ Route::group(['prefix' => 'call-checklist'], function () {
 
             Route::get('/patientList', [Tier2Controller::class, 'tire2patientlist'])->name('call_checklist.shojon.Patientlist');
             Route::get('/details/{id}', [Tier2Controller::class, 'clientDetails'])->name('call_checklist.shojon.view');
+            Route::get('/update/{id}', [Tier2Controller::class, 'clientUpdate'])->name('call_checklist.shojon.edit');
             Route::post('/submit', [Tier2Controller::class, 'TerminationSave_form'])->name('call_checklist.shojon.termination_form');
             Route::post('/referral_t_two', [Tier2Controller::class, 'ReferralSave_form'])->name('call_checklist.shojon.Referral_form');
             //Shojon tier Three route  call_checklist.shojontierThree.store

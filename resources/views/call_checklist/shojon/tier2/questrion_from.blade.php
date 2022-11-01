@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">গোল্ডবার্গ এর মানসিক স্বাস্থ্য বিষয়ক প্রশ্নমালা</h5>
+        <h5 class="modal-title" id="exampleModalLabel">WHO (Five) Well-Being Index (1988 version)</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button> 

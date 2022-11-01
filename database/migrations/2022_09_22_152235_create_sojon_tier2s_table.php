@@ -29,7 +29,7 @@ class CreateSojonTier2sTable extends Migration
             $table->string('age')->nullable();
             $table->string('occupation')->nullable();
             $table->string('location')->nullable();
-            $table->string('socio-economic')->nullable();
+            $table->string('socio_economic')->nullable();
             $table->string('education')->nullable();
             $table->string('marital')->nullable();
             $table->string('session')->nullable();
