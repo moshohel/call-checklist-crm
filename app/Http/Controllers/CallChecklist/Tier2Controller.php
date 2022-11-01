@@ -14,7 +14,7 @@ class Tier2Controller extends Controller
 {
     protected $pageTitle = 'Shojon Tier 2 Service';
     protected $pageTitleUpdate = 'Shojon Tier 2 Update';
-  
+
 
     public function tire2fromblade($refId = 0, $phone = '')
     {
@@ -105,8 +105,8 @@ class Tier2Controller extends Controller
         $data['intervention'] = $request->Intervention;
         $data['homework'] = $request->Homework;
         $data['effective'] = $request->useful_effective;
-        $data['ReasonForReferral'] = $request->ReasonForReferral;
-        $data['NameOfAgency'] = $request->NameOfAgency;
+        $data['reason_for_referral'] = $request->ReasonForReferral;
+        $data['name_of_agency'] = $request->NameOfAgency;
         $data['client_referral'] = $request->client_referral;
         $data['session_plan'] = $request->next_session_plan;
         $data['session_summary'] = $request->session_summary;
@@ -118,7 +118,7 @@ class Tier2Controller extends Controller
 
     public function clientUpdate($id, $phone = '')
     {
-         $pageTitleUpdate = $this->pageTitleUpdate;
+        $pageTitleUpdate = $this->pageTitleUpdate;
         $data = DB::table('sojon_tier2s')->where('id', $id)->first();
         $previous_data = null;
         $last = null;
@@ -130,13 +130,13 @@ class Tier2Controller extends Controller
                 $last = $previous_data->last();
             }
             $districts = DB::table('districts')->get();
-            return view('call_checklist.shojon.tier2.editTierTwo', compact('pageTitleUpdate', 'districts', 'phone', 'is_phone_no', 'previous_data', 'last','data'));
+            return view('call_checklist.shojon.tier2.editTierTwo', compact('pageTitleUpdate', 'districts', 'phone', 'is_phone_no', 'previous_data', 'last', 'data'));
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         } catch (\Exception $e) {
             return back()->withError($e->getMessage());
         }
-        return view('', compact('pageTitleUpdate','districts'));
+        return view('', compact('pageTitleUpdate', 'districts'));
     }
 
     public function tire2patientlist(Request $request)

@@ -21,11 +21,11 @@
               <!-- /.card-header -->
                 <div class="card-body">
                   <div class="row g-2">
-                    <div class="col-md-3 bg-primary">
+                    {{-- <div class="col-md-3 bg-primary">
                       <div class="card-block text-center text-white">
                           <i class="fa-solid fa-user-nurse fa-7x mt-5"></i>
                       </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-9">
                         <div class="row g-2">
                             <div class="col-md-3">

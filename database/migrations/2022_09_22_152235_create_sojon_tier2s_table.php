@@ -15,7 +15,7 @@ class CreateSojonTier2sTable extends Migration
     {
         Schema::create('sojon_tier2s', function (Blueprint $table) {
             $table->id();
-            $table->string('project_name')->nullable();
+            $table->string('program_name')->nullable();
             $table->string('service_providers_name')->nullable();
             $table->string('service_providers_di')->nullable();
             $table->string('date')->nullable();
@@ -44,7 +44,7 @@ class CreateSojonTier2sTable extends Migration
             $table->string('self_harm_history')->nullable();
             $table->string('diagnosis')->nullable();
             $table->string('psychiatric_medication')->nullable();
-            $table->string('name_of_medicine')->nullable();  
+            $table->string('name_of_medicine')->nullable();
             $table->string('concern_history')->nullable();
             $table->string('differential_diagnosis')->nullable();
             $table->string('tool_name')->nullable();
@@ -59,6 +59,9 @@ class CreateSojonTier2sTable extends Migration
             $table->string('intervention')->nullable();
             $table->string('homework')->nullable();
             $table->string('effective')->nullable();
+            $table->string('reason_for_referral')->nullable();
+            $table->string('name_of_agency')->nullable();
+            $table->string('client_referral')->nullable();
             $table->string('session_plan')->nullable();
             $table->text('session_summary')->nullable();
             $table->string('session_date')->nullable();
