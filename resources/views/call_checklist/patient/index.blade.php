@@ -6,7 +6,7 @@
     <!-- Product Table -->
     <div class="card card-table-border-none" id="recent-orders">
       <div class="card-header justify-content-between">
-        <h2 class="pb-4">All patients</h2>
+        <h2 class="pb-4">All Clients</h2>
         <div class="btn-group">
           <a id="print_excel" href="#" class="btn btn-sm btn-secondary" style="display: none">
             <i class="mdi mdi-content-save"></i> Download Excel</a>
