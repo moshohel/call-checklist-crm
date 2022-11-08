@@ -32,10 +32,11 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 // Route::get('/login', 'Auth\LoginController@login')->name('login');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 
-Route::get('users', 'Auth\RegisterController@showAllUser')->name('users')->middleware('auth');;
+Route::get('users', 'Auth\RegisterController@showAllUser')->name('users')->middleware('auth');
 Route::get('/show/{user_id}', 'Auth\UserController@show')->name('user.show')->middleware('auth');
-Route::get('/edit/{user_id}', 'Auth\UserController@edit')->name('user.edit')->middleware('auth');;
-Route::post('/edit/{user_id}', 'Auth\UserController@update')->name('user.update')->middleware('auth');;
+Route::get('/edit/{user_id}', 'Auth\UserController@edit')->name('user.edit')->middleware('auth');
+Route::post('/edit/{user_id}', 'Auth\UserController@update')->name('user.update')->middleware('auth');
+
 
 Auth::routes();
 
@@ -47,8 +48,8 @@ Route::group(['prefix' => 'patient'], function () {
     Route::get('/', 'Patient\PatientController@index')->name('patients')->middleware('auth');
     Route::get('/show/{id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');
     Route::get('/showInfo/{phone}', 'Patient\PatientController@showInfo')->name('patient.showInfo')->middleware('auth');
-    Route::post('/paging', 'Patient\PatientController@paging')->name('patient.paging')->middleware('auth');
-    Route::post('/search', 'Patient\PatientController@search')->name('patient.search')->middleware('auth');
+    Route::get('/paging', 'Patient\PatientController@paging')->name('patient.paging')->middleware('auth');
+    Route::get('/search', 'Patient\PatientController@search')->name('patient.search')->middleware('auth');
 
     Route::get('/create', 'Patient\PatientController@create')->name('patient.create');
     Route::get('/edit/{id}', 'Patient\PatientController@edit')->name('patient.edit');

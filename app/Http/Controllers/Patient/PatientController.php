@@ -32,6 +32,76 @@ class PatientController extends Controller
         return view('call_checklist.patient.index', compact('patients'));
     }
 
+    public function search(Request $request)
+    {
+
+        $unique_id = $request->unique_id;
+        $phone_number = $request->phone_number;
+        $from_date = $request->from_date;
+        $to_date = $request->to_date;
+
+        $str = '';
+        if ($unique_id != '') {
+            $str .= " and patients.unique_id ='$unique_id' ";
+        }
+        if ($phone_number != '') {
+            $str .= " and patients.phone_number ='$phone_number' ";
+        }
+        if ($from_date != '') {
+            $str .= " and DATE(patients.created_at) >= '$from_date' ";
+        }
+        if ($to_date != '') {
+            $str .= " and DATE(patients.created_at) <= '$to_date' ";
+        }
+        // echo $str;
+
+        $json_data = array(
+            "additional_query" => $str,
+        );
+        echo json_encode($json_data);
+    }
+
+    public function paging(Request $request)
+    {
+        // DataTable sends this draw, search, start, length
+        $draw = $request->draw;
+        $search = $request->search;
+        $start = $request->start;
+        $length = $request->length;
+
+        // additional_query is the query string for filtering data 
+        // form submit calles search which genarate this Query String 
+        $additional_query = $request->additional_query;
+        // $patients = DB::select("SELECT consultants.name as consultant_name, patients.* FROM patients LEFT JOIN consultants ON consultants.id= patients.consultant_id WHERE 1 $additional_query limit $start ,$length");
+        $patients = DB::select("SELECT * FROM patients WHERE 1 $additional_query limit $start ,$length");
+        $count_result = DB::select("SELECT count(*) as total FROM patients WHERE 1 $additional_query ");
+
+        $recordsTotal = $count_result[0]->total;
+        $recordsFiltered = $recordsTotal; //by default its equal to total record when no search applied
+
+        $output = array();
+        foreach ($patients as $item) {
+            $id = $item->id;
+            $phone = $item->phone_number;
+            $view_button = "<a href='patient/show/$id' class='btn btn-info'>Info</a>";
+            $edit_button = "<a href='patient/edit/$id' class='btn btn-default'>Edit</a>";
+            $delete_button = "<a href='patient/delete/$id' class='badge badge-danger'>Delete</a>";
+            $showInfo = "<a href='patient/showInfo/$phone' class='btn btn-success'>History</a>";
+            $output[] = array(
+                $item->name, $item->phone_number, $item->sex, $item->age, $item->location, $item->occupation,
+                $item->unique_id, "$view_button&nbsp;&nbsp$edit_button&nbsp;&nbsp$showInfo&nbsp;&nbsp;"
+            );
+        }
+
+        $json_data = array(
+            "draw"            => $draw,
+            "recordsTotal"    => $recordsTotal,
+            "recordsFiltered" => $recordsFiltered,
+            "data"            => $output   // total data array
+        );
+        echo json_encode($json_data);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -61,11 +131,9 @@ class PatientController extends Controller
         $data = $request->only($patient->getFillable());
         $patient->fill($data);
         $patient->created_by = auth()->id();
-        // print_r(auth()->id());
         $patient->created_at = Carbon::now();
         // $patient->created_date = Carbon::today();
         $patient->unique_id = rand(100000, 999999);
-        // dd($patient);
         $patient->save();
         session()->flash('success', 'New patient has added successfully !!');
         // return redirect()->route('admin.products');
