@@ -40,7 +40,7 @@
           <div class="form-group col-3" id="phone_number">
             <label for="exampleFormControlInput5">Phone Number</label>
             <input type="number" class="form-control" name="phone_number" id="exampleFormControlInput5"
-              placeholder="Phone Number">
+              placeholder="Phone Number" min="">
           </div>
           <div class="form-footer pt-2 mt-4 ml-4">
             <button type="submit" class="btn btn-info btn-default" id="search-btn">Search</button>

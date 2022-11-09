@@ -84,9 +84,9 @@ class PatientController extends Controller
             $id = $item->id;
             $phone = $item->phone_number;
             $view_button = "<a href='patient/show/$id' class='btn btn-info'>Info</a>";
-            $edit_button = "<a href='patient/edit/$id' class='btn btn-default'>Edit</a>";
+            $edit_button = "<a href='patient/edit/$id' class='btn btn-info'>Edit</a>";
             $delete_button = "<a href='patient/delete/$id' class='badge badge-danger'>Delete</a>";
-            $showInfo = "<a href='patient/showInfo/$phone' class='btn btn-success'>History</a>";
+            $showInfo = "<a href='patient/showInfo/$phone' class='btn btn-info'>History</a>";
             $output[] = array(
                 $item->name, $item->phone_number, $item->sex, $item->age, $item->location, $item->occupation,
                 $item->unique_id, "$view_button&nbsp;&nbsp$edit_button&nbsp;&nbsp$showInfo&nbsp;&nbsp;"

@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Maatwebsite\Excel\Facades\Excel;
 use Svg\Tag\Rect;
+use App\Models\Patient;
 
 class ShojonController extends Controller
 {
@@ -150,14 +151,39 @@ class ShojonController extends Controller
             'ref_emergency_number' => $request['ref_emergency_number'] ? $request['ref_emergency_number'] : null,
             'ref_financial_affort' => $request['ref_financial_affort'] ? $request['ref_financial_affort'] : null,
             'ref_therapist_preference' => $request['ref_therapist_preference'] ? $request['ref_therapist_preference'] : null,
-            'created_by' => 1,
-            'updated_by' => 1
+            'created_by' => auth()->id(),
+            'updated_by' => Carbon::now()
         ];
 
-        CallChecklistForShojon::create($data);
+
+        $phone = $request->phone_number;
+
+        // $is_phone_no = CallChecklistForShojon::where('phone_number', $phone)->first();
+        $is_phone_no = CallChecklistForShojon::where('phone_number', $phone)->first();
+        if ($is_phone_no != NULL) {
+            session()->flash('success', 'Added successfully !!');
+        } else {
+            $patient = new Patient;
+
+            $patient->name = $request->caller_name;
+            $patient->phone_number = $request->phone_number;
+            $patient->caller_id = $request->caller_id;
+            $patient->sex = $request->sex;
+            $patient->age = $request->age;
+            $patient->occupation = $request->occupation;
+            $patient->location = $request->location;
+            $patient->socio_economic_status = $request->socio_economic_status;
+            $patient->hearing_source = $request->hearing_source;
+            $patient->caller_description = $request->caller_description;
+            $patient->unique_id = rand(100000, 999999);
+            $patient->created_by = auth()->id();
+            $patient->created_at = Carbon::now();
+            $patient->save();
+            session()->flash('success', 'Added successfully & New Client Created!!');
+        }
 
         // $status = 'Checklist for Shojon created successfully';
-        session()->flash('success', 'Added successfully !!');
+        CallChecklistForShojon::create($data);
 
         return redirect(route('call_checklist.shojon.index'));
     }
