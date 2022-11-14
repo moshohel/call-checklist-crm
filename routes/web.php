@@ -58,6 +58,22 @@ Route::group(['prefix' => 'patient'], function () {
     Route::get('/delete/{id}', 'Patient\PatientController@delete')->name('patient.delete');
 });
 
+// Referral Routes
+Route::get('generate-pdf-referral/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');
+Route::group(['prefix' => 'referral'], function () {
+    Route::get('/', 'Referral\ReferralController@index')->name('referrals')->middleware('auth');
+    Route::get('/show/{id}', 'Referral\ReferralController@show')->name('referral.show')->middleware('auth');
+    Route::get('/showInfo/{phone}', 'Referral\ReferralController@showInfo')->name('referral.showInfo')->middleware('auth');
+    Route::get('/paging', 'Referral\ReferralController@paging')->name('referral.paging')->middleware('auth');
+    Route::get('/search', 'Referral\ReferralController@search')->name('referral.search')->middleware('auth');
+
+    Route::get('/create', 'Referral\ReferralController@create')->name('referral.create');
+    Route::get('/edit/{id}', 'Referral\ReferralController@edit')->name('referral.edit');
+    Route::post('/create', 'Referral\ReferralController@store')->name('referral.store');
+    Route::post('/edit/{id}', 'Referral\ReferralController@update')->name('referral.update');
+    Route::get('/delete/{id}', 'Referral\ReferralController@delete')->name('referral.delete');
+});
+
 Route::group(['prefix' => 'call-checklist'], function () {
 
 

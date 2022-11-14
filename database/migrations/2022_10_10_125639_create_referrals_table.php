@@ -17,13 +17,15 @@ class CreateReferralsTable extends Migration
             $table->id();
             $table->string('referr_to')->nullable();
             $table->string('referr_from')->nullable();
-            $table->string('client_name')->nullable();
-            $table->string('client_id')->nullable();
+            $table->string('name')->nullable();
+            $table->string('unique_id')->nullable();
             $table->string('age')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('phone_number_two')->nullable();
             $table->string('reason_for_therapy')->nullable();
             $table->string('preferred_time')->nullable();
+            $table->string('preferred_therapist')->nullable();
+            $table->string('already_referred')->nullable();
             $table->string('financial')->nullable();
             $table->string('therapist')->nullable();
             $table->timestamps();

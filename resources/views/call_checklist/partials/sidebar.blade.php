@@ -87,6 +87,33 @@
             </ul>
         </li>
         @endif
+        
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
+                <span class="app-menu__label">Shojon Patient</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a class="app-menu__item" href="{{ route('patients') }}">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">Patients</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="treeview-menu">
+                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+                <li>
+                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                        == "SHOJON") ? 'active' : '' }}"
+                        href="{{ route('patient.create') }}">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">New Patient</span>
+                    </a>
+                </li>
+                @endif
+            </ul>
+        </li>
 
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
@@ -145,14 +172,41 @@
         </li>
 
         <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-retweet"></i>
+                <span class="app-menu__label">Referrals</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li>
+                    <a class="app-menu__item" href="{{ route('referrals') }}">
+                        <i class="app-menu__icon fa fa-list"></i>
+                        <span class="app-menu__label">Referral List</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="treeview-menu">
+                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+                <li>
+                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                        == "SHOJON") ? 'active' : '' }}"
+                        href="{{ route('referral.create') }}">
+                        <i class="app-menu__icon fa fa-plus-circle"></i>
+                        <span class="app-menu__label">New User</span>
+                    </a>
+                </li>
+                @endif
+            </ul>
+        </li>
+
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-circle"></i>
                 <span class="app-menu__label">User</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
                 <li>
                     <a class="app-menu__item" href="{{ route('users') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <i class="app-menu__icon fa fa-user-circle"></i>
                         <span class="app-menu__label">User List</span>
                     </a>
                 </li>
@@ -163,7 +217,7 @@
                     <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
                         == "SHOJON") ? 'active' : '' }}"
                         href="{{ route('register') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <i class="app-menu__icon fa fa-user-circle"></i>
                         <span class="app-menu__label">New User</span>
                     </a>
                 </li>
