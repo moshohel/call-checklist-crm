@@ -70,6 +70,7 @@
 
         </table>
       </div>
+      @include('call_checklist.shojon.tier2._referral')
     </div>
   </div>
 </div>

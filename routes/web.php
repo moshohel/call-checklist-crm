@@ -93,7 +93,7 @@ Route::group(['prefix' => 'call-checklist'], function () {
     Route::group(['prefix' => 'shojon'], function () {
 
         Route::get('create/{referrence_id}/{phone_number}', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
-        Route::get('create', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
+        Route::get('create/{new}', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
         // Route::get('create', function () {
         //     echo '------test';
         // })->name('call_checklist.shojon.create');

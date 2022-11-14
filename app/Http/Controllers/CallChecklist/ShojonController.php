@@ -39,9 +39,11 @@ class ShojonController extends Controller
         return view('call_checklist.shojon.index', compact('pageTitle', 'shojonData', 'data'));
     }
 
-    public function create($refId = 0, $phone = '')
+    public function create($refId = 0, $phone = '', $new = 0)
     {
-
+        if ($new == 1) {
+            dd($new);
+        }
         $pageTitle = $this->pageTitle;
         $previous_data = null;
         $last = null;

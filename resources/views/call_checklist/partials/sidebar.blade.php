@@ -30,7 +30,7 @@
             <ul class="treeview-menu">
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="{{ route('call_checklist.shojon.create') }}">
+                        href="{{ route('call_checklist.shojon.create', $new=1) }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Shojon Manual Entry</span>
                     </a>

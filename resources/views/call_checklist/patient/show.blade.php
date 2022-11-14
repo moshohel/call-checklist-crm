@@ -49,8 +49,16 @@
                 <button type="submit" class="btn btn-danger">Permanent Delete</button>
             </form>
         </div> --}}
-        <a href="#deleteModal{{ $patient->id }}" data-toggle="modal" class="mb-1 btn btn-block btn-danger"
-            style="height: 20%; width: 20%;">Delete</a>
+        <div class="row">
+            <div class="col">
+
+                <a href="{{ route('patient.edit', $patient->id) }}" class='btn btn-info'>Edit</a>
+            </div>
+            <div class="col">
+
+                <a href="#deleteModal{{ $patient->id }}" data-toggle="modal" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
         <div class="modal fade" id="deleteModal{{ $patient->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">

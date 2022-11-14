@@ -83,13 +83,13 @@ class PatientController extends Controller
         foreach ($patients as $item) {
             $id = $item->id;
             $phone = $item->phone_number;
-            $view_button = "<a href='patient/show/$id' class='btn btn-info'>Info</a>";
-            $edit_button = "<a href='patient/edit/$id' class='btn btn-info'>Edit</a>";
-            $delete_button = "<a href='patient/delete/$id' class='badge badge-danger'>Delete</a>";
-            $showInfo = "<a href='patient/showInfo/$phone' class='btn btn-info'>History</a>";
+            $view_button = "<a href='patient/show/$id' class='btn btn-info m-1'>Info</a>";
+            $tier_two = "<a href='#' class='btn btn-info m-1' data-toggle='modal' data-target='#ReferralModal'>R-Tier 2</a>";
+            $tier_three = "<a href='#' class='btn btn-info m-1' data-toggle='modal' data-target='#ReferralModal'>R-Tier 3</a>";
+            $showInfo = "<a href='patient/showInfo/$phone' class='btn btn-info m-1'>History</a>";
             $output[] = array(
                 $item->name, $item->phone_number, $item->sex, $item->age, $item->location, $item->occupation,
-                $item->unique_id, "$view_button&nbsp;&nbsp$edit_button&nbsp;&nbsp$showInfo&nbsp;&nbsp;"
+                $item->unique_id, "$tier_two&nbsp;&nbsp$tier_three&nbsp;&nbsp$showInfo&nbsp;&nbsp;$view_button&nbsp;&nbsp;"
             );
         }
 
