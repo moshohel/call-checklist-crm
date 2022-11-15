@@ -196,8 +196,9 @@ class Tier2Controller extends Controller
         $data->phone_number_two = $request->Emergency_number;
         $data->reason_for_therapy = $request->reason_for_therapy;
         $data->preferred_time = $request->preferred_time;
+        $data->preferred_therapist_or_psychiatrist = $request->preferred_therapist_or_psychiatrist;
         $data->financial = $request->Financial;
-        $data->therapist = $request->Therapist;
+        // $data->therapist_or_psychiatrist = $request->therapist_or_psychiatrist;
         $data->save();
     }
 }

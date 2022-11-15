@@ -6,7 +6,7 @@
         <!-- Product Table -->
         <div class="card card-table-border-none" id="recent-orders">
           <div class="card-header justify-content-between">
-            <h2>All Referrals</h2>          
+            <h2>All Referrals Request</h2>          
           </div>
           
           <div class="card-body pt-4 pb-5">
@@ -34,7 +34,7 @@
                         <td class="d-none d-md-table-cell text-dark">{{ $referral->unique_id }}</td>
                         <td>
                           
-                          <a href="{{ route('referral.edit', $referral->unique_id) }}" class="btn btn-info btn-default">Edit</a>
+                          <a href="{{ route('referral.edit', [$referral->unique_id, $referral->id]) }}" class="btn btn-info btn-default">Refer</a>
                         </td>
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $referral->department }}</td> --}}
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $referral->con_name }}</td> --}}

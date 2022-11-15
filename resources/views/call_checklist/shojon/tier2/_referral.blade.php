@@ -61,7 +61,7 @@
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Therapist preference:</label>
-              <input type="text" class="form-control" name="Therapist" placeholder="Therapist preference" >
+              <input type="text" class="form-control" name="preferred_therapist_or_psychiatrist" placeholder="Therapist preference" >
              </div>
              </div>
             </div>

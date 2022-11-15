@@ -68,7 +68,7 @@ Route::group(['prefix' => 'referral'], function () {
     Route::get('/search', 'Referral\ReferralController@search')->name('referral.search')->middleware('auth');
 
     Route::get('/create', 'Referral\ReferralController@create')->name('referral.create');
-    Route::get('/edit/{id}', 'Referral\ReferralController@edit')->name('referral.edit');
+    Route::get('/edit/{unique_id}/{id}', 'Referral\ReferralController@edit')->name('referral.edit');
     Route::post('/create', 'Referral\ReferralController@store')->name('referral.store');
     Route::post('/edit/{id}', 'Referral\ReferralController@update')->name('referral.update');
     Route::get('/delete/{id}', 'Referral\ReferralController@delete')->name('referral.delete');

@@ -62,7 +62,7 @@
                                     <option value="MHW">MHW</option>
                                     <option value="SHOJON">SHOJON Admin</option>
                                     <option value="Supervisor">Supervisor</option>
-                                    <option value="Doctor">Doctor</option>
+                                    <option value="Therapist">Therapist</option>
                                     <option value="Psychiatrist">Psychiatrist</option>
                                 </select>
                             </div>

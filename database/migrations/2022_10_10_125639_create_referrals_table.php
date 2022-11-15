@@ -24,10 +24,10 @@ class CreateReferralsTable extends Migration
             $table->string('phone_number_two')->nullable();
             $table->string('reason_for_therapy')->nullable();
             $table->string('preferred_time')->nullable();
-            $table->string('preferred_therapist')->nullable();
-            $table->string('already_referred')->nullable();
+            $table->string('preferred_therapist_or_psychiatrist')->nullable();
+            $table->boolean('already_referred')->default(0);
             $table->string('financial')->nullable();
-            $table->string('therapist')->nullable();
+            $table->string('referred_therapist_or_psychiatrist')->nullable();
             $table->timestamps();
         });
     }
