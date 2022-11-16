@@ -23,21 +23,25 @@
                         id="exampleFormControlInput2">
                 </div>
 
-                <div class="form-group col-12">
+                <div class="form-group col-6">
                     <label for="exampleFormControlSelect3">Consultent</label>
-                    <select class="form-control" name="consultant_id" value="{{ $referral[0]->consultant_id }}"
+                    <select class="form-control" name="consultant_id" value=""
                         id="exampleFormControlSelect3">
                         <option value="" disabled selected hidden>Consultent</option>
                         @foreach ($consultants as $consultant)
-
-                        <option value="{{ $consultant->id }}">{{ $consultant->name }}</option>
+                        <option value="{{ $consultant->full_name }}">{{ $consultant->full_name }}</option>
                         @endforeach
-
                     </select>
                 </div>
 
                 <div class="form-group col-6">
-                    <label for="exampleFormControlInput1">referr_from</label>
+                    <label for="exampleFormControlInput7">Preferred Contultent</label>
+                    <input type="text" class="form-control" name="preferred_therapist_or_psychiatrist"  value="{{ $referral[0]->preferred_therapist_or_psychiatrist }}" id="exampleFormControlInput7"
+                        placeholder="Preferred Contultent" >
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="exampleFormControlInput1">Referr From</label>
                     <input type="text" name="referr_from" value="{{ $referral[0]->referr_from }}" class="form-control"
                         id="exampleFormControlInput1">
                 </div>
@@ -54,15 +58,11 @@
                         placeholder="age" min="1" max="50000">
                 </div>
 
-                <div class="form-group col-6">
-                    <label for="exampleFormControlInput7">referral price</label>
-                    <input type="number" class="form-control" name="referral_price" id="exampleFormControlInput7"
-                        placeholder="referral price" min="1" max="50000">
-                </div>
+                
             </div>
 
             <div class="form-footer pt-4 mt-4">
-                <button type="submit" class="btn btn-primary btn-default">Edit</button>
+                <button type="submit" class="btn btn-primary btn-default"> Save Change</button>
                 <button type="submit" class="btn btn-secondary btn-default">Cancel</button>
             </div>
         </form>

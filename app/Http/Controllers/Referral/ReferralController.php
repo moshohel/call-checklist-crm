@@ -19,15 +19,43 @@ class ReferralController extends Controller
 
     public function edit($unique_id, $id)
     {
-        $referral = Referral::where('unique_id', $unique_id)->get();
-        // dd($referral);
-        $consultants = DB::select('');
-        return view('call_checklist.referral.edit', compact('referral', $referral));
+        $referral = Referral::where('id', $id)->get();
+        // dd($referral[0]->referr_to);
+        if ($referral[0]->referr_to == "Shojon Tier 2") {
+            $consultants = DB::select('SELECT full_name FROM vicidial_users WHERE user_group="Therapist"');
+            // dd($consultants);
+        } else {
+            $consultants = DB::select('SELECT full_name FROM vicidial_users WHERE user_group="Psychiatrist"');
+        }
+        return view('call_checklist.referral.edit', compact('referral', 'consultants'));
     }
 
-    public function update(Request $request)
+    public function showInfo($unique_id, $id)
     {
-        // sdfsdf
+        $referral = Referral::where('id', $id)->get();
+        // dd($referral[0]->referr_to);
+        if ($referral[0]->referr_to == "Shojon Tier 2") {
+            $consultants = DB::select('SELECT full_name FROM vicidial_users WHERE user_group="Therapist"');
+            // dd($consultants);
+        } else {
+            $consultants = DB::select('SELECT full_name FROM vicidial_users WHERE user_group="Psychiatrist"');
+        }
+        return view('call_checklist.referral.show', compact('referral', 'consultants'));
+    }
 
+    public function update(Request $request, $id)
+    {
+        dd($request);
+    }
+
+    public function referConsultant(Request $request, $id)
+    {
+        $referral = Referral::Find($id);
+        $referral->already_referred = 1;
+        $referral->referred_therapist_or_psychiatrist = $request->referred_therapist_or_psychiatrist;
+        $referral->save();
+        session()->flash('success', 'Referred successfully');
+
+        return redirect()->route('referrals');
     }
 }

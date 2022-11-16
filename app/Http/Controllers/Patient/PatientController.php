@@ -84,8 +84,8 @@ class PatientController extends Controller
             $id = $item->id;
             $phone = $item->phone_number;
             $view_button = "<a href='patient/show/$id' class='btn btn-info m-1'>Info</a>";
-            $tier_two = "<a href='#' class='btn btn-info m-1' data-toggle='modal' data-target='#ReferralModal'>R-Tier 2</a>";
-            $tier_three = "<a href='#' class='btn btn-info m-1' data-toggle='modal' data-target='#ReferralModal'>R-Tier 3</a>";
+            $tier_two = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#ReferralModal'>R-Tier 2</a>";
+            $tier_three = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#ReferralModal'>R-Tier 3</a>";
             $showInfo = "<a href='patient/showInfo/$phone' class='btn btn-info m-1'>History</a>";
             $output[] = array(
                 $item->name, $item->phone_number, $item->sex, $item->age, $item->location, $item->occupation,

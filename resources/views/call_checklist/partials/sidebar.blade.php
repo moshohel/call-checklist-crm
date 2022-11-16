@@ -191,7 +191,7 @@
                         == "SHOJON") ? 'active' : '' }}"
                         href="{{ route('referral.create') }}">
                         <i class="app-menu__icon fa fa-plus-circle"></i>
-                        <span class="app-menu__label">New User</span>
+                        <span class="app-menu__label">New Referral</span>
                     </a>
                 </li>
                 @endif
