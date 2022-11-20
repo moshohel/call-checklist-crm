@@ -74,11 +74,11 @@
 
                             <div class="form-group col-6">
                                 <label for="exampleFormControlSelect3">Consultent</label>
-                                <select class="form-control" name="referred_therapist_or_psychiatrist" value=""
+                                <select class="form-control" name="referred_therapist_or_psychiatrist_user_id" value=""
                                     id="exampleFormControlSelect3">
                                     <option value="" disabled selected hidden>Consultent</option>
                                     @foreach ($consultants as $consultant)
-                                    <option value="{{ $consultant->full_name }}">{{ $consultant->full_name }}</option>
+                                    <option value="{{ $consultant->user_id }}">{{ $consultant->full_name }}</option>
                                     @endforeach
                                 </select>
                             </div>

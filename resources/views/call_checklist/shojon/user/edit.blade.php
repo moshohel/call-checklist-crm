@@ -49,10 +49,10 @@
 
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput5">User type</label>
-                    <select class="form-control" name="user_group" id="exampleFormControlSelect3" required>
+                    <select class="form-control" name="user_group" id="exampleFormControlSelect3" readonly>
                         <option value="">- Select User Type -</option>
                         <?php 
-                          $user_group_dropdown=array('MHW'=>'MHW','SHOJON'=>'SHOJON', 'Supervisor'=>'Supervisor', 'Doctor'=>'Doctor', 'Psychiatrist'=>'Psychiatrist',);
+                          $user_group_dropdown=array('MHW'=>'MHW','SHOJON'=>'SHOJON', 'Supervisor'=>'Supervisor', 'Therapist'=>'Therapist', 'Psychiatrist'=>'Psychiatrist',);
                           foreach ($user_group_dropdown as $key => $value) {
                               $selected="";
                               if($user[0]->user_group==$key){

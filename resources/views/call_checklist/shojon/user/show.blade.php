@@ -85,14 +85,9 @@
                                     </div>
                                     <div class="media-body">
                                         <h6 class="mt-0 text-dark"> Refferls </h6>
-                                        <span> Larissa Gebhardt</span>
-                                        <span class="float-right">5 mins ago</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore
-                                            magna aliqua. ut enim ad minim veniam quis nostrud exercitation ullamco
-                                            laboris nisi ut aliquip.</p>
+                                        
                                         <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
-                                            
+                                            @include('call_checklist.referral.referral_list');
                                         </div>
                                         <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
                                             

@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use phpDocumentor\Reflection\Types\Null_;
 use App\Http\Controllers\Controller;
 use FontLib\Table\Type\post;
+use App\Models\Referral;
 
 class UserController extends Controller
 {
@@ -29,8 +30,11 @@ class UserController extends Controller
         $user =  DB::table('vicidial_users')
             ->where('user_id', '=', $user_id)
             ->get();
-
-        return view('call_checklist.shojon.user.show')->with('user', $user);
+        $referrals = DB::table('referrals')
+            ->where('referred_therapist_or_psychiatrist_user_id', '=', $user_id)
+            ->get();
+        // dd($referrals);
+        return view('call_checklist.shojon.user.show', compact('user', 'referrals'));
     }
 
     /**
