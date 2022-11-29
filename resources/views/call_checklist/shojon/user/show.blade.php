@@ -6,6 +6,7 @@
 
     <div class="content">
         <div class="bg-white border rounded">
+            @include('call_checklist.partials.messages')
             <div class="row no-gutters">
                 <div class="col-lg-4 col-xl-3">
                     <div class="profile-content-left pt-5 pb-3 px-3 px-xl-5">
@@ -87,7 +88,7 @@
                                         <h6 class="mt-0 text-dark"> Refferls </h6>
                                         
                                         <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
-                                            @include('call_checklist.referral.referral_list');
+                                            @include('call_checklist.referral.referral_list')
                                         </div>
                                         <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
                                             
@@ -106,14 +107,9 @@
                                     </div>
                                     <div class="media-body">
                                         <h6 class="mt-0 text-dark"> Sessions </h6>
-                                        <span> Larissa Gebhardt</span>
-                                        <span class="float-right">5 mins ago</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore
-                                            magna aliqua. ut enim ad minim veniam quis nostrud exercitation ullamco
-                                            laboris nisi ut aliquip.</p>
+
+                                        @include('call_checklist.shojon.session.session_list')
                                         <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
-                                            
                                         </div>
                                         <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
                                             
@@ -131,12 +127,7 @@
                                     </div>
                                     <div class="media-body">
                                         <h6 class="mt-0 text-dark"> Clients </h6>
-                                        <span> Larissa Gebhardt</span>
-                                        <span class="float-right">5 mins ago</span>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore
-                                            magna aliqua. ut enim ad minim veniam quis nostrud exercitation ullamco
-                                            laboris nisi ut aliquip.</p>
+                                        @include('call_checklist.shojon.session.myclient_list')
                                         <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
                                             
                                         </div>

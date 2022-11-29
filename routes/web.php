@@ -75,6 +75,23 @@ Route::group(['prefix' => 'referral'], function () {
     Route::get('/delete/{id}', 'Referral\ReferralController@delete')->name('referral.delete');
 });
 
+// Referral Routes
+Route::get('generate-pdf-session/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');
+Route::group(['prefix' => 'session'], function () {
+    Route::get('/', 'Session\SessionController@index')->name('sessions')->middleware('auth');
+    Route::get('/show/{id}', 'Session\SessionController@show')->name('session.show')->middleware('auth');
+    Route::get('/showInfo/{unique_id}/{id}', 'Session\SessionController@showInfo')->name('session.showInfo')->middleware('auth');
+    Route::get('/paging', 'Session\SessionController@paging')->name('session.paging')->middleware('auth');
+    Route::get('/search', 'Session\SessionController@search')->name('session.search')->middleware('auth');
+
+    Route::get('/create/{unique_id}/{id}', 'Session\SessionController@create')->name('session.create');
+    Route::get('/edit/{unique_id}/{id}', 'Session\SessionController@edit')->name('session.edit');
+    Route::post('/create/{unique_id}/{id}', 'Session\SessionController@store')->name('session.store');
+    Route::post('/edit/{id}', 'Session\SessionController@update')->name('session.update');
+    Route::post('/referConsultant/{id}', 'Session\SessionController@referConsultant')->name('session.referConsultant');
+    Route::get('/delete/{id}', 'Session\SessionController@delete')->name('session.delete');
+});
+
 Route::group(['prefix' => 'call-checklist'], function () {
 
 

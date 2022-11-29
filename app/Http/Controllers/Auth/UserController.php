@@ -15,6 +15,8 @@ use phpDocumentor\Reflection\Types\Null_;
 use App\Http\Controllers\Controller;
 use FontLib\Table\Type\post;
 use App\Models\Referral;
+use App\Models\Appointment;
+use App\Models\Session;
 
 class UserController extends Controller
 {
@@ -32,9 +34,15 @@ class UserController extends Controller
             ->get();
         $referrals = DB::table('referrals')
             ->where('referred_therapist_or_psychiatrist_user_id', '=', $user_id)
+            ->orderBy('id', 'DESC')
             ->get();
-        // dd($referrals);
-        return view('call_checklist.shojon.user.show', compact('user', 'referrals'));
+        $sessions = DB::table('sessions')
+            ->where('referred_therapist_or_psychiatrist_user_id', '=', $user_id)
+            ->orderBy('id', 'DESC')
+            ->get();
+        $patients = DB::select("SELECT patients.* FROM sessions, patients WHERE referred_therapist_or_psychiatrist_user_id = $user_id and patients.unique_id = sessions.unique_id ORDER BY sessions.id;");
+        // dd($patients);
+        return view('call_checklist.shojon.user.show', compact('user', 'referrals', 'sessions', 'patients'));
     }
 
     /**
