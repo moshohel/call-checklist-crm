@@ -42,11 +42,11 @@ class CreateSojonTier2sTable extends Migration
             $table->text('family_history')->nullable();
             $table->string('suicidal_ideation')->nullable();
             $table->string('self_harm_history')->nullable();
-            $table->string('diagnosis')->nullable();
+            $table->text('diagnosis')->nullable();
             $table->string('psychiatric_medication')->nullable();
             $table->string('name_of_medicine')->nullable();
-            $table->string('concern_history')->nullable();
-            $table->string('differential_diagnosis')->nullable();
+            $table->text('concern_history')->nullable();
+            $table->text('differential_diagnosis')->nullable();
             $table->string('tool_name')->nullable();
             $table->string('score')->nullable();
             $table->text('therapy')->nullable();

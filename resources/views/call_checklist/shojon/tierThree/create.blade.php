@@ -925,7 +925,7 @@
         radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
     }
     function ShowSpeechBox(){
-         var radio = document.getElementById("chkSpeech");
+        var radio = document.getElementById("chkSpeech");
         var Box = document.getElementById("SpeechBox");
         Box.style.display = radio.checked ? "block" : "none";
         var other = Box.getElementsByTagName('input')[0];

@@ -21,6 +21,18 @@
                     <input type="number" name="unique_id" class="form-control" readonly id="exampleFormControlInput1" value="{{ $referral->unique_id }}">
                 </div>
 
+                <div class="col-md-6 col-3">
+                    <label for="validationCustom01" class="form-label">Referral To:</label>
+                    <input type="text" class="form-control" readonly id="referr_to" name="referr_to" value="{{ $referral->referr_to }}">
+                </div>
+
+                <input type="hidden" name="referr_from" value="{{ $referral->referr_from }}">
+                <input type="hidden" name="age" value="{{ $referral->age }}">
+                <input type="hidden" name="phone_number" value="{{ $referral->phone_number }}">
+                <input type="hidden" name="phone_number_two" value="{{ $referral->phone_number_two }}">
+                <input type="hidden" name="reason_for_therapy" value="{{ $referral->reason_for_therapy }}">
+                
+
                 <div class="form-group col-3">
                     <label for="exampleFormControlInput2">Phone</label>
                     <input type="number" name="phone" class="form-control" readonly id="exampleFormControlInput2" value="{{ $referral->phone_number }}">

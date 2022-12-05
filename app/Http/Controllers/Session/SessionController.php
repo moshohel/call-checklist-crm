@@ -31,7 +31,7 @@ class SessionController extends Controller
     {
         try {
             $referral = DB::table('referrals')->where('id', $reffer_id)->first();
-
+            // dd($referral);
             if ($referral) {
                 $previous_data = DB::table('referrals')->where('id', $reffer_id)->get();
                 $last = $previous_data->last();
