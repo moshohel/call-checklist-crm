@@ -15,19 +15,19 @@ class KprCallChecklistExport implements FromCollection, WithHeadings
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
-       // return CallChecklistForKpr::select('agent', 'created_at', 'customer_sec','call_started',  'call_ended', 'phone_number', 'caller_name', 'sex','age','occupation','location', 'call_type', 'caller', 'risk_level', 'main_reason_for_calling', 'secondary_reason_for_calling', 'caller_experience', 'caller_description')
+        // return CallChecklistForKpr::select('agent', 'created_at', 'customer_sec','call_started',  'call_ended', 'phone_number', 'caller_name', 'sex','age','occupation','location', 'call_type', 'caller', 'risk_level', 'main_reason_for_calling', 'secondary_reason_for_calling', 'caller_experience', 'caller_description')
         //->get();
         return new Collection($this->data);
     }
 
-    public function headings() :array
+    public function headings(): array
     {
         return [
-            'Volunteer Id',
+            'Volunteer',
             'Date',
             'Talk Time',
             'Time Call Started',
@@ -44,7 +44,12 @@ class KprCallChecklistExport implements FromCollection, WithHeadings
             'Main Reason',
             'Secondary Reason',
             'Caller Experience',
-            'Caller Descriprion'
+            'Caller Descriprion',
+            // 'Client Referral',
+            // 'Date',
+            // 'Updated Date',
+            // 'Synced',
+            // 'Sync Count',
         ];
     }
 }

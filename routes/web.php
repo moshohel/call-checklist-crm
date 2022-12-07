@@ -41,7 +41,7 @@ Route::post('/edit/{user_id}', 'Auth\UserController@update')->name('user.update'
 
 Auth::routes();
 
-Route::get('/uniqueid',[TierOneController::class,'uniqueId']);
+Route::get('/uniqueid', [TierOneController::class, 'uniqueId']);
 //Route::get('/add_patient', [Tier2Controller::class, 'tire2fromblade'])
 
 // patient Routes
@@ -92,6 +92,8 @@ Route::group(['prefix' => 'session'], function () {
     Route::post('/edit/{id}', 'Session\SessionController@update')->name('session.update');
     Route::post('/referConsultant/{id}', 'Session\SessionController@referConsultant')->name('session.referConsultant');
     Route::get('/delete/{id}', 'Session\SessionController@delete')->name('session.delete');
+
+    Route::get('/reschedule/cancelation/{number}', 'Session\SessionController@sessionRescheduleCancelationForm')->name('session.rescheduleOrCancelationForm');
 });
 
 Route::group(['prefix' => 'call-checklist'], function () {
@@ -143,9 +145,9 @@ Route::group(['prefix' => 'call-checklist'], function () {
 
             Route::get('dashboard', 'CallChecklist\KprController@dashboard')->name('call_checklist.kpr.dashboard');
             //tire 1 route
-            
+
             Route::get('/tierOne', [TierOneController::class, 'tireOnefromblade'])->name('call_checklist.shojon.tierOne');
-        
+
             Route::post('/store/tierOne', [TierOneController::class, 'store_tier_One'])->name('call_checklist.shojontierOne.store_tier_one');
             Route::get('/tierOne_list', [TierOneController::class, 'tireOneList'])->name('call_checklist.shojon.TierOneList');
             Route::get('/tier-one-details/{id}', [TierOneController::class, 'TierOneClientDetails'])->name('call_checklist.shojon.TierOneview');

@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Models\Session;
 use Illuminate\Support\Facades\Auth;
+use App\Models\RescheduleOrCancelation;
 
 class SessionController extends Controller
 {
@@ -57,21 +58,31 @@ class SessionController extends Controller
      */
     public function store(Request $request, $unique_id, $id)
     {
-        // dd($request);
+
+
         $session = new Session();
-
         $data = $request->only($session->getFillable());
-
         $session->fill($data);
-        $session->referred_therapist_or_psychiatrist_user_id = Auth::user()->user_id;
-        $session->referred_therapist_or_psychiatrist = Auth::user()->full_name;
-        $session->referred_therapist_or_psychiatrist_user_name = Auth::user()->user;
-
+        $session->therapist_or_psychiatrist_user_id = Auth::user()->user_id;
+        $session->therapist_or_psychiatrist = Auth::user()->full_name;
+        $session->therapist_or_psychiatrist_user_name = Auth::user()->user;
         $session->save();
+
+        $referral = Referral::find($id);
+        $referral->appointment_status = 1;
+        $referral->save();
 
         $user_id = Auth::user()->user_id;
         return redirect()->to('show/' . $user_id);
     }
+
+    public function sessionRescheduleCancelationForm()
+    {
+        $consultants = DB::select('SELECT full_name, user_id, user as user_name FROM vicidial_users WHERE user_group="Psychiatrist" or user_group="Therapist"');
+        return view('call_checklist.shojon.session.reschedule_cancelation', compact('consultants'));
+    }
+
+
 
     /**
      * Display the specified resource.

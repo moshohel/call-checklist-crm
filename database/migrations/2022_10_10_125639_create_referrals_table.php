@@ -29,6 +29,7 @@ class CreateReferralsTable extends Migration
             $table->string('referred_therapist_or_psychiatrist_user_name')->nullable();
             $table->string('referred_therapist_or_psychiatrist_user_id')->nullable();
             $table->boolean('already_referred')->default(0);
+            $table->boolean('appointment_status')->default(0);
             $table->string('financial')->nullable();
             $table->timestamps();
         });
