@@ -151,7 +151,7 @@
                                     </div>
                                     <div class="media-body">
                                         <h6 class="mt-0 text-dark"> Reschedule/Session Cancelation Request </h6>
-                                        @include('call_checklist.shojon.session.myclient_list')
+                                        @include('call_checklist.shojon.session.reschedule_cancelation_list')
                                         <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
                                             
                                         </div>

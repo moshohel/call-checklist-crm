@@ -76,13 +76,36 @@ class SessionController extends Controller
         return redirect()->to('show/' . $user_id);
     }
 
-    public function sessionRescheduleCancelationForm()
+    public function sessionRescheduleCancelation()
     {
-        $consultants = DB::select('SELECT full_name, user_id, user as user_name FROM vicidial_users WHERE user_group="Psychiatrist" or user_group="Therapist"');
-        return view('call_checklist.shojon.session.reschedule_cancelation', compact('consultants'));
+        $rescheduleOrCancelations = RescheduleOrCancelation::all();
+        // dd($rescheduleOrCancelations);
+        return view('call_checklist.shojon.session.rescheduleCancelation.index', compact('rescheduleOrCancelations'));
     }
 
+    public function sessionRescheduleCancelationForm($number)
+    {
+        $phone_number = $number;
+        $consultants = DB::select('SELECT full_name, user_id, user as user_name FROM vicidial_users WHERE user_group="Psychiatrist" or user_group="Therapist"');
+        return view('call_checklist.shojon.session.rescheduleCancelation.create', compact('consultants', 'phone_number'));
+    }
 
+    public function sessionRescheduleCancelationStore(Request $request)
+    {
+        // dd($request);
+        $rescheduleOrCancelation = new RescheduleOrCancelation();
+        $data = $request->only($rescheduleOrCancelation->getFillable());
+        $rescheduleOrCancelation->fill($data);
+        if ($request->request_type == "Cancelation") {
+            $rescheduleOrCancelation->cancelation_request = 1;
+        } else {
+            $rescheduleOrCancelation->reshedule_request = 1;
+        }
+        $rescheduleOrCancelation->save();
+        $consultants = DB::select('SELECT full_name, user_id, user as user_name FROM vicidial_users WHERE user_group="Psychiatrist" or user_group="Therapist"');
+        // return view('call_checklist.shojon.session.rescheduleCancelation.index', compact('consultants'));
+        return redirect()->route('session.rescheduleOrCancelations');
+    }
 
     /**
      * Display the specified resource.

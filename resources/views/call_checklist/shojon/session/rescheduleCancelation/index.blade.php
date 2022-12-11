@@ -1,4 +1,6 @@
+@extends('call_checklist.app')
 
+@section('content')
     <!-- Product Table -->
     <div class="card card-table-border-none" id="recent-orders">  
         <div class="card-body">
@@ -35,6 +37,7 @@
             </table>
         </div>
     </div>
+@endsection
 
 @push('scripts')
 <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>

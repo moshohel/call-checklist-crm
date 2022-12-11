@@ -94,6 +94,8 @@ Route::group(['prefix' => 'session'], function () {
     Route::get('/delete/{id}', 'Session\SessionController@delete')->name('session.delete');
 
     Route::get('/reschedule/cancelation/{number}', 'Session\SessionController@sessionRescheduleCancelationForm')->name('session.rescheduleOrCancelationForm');
+    Route::post('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelationStore')->name('session.rescheduleOrCancelationStore');
+    Route::get('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelation')->name('session.rescheduleOrCancelations');
 });
 
 Route::group(['prefix' => 'call-checklist'], function () {

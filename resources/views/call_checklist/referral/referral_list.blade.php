@@ -19,7 +19,7 @@
                     
                         <td class="text-dark">{{ $referral->name }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $referral->unique_id }}</td>
-                        <td class="d-none d-md-table-cell text-dark already_referred">{{ $referral->preferred_time }}</td>
+                        <td class="d-none d-md-table-cell text-dark">{{ $referral->preferred_time }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $referral->referred_therapist_or_psychiatrist }}</td>
                         <td>
                             <a href="{{ route('session.create', [$referral->unique_id, $referral->id]) }}" class="btn btn-info btn-default">Appointment</a>
