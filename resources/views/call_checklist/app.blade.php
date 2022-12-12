@@ -11,6 +11,8 @@
     <link rel="stylesheet" type="text/css"  href="{{ asset('plugins/date-picker/css/bootstrap-datetimepicker.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('backend/css/style.css') }}" />
 
+    @stack('styles')
+
 </head>
 <body class="app sidebar-mini rtl">
     @include('call_checklist.partials.header')
@@ -26,7 +28,9 @@
     <script src="{{ asset('backend/js/plugins/pace.min.js') }}"></script>
     <script src="{{ asset('plugins/slider/js/rSlider.min.js') }}"></script>
     <script src="{{ asset('plugins/date-picker/moment.min.js') }}"></script>
-    <script src="{{ asset('plugins/date-picker/js/bootstrap-datetimepicker.min.js') }}"> </script>    @stack('scripts')
+    <script src="{{ asset('plugins/date-picker/js/bootstrap-datetimepicker.min.js') }}"> </script>   
+    
+    @stack('scripts')
 
 @section('datatables')
     <script>

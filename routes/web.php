@@ -77,7 +77,7 @@ Route::group(['prefix' => 'referral'], function () {
     Route::get('/delete/{id}', 'Referral\ReferralController@delete')->name('referral.delete');
 });
 
-// Referral Routes
+// Session Routes
 Route::get('generate-pdf-session/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');
 Route::group(['prefix' => 'session'], function () {
     Route::get('/', 'Session\SessionController@index')->name('sessions')->middleware('auth');
@@ -97,6 +97,13 @@ Route::group(['prefix' => 'session'], function () {
     Route::post('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelationStore')->name('session.rescheduleOrCancelationStore');
     Route::get('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelation')->name('session.rescheduleOrCancelations');
 });
+
+// Calendar routes
+Route::get('calendar/index', 'CalendarController@index')->name('calendar.index');
+Route::post('calendar', [CalendarController::class, 'store'])->name('calendar.store');
+Route::patch('calendar/update/{id}', [CalendarController::class, 'update'])->name('calendar.update');
+Route::delete('calendar/destroy/{id}', [CalendarController::class, 'destroy'])->name('calendar.destroy');
+
 
 Route::group(['prefix' => 'call-checklist'], function () {
 

@@ -219,6 +219,15 @@
                         <span class="app-menu__label">New User</span>
                     </a>
                 </li>
+
+                <li>
+                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                        == "SHOJON") ? 'active' : '' }}"
+                        href="{{ route('calendar.index') }}">
+                        <i class="app-menu__icon fa fa-user-circle"></i>
+                        <span class="app-menu__label">Calendar</span>
+                    </a>
+                </li>
                 @endif
             </ul>
         </li>
