@@ -19,7 +19,7 @@
                     <div class="card-body text-center">
                         {{-- <h5 class="card-title text-primary">Card Title</h5> --}}
 
-                        <a href="{{ route('call_checklist.shojon.create') }}" class="btn btn-outline-primary">New
+                        <a href="{{ route('call_checklist.shojon.create', $new=1) }}" class="btn btn-outline-primary">New
                             Caller</a>
                     </div>
                 </div>

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CallChecklist\Tier2Controller;
 use App\Http\Controllers\CallChecklist\shojonTierThree;
 use App\Http\Controllers\CallChecklist\TierOneController;
+use App\Http\Controllers\CallChecklist\EvaluationController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -33,10 +34,11 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 // Route::get('/login', 'Auth\LoginController@login')->name('login');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 
-Route::get('users', 'Auth\RegisterController@showAllUser')->name('users')->middleware('auth');;
+Route::get('users', 'Auth\RegisterController@showAllUser')->name('users')->middleware('auth');
 Route::get('/show/{user_id}', 'Auth\UserController@show')->name('user.show')->middleware('auth');
-Route::get('/edit/{user_id}', 'Auth\UserController@edit')->name('user.edit')->middleware('auth');;
-Route::post('/edit/{user_id}', 'Auth\UserController@update')->name('user.update')->middleware('auth');;
+Route::get('/edit/{user_id}', 'Auth\UserController@edit')->name('user.edit')->middleware('auth');
+Route::post('/edit/{user_id}', 'Auth\UserController@update')->name('user.update')->middleware('auth');
+
 
 Auth::routes();
 
@@ -49,14 +51,48 @@ Route::group(['prefix' => 'patient'], function () {
     Route::get('/', 'Patient\PatientController@index')->name('patients')->middleware('auth');
     Route::get('/show/{id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');
     Route::get('/showInfo/{phone}', 'Patient\PatientController@showInfo')->name('patient.showInfo')->middleware('auth');
-    Route::post('/paging', 'Patient\PatientController@paging')->name('patient.paging')->middleware('auth');
-    Route::post('/search', 'Patient\PatientController@search')->name('patient.search')->middleware('auth');
+    Route::get('/paging', 'Patient\PatientController@paging')->name('patient.paging')->middleware('auth');
+    Route::get('/search', 'Patient\PatientController@search')->name('patient.search')->middleware('auth');
 
     Route::get('/create', 'Patient\PatientController@create')->name('patient.create');
     Route::get('/edit/{id}', 'Patient\PatientController@edit')->name('patient.edit');
     Route::post('/create', 'Patient\PatientController@store')->name('patient.store');
     Route::post('/edit/{id}', 'Patient\PatientController@update')->name('patient.update');
     Route::get('/delete/{id}', 'Patient\PatientController@delete')->name('patient.delete');
+});
+
+// Referral Routes
+Route::get('generate-pdf-referral/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');
+Route::group(['prefix' => 'referral'], function () {
+    Route::get('/', 'Referral\ReferralController@index')->name('referrals')->middleware('auth');
+    Route::get('/show/{id}', 'Referral\ReferralController@show')->name('referral.show')->middleware('auth');
+    Route::get('/showInfo/{unique_id}/{id}', 'Referral\ReferralController@showInfo')->name('referral.showInfo')->middleware('auth');
+    Route::get('/paging', 'Referral\ReferralController@paging')->name('referral.paging')->middleware('auth');
+    Route::get('/search', 'Referral\ReferralController@search')->name('referral.search')->middleware('auth');
+
+    Route::get('/create', 'Referral\ReferralController@create')->name('referral.create');
+    Route::get('/edit/{unique_id}/{id}', 'Referral\ReferralController@edit')->name('referral.edit');
+    Route::post('/create', 'Referral\ReferralController@store')->name('referral.store');
+    Route::post('/edit/{id}', 'Referral\ReferralController@update')->name('referral.update');
+    Route::post('/referConsultant/{id}', 'Referral\ReferralController@referConsultant')->name('referral.referConsultant');
+    Route::get('/delete/{id}', 'Referral\ReferralController@delete')->name('referral.delete');
+});
+
+// Referral Routes
+Route::get('generate-pdf-session/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');
+Route::group(['prefix' => 'session'], function () {
+    Route::get('/', 'Session\SessionController@index')->name('sessions')->middleware('auth');
+    Route::get('/show/{id}', 'Session\SessionController@show')->name('session.show')->middleware('auth');
+    Route::get('/showInfo/{unique_id}/{id}', 'Session\SessionController@showInfo')->name('session.showInfo')->middleware('auth');
+    Route::get('/paging', 'Session\SessionController@paging')->name('session.paging')->middleware('auth');
+    Route::get('/search', 'Session\SessionController@search')->name('session.search')->middleware('auth');
+
+    Route::get('/create/{unique_id}/{id}', 'Session\SessionController@create')->name('session.create');
+    Route::get('/edit/{unique_id}/{id}', 'Session\SessionController@edit')->name('session.edit');
+    Route::post('/create/{unique_id}/{id}', 'Session\SessionController@store')->name('session.store');
+    Route::post('/edit/{id}', 'Session\SessionController@update')->name('session.update');
+    Route::post('/referConsultant/{id}', 'Session\SessionController@referConsultant')->name('session.referConsultant');
+    Route::get('/delete/{id}', 'Session\SessionController@delete')->name('session.delete');
 });
 
 Route::group(['prefix' => 'call-checklist'], function () {
@@ -94,7 +130,7 @@ Route::group(['prefix' => 'call-checklist'], function () {
     Route::group(['prefix' => 'shojon'], function () {
 
         Route::get('create/{referrence_id}/{phone_number}', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
-        Route::get('create', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
+        Route::get('create/{new}', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
         // Route::get('create', function () {
         //     echo '------test';
         // })->name('call_checklist.shojon.create');
@@ -107,6 +143,11 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('/report/pdf/{range_type?}', 'CallChecklist\ShojonController@exportPdf');
 
             Route::get('dashboard', 'CallChecklist\KprController@dashboard')->name('call_checklist.kpr.dashboard');
+            //call evaluation
+            Route::get('/evaluation', [EvaluationController::class, 'callEvaluationblade'])->name('call_checklist.shojon.callEvaluation');
+            Route::post('/evaluation-sote', [EvaluationController::class, 'store'])->name('call_checklist.evaluation.store');
+            Route::get('/eva-list', [EvaluationController::class, 'callEvaluationIndex'])->name('call_checklist.shojon.eva_index');
+            Route::get('/evaluation-details/{id}', [EvaluationController::class, 'evaluationDetails'])->name('call_checklist.shojon.evaluationdetalis');
             //tire 1 route
             
             Route::get('/tierOne', [TierOneController::class, 'tireOnefromblade'])->name('call_checklist.shojon.tierOne');

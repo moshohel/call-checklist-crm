@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateReferralsTable extends Migration
+class CreateSessionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateReferralsTable extends Migration
      */
     public function up()
     {
-        Schema::create('referrals', function (Blueprint $table) {
+        Schema::create('sessions', function (Blueprint $table) {
             $table->id();
             $table->string('referr_to')->nullable();
             $table->string('referr_from')->nullable();
@@ -23,13 +23,19 @@ class CreateReferralsTable extends Migration
             $table->string('phone_number')->nullable();
             $table->string('phone_number_two')->nullable();
             $table->string('reason_for_therapy')->nullable();
-            $table->string('preferred_time')->nullable();
-            $table->string('preferred_therapist_or_psychiatrist')->nullable();
+            $table->string('call_data')->nullable();
+            $table->string('call_status')->nullable();
+            $table->string('session_time')->nullable();
+            $table->string('session_date')->nullable();
+            $table->string('session_number')->nullable();
+            $table->string('communication_medium')->nullable();
+            $table->string('appointment_status')->nullable();
+            $table->boolean('reshedule_request')->default(0);
+            $table->boolean('cancelation_request')->default(0);
             $table->string('referred_therapist_or_psychiatrist')->nullable();
             $table->string('referred_therapist_or_psychiatrist_user_name')->nullable();
             $table->string('referred_therapist_or_psychiatrist_user_id')->nullable();
-            $table->boolean('already_referred')->default(0);
-            $table->string('financial')->nullable();
+            $table->string('session_taken')->default('NO');
             $table->timestamps();
         });
     }
@@ -41,6 +47,6 @@ class CreateReferralsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('referrals');
+        Schema::dropIfExists('sessions');
     }
-};
+}

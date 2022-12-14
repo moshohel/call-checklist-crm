@@ -1,4 +1,4 @@
-@extends('call_checklist.appCreate')
+@extends('call_checklist.app')
 @section('title') {{ $pageTitle }} @endsection
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
@@ -12,7 +12,7 @@
 
 
     <div class="row">
-        <div class="col-md-8 mx-auto">
+        <div class="col-md-10 mx-auto">
             <div class="tile">
                 <h3 class="tile-title">Create Checklist for Shojon</h3>
                 <form id="myForm" action="{{ route('call_checklist.shojontierThree.store') }}" method="POST" role="form"

@@ -61,7 +61,7 @@
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Therapist preference:</label>
-              <input type="text" class="form-control" name="Therapist" placeholder="Therapist preference" >
+              <input type="text" class="form-control" name="preferred_therapist_or_psychiatrist" placeholder="Therapist preference" >
              </div>
              </div>
             </div>
@@ -73,13 +73,18 @@
        </div>
     </div>
 </div> 
-<script>
+
+  {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> --}}
+  <script type="text/javascript" src="{{ asset('backend/js/jquery-3.2.1.min.js') }}"></script>
+  {{-- <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script> --}}
+
+{{-- <script>
   config ={
       enableTime: true,
       dateFormat: "Y-m-d (h:i K)",
   }
   flatpickr("input[type=datetime-local]", config);
-</script>
+</script> --}}
 <script type="text/javascript">
   $(document).ready(function(){
      $('#_referral_form').on('submit',function(e){

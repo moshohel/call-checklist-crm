@@ -3,7 +3,7 @@
 @section('content')
 <div class="card card-default">
     <div class="card-header card-header-border-bottom">
-        <h2>Edit Package</h2>
+        <h2>Edit Clients</h2>
     </div>
     <div class="card-body">
         <form action="{{ route("patient.update", $patient->id) }}" method="post" enctype="multipart/form-data">
