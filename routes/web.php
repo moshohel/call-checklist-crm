@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CallChecklist\Tier2Controller;
 use App\Http\Controllers\CallChecklist\shojonTierThree;
 use App\Http\Controllers\CallChecklist\TierOneController;
+use App\Http\Controllers\CallChecklist\EvaluationController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -153,6 +154,11 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('/report/pdf/{range_type?}', 'CallChecklist\ShojonController@exportPdf');
 
             Route::get('dashboard', 'CallChecklist\KprController@dashboard')->name('call_checklist.kpr.dashboard');
+            //call evaluation
+            Route::get('/evaluation', [EvaluationController::class, 'callEvaluationblade'])->name('call_checklist.shojon.callEvaluation');
+            Route::post('/evaluation-sote', [EvaluationController::class, 'store'])->name('call_checklist.evaluation.store');
+            Route::get('/eva-list', [EvaluationController::class, 'callEvaluationIndex'])->name('call_checklist.shojon.eva_index');
+            Route::get('/evaluation-details/{id}', [EvaluationController::class, 'evaluationDetails'])->name('call_checklist.shojon.evaluationdetalis');
             //tire 1 route
 
             Route::get('/tierOne', [TierOneController::class, 'tireOnefromblade'])->name('call_checklist.shojon.tierOne');

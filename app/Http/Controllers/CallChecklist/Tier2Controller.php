@@ -265,7 +265,7 @@ class Tier2Controller extends Controller
         $data->referr_to = $request->referral_to;
         $data->referr_from = $request->referral_from;
         $data->client_name = $request->client_name;
-        $data->client_id = $request->client_id;
+        $data->unique_id = $request->client_id;
         $data->age = $request->age;
         $data->phone_number = $request->phone_number;
         $data->phone_number_two = $request->Emergency_number;

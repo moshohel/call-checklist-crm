@@ -110,6 +110,30 @@
 
             </ul>
         </li>
+        <li class="treeview">
+            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
+                <span class="app-menu__label">Call Evaluation</span>
+                <i class="treeview-indicator fa fa-angle-right"></i>
+            </a>
+            <ul class="treeview-menu">
+
+                <li>
+                    <a class="app-menu__item"
+                        href=" {{ route('call_checklist.shojon.callEvaluation') }} ">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">Evaluation</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="app-menu__item"
+                        href=" {{ route('call_checklist.shojon.eva_index') }} ">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">Evaluation List</span>
+                    </a>
+                </li>
+
+            </ul>
+        </li>
         @endif
         
 
