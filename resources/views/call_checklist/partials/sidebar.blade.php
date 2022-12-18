@@ -220,6 +220,7 @@
                     </a>
                 </li>
 
+                @endif
                 <li>
                     <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
                         == "SHOJON") ? 'active' : '' }}"
@@ -228,7 +229,6 @@
                         <span class="app-menu__label">Calendar</span>
                     </a>
                 </li>
-                @endif
             </ul>
         </li>
 

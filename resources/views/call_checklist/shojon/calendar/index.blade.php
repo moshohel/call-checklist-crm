@@ -9,11 +9,11 @@
 
 @section('content')
   <!-- Modal -->
-  <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  {{-- <div class="modal fade" id="sessionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Booking title</h5>
+          <h5 class="modal-title" id="exampleModalLabel">session title</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -26,7 +26,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> --}}
 
     <div class="container bg-light">
         <div class="row">
@@ -63,9 +63,22 @@
                 header: {
                     left: 'prev, next today',
                     center: 'title',
-                    right: 'month, agendaWeek, agendaDay',
+                    right: 'month',
                 },
-                events: sessions
+                events: sessions,
+                selectable: true,
+                selectHelper: true,
+                select: function(start, end, allDays)
+                {
+                  $('#sessionModal').modal('toggle');
+
+                  $('#saveBtn').click(function() {
+                        var title = $('#title').val();
+                        var start_date = moment(start).format('YYYY-MM-DD');
+                        var end_date = moment(end).format('YYYY-MM-DD');
+                        // console.log(start_date);
+                    });
+                }
             })
         });
     </script>

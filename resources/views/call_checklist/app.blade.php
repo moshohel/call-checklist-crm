@@ -33,7 +33,7 @@
     @stack('scripts')
 
 @section('datatables')
-    <script>
+    {{-- <script>
         $(document).ready(function () {
             $('.sampleTable').DataTable({
                 responsive: true
@@ -42,7 +42,7 @@
             //         format: 'YYYY-MM-DD'
             //     });
         });
-    </script>
+    </script> --}}
 @show
 
 @yield('script')
