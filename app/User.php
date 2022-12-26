@@ -18,9 +18,10 @@ class User extends Authenticatable
     protected $table = "vicidial_users";
     protected $primaryKey = "user";
     public $incrementing = false;
+    public $timestamps = false;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'user', 'pass', 'user_level', 'full_name', 'user_group', 'image', 'user_id',
     ];
 
     /**
@@ -29,7 +30,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'pass', 'remember_token',
     ];
 
     /**
@@ -45,5 +46,4 @@ class User extends Authenticatable
     {
         return $this->pass;
     }
-
 }

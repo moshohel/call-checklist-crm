@@ -41,7 +41,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-
     }
 
     public function username()
@@ -53,7 +52,7 @@ class LoginController extends Controller
     {
         $user = User::find($request->get($this->username()));
 
-        if( $user && ($user->getAuthPassword() == $request->get("password")) ){
+        if ($user && ($user->getAuthPassword() == $request->get("password"))) {
             Auth::login($user);
             return true;
         }
@@ -62,23 +61,23 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-
+        $user_id = Auth::user()->user_id;
         $redirectPath = '/';
-        if(($user->user_level == 9) && ($user->user_group == 'ADMIN') ){
+        if (($user->user_level == 9) && ($user->user_group == 'ADMIN')) {
             $redirectPath = 'call-checklist/index';
-        }
-        else if(($user->user_level == 8) && ($user->user_group == 'SHOJON') ){
+        } else if (($user->user_level == 8) && ($user->user_group == 'SHOJON')) {
             $redirectPath = 'call-checklist/shojon/dashboard';
-        }else if(($user->user_level == 8) && ($user->user_group == 'KPR')){
+        } else if (($user->user_level == 8) && ($user->user_group == 'KPR')) {
             $redirectPath = 'call-checklist/kpr/index';
-        }
-        else if(($user->user_level == 1) && ($user->user_group == 'SHOJON')){
+        } else if (($user->user_level == 1) && ($user->user_group == 'SHOJON')) {
             $redirectPath = 'call-checklist/shojon/index';
-        }
-        else if(($user->user_level == 1) && ($user->user_group == 'KPR')){
+        } else if (($user->user_level == 1) && ($user->user_group == 'KPR')) {
             $redirectPath = 'call-checklist/kpr/index';
-        }
-        else {
+        } else if (($user->user_level == 8) && ($user->user_group == 'Therapist')) {
+            $redirectPath = '/show/' . $user_id;
+        } else if (($user->user_level == 8) && ($user->user_group == 'Psychiatrist')) {
+            $redirectPath = '/show/' . $user_id;
+        } else {
             echo "Unknown User group";
             return true;
         }
