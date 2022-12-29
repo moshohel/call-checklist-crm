@@ -77,6 +77,8 @@ class LoginController extends Controller
             $redirectPath = '/show/' . $user_id;
         } else if (($user->user_level == 8) && ($user->user_group == 'Psychiatrist')) {
             $redirectPath = '/show/' . $user_id;
+        } else if (($user->user_level == 8) && ($user->user_group == 'MHW')) {
+            $redirectPath = 'call-checklist/shojon/tierOne/dashboard';
         } else {
             echo "Unknown User group";
             return true;

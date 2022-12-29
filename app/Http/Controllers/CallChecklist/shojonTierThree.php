@@ -64,29 +64,36 @@ class shojonTierThree extends Controller
         $data['education'] = $request->Educational_Qualification;
         $data['marital'] = $request->Marital_Status;
         $data['session'] = $request->Session_Number;
-        $data['distress'] = $request->distress_rating;
-        $data['WHO'] = $request->ghq;
+        $data['appearance'] = $request->examination_appearance;
+        $data['behavior'] = $request->examination_behavior;
+        $data['speech'] = $request->examination_speech;
+        $data['affect'] = $request->examination_affect;
+        $data['thought'] = $request->examination_thought;
+        $data['perception'] = $request->examination_perception;
+        $data['cognition'] = $request->examination_cognition;
+        $data['judgement'] = $request->examination_judgement;
+
+
         $data['symptoms'] = implode("; ", $request['Symptoms']);
         $data['severity'] = implode("; ", $request['Severity']);
         $data['problem_duration'] = $request->Problem_duration;
-        $data['problem_history'] = $request->problem_history;
+        $data['problem_history'] = $request->illness_history;
+        $data['birth_history'] = $request->birth_history;
         $data['family_history'] = $request->Family_History;
+        $data['substance_history'] = $request->substance_history;
         $data['suicidal_ideation'] = $request->suicidal_risk;
         $data['self_harm_history'] = $request->self_harm_history;
         $data['diagnosis'] = json_encode($request->mental_illness_diagnosis);
-        $data['psychiatric_medication'] = $request->PresentCotinuation;
-        $data['name_of_medicine'] = $request->name_of_medicine;
+
+        $data['previous_medication'] = $request->previous_medication;
         $data['concern_history'] = json_encode($request->Physical_Concern_history);
         $data['differential_diagnosis'] = json_encode($request->current_differential_diagnosis);
-        $data['tool_name'] = $request->PsychometricTool;
-        $data['score'] = $request->Psychometricscore;
-        $data['therapy'] = $request->therapy;
-        $data['predisposing'] = implode("; ", $request['Predisposing']);
-        $data['precipitatory'] = implode("; ", $request['Precipitatory']);
-        $data['perpetuating'] = implode("; ", $request['Perpetuating']);
-        $data['protective'] = implode("; ", $request['Protective']);
-        $data['short_term'] = $request->ShorttermGoal;
-        $data['long_term'] = $request->Longtermgoal;
+        $data['prescribed_medications'] = $request->prescribed_medications;
+        $data['psychotherapy_session_suggested'] = $request->psychotherapy_session_suggested;
+        $data['client_ability_buy_medicine'] = $request->client_ability_buy_medicine;
+        $data['suitable_session_type'] = $request->suitable_session_type;
+
+
         $data['intervention'] = $request->Intervention;
         $data['homework'] = $request->Homework;
         $data['effective'] = $request->useful_effective;
@@ -95,7 +102,7 @@ class shojonTierThree extends Controller
         $data['client_referral'] = $request->client_referral;
         $data['session_plan'] = $request->next_session_plan;
         $data['session_summary'] = $request->session_summary;
-        $data['session_date'] = $request->next_session;
+        $data['next_session_date'] = $request->next_session;
 
 
         DB::table('shojon_tire_threes')->insert($data);
