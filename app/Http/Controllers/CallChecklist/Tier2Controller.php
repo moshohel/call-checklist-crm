@@ -260,17 +260,12 @@ class Tier2Controller extends Controller
         $data->save();
     }
     public function ReferralSave_form(Request $request)
-    {
+    { 
         $data = new Referral;
         $data->referr_to = $request->referral_to;
         $data->referr_from = $request->referral_from;
-<<<<<<< HEAD
-        $data->client_name = $request->client_name;
-        $data->client_id =$request->client_id; 
-=======
         $data->name = $request->client_name;
         $data->unique_id = $request->client_id;
->>>>>>> c0e6d619146944cde06ce77bbb33f940d3f3b729
         $data->age = $request->age;
         $data->phone_number = $request->phone_number;
         $data->phone_number_two = $request->Emergency_number;
@@ -278,6 +273,7 @@ class Tier2Controller extends Controller
         $data->preferred_time = $request->preferred_time;
         $data->preferred_therapist_or_psychiatrist = $request->preferred_therapist_or_psychiatrist;
         $data->financial = $request->Financial;
+        //$data->Referral_types = $request->Referral_types;
         // $data->therapist_or_psychiatrist = $request->therapist_or_psychiatrist;
         $data->save();
     }

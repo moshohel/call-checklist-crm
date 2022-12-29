@@ -47,7 +47,7 @@
 
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="{{ route('call_checklist.shojon.tierOne') }}">
+                        href="#">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Add Patient - Tier 1 </span>
                     </a>
@@ -154,7 +154,7 @@
                 <li>
                     <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
                         == "SHOJON") ? 'active' : '' }}"
-                        href="{{ route('patient.create') }}">
+                        href="#">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">New Patient</span>
                     </a>
@@ -210,7 +210,7 @@
                 <li>
                     <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
                         == "SHOJON") ? 'active' : '' }}"
-                        href="{{ route('patient.create') }}">
+                        href="#">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">New Patient</span>
                     </a>

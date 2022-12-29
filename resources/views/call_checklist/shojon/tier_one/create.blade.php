@@ -26,21 +26,25 @@
             <div class="row g-4">
               <div class="col-md-3">
                   <label for="validationCustom01" class="form-label">Phone Number:</label>
-                  <input type="number" class="form-control" name="phone_number" placeholder="Enter client name" value="8801#########" >
+                  <input type="number" class="form-control" readonly name="phone_number"value="{{$newPatient->phone_number}}" >
               </div>
               <div class="col-md-3">
                   <label for="validationCustom01" class="form-label">Client Name:</label>
-                  <input type="text" class="form-control" name="client_name" placeholder="Enter client name">
-                  <input type="hidden" class="form-control" name="client_id" placeholder="Enter client name" value="{{ $getuniqueId->unique_id}}">
+                  <input type="text" class="form-control" name="client_name" readonly value="{{$newPatient->name}}">
+                  <input type="hidden" class="form-control" name="client_id" placeholder="Enter client name" value="{{ $uniqueid }}">
               </div>
               <div class="col-md-3">
                   <div class="form-group">
                       @php $types = ['Male','Female','Intersex','Others']; @endphp 
                       <label for="validationCustom01" class="form-label">Sex:</label>
-                      <select class="form-control" name="sex">
+                      <select class="form-control" readonly disabled name="sex">
                           <option disabled selected>Select Sex</option>
                           @foreach($types as $item)
+                          @if($newPatient->sex == $item)
+                          <option selected value="{{$item}}">{{$item}}</option>
+                          @else
                           <option value="{{$item}}">{{$item}}</option>
+                          @endif
                           @endforeach
                       </select>
                   </div>
@@ -49,10 +53,14 @@
                   <div class="form-group">
                       @php $types = ['0-12','13-19','20-30','30-40','40-65','65+','Don’t know.','Don’t want to share']; @endphp 
                       <label for="validationCustom01" class="form-label">Age:</label>
-                      <select class="form-control" name="age">
+                      <select class="form-control" readonly disabled name="age">
                           <option disabled selected>Select age</option>
                           @foreach($types as $item)
+                          @if($newPatient->age == $item)
+                          <option selected value="{{$item}}">{{$item}}</option>
+                          @else
                           <option value="{{$item}}">{{$item}}</option>
+                          @endif
                           @endforeach
                       </select>
                   </div>
@@ -66,10 +74,14 @@
                   <div class="form-group">
                       @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower Class', 'Lower Class']; @endphp 
                       <label for="validationCustom01" class="form-label">Socio-economic Status (SES):</label>
-                      <select class="form-control" name="socio_economic">
+                      <select class="form-control" readonly disabled name="socio_economic">
                           <option disabled selected>Select Socio-economic</option>
                           @foreach($types as $item)
+                          @if($newPatient->socio_economic_status ==$item )
+                          <option selected value="{{$item}}">{{$item}}</option>
+                          @else
                           <option value="{{$item}}">{{$item}}</option>
+                          @endif
                           @endforeach
                       </select>
                   </div>
@@ -77,10 +89,14 @@
               <div class="col-md-3">
                   <div class="form-group">
                       <label for="validationCustom01" class="form-label">Location:</label>
-                      <select class="form-control" name="location">
+                      <select class="form-control" readonly disabled name="location">
                           <option disabled selected>Select Location</option>
                           @foreach($districts as $item)
+                          @if($newPatient->location == $item->name)
+                          <option selected value="{{$item->name}}">{{$item->name}}</option>
+                          @else
                           <option value="{{$item->name}}">{{$item->name}}</option>
+                          @endif
                           @endforeach
                       </select>
                   </div>

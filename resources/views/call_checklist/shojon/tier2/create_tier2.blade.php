@@ -2,13 +2,13 @@
 @section('title') {{ $pageTitle }} @endsection
 @section('content')
 
-<<<<<<< HEAD
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
-=======
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
->>>>>>> c0e6d619146944cde06ce77bbb33f940d3f3b729
+
 <div class="app-title">
     <div>
         <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
@@ -22,7 +22,7 @@
         <div class="tile">
             <h3 class="tile-title">Create Checklist for Shojon</h3>
             <form id="myForm" action="{{ route('call_checklist.shojontier2.store') }}" method="POST" role="form"
-<<<<<<< HEAD
+
             enctype="multipart/form-data" autocomplete="off">
             @csrf
 
@@ -141,7 +141,7 @@
                                     </div>
                                     @error('district') {{ $message }} @enderror
                                 </div>
-=======
+
                 enctype="multipart/form-data" autocomplete="off">
                 @csrf
 
@@ -176,11 +176,10 @@
                                 <input class="form-control" type="text" name="caller_name" id="caller_name"
                                     value="{{ old('caller_name',$last? $last->caller_name : null) }}"
                                     placeholder="Enter caller name" />
->>>>>>> c0e6d619146944cde06ce77bbb33f940d3f3b729
+
                             </div>
                         </div>
 
-<<<<<<< HEAD
                         <div class="form-group">
                             <label class="control-label" for="socio_economic_status"><b>Socio-economic
                             Status:</b></label>
@@ -540,7 +539,7 @@
                       </textarea>
                   </div>
                   <div class="form-group">
-=======
+
                     <div class="row">
                         <div class="col-3">
                             <div class="form-group">
@@ -1067,12 +1066,11 @@
                             </textarea>
                 </div>
                 <div class="form-group">
->>>>>>> c0e6d619146944cde06ce77bbb33f940d3f3b729
+
                     <label class="control-label">Formulation:</label><br>
                     <table class="table table-bordered border-primary" id="dynamic_field_formulation">
                         <thead>
                             <tr>
-<<<<<<< HEAD
                               <th scope="col">Predisposing Factor</th>
                               <th scope="col">Precipitatory factor </th>
                               <th scope="col">Perpetuating (maintaining) factor</th>
@@ -1205,7 +1203,7 @@
             @error('client_referral') {{ $message }} @enderror   
         </div>
     </div>
-=======
+
                                 <th scope="col">Predisposing Factor</th>
                                 <th scope="col">Precipitatory factor </th>
                                 <th scope="col">Perpetuating (maintaining) factor</th>
@@ -1345,7 +1343,7 @@
                         @error('client_referral') {{ $message }} @enderror
                     </div>
                 </div>
->>>>>>> c0e6d619146944cde06ce77bbb33f940d3f3b729
+
 
                 <!-- {{-- <label class="control-label" for="financial_affordability"><b>If referred to 2/3 Tier of SHOJON – Financial affordability:</label>
                         @php $types = ['Free', '50 - 100', '100 - 200', '200 - 300', '300-500', '500 – 800', '800 – 1000', 'Not referred to SHOJON tier 2/3']; @endphp
@@ -1356,7 +1354,7 @@
                             @endforeach
                         </select>
                         @error('financial_affordability') {{ $message }} @enderror --}} -->
-<<<<<<< HEAD
+
                         <div class="form-group">
                             <label class="control-label" for="next_session_plan"><b>Next session plan</label>
                                 <textarea rows="2" cols="50"
@@ -1442,7 +1440,7 @@
                 &nbsp;&nbsp;&nbsp;
                 <a class="btn btn-secondary" onclick="cancel()"><i
                     class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
-=======
+
                 <div class="form-group">
                     <label class="control-label" for="next_session_plan"><b>Next session plan</label>
                     <textarea rows="2" cols="50" class="form-control
@@ -1520,7 +1518,7 @@
                     &nbsp;&nbsp;&nbsp;
                     <a class="btn btn-secondary" onclick="cancel()"><i
                             class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
->>>>>>> c0e6d619146944cde06ce77bbb33f940d3f3b729
+
                 </div>
             </form>
         </div>

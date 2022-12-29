@@ -5,7 +5,9 @@ use App\Http\Controllers\CallChecklist\Tier2Controller;
 use App\Http\Controllers\CallChecklist\shojonTierThree;
 use App\Http\Controllers\CallChecklist\TierOneController;
 use App\Http\Controllers\CallChecklist\EvaluationController;
+use App\Http\Controllers\Patient\PatientController;
 use Illuminate\Support\Facades\Auth;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -48,17 +50,23 @@ Route::get('/uniqueid',[TierOneController::class,'uniqueId']);
 // patient Routes
 Route::get('generate-pdf-patient/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');
 Route::group(['prefix' => 'patient'], function () {
+    //Route::get('', 'CallChecklist\PatientController@pupup');
+    Route::get('/pupup/{number}', [PatientController::class, 'pupup']);    
+    Route::get('/livesearch', [PatientController::class, 'searchExisting']);
+    Route::get('/create/{number}',[PatientController::class, 'create'])->name('patient.create');
+
     Route::get('/', 'Patient\PatientController@index')->name('patients')->middleware('auth');
     Route::get('/show/{id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');
     Route::get('/showInfo/{phone}', 'Patient\PatientController@showInfo')->name('patient.showInfo')->middleware('auth');
     Route::get('/paging', 'Patient\PatientController@paging')->name('patient.paging')->middleware('auth');
     Route::get('/search', 'Patient\PatientController@search')->name('patient.search')->middleware('auth');
 
-    Route::get('/create', 'Patient\PatientController@create')->name('patient.create');
+    
     Route::get('/edit/{id}', 'Patient\PatientController@edit')->name('patient.edit');
     Route::post('/create', 'Patient\PatientController@store')->name('patient.store');
     Route::post('/edit/{id}', 'Patient\PatientController@update')->name('patient.update');
     Route::get('/delete/{id}', 'Patient\PatientController@delete')->name('patient.delete');
+
 });
 
 // Referral Routes
@@ -96,10 +104,6 @@ Route::group(['prefix' => 'session'], function () {
 });
 
 Route::group(['prefix' => 'call-checklist'], function () {
-
-
-    Route::get('/pupup/{number}', 'CallChecklist\ShojonController@pupup')->name('call_checklist.shojon.pupup');
-
 
     Route::group(['middleware' => 'super_admin'], function () {
         Route::get('index', 'CallChecklist\KprController@index')->name('call_checklist.kpr.index'); // same as /call-checklist/kpr/index
@@ -150,7 +154,7 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('/evaluation-details/{id}', [EvaluationController::class, 'evaluationDetails'])->name('call_checklist.shojon.evaluationdetalis');
             //tire 1 route
             
-            Route::get('/tierOne', [TierOneController::class, 'tireOnefromblade'])->name('call_checklist.shojon.tierOne');
+            Route::get('/tierOne/{uniqueid}', [TierOneController::class, 'tireOnefromblade'])->name('call_checklist.shojon.tierOne');
         
             Route::post('/store/tierOne', [TierOneController::class, 'store_tier_One'])->name('call_checklist.shojontierOne.store_tier_one');
             Route::get('/tierOne_list', [TierOneController::class, 'tireOneList'])->name('call_checklist.shojon.TierOneList');
@@ -167,14 +171,13 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('/edit/{id}', [Tier2Controller::class, 'clientUpdate'])->name('call_checklist.shojon.edit');
             Route::post('/update', [Tier2Controller::class, 'TierTwoUpdate'])->name('tierTwo.update');
             Route::post('/submit', [Tier2Controller::class, 'TerminationSave_form'])->name('call_checklist.shojon.termination_form');
-            Route::post('/referral_t_two', [Tier2Controller::class, 'ReferralSave_form'])->name('call_checklist.shojon.Referral_form');
+            Route::get('/referral_t_two', [Tier2Controller::class, 'ReferralSave_form'])->name('call_checklist.shojon.Referral_form');
             //Shojon tier Three route  call_checklist.shojontierThree.store
             Route::get('/add_patientt3', [shojonTierThree::class, 'tireThreefromblade'])->name('call_checklist.shojon.tierThree');
             Route::post('store_tier3', [shojonTierThree::class, 'store'])->name('call_checklist.shojontierThree.store');
             Route::get('/patientListt3', [shojonTierThree::class, 'tireThreepatientlist'])->name('call_checklist.shojon.TierThreePatientlist');
             ///test route
-            // Route::post('/referral_t_three',[shojonTierThree::class,'tireThreerelerral_save_data'])->name('call_checklist.shojon.Referral_form');
-
+            
             // Route::get('/user/info',[AygasController::class,'userInfo'])->name('user.info');
             // Route::get('dashboard', function()call_checklist.shojon.Patientlist
             // {

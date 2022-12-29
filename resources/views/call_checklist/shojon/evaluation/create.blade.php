@@ -19,7 +19,7 @@
               <div class="col-md-3">
                   <label for="validationCustom01" class="form-label">Observer's Name:</label>
                   <input type="text" class="form-control" name="name" placeholder="Observer's Name">
-              </div>
+              </div> 
               <div class="col-md-3">
                   <label for="validationCustom01" class="form-label">Counselor's Name:</label>
                   <input type="text" class="form-control" name="counselor_name" placeholder="Counselor's Name">

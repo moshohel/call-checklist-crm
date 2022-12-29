@@ -13,43 +13,16 @@ class TierOneController extends Controller
 {
    protected $pageTitle = 'Shojon Tier 1 Service'; 
    protected $pageTitleUpdate = 'Shojon Tier 1 Update'; 
-
-   protected function uniqueGenerator($model,$throw,$length = 6,$prefix)
-   {
-       $data = $model::orderBy('id','desc')->first();
-       if(!$data)
-       {
-        $og_length = $length;
-        $last_number = '';
-       }else{
-        $code = substr($data->$throw, strlen($prefix)+1);
-        $actial_last_number = ($code/1)*1;
-        $increment_last_number = ((int)$actial_last_number+1);
-        $last_number_length = strlen($increment_last_number);
-        $og_length = $length - $last_number_length;
-        $last_number = $increment_last_number;
-       }
-       $zeros = "";
-       for($i=0;$i<$og_length;$i++)
-       {
-        $zeros.="0";
-       }
-       return $prefix.$zeros.$last_number;
-   }
-
    //protected $randomNumber = 999999;
 
 
-   public function tireOnefromblade()
-   {
-    $uniqueId = $this->uniqueGenerator(new Unique,'unique_id',6,'C');
-      $data = new Unique;
-      $data->unique_id = $uniqueId;
-      $data->save();
+   public function tireOnefromblade($uniqueid)
+   { 
+    $uniqueid =$uniqueid;   
     $pageTitle = $this->pageTitle;
-    $districts = DB::table('districts')->get();    
-    $getuniqueId = DB::table('uniques')->latest()->first();
-    return view('call_checklist.shojon.tier_one.create', compact('pageTitle','districts','getuniqueId'));
+    $districts = DB::table('districts')->get();
+    $newPatient = DB::table('patients')->where('unique_id',$uniqueid)->first();    
+    return view('call_checklist.shojon.tier_one.create', compact('pageTitle','districts','uniqueid','newPatient'));
     }
 
     public function store_tier_One(Request $request)
