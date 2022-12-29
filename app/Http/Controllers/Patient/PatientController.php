@@ -14,6 +14,7 @@ use App\Models\ShojonMentalIllnessDiagnosis;
 use App\Models\ShojonSecondaryReasonForCalling;
 use Illuminate\Support\Facades\DB;
 use App\Models\CallChecklistForShojon;
+use App\Models\Unique; 
 
 class PatientController extends Controller
 {
@@ -107,16 +108,72 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($refId = 0, $phone = '')
-    {
-        $pageTitle = $this->pageTitle;
-        $previous_data = null;
+    public function searchExisting(Request $request){
 
+        if($request->ajax()) {
+            $output = '';
+
+            $data = Patient::where('unique_id','like',$request->Search.'%')->orWhere('phone_number','like',$request->Search.'%')->orWhere('name','like',$request->Search.'%')->get();
+            if ($data) {
+                foreach($data as $key=>$row){
+                    $output .=
+                            '<tr>
+                                <td>'.$key.'</td>
+                                <td>'.$row->unique_id.'</td>
+                                <td>'.$row->name.'</td>
+                                <td>'.$row->phone_number.'</td>
+                                <td>'.$row->age.'</td>
+                                <td>'.$row->sex.'</td>
+                                <td>'.$row->location.'</td>
+                                <td>'.$row->socio_economic_status.'</td>
+                                <td>'.'<a href=""><i class="fa-solid fa-eye"></a>'.'</td>
+                            </tr>
+                            ';
+                }
+                 return response()->json($output);
+            }
+            
+      }
+      return view('call_checklist.patient.pupup');
+    }
+    //uniqueGenerator//
+    protected function uniqueGenerator($model,$throw,$length,$prefix)
+    {
+        $data = $model::orderBy('id','desc')->first();
+        if(!$data)
+        {
+         $og_length = $length;
+         $last_number = '';
+        }else{
+         $code = substr($data->$throw, strlen($prefix)+1);
+         $actial_last_number = ($code/1)*1;
+         $increment_last_number = ((int)$actial_last_number+1);
+         $last_number_length = strlen($increment_last_number);
+         $og_length = $length - $last_number_length;
+         $last_number = $increment_last_number;
+        }
+        $zeros = "";
+        for($i=0;$i<$og_length;$i++)
+        {
+         $zeros.="0";
+        }
+        return $prefix.$zeros.$last_number;
+    }
+    // new client popup
+    public function pupup($number)
+    {
+        return view('call_checklist.patient.pupup', compact('number'));
+    }
+    // new 
+    public function create($number)
+    {
+        $uniqueId = $this->uniqueGenerator(new Unique,'unique_id',6,'SHO');
+        $data = new Unique;
+        $data->unique_id = $uniqueId;
+        $data->save();
+        $getuniqueId = DB::table('uniques')->latest()->first();
         $districts = District::orderBy('name')->pluck('name');
-        $main_reason = ShojonMainReasonForCalling::all()->pluck('reason');
-        $secondary_reason = ShojonSecondaryReasonForCalling::all()->pluck('reason');
-        $mental_illness = ShojonMentalIllnessDiagnosis::all()->pluck('illness');
-        return view('call_checklist.patient.create', compact('pageTitle', 'districts', 'main_reason', 'secondary_reason', 'mental_illness', 'refId', 'phone'));
+        return view('call_checklist.patient.create', compact('districts', 'getuniqueId','number'));
     }
 
     /**
@@ -127,17 +184,22 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $patient = new Patient();
-        $data = $request->only($patient->getFillable());
-        $patient->fill($data);
-        $patient->created_by = auth()->id();
-        $patient->created_at = Carbon::now();
+        $patient->unique_id = $request->uniqueId;
+        $patient->name = $request->name;
+        $patient->phone_number = $request->phone_number;
+        $patient->sex = $request->sex;
+        $patient->age = $request->age;
+        $patient->location = $request->location;
+        $patient->socio_economic_status = $request->socio_economic_status;
+        //$patient->created_at = Carbon::now();
         // $patient->created_date = Carbon::today();
-        $patient->unique_id = rand(100000, 999999);
+        //dd($patient);
         $patient->save();
-        session()->flash('success', 'New patient has added successfully !!');
+        //session()->flash('success', 'New patient has added successfully !!');
         // return redirect()->route('admin.products');
-        return redirect()->route('patients');
+        return redirect()->route('call_checklist.shojon.tierOne',$request->uniqueId);
     }
 
     /**

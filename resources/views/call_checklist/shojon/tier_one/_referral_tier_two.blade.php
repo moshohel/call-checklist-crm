@@ -12,32 +12,32 @@
             <div class="modal-body">
               <div class="row g-2">
               <div class="col-md-6">
-              <label for="validationCustom01" class="form-label">Referral To:</label>
+              <label for="validationCustom01" class="form-label">Referral Form:</label>
               <input type="text" class="form-control" readonly name="referral_to"  value="Shojon Tier 1">
               </div>
               <div class="col-md-6">
-              <label for="validationCustom01" class="form-label">Referral From:</label>
+              <label for="validationCustom01" class="form-label">Referral To:</label>
               <input type="text" class="form-control" readonly name="referral_from" value="Shojon Tier 2">
              </div>
              </div><hr>
              <div class="row g-3">
               <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Client ID:</label>
-              <input type="text" class="form-control" name="client_id"  placeholder="Enter Client id">
+              <input type="text" class="form-control" name="client_id" readonly value="{{ $uniqueid }}">
               </div>
               <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Client Name:</label>
-              <input type="text" class="form-control" name="client_name" placeholder="Enter client name" >
+              <input type="text" class="form-control" name="client_name" value="{{$newPatient->name}}" readonly>
              </div>
              <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Age:</label>
-              <input type="number" class="form-control" name="age" placeholder="Enter age" >
+              <input type="text" class="form-control" name="age" readonly value="{{ $newPatient->age }}">
              </div>
              </div><br>
              <div class="row g-2">
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Phone Number:</label>
-              <input type="number" class="form-control" name="phone_number"  placeholder="Phone Number">
+              <input type="number" class="form-control" name="phone_number" value="{{$newPatient->phone_number}}" readonly>
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Emergency number in case of unavailability:</label>
@@ -54,14 +54,30 @@
               <input type="datetime-local" class="form-control" name="preferred_time" placeholder="Preferred time for session">
              </div>
              </div><br>
-             <div class="row g-2">
-              <div class="col-md-6">
+             <div class="row g-3">
+              <div class="col-md-4">
+                @php $types = ['Free of cost','200']; @endphp 
               <label for="validationCustom01" class="form-label">Financial affordability:</label>
-              <input type="text" class="form-control" name="Financial"  placeholder="Financial affordability">
+              <select class="form-control" name="Financial">
+                <option selected disabled>Select Referral Types</option>
+                @foreach($types as $item)
+                <option value="{{$item}}">{{$item}}</option>
+                @endforeach
+              </select>  
               </div>
-              <div class="col-md-6">
+              <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Therapist preference:</label>
               <input type="text" class="form-control" name="Therapist" placeholder="Therapist preference" >
+             </div>
+             <div class="col-md-4">
+              @php $types = ['Regular','Emergenct']; @endphp
+              <label for="validationCustom01" class="form-label">Referral Types :</label>
+              <select class="form-control" name="Referral_types">
+                <option selected disabled>Select Referral Types</option>
+                @foreach($types as $item)
+                <option value="{{$item}}">{{$item}}</option>
+                @endforeach
+              </select> 
              </div>
              </div>
             </div>
@@ -85,7 +101,7 @@
      $('#_referral_tier_two_form').on('submit',function(e){
        e.preventDefault();
           $.ajax({
-              type:"POST",
+              type:"get",
               url: '{{ route('call_checklist.shojon.Referral_form') }}',
               data:$('#_referral_tier_two_form').serialize(),
               success:function(response){

@@ -331,9 +331,4 @@ class ShojonController extends Controller
         return Excel::download(new ShojonCallChecklistExport($filtered_data), 'ShojonCallChecklistReport.xlsx');
     }
 
-    public function pupup($number)
-    {
-        $referrence_id = 1000;
-        return view('call_checklist.pupup', compact('number', 'referrence_id'));
-    }
 }
