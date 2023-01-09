@@ -47,7 +47,7 @@
 
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="#">
+                        href="{{ route('call_checklist.shojon.manual_form') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Add Patient - Tier 1 </span>
                     </a>

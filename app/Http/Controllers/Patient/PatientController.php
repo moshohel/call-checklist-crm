@@ -15,6 +15,7 @@ use App\Models\ShojonSecondaryReasonForCalling;
 use Illuminate\Support\Facades\DB;
 use App\Models\CallChecklistForShojon;
 use App\Models\Unique; 
+use App\Models\ShojonTierOne; 
 
 class PatientController extends Controller
 {
@@ -113,20 +114,20 @@ class PatientController extends Controller
         if($request->ajax()) {
             $output = '';
 
-            $data = Patient::where('unique_id','like',$request->Search.'%')->orWhere('phone_number','like',$request->Search.'%')->orWhere('name','like',$request->Search.'%')->get();
+            $data = ShojonTierOne::where('caller_id','like',$request->Search.'%')->orWhere('phone_number','like',$request->Search.'%')->orWhere('caller_name','like',$request->Search.'%')->get();
             if ($data) {
                 foreach($data as $key=>$row){
                     $output .=
                             '<tr>
                                 <td>'.$key.'</td>
-                                <td>'.$row->unique_id.'</td>
-                                <td>'.$row->name.'</td>
+                                <td>'.$row->caller_id.'</td>
+                                <td>'.$row->caller_name.'</td>
                                 <td>'.$row->phone_number.'</td>
                                 <td>'.$row->age.'</td>
                                 <td>'.$row->sex.'</td>
                                 <td>'.$row->location.'</td>
-                                <td>'.$row->socio_economic_status.'</td>
-                                <td>'.'<a href=""><i class="fa-solid fa-eye"></a>'.'</td>
+                                <td>'.$row->socio_economic.'</td>
+                                <td>'.'<a href="' . route('call_checklist.shojon.TierOneedit', $row->caller_id) . '"><i class="fa-solid fa-eye"></a>'.'</td>
                             </tr>
                             ';
                 }

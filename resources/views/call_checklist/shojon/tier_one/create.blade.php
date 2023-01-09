@@ -37,7 +37,7 @@
                   <div class="form-group">
                       @php $types = ['Male','Female','Intersex','Others']; @endphp 
                       <label for="validationCustom01" class="form-label">Sex:</label>
-                      <select class="form-control" readonly disabled name="sex">
+                      <select class="form-control" readonly  name="sex">
                           <option disabled selected>Select Sex</option>
                           @foreach($types as $item)
                           @if($newPatient->sex == $item)
@@ -53,7 +53,7 @@
                   <div class="form-group">
                       @php $types = ['0-12','13-19','20-30','30-40','40-65','65+','Don’t know.','Don’t want to share']; @endphp 
                       <label for="validationCustom01" class="form-label">Age:</label>
-                      <select class="form-control" readonly disabled name="age">
+                      <select class="form-control" readonly name="age">
                           <option disabled selected>Select age</option>
                           @foreach($types as $item)
                           @if($newPatient->age == $item)
@@ -74,7 +74,7 @@
                   <div class="form-group">
                       @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower Class', 'Lower Class']; @endphp 
                       <label for="validationCustom01" class="form-label">Socio-economic Status (SES):</label>
-                      <select class="form-control" readonly disabled name="socio_economic">
+                      <select class="form-control" readonly  name="socio_economic">
                           <option disabled selected>Select Socio-economic</option>
                           @foreach($types as $item)
                           @if($newPatient->socio_economic_status ==$item )
@@ -89,7 +89,7 @@
               <div class="col-md-3">
                   <div class="form-group">
                       <label for="validationCustom01" class="form-label">Location:</label>
-                      <select class="form-control" readonly disabled name="location">
+                      <select class="form-control" readonly  name="location">
                           <option disabled selected>Select Location</option>
                           @foreach($districts as $item)
                           @if($newPatient->location == $item->name)

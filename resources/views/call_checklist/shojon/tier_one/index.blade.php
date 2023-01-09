@@ -53,7 +53,7 @@
                                 <td>{{$row->location}}</td>
                                 <td>{{$row->call_Type}}</td>
                                 <td><a href="{{ route('call_checklist.shojon.TierOneview',$row->id) }}"><i class="fa-solid fa-eye"></i></a>
-                                 <a href="{{ route('call_checklist.shojon.TierOneedit',$row->id) }}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
+                                 <a href="{{ route('call_checklist.shojon.TierOneedit',$row->caller_id) }}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
                                 </td>
                             </tr>
                             @endforeach
