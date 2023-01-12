@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>@yield('title') {{ config('app.name') }}</title>
+    <title>SHOJON CRM</title>
+    {{-- <title>@yield('title') {{ config('app.name') }}</title> --}}
+    <link rel="icon" href="{{ asset('Image/logo/SHOJON LOgo.png') }}" type="image/icon type">
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

@@ -40,7 +40,7 @@ class Tier2Controller extends Controller
     public function store(Request $request)
     {
         //$params = $request->except('_token');
-
+        // dd($request);
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -158,6 +158,7 @@ class Tier2Controller extends Controller
 
     public function TierTwoUpdate(Request $request)
     {
+
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }

@@ -18,7 +18,7 @@
                 
                 <div class="form-group col-3">
                     <label for="exampleFormControlInput1">Client ID</label>
-                    <input type="number" name="unique_id" class="form-control" readonly id="exampleFormControlInput1" value="{{ $referral->unique_id }}">
+                    <input type="text" name="unique_id" class="form-control" readonly id="exampleFormControlInput1" value="{{ $referral->unique_id }}">
                 </div>
 
                 <div class="col-md-6 col-3">
@@ -40,7 +40,7 @@
 
                 <div class="form-group col-3">
                     <label for="exampleFormControlInput5">Preferred time</label>
-                    <input type="timedate" name="preferred_time" class="form-control" readonly id="exampleFormControlInput5" value="{{ $referral->preferred_time }}">
+                    <input type="text" name="preferred_time" class="form-control" readonly id="exampleFormControlInput5" value="{{ $referral->preferred_time }}">
                 </div>
 
                 <div class="form-group col-6">

@@ -15,6 +15,7 @@
         <div class="col-md-10 mx-auto">
             <div class="tile">
                 <h3 class="tile-title">Create Checklist for Shojon</h3>
+                @include('call_checklist.partials.messages')
                 <form id="myForm" action="{{ route('call_checklist.shojontierThree.store') }}" method="POST" role="form"
                       enctype="multipart/form-data" autocomplete="off">
                     @csrf

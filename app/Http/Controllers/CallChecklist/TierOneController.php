@@ -191,47 +191,19 @@ class TierOneController extends Controller
 
     public function dashboard(Request $request)
     {
-        // $start_time = "2022-01-25";
-        // $end_time = "2022-04-22";
+        $start_time = "2022-01-25";
+        $end_time = "2022-04-22";
+        // dd($request);
 
-        if ($request->start_time == null || $request->end_time == null) {
-            $end_time = Carbon::now()->format('Y-m-d');
-            $start_time = Carbon::now()->subDays(7)->format('Y-m-d');
+        // if ($request->start_time == null || $request->end_time == null) {
+        //     $end_time = Carbon::now()->format('Y-m-d');
+        //     $start_time = Carbon::now()->subDays(7)->format('Y-m-d');
+        // }
 
-            // printf(gettype($end_time));
-            // dd($start_time);
-        }
-
-        if ($request->start_time && $request->end_time) {
-
-            $start_time = $request->start_time;
-            $end_time = $request->end_time;
-
-
-            // $start_time = strtotime($request->start_time);
-            // $start_time = date('Y-m-d',$start_time);
-            // $start_time .= " 00:00:00";
-            // // $start_time = DateTime::createFromFormat('YmdHis', $start_time);
-
-            // $end_time = strtotime($request->end_time);
-            // $end_time = date('Y-m-d',$end_time);
-            // $end_time .= " 00:00:00";
-
-            // $iparr = explode(":", $start_time); 
-            // $ipar = explode(":", $end_time); 
-
-            // print "$iparr[0] <br />";
-            // print "$ipar[0] <br />";
-            // $start_time = $iparr[0];
-            // $end_time = $ipar[0];
-            // printf(gettype($end_time));
-            // printf(gettype($start_time));
-            // print_r($start_time);
-            // dd($start_time);
-            // $start_time = strval($request->start_time);
-            // $end_time =strval($request->end_time);
-
-        }
+        // if ($request->start_time && $request->end_time) {
+        //     $start_time = $request->start_time;
+        //     $end_time = $request->end_time;
+        // }
 
         $pageTitle = $this->pageTitle;
 

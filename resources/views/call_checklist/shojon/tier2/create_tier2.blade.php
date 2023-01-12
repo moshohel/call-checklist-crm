@@ -2,18 +2,8 @@
 @section('title') {{ $pageTitle }} @endsection
 @section('content')
 
-<<<<<<< HEAD
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
-=======
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"/>
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-
->>>>>>> 8816165d36b1195532b8fb1c1b1cc3ed2235617d
 <div class="app-title">
     <div>
         <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
@@ -27,10 +17,6 @@
         <div class="tile">
             <h3 class="tile-title">Create Checklist for Shojon</h3>
             <form id="myForm" action="{{ route('call_checklist.shojontier2.store') }}" method="POST" role="form"
-<<<<<<< HEAD
-=======
-
->>>>>>> 8816165d36b1195532b8fb1c1b1cc3ed2235617d
             enctype="multipart/form-data" autocomplete="off">
             @csrf
 
@@ -647,150 +633,6 @@
             @error('client_referral') {{ $message }} @enderror   
         </div>
     </div>
-<<<<<<< HEAD
-=======
-
-                                <th scope="col">Predisposing Factor</th>
-                                <th scope="col">Precipitatory factor </th>
-                                <th scope="col">Perpetuating (maintaining) factor</th>
-                                <th scope="col">ProtectiveFactor</th>
-                                <th scope="col">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><input type="text" name="Predisposing[]" placeholder="Predisposing Factor"
-                                        class="form-control name_list" /></td>
-                                <td><input type="text" name="Precipitatory[]" placeholder="Precipitatory factor"
-                                        class="form-control name_list" /></td>
-                                <td><input type="text" name="Perpetuating[]" placeholder="Perpetuating factor"
-                                        class="form-control name_list" /></td>
-                                <td><input type="text" name="Protective[]" placeholder="ProtectiveFactor"
-                                        class="form-control name_list" /></td>
-                                <td><button type="button" name="addmore" id="addmore_formulation"
-                                        class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="TreatmentGoal"><b>Treatment Goal
-                    </label><br>
-                    <div class="form-control @error('TreatmentGoal') is-invalid @enderror">
-                        <label class="control-label">Short term Goal:</label><br>
-                        <label class="control-label" style="width: 90%;">
-                            <input type="text" name="ShorttermGoal" class="form-control">
-
-                        </label><br>
-                        <label class="control-label">Long term goal:</label><br>
-                        <label class="control-label" style="width: 90%;">
-                            <input type="text" name="Longtermgoal" class="form-control">
-
-                        </label>
-                    </div>
-                    @error('TreatmentGoal') {{ $message }} @enderror
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="Problem_duration"><b> Intervention:</b></label>
-                    <textarea class="form-control" name="Intervention">
-
-                            </textarea>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="Problem_duration"><b>Homework:</b></label>
-                    <textarea class="form-control" name="Homework">
-
-                            </textarea>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="useful_effective"><b>How useful and effective do you think the
-                            call has been for you?
-                    </label><br>
-                    @php $types = ['Very useful and effective','Useful, but not so effective', 'Quite useful and
-                    effective', 'Neither useful, nor effective', 'No comment/Cannot decide']; @endphp
-                    <div class="form-control @error('useful_effective') is-invalid @enderror">
-                        <label>
-                            @foreach($types as $item)
-                            @if( old('useful_effective') == $item)
-                            <input type="radio" name="useful_effective" value="{{ $item }}" />
-                            @else
-                            <input type="radio" name="useful_effective" value="{{ $item }}" />
-                            @endif
-                            {{ $item }}
-                            <br>
-                            @endforeach
-                        </label>
-                    </div>
-                    @error('useful_effective') {{ $message }} @enderror
-                </div>
-
-                <div class="form-group" style="display: none">
-                    <label class="control-label" for="yes_no_radio"><b>Consent for Recording: </label>
-                    <div class="form-control @error('is_recordable') is-invalid @enderror">
-                        <div>
-                            <input type="radio" id="yes" name="is_recordable" value=1>
-                            <label for="yes">Yes</label>
-                        </div>
-
-                        <div>
-                            <input type="radio" id="no" name="is_recordable" value=0>
-                            <label for="no">No</label>
-                        </div>
-                    </div>
-                    @error('is_recordable') {{ $message }} @enderror
-                </div>
-                <div class="form-group" id="referred">
-                    <label class="control-label" for="client_referral">Referral</label>
-                    <div class="form-control">
-                        <label class="control-label">Internal Referral:( single select )</label><br>
-                        <label class="control-label">
-                            <a href="#" class="btn btn-primary btn-sm Referral_form " data-id="#" data-toggle="modal"
-                                data-target="#ReferralModal">Referral Tier 3</a>
-
-                        </label>
-                        @include('call_checklist.shojon.tier2._referral')
-                        </label>
-                    </div>
-                    <div class="form-control">
-                        <label class="control-label" for="client_referral"><b>External referral: </label>
-                        <div class="form-control @error('TreatmentGoal') is-invalid @enderror">
-                            <label class="control-label">Reason for referral:</label><br>
-                            <label class="control-label" style="width: 90%;">
-                                <input type="text" name="ReasonForReferral" class="form-control">
-
-                            </label><br>
-                            <label class="control-label">Name of the Agency:</label><br>
-                            <label class="control-label" style="width: 90%;">
-                                <input type="text" name="NameOfAgency" class="form-control">
-
-                            </label>
-                        </div>
-                        @php $types = ['Health Hotline 09678771511','KPR 01777772215']; @endphp
-                        <div class="form-control @error('client_referral') is-invalid @enderror">
-                            <label>
-                                @foreach($types as $item)
-                                <input type="radio" name="client_referral" value="{{ $item }}" />
-                                {{ $item }}
-                                <br>
-                                @endforeach
-                                <input type="radio" id="CliKReferral" name="client_referral" value="other"
-                                    onclick="ShowReferralBox()" />
-                                Other (please explain)
-                            </label>
-                            <span id="ReferralBox" style="display: none;">
-                                <input class="form-control" type="text" name="other_client_referral"
-                                    value="{{ old('client_referral') }}" placeholder="Explain" />
-                            </span>
-                        </div>
-                        @error('client_referral') {{ $message }} @enderror
-                    </div>
-                </div>
-
->>>>>>> 8816165d36b1195532b8fb1c1b1cc3ed2235617d
 
                 <!-- {{-- <label class="control-label" for="financial_affordability"><b>If referred to 2/3 Tier of SHOJON – Financial affordability:</label>
                         @php $types = ['Free', '50 - 100', '100 - 200', '200 - 300', '300-500', '500 – 800', '800 – 1000', 'Not referred to SHOJON tier 2/3']; @endphp
@@ -801,10 +643,6 @@
                             @endforeach
                         </select>
                         @error('financial_affordability') {{ $message }} @enderror --}} -->
-<<<<<<< HEAD
-=======
-
->>>>>>> 8816165d36b1195532b8fb1c1b1cc3ed2235617d
                         <div class="form-group">
                             <label class="control-label" for="next_session_plan"><b>Next session plan</label>
                                 <textarea rows="2" cols="50"
@@ -890,88 +728,6 @@
                 &nbsp;&nbsp;&nbsp;
                 <a class="btn btn-secondary" onclick="cancel()"><i
                     class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
-<<<<<<< HEAD
-=======
-
-                <div class="form-group">
-                    <label class="control-label" for="next_session_plan"><b>Next session plan</label>
-                    <textarea rows="2" cols="50" class="form-control
-                                @error('next_session_plan') is-invalid @enderror" name="next_session_plan"
-                        id="next_session_plan" value="{{ old('next_session_plan') }}">{{ old('next_session_plan')}}
-                        </textarea>
-
-                    @error('next_session_plan') {{ $message }} @enderror
-                </div>
-                <div class="form-group">
-                    <label class="control-label" for="session_summary"><b>Session summary : </label>
-                    <textarea rows="2" cols="50" class="form-control
-                                @error('session_summary') is-invalid @enderror" name="session_summary"
-                        id="session_summary" value="{{ old('session_summary') }}">{{ old('session_summary')}}
-                        </textarea>
-
-                    @error('session_summary') {{ $message }} @enderror
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="TreatmentGoal"><b>Session Outcomes
-                    </label><br>
-                    <div class="form-control @error('TreatmentGoal') is-invalid @enderror">
-                        <label class="control-label">Schedule next session</label><br>
-                        <label class="control-label" style="width: 90%;">
-                            <input type="date" name="next_session" class="form-control">
-
-                        </label><br>
-                        <label class="control-label">
-                            <a href="#" class="btn btn-primary btn-sm Termination_form " data-id="#" data-toggle="modal"
-                                data-target="#TerminationModal">Termination</a>
-                        </label>
-                        @include('call_checklist.shojon.tier2.Termination_form')
-                        </label>
-                    </div>
-                    @error('TreatmentGoal') {{ $message }} @enderror
-                </div>
-
-                <span class="btn btn-success" id="messageButton" style="margin: 5px"
-                    onclick="showMessageBox()">Message</span>
-                <div class="form-group" id="messageBox" style="display: none">
-                    <select name="sms_switch" type="text" class="form-control" id="sms_type" list="sms_types"
-                        onchange="change_sms()">
-                        <datalist id="sms_types">
-                            <option value="" selected>Please Select Type</option>
-                            <option value="tier2" <?php if (old('sms_switch')=='tier2' ) echo "selected" ?> >Tier
-                                2
-                            </option>
-                            <option value="tier3" <?php if (old('sms_switch')=='tier3' ) echo "selected" ?> >Tier
-                                3
-                            </option>
-                            <option value="health_hotline" <?php if (old('sms_switch')=='health_hotline' )
-                                echo "selected" ?> >
-                                Health Hotline
-                            </option>
-                            <option value="kpr" <?php if (old('sms_switch')=='kpr' ) echo "selected" ?> >KPR
-                            </option>
-                            <option value="inner_circle" <?php if (old('sms_switch')=='inner_circle' ) echo "selected"
-                                ?> >
-                                Inner Circle
-                            </option>
-                        </datalist>
-
-                        <label class="control-label" for="message"><b>Message: </b></label>
-                        <textarea rows="3" cols="50" class="form-control
-                                @error('message') is-invalid @enderror" name="message" id="message"
-                            value="{{ old('message') }}" placeholder="Write your message"></textarea>
-                        @error('message') {{ $message }} @enderror
-                </div>
-
-                <div class="tile-footer">
-                    <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save
-                        Shojon
-                    </button>
-                    &nbsp;&nbsp;&nbsp;
-                    <a class="btn btn-secondary" onclick="cancel()"><i
-                            class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
-
->>>>>>> 8816165d36b1195532b8fb1c1b1cc3ed2235617d
                 </div>
             </form>
         </div>
