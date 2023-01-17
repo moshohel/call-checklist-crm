@@ -21,7 +21,7 @@
                     
                         <td >{{ $patient->name }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $patient->unique_id }}</td>
-                        <td class="d-none d-md-table-cell text-dark already_referred">{{ $patient->sex }}</td>
+                        <td class="d-none d-md-table-cell text-dark">{{ $patient->sex }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $patient->age }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $patient->occupation }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $patient->socio_economic_status }}</td>

@@ -97,8 +97,8 @@
                                 <td>{{$row->age}}</td>
                                 <td>{{$row->location}}</td>
                                 <td>{{$row->session}}</td>
-                                <td><a href="{{ route('call_checklist.shojon.view',$row->id) }}"><i class="fa-solid fa-eye"></i></a>
-                                 <a href="{{ route('call_checklist.shojon.edit',$row->id) }}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
+                                <td><a href="{{ route('shojon.tireThree.view',$row->id) }}"><i class="fa-solid fa-eye"></i></a>
+                                 <a href="{{ route('shojon.tireThree.view',$row->id) }}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
                                 </td>
                             </tr>
                             @endforeach

@@ -34,15 +34,20 @@ class UserController extends Controller
             ->get();
         $referrals = DB::table('referrals')
             ->where('referred_therapist_or_psychiatrist_user_id', '=', $user_id)
+            ->where('appointment_status', '=', 0)
             ->orderBy('id', 'DESC')
             ->get();
         $sessions = DB::table('sessions')
-            ->where('referred_therapist_or_psychiatrist_user_id', '=', $user_id)
+            ->where('therapist_or_psychiatrist_user_id', '=', $user_id)
             ->orderBy('id', 'DESC')
             ->get();
-        $patients = DB::select("SELECT patients.* FROM sessions, patients WHERE referred_therapist_or_psychiatrist_user_id = $user_id and patients.unique_id = sessions.unique_id ORDER BY sessions.id;");
+        $rescheduleOrCancelations = DB::table('reschedule_or_cancelations')
+            ->where('therapist_or_psychiatrist_user_id', '=', $user_id)
+            ->where('status', '=', 'NOT DONE')
+            ->get();
+        $patients = DB::select("SELECT patients.* FROM sessions, patients WHERE therapist_or_psychiatrist_user_id = $user_id and patients.unique_id = sessions.unique_id ORDER BY sessions.id;");
         // dd($patients);
-        return view('call_checklist.shojon.user.show', compact('user', 'referrals', 'sessions', 'patients'));
+        return view('call_checklist.shojon.user.show', compact('user', 'referrals', 'sessions', 'patients', 'rescheduleOrCancelations'));
     }
 
     /**

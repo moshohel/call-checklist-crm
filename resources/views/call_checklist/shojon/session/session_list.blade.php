@@ -21,7 +21,7 @@
                     
                         <td >{{ $session->name }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $session->unique_id }}</td>
-                        <td class="d-none d-md-table-cell text-dark already_referred">{{ $session->session_time }}</td>
+                        <td class="d-none d-md-table-cell text-dark">{{ $session->session_time }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $session->session_date }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $session->session_number }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $session->session_taken }}</td>

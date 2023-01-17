@@ -445,6 +445,71 @@ class KprController extends Controller
         return $Data->get();
     }
 
+    public function ExcelKprFilteredData($request, $data)
+    {
+        $query = CallChecklistForKpr::query();
+
+        $Data = $query->select(
+            'agent',
+            'call_received',
+            'customer_sec',
+            'call_started',
+            'call_ended',
+            'phone_number',
+            'caller_name',
+            'sex',
+            'age',
+            'occupation',
+            'location',
+            'call_type',
+            'caller',
+            'risk_level',
+            'main_reason_for_calling',
+            'secondary_reason_for_calling',
+            'caller_experience',
+            'caller_description'
+        );
+        $Data = $query->whereBetween('created_at', [$data['start'], $data['end']]);
+
+        if ($request->start_time && $request->end_time) {
+            $starttime = Carbon::createFromTimeString($request->start_time);
+            $endttime = Carbon::createFromTimeString($request->end_time);
+            $Data = $query->whereTime('created_at', '>', $starttime);
+            $Data = $query->whereTime('created_at', '<', $endttime);
+        }
+
+        if (auth()->user()->user_level == 1) {
+            $Data = $query->where('agent', auth()->user()->user);
+        }
+
+        if ($request->sex)
+            $Data = $query->where('sex', $request->sex);
+        if ($request->age)
+            $Data = $query->where('age', $request->age);
+        if ($request->occupation)
+            $Data = $query->where('occupation', $request->occupation);
+        if ($request->location)
+            $Data = $query->where('location', $request->location);
+        if ($request->call_type)
+            $Data = $query->where('call_type', $request->call_type);
+        if ($request->caller)
+            $Data = $query->where('caller', $request->caller);
+        if ($request->risk_level)
+            $Data = $query->where('risk_level', $request->risk_level);
+        if ($request->main_reason_for_calling)
+            $Data = $query->where('main_reason_for_calling', $request->main_reason_for_calling);
+        if ($request->secondary_reason_for_calling)
+            $Data = $query->where('secondary_reason_for_calling', $request->secondary_reason_for_calling);
+        if ($request->caller_experience)
+            $Data = $query->where('caller_experience', $request->caller_experience);
+        if ($request->client_referral)
+            $Data = $query->where('client_referral', $request->client_referral);
+        if ($request->volunteer_id)
+            $Data = $query->where('agent', $request->volunteer_id);
+
+        return $Data->get();
+    }
+
     protected function setFilterParams(Request $request = null)
     {
         $request = $request ?: request();
@@ -489,7 +554,8 @@ class KprController extends Controller
     public function exportExcel(Request $request)
     {
         $data = $this->setFilterParams($request);
-        $filtered_data = $this->KprFilteredData($request, $data);
+        $filtered_data = $this->ExcelKprFilteredData($request, $data);
+        // dd($filtered_data);
         return Excel::download(new KprCallChecklistExport($filtered_data), 'KprCallChecklistReport.xlsx');
     }
 }

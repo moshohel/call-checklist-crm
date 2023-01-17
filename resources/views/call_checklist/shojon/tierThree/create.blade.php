@@ -15,6 +15,7 @@
         <div class="col-md-10 mx-auto">
             <div class="tile">
                 <h3 class="tile-title">Create Checklist for Shojon</h3>
+                @include('call_checklist.partials.messages')
                 <form id="myForm" action="{{ route('call_checklist.shojontierThree.store') }}" method="POST" role="form"
                       enctype="multipart/form-data" autocomplete="off">
                     @csrf
@@ -160,15 +161,15 @@
                         
 
                     <div class="form-group">
-                            <label class="control-label" for="Educational_Qualification"><b> Educational Qualification: (mandatory single select):</b></label>
+                            <label class="control-label" for="educational_qualification"><b> Educational Qualification: (mandatory single select):</b></label>
                             @php $types = ['Pre-primary(Jr/Sr KG or equivalent)', 'Primary (1st-5th)', 'Secondary (5th-SSC)', 'Higher Secondary ( 11th- HSC)', 'Graduate (degree and Hons)', 'Post-Graduate and above','Never been to school','Don’t know','Other']; @endphp
-                            <select name="Educational_Qualification" list="Educational_Qualification"
-                                    id="Educational_Qualification" class="form-control">
+                            <select name="educational_qualification" list="educational_qualification"
+                                    id="educational_qualification" class="form-control">
 
-                                <datalist id="Educational_Qualification">
+                                <datalist id="educational_qualification">
                                     <option value="" selected disabled>Select Educational Qualification</option>
                                     @foreach($types as $item)
-                                        @if( old('Educational_Qualification') == $item))
+                                        @if( old('educational_qualification') == $item))
                                         <option value="{{ $item }}">{{ $item }}</option>
                                         @else
                                             <option value="{{ $item }}">{{ $item }}</option>
@@ -179,15 +180,15 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="Marital_Status"><b> Marital Status: (single select)</b></label>
+                            <label class="control-label" for="marital_status"><b> Marital Status: (single select)</b></label>
                             @php $types = ['Single', 'Married', 'Divorced', 'Separated', 'Don’t know', 'Don’t want to share']; @endphp
-                            <select name="Marital_Status" list="Marital_Status"
-                                    id="Marital_Status" class="form-control">
+                            <select name="marital_status" list="marital_status"
+                                    id="marital_status" class="form-control">
 
-                                <datalist id="Marital_Status">
+                                <datalist id="marital_status">
                                     <option value="" selected disabled>Select Marital Status</option>
                                     @foreach($types as $item)
-                                        @if( old('Marital_Status') == $item))
+                                        @if( old('marital_status') == $item))
                                         <option value="{{ $item }}">{{ $item }}</option>
                                         @else
                                             <option value="{{ $item }}">{{ $item }}</option>
@@ -198,45 +199,45 @@
                         </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="Session_Number"><b>Session Number (mandatory single select )</b></label>
+                            <label class="control-label" for="session_number"><b>Session Number (mandatory single select )</b></label>
                             @php $types = ['1st session', '2nd session', '3rd session', '4th session', '6th session', '7th session','8th session','8th session','9th session','10th session','Last session']; @endphp
-                            <div class="form-control @error('Session_Number') is-invalid @enderror">
+                            <div class="form-control @error('session_number') is-invalid @enderror">
                                 <label>
                                     @foreach($types as $item)
-                                        @if((old('Session_Number') == $item))
-                                            <input type="radio" name="Session_Number" value="{{ $item }}" checked="checked"
+                                        @if((old('session_number') == $item))
+                                            <input type="radio" name="session_number" value="{{ $item }}" checked="checked"
                                                    onclick="ShowSessionBox()"/>
                                         @else
-                                            <input type="radio" name="Session_Number" value="{{ $item }}"
+                                            <input type="radio" name="session_number" value="{{ $item }}"
                                                    onclick="ShowSessionBox()"/>
                                         @endif
                                         {{ $item }}
                                         <br>
                                     @endforeach
-                                    <input type="radio" id="chkSession" name="Session_Number"
+                                    <input type="radio" id="chkSession" name="session_number"
                                            onclick="ShowSessionBox()"/>
                                     Other (please explain)
                                 </label>
                                 <span id="SessionBox" style="display: none;">
-                                    <input class="form-control" type="text" name="other_Session_Number"
+                                    <input class="form-control" type="text" name="other_session_number"
                                            value="{{ old('other_occupation',$last ? $last->other_occupation : null) }}"
                                            placeholder="Explain"/>
                                 </span>
                             </div>
-                            @error('Session_Number') {{ $message }} @enderror
+                            @error('session_number') {{ $message }} @enderror
                         </div>
                      <div class="form-group">
                          <label class="control-label">Mental State Examination </label><br>
                          <div class="form-control">
                             <label class="form-control">
                          <label class="control-label">
-                             <input type="radio" id="chkAppearance" class="Appearance" name="Appearance"onclick="ShowAppearanceBox()"/>
+                             <input type="radio" id="chkAppearance" class="Appearance" name="appearance"onclick="ShowAppearanceBox()"/>
                              Appearance (please explain)
                          </label>
                          
                          <span id="AppearanceBox" class="AppearanceInput" style="display: none;">
-                                    <input class="form-control" type="text" name="other_Appearance"
-                                           value="{{ old('other_Appearance',$last ? $last->other_Appearance : null) }}"
+                                    <input class="form-control" type="text" name="examination_appearance"
+                                           value="{{ old('examination_appearance',$last ? $last->examination_appearance : null) }}"
                                            placeholder="Appearance Explain"/>
                          </span>
                          </label>
@@ -247,8 +248,8 @@
                          </label>
                          
                          <span id="BehaviorBox" class="BehaviorInput"  style="display: none;">
-                                    <input class="form-control" type="text" name="other_Behavior"
-                                           value="{{ old('other_Behavior',$last ? $last->other_Behavior : null) }}"
+                                    <input class="form-control" type="text" name="examination_behavior"
+                                           value="{{ old('examination_behavior',$last ? $last->examination_behavior : null) }}"
                                            placeholder="Behavior Explain"/>
                          </span>
                          </label>
@@ -259,8 +260,8 @@
                          </label>
                          
                          <span id="SpeechBox" class="SpeechInput"  style="display: none;">
-                                    <input class="form-control" type="text" name="other_Speech"
-                                           value="{{ old('other_Speech',$last ? $last->other_Speech : null) }}"
+                                    <input class="form-control" type="text" name="examination_speech"
+                                           value="{{ old('examination_speech',$last ? $last->examination_speech : null) }}"
                                            placeholder="Speech Explain"/>
                          </span>
                          </label>
@@ -271,8 +272,8 @@
                          </label>
                          
                          <span id="affectBox" class="affectInput"  style="display: none;">
-                                    <input class="form-control" type="text" name="other_affect"
-                                           value="{{ old('other_affect',$last ? $last->other_affect : null) }}"
+                                    <input class="form-control" type="text" name="examination_affect"
+                                           value="{{ old('examination_affect',$last ? $last->examination_affect : null) }}"
                                            placeholder="affect Explain"/>
                          </span>
                          </label>
@@ -283,8 +284,8 @@
                          </label>
                          
                          <span id="ThoughtBox" class="ThoughtInput"  style="display: none;">
-                                    <input class="form-control" type="text" name="other_Thought"
-                                           value="{{ old('other_Thought',$last ? $last->other_Thought : null) }}"
+                                    <input class="form-control" type="text" name="examination_thought"
+                                           value="{{ old('examination_thought',$last ? $last->examination_thought : null) }}"
                                            placeholder="Thought Explain"/>
                          </span>
                          </label>
@@ -295,8 +296,8 @@
                          </label>
                          
                          <span id="PerceptionBox" class="PerceptionInput"  style="display: none;">
-                                    <input class="form-control" type="text" name="other_Perception"
-                                           value="{{ old('other_Perception',$last ? $last->other_Perception : null) }}"
+                                    <input class="form-control" type="text" name="examination_perception"
+                                           value="{{ old('examination_perception',$last ? $last->examination_perception : null) }}"
                                            placeholder="Perception Explain"/>
                          </span>
                          </label>
@@ -307,8 +308,8 @@
                          </label>
                          
                          <span id="CognitionBox" class="CognitionInput"  style="display: none;">
-                                    <input class="form-control" type="text" name="other_Cognition"
-                                           value="{{ old('other_Cognition',$last ? $last->other_Cognition : null) }}"
+                                    <input class="form-control" type="text" name="examination_cognition"
+                                           value="{{ old('examination_cognition',$last ? $last->examination_cognition : null) }}"
                                            placeholder="Cognition Explain"/>
                          </span>
                          </label>
@@ -319,8 +320,8 @@
                          </label>
                          
                          <span id="JudgementBox" class="JudgementInput"  style="display: none;">
-                                    <input class="form-control" type="text" name="other_Judgement"
-                                           value="{{ old('other_Judgement',$last ? $last->other_Judgement : null) }}"
+                                    <input class="form-control" type="text" name="examination_judgement"
+                                           value="{{ old('examination_judgement',$last ? $last->examination_judgement : null) }}"
                                            placeholder="Judgement Explain"/>
                          </span>
                          </label>
@@ -349,15 +350,15 @@
                       </div>
 
                         <div class="form-group">
-                            <label class="control-label" for="Problem_duration"><b>Problem duration: (mandatory single select)</b></label>
+                            <label class="control-label" for="problem_duration"><b>Problem duration: (mandatory single select)</b></label>
                             @php $types = ['<1 month', '1 to 3 months', '4 to 6 months ', '6 to 12 month ', '12 to 24 months ', '<24 month','More than 5 years','More than 10 years ','Don’t know','Other']; @endphp
-                            <select name="Problem_duration" list="Problem_duration"
-                                    id="Problem_duration" class="form-control">
+                            <select name="problem_duration" list="problem_duration"
+                                    id="problem_duration" class="form-control">
 
-                                <datalist id="Problem_duration">
+                                <datalist id="problem_duration">
                                     <option value="" selected disabled>Select Problem duration</option>
                                     @foreach($types as $item)
-                                        @if( old('Problem_duration') == $item))
+                                        @if( old('problem_duration') == $item))
                                         <option value="{{ $item }}">{{ $item }}</option>
                                         @else
                                             <option value="{{ $item }}">{{ $item }}</option>
@@ -368,26 +369,26 @@
                         </div>
 
                         <div class="form-group">
-                          <label class="control-label" for="Problem_duration"><b>    Illness/ problem history (short):</b></label>  
-                            <textarea class="form-control" name="problem_history">
+                          <label class="control-label" for="illness_history"><b>Illness/ problem history (short):</b></label>  
+                            <textarea class="form-control" name="illness_history">
                                 
                             </textarea>
                         </div>
                         <div class="form-group">
-                          <label class="control-label" for="Problem_duration"><b>Family illness History (short): </b></label>  
-                            <textarea class="form-control" name="Family_History">
+                          <label class="control-label" for="family_history"><b>Family illness History (short): </b></label>  
+                            <textarea class="form-control" name="family_history">
                                 
                             </textarea>
                         </div>
                          <div class="form-group">
-                          <label class="control-label" for="Problem_duration"><b>Birth and development history:</b></label>  
-                            <textarea class="form-control" name="Birth_History">
+                          <label class="control-label" for="birth_history"><b>Birth and development history:</b></label>  
+                            <textarea class="form-control" name="birth_history">
                                 
                             </textarea>
                         </div>
                         <div class="form-group">
-                          <label class="control-label" for="Problem_duration"><b>Substance use history if any</b></label>  
-                            <textarea class="form-control" name="Substance_History">
+                          <label class="control-label" for="substance_history"><b>Substance use history if any</b></label>  
+                            <textarea class="form-control" name="substance_history">
                                 
                             </textarea>
                         </div>
@@ -465,39 +466,39 @@
 
                     <div class="form-group">
                         <label class="control-label">Previous Medication History :</label>
-                        <textarea class="form-control" name="Previous_medicine"></textarea>
+                        <textarea class="form-control" name="previous_medication"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="Physical_Concern_history"><b>Physical Concern history: (multiple select) 
+                        <label class="control-label" for="physical_Concern_history"><b>Physical Concern history: (multiple select) 
                               </label>
                          @php $types = ['Diabetes','Hypertension','Thyroid problem','Chronic pain','Asthma','Hormonal issues','Life threatening disease','Obesity','Not Applicable']; @endphp
-                        <div class="form-control @error('Physical_Concern_history') is-invalid @enderror">
+                        <div class="form-control @error('physical_Concern_history') is-invalid @enderror">
                             <label>
                                 @foreach($types as $item)
-                                    @if(old('Physical_Concern_history') && is_array(old('Physical_Concern_history')) && in_array($item,old('Physical_Concern_history')))
-                                        <input type="checkbox" name="Physical_Concern_history[]" value="{{ $item }}"
+                                    @if(old('physical_Concern_history') && is_array(old('physical_Concern_history')) && in_array($item,old('physical_Concern_history')))
+                                        <input type="checkbox" name="physical_Concern_history[]" value="{{ $item }}"
                                                onclick="ShowSecondaryReasonBox()" checked="checked"/>
                                     @else
-                                        <input type="checkbox" name="Physical_Concern_history[]" value="{{ $item }}"
+                                        <input type="checkbox" name="physical_Concern_history[]" value="{{ $item }}"
                                                onclick="ShowSecondaryReasonBox()"/>
 
                                     @endif
                                     {{ $item }}
                                     <br>
                                 @endforeach
-                                <input type="checkbox" id="chkSecondaryReason" name="Physical_Concern_history"
+                                <input type="checkbox" id="chkSecondaryReason" name="physical_Concern_history"
                                        onclick="ShowSecondaryReasonBox()"/>
                                 Others (please explain)<br>
-                                    <input type="hidden" name="Physical_Concern_history[]" value="" checked="checked">
+                                    <input type="hidden" name="physical_Concern_history[]" value="" checked="checked">
                             </label>
                             <span id="SecondaryReasonBox" style="display: none;">
-                                    <input class="form-control" type="text" name="other_Physical_Concern_history[]"
+                                    <input class="form-control" type="text" name="other_physical_Concern_history[]"
                                            placeholder="Explain"/>
                                 <!-- MUST BE A PROBLEM FOR ARRAY TO SHOW OLD VALUE-->
                             </span>
                         </div>
-                        @error('Physical_Concern_history') {{ $message }} @enderror
+                        @error('physical_Concern_history') {{ $message }} @enderror
                     </div>
 
                     <div class="form-group">
@@ -534,21 +535,21 @@
                     </div>
                      <!-- Prescribed Medications -->
                      <div class="form-group">
-                          <label class="control-label" for="Prescribed_Medications"><b>Prescribed Medications:</b></label>  
-                            <textarea class="form-control" name="Prescribed_Medications">
+                          <label class="control-label" for="prescribed_medications"><b>Prescribed Medications:</b></label>  
+                            <textarea class="form-control" name="prescribed_medications">
                                 
                             </textarea>
                         </div>
                         <!-- Is Psychotherapy session suggested for the client?  -->
                     <div class="form-group">
-                        <label class="control-label" for="Psychotherapy_session_suggested"><b>Is Psychotherapy session suggested for the client?</b></label>
+                        <label class="control-label" for="psychotherapy_session_suggested"><b>Is Psychotherapy session suggested for the client?</b></label>
                         @php $types = ['Yes', 'No']; @endphp
-                        <select name="Psychotherapy_session_suggested" id="Psychotherapy_session_suggested" list="suicidal_risk_list"
-                                class="form-control @error('Psychotherapy_session_suggested') is-invalid @enderror">
+                        <select name="psychotherapy_session_suggested" id="psychotherapy_session_suggested" list="suicidal_risk_list"
+                                class="form-control @error('psychotherapy_session_suggested') is-invalid @enderror">
                             <datalist id="suicidal_risk_list">
                                 <option value="" selected disabled>Select Option</option>
                                 @foreach($types as $item)
-                                    @if( old('Psychotherapy_session_suggested') == $item)
+                                    @if( old('psychotherapy_session_suggested') == $item)
                                         <option value="{{ $item }}" selected>{{ $item }}</option>
                                     @else
                                         <option value="{{ $item }}">{{ $item }}</option>
@@ -556,7 +557,7 @@
                                 @endforeach
                             </datalist>
                         </select>
-                        @error('Psychotherapy_session_suggested') {{ $message }} @enderror
+                        @error('psychotherapy_session_suggested') {{ $message }} @enderror
                     </div>  
                     <!-- 22. Does client have the ability to buy medicine?   -->
                     <div class="form-group">
@@ -579,14 +580,14 @@
                     </div>
                     <!-- 23. Is the client suitable for ? ( single select) -->
                     <div class="form-group">
-                        <label class="control-label" for="suitable_session_time"><b>Is the client suitable for ?</b></label>
+                        <label class="control-label" for="suitable_session_type"><b>Is the client suitable for ?</b></label>
                         @php $types = ['Online session', 'In person Session']; @endphp
-                        <select name="suitable_session_time" id="suitable_session_time" list="suicidal_risk_list"
-                                class="form-control @error('suitable_session_time') is-invalid @enderror">
+                        <select name="suitable_session_type" id="suitable_session_type" list="suicidal_risk_list"
+                                class="form-control @error('suitable_session_type') is-invalid @enderror">
                             <datalist id="suicidal_risk_list">
                                 <option value="" selected disabled>Select Option</option>
                                 @foreach($types as $item)
-                                    @if( old('suitable_session_time') == $item)
+                                    @if( old('suitable_session_type') == $item)
                                         <option value="{{ $item }}" selected>{{ $item }}</option>
                                     @else
                                         <option value="{{ $item }}">{{ $item }}</option>
@@ -594,7 +595,7 @@
                                 @endforeach
                             </datalist>
                         </select>
-                        @error('suitable_session_time') {{ $message }} @enderror
+                        @error('suitable_session_type') {{ $message }} @enderror
                     </div>
                    <!--   24.    How effective the client thinks the psychiatric consultation was? (mandatory single select)  -->
                     <div class="form-group">

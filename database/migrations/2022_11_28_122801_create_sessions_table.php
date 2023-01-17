@@ -32,9 +32,9 @@ class CreateSessionsTable extends Migration
             $table->string('appointment_status')->nullable();
             $table->boolean('reshedule_request')->default(0);
             $table->boolean('cancelation_request')->default(0);
-            $table->string('referred_therapist_or_psychiatrist')->nullable();
-            $table->string('referred_therapist_or_psychiatrist_user_name')->nullable();
-            $table->string('referred_therapist_or_psychiatrist_user_id')->nullable();
+            $table->string('therapist_or_psychiatrist')->nullable();
+            $table->string('therapist_or_psychiatrist_user_name')->nullable();
+            $table->string('therapist_or_psychiatrist_user_id')->nullable();
             $table->string('session_taken')->default('NO');
             $table->timestamps();
         });

@@ -327,7 +327,7 @@ class ShojonController extends Controller
         $filtered_data = $this->ShojonFilteredData($request, $data);
         // print_r(gettype($filtered_data));
         // print_r($filtered_data);
-        // dd($filtered_data->items);
+        dd($filtered_data);
         return Excel::download(new ShojonCallChecklistExport($filtered_data), 'ShojonCallChecklistReport.xlsx');
     }
 

@@ -18,8 +18,20 @@
                 
                 <div class="form-group col-3">
                     <label for="exampleFormControlInput1">Client ID</label>
-                    <input type="number" name="unique_id" class="form-control" readonly id="exampleFormControlInput1" value="{{ $referral->unique_id }}">
+                    <input type="text" name="unique_id" class="form-control" readonly id="exampleFormControlInput1" value="{{ $referral->unique_id }}">
                 </div>
+
+                <div class="col-md-6 col-3">
+                    <label for="validationCustom01" class="form-label">Referral To:</label>
+                    <input type="text" class="form-control" readonly id="referr_to" name="referr_to" value="{{ $referral->referr_to }}">
+                </div>
+
+                <input type="hidden" name="referr_from" value="{{ $referral->referr_from }}">
+                <input type="hidden" name="age" value="{{ $referral->age }}">
+                <input type="hidden" name="phone_number" value="{{ $referral->phone_number }}">
+                <input type="hidden" name="phone_number_two" value="{{ $referral->phone_number_two }}">
+                <input type="hidden" name="reason_for_therapy" value="{{ $referral->reason_for_therapy }}">
+                
 
                 <div class="form-group col-3">
                     <label for="exampleFormControlInput2">Phone</label>
@@ -28,7 +40,7 @@
 
                 <div class="form-group col-3">
                     <label for="exampleFormControlInput5">Preferred time</label>
-                    <input type="timedate" name="preferred_time" class="form-control" readonly id="exampleFormControlInput5" value="{{ $referral->preferred_time }}">
+                    <input type="text" name="preferred_time" class="form-control" readonly id="exampleFormControlInput5" value="{{ $referral->preferred_time }}">
                 </div>
 
                 <div class="form-group col-6">

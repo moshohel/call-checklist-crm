@@ -13,17 +13,24 @@
 
             <div class="card-body">
                 <div class="d-flex">
-                    <div class="rounded-circle" style="width: 10%; margin-right: 2em;">
-                        <img src="{{asset('Image/Profile/'.$user[0]->image )}}" alt="user image">
-                    </div>
-                    <div class="button-wrapper">
-                        <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                            <span class="d-none d-sm-block">Upload new photo</span>
-                            <i class="bx bx-upload d-block d-sm-none"></i>
-                            <input type="file" id="image" name="image" class="account-file-input" accept="image/png, image/jpeg" />
-                            
-                        </label>
-                        <p class="text-muted mb-0">Allowed JPG, GIF or PNG.</p>
+                    <div class="row">
+
+                        <div class="rounded-circle col" style="width: 10%; margin-right: 2em;">
+                            <img src="{{asset('Image/Profile/'.$user[0]->image )}}" alt="user image">
+                        </div>
+                        <div class="button-wrapper col">
+                            <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <span class="d-none d-sm-block">Upload new photo</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file" id="image" name="image" class="account-file-input" accept="image/png, image/jpeg" />
+                                
+                            </label>
+                            <p class="text-muted mb-0">Allowed JPG, GIF or PNG.</p>
+                        </div>
+                        <div class="col" style="float:right;">
+                            <label for="exampleFormControlInput5">User type</label>
+                            <h3>{{ $user[0]->user_group }}</h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,11 +55,12 @@
                 </div>
 
                 <div class="form-group col-6">
+                    @if ( auth()->user()->user_group == "ADMIN")
                     <label for="exampleFormControlInput5">User type</label>
                     <select class="form-control" name="user_group" id="exampleFormControlSelect3" readonly>
                         <option value="">- Select User Type -</option>
                         <?php 
-                          $user_group_dropdown=array('MHW'=>'MHW','SHOJON'=>'SHOJON', 'Supervisor'=>'Supervisor', 'Therapist'=>'Therapist', 'Psychiatrist'=>'Psychiatrist',);
+                          $user_group_dropdown=array('MHW'=>'MHW','SHOJON'=>'SHOJON', 'Supervisor'=>'Supervisor', 'Therapist'=>'Therapist', 'Psychiatrist'=>'Psychiatrist', 'ADMIN'=>'ADMIN');
                           foreach ($user_group_dropdown as $key => $value) {
                               $selected="";
                               if($user[0]->user_group==$key){
@@ -63,13 +71,16 @@
                           }
                         ?>
                     </select>
+                    @endif
                 </div>
 
             </div>
 
             <div class="form-footer pt-4 mt-4">
+
                 <button type="submit" class="btn btn-primary btn-default">Save Change</button>
                 <button type="reset" value="Reset" class="btn btn-secondary btn-default">Cancel</button>
+
             </div>
         </form>
     </div>

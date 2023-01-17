@@ -47,7 +47,14 @@
 
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="{{ route('call_checklist.shojon.manual_form') }}">
+                    href="{{ route('call_checklist.shojon.dashboard') }}">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">Dashboard - Tier 1</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+                    href="{{ route('call_checklist.shojon.manual_form') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Add Patient - Tier 1 </span>
                     </a>
@@ -102,7 +109,7 @@
                 </li>
                 <li>
                     <a class="app-menu__item"
-                        href="{{ route('call_checklist.shojon.TierThreePatientlist') }}">
+                        href="{{ route('shojon.tierThreeList') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Patient List - Tier 3</span>
                     </a>
@@ -251,6 +258,7 @@
                 <span class="app-menu__label">User</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
+            @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
             <ul class="treeview-menu">
                 <li>
                     <a class="app-menu__item" href="{{ route('users') }}">
@@ -259,6 +267,7 @@
                     </a>
                 </li>
             </ul>
+            @endif
             <ul class="treeview-menu">
                 @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
                 <li>
@@ -270,7 +279,26 @@
                     </a>
                 </li>
                 @endif
+                
+                <li>
+                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                        == "SHOJON") ? 'active' : '' }}"
+                        href="{{ route('user.show', auth()->user()->user_id) }}">
+                        <i class="app-menu__icon fa fa-user-circle"></i>
+                        <span class="app-menu__label">Client Details</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                        == "SHOJON") ? 'active' : '' }}"
+                        href="{{ route('calendar.index') }}">
+                        <i class="app-menu__icon fa fa-user-circle"></i>
+                        <span class="app-menu__label">Calendar</span>
+                    </a>
+                </li>
             </ul>
+
         </li>
 
 

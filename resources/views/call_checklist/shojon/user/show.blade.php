@@ -76,6 +76,10 @@
                                 <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab"
                                     aria-controls="settings" aria-selected="false">Clients</a>
                             </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="request-tab" data-toggle="tab" href="#request" role="tab"
+                                    aria-controls="request" aria-selected="false">Requests</a>
+                            </li>
                         </ul>
                         <div class="tab-content px-3 px-xl-5" id="myTabContent">
                             <div class="tab-pane fade " id="timeline" role="tabpanel"
@@ -128,6 +132,26 @@
                                     <div class="media-body">
                                         <h6 class="mt-0 text-dark"> Clients </h6>
                                         @include('call_checklist.shojon.session.myclient_list')
+                                        <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
+                                            
+                                        </div>
+                                        <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
+                                            
+                                        </div>
+                                        <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="request" role="tabpanel" aria-labelledby="request-tab">
+                                <div class="media mt-5 profile-timeline-media">
+                                    <div class="align-self-start iconbox-45 overflow-hidden mr-3">
+                                        {{-- <img src="assets/img/user/u3.jpg" alt="Generic placeholder image"> --}}
+                                    </div>
+                                    <div class="media-body">
+                                        <h6 class="mt-0 text-dark"> Reschedule/Session Cancelation Request </h6>
+                                        @include('call_checklist.shojon.session.reschedule_cancelation_list')
                                         <div class="d-inline-block rounded overflow-hidden mt-4 mr-0 mr-lg-4">
                                             
                                         </div>

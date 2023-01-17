@@ -40,7 +40,7 @@ class Tier2Controller extends Controller
     public function store(Request $request)
     {
         //$params = $request->except('_token');
-
+        // dd($request);
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -111,7 +111,7 @@ class Tier2Controller extends Controller
         $data['session_plan'] = $request->next_session_plan;
         $data['session_summary'] = $request->session_summary;
         $data['session_date'] = $request->next_session;
-       
+
 
         DB::table('sojon_tier2s')->insert($data);
         return redirect()->back()->with('success', 'insert successfull');
@@ -133,7 +133,7 @@ class Tier2Controller extends Controller
             $previous = DB::table('sojon_tier2s')->where('id', $id)->get();
 
             $districts = DB::table('districts')->get();
-            return view('call_checklist.shojon.tier2.editTierTwo', compact('pageTitleUpdate', 'districts', 'phone', 'is_phone_no', 'previous_data', 'last', 'data','previous'));
+            return view('call_checklist.shojon.tier2.editTierTwo', compact('pageTitleUpdate', 'districts', 'phone', 'is_phone_no', 'previous_data', 'last', 'data', 'previous'));
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         } catch (\Exception $e) {
@@ -158,7 +158,8 @@ class Tier2Controller extends Controller
 
     public function TierTwoUpdate(Request $request)
     {
-         if ($request['occupation'] == "on") {
+
+        if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
         if ($request['mental_illness_diagnosis'] == "on") {
@@ -221,8 +222,8 @@ class Tier2Controller extends Controller
         $data['session_plan'] = $request->next_session_plan;
         $data['session_summary'] = $request->session_summary;
         $data['session_date'] = $request->next_session;
-        
-        DB::table('sojon_tier2s')->where('id',$request->id)->update($data);
+
+        DB::table('sojon_tier2s')->where('id', $request->id)->update($data);
 
         return redirect()->back()->with('success', 'Update successfully!');
     }
@@ -260,7 +261,7 @@ class Tier2Controller extends Controller
         $data->save();
     }
     public function ReferralSave_form(Request $request)
-    { 
+    {
         $data = new Referral;
         $data->referr_to = $request->referral_to;
         $data->referr_from = $request->referral_from;
