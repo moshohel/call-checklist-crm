@@ -16,6 +16,37 @@ class TierOneController extends Controller
     protected $pageTitleUpdate = 'Shojon Tier 1 Update';
     //protected $randomNumber = 999999;
 
+    protected function uniqueGenerator($model, $throw, $length, $prefix)
+    {
+        $data = $model::orderBy('id', 'desc')->first();
+        if (!$data) {
+            $og_length = $length;
+            $last_number = '';
+        } else {
+            $code = substr($data->$throw, strlen($prefix) + 1);
+            $actial_last_number = ($code / 1) * 1;
+            $increment_last_number = ((int)$actial_last_number + 1);
+            $last_number_length = strlen($increment_last_number);
+            $og_length = $length - $last_number_length;
+            $last_number = $increment_last_number;
+        }
+        $zeros = "";
+        for ($i = 0; $i < $og_length; $i++) {
+            $zeros .= "0";
+        }
+        return $prefix . $zeros . $last_number;
+    }
+    public function tireOnemanual()
+    {
+        $uniqueId = $this->uniqueGenerator(new Unique, 'unique_id', 6, 'SHO');
+        $data = new Unique;
+        $data->unique_id = $uniqueId;
+        $data->save();
+        $getuniqueId = DB::table('uniques')->latest()->first();
+        $districts = DB::table('districts')->get();
+        return view('call_checklist.shojon.tier_one.manual_form', compact('districts', 'getuniqueId'));
+    }
+
 
     public function tireOnefromblade($uniqueid)
     {
@@ -28,6 +59,9 @@ class TierOneController extends Controller
 
     public function store_tier_One(Request $request)
     {
+        $request->validate([
+            'client_id' => 'required|unique:shojon_tier_ones,caller_id|max:25',
+        ]);
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -75,7 +109,8 @@ class TierOneController extends Controller
         $data['name_of_agency'] = $request->name_of_agency;
 
         DB::table('shojon_tier_ones')->insert($data);
-        return redirect()->back()->with('success', 'insert successfull');
+
+        return redirect()->route('call_checklist.shojon.TierOneList');
     }
 
 
@@ -91,12 +126,14 @@ class TierOneController extends Controller
         $data = DB::table('shojon_tier_ones')->where('id', $id)->first();
         return view('call_checklist.shojon.tier_one._client_details', compact('data'));
     }
-    public function TierOneclientUpdate($id)
+    public function TierOneclientUpdate($caller_id)
     {
+        $uniqueid = $caller_id;
         $pageTitleUpdate = $this->pageTitleUpdate;
         $districts = DB::table('districts')->get();
-        $data = DB::table('shojon_tier_ones')->where('id', $id)->first();
-        return view('call_checklist.shojon.tier_one._edit_tier_one', compact('data', 'pageTitleUpdate', 'districts'));
+        $newPatient = DB::table('patients')->where('unique_id', $caller_id)->first();
+        $data = DB::table('shojon_tier_ones')->where('caller_id', $caller_id)->first();
+        return view('call_checklist.shojon.tier_one._edit_tier_one', compact('data', 'pageTitleUpdate', 'districts', 'uniqueid', 'newPatient'));
     }
     public function TierOneUpdate(Request $request)
     {
@@ -140,7 +177,7 @@ class TierOneController extends Controller
 
         DB::table('shojon_tier_ones')->where('id', $request->id)->update($data);
 
-        return redirect()->back()->with('success', 'Update successfully!');
+        return redirect()->route('call_checklist.shojon.TierOneList');
     }
 
     // public function uniqueId()
