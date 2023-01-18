@@ -6,7 +6,7 @@
 @section('content')
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-tags"></i> <a href="{{ route('call_checklist.shojon.dashboard') }}">Dashboard</span></a>
+            <h1><i class="fa fa-tags"></i> <a href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">Dashboard Tier-1</span></a>
             </h1>
         </div>
     </div>
@@ -25,7 +25,7 @@
                                 <strong> Last 10 days </strong>
                             </span> --}}
 
-                            <form action="{{ route('call_checklist.shojon.dashboard') }}" method="get" enctype="multipart/form-data" id="search">
+                            <form action="{{ route('call_checklist.shojon.tierOne.dashboard') }}" method="get" enctype="multipart/form-data" id="search">
                               @csrf
                               <div class="row card-body pt-0 pb-5 position-relative">
 
@@ -37,17 +37,17 @@
                                     <label for="exampleFormControlInput5"> End Date</label>
                                     <input type="date" class="form-control"  name="end_time" id="exampleFormControlInput5" placeholder="Chamber Time">
                                   </div>
-                                  
+
                                   <div class="form-group col-3 m-4 pt-2">
-                                    <button type="submit" class="btn btn-info btn-default" id="search-btn">Search</button>    
+                                    <button type="submit" class="btn btn-info btn-default" id="search-btn">Search</button>
                                   </div>
                                 </div>
                             </form>
                         </div>
 
-                        
+
                         <hr>
-                    </div>                    
+                    </div>
 
                     <div class="row">
 
@@ -57,7 +57,7 @@
                                     <h3 class="text-white">{{ $total_cnt }}</h3>
                                     <p class="py-2">NEW CLIENTS</p>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6">
@@ -66,7 +66,7 @@
                                     <h3 class="text-white">{{ $ref_cnt_tier2 }}</h3>
                                     <p class="py-2">REFERRED TO TIER 2</p>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6">
@@ -75,7 +75,7 @@
                                     <h3 class="text-white">{{ $ref_cnt_tier3 }}</h3>
                                     <p class="py-2">REFERRED TO TIER 3</p>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="col-xl-3 col-sm-6">
@@ -84,7 +84,7 @@
                                     <h3 class="text-white">{{ $total_call_cnt }}</h3>
                                     <p class="py-2">TOTAL CALLS</p>
                                 </div>
-                                
+
                             </div>
                         </div>
 
@@ -98,7 +98,7 @@
 
 
 <div class="content-wrapper">
-    <div class="content">	
+    <div class="content">
         <div class="row">
 
             <div class="col-12 col-lg-6">
@@ -366,7 +366,7 @@
 
 <script>
   // var php_var = <?php json_encode($sex_cnt);  ?>;
-  
+
     /*========  DEVICE - DOUGHNUT CHART For id="deviceChart2 ========*/
     var data = JSON.parse(document.getElementById("sex_cnt").innerHTML);
     // var data = {!! json_encode($sex_cnt) !!};
@@ -390,7 +390,7 @@
                 backgroundColor: [
                 "rgba(60, 179, 113, 1)",
                 "rgba(2, 5, 73, 0.89)",
-                                
+
                 ],
                 borderWidth: 1
             }
@@ -456,7 +456,7 @@
         labels: xValues,
         datasets: [
           {
-            
+
             // label: "Italy",
             data: yValues,
             // data: [2, 3.2, 1.8, 2.1, 1.5, 3.5, 4, 2.3, 2.9, 4.5, 1.8, 3.4, 2.8],
@@ -494,7 +494,7 @@
           ],
           yAxes: [
             {
-              
+
               gridLines: {
                 drawBorder: true,
                 display: true,
@@ -512,7 +512,7 @@
                 labelString: 'Age Group',
 
               }
-              
+
             }
           ]
         },
@@ -557,7 +557,7 @@
               "rgba(60, 60, 60, 1)",
               "rgba(255, 99, 71, 1)",
               "rgba(106, 90, 205, 1)",
-              
+
               ],
               borderWidth: 1
           }
@@ -623,7 +623,7 @@
         labels: xValues,
         datasets: [
           {
-            
+
             // label: "Italy",
             data: yValues,
             // data: [2, 3.2, 1.8, 2.1, 1.5, 3.5, 4, 2.3, 2.9, 4.5, 1.8, 3.4, 2.8],
@@ -661,7 +661,7 @@
           ],
           yAxes: [
             {
-              
+
               gridLines: {
                 drawBorder: true,
                 display: true,
@@ -679,7 +679,7 @@
                 labelString: 'IN TAKA',
 
               }
-              
+
             }
           ]
         },
@@ -785,7 +785,7 @@
         data: yValues
       }]
     },
-    
+
     options: {
       responsive: true,
       maintainAspectRatio: true,
@@ -803,7 +803,7 @@
 <script>
   var canvas = document.getElementById('myChart');
 new Chart(canvas, {
-    type: 'pie',    
+    type: 'pie',
     data: {
       labels: ['January', 'February', 'March'],
       datasets: [{
@@ -880,7 +880,7 @@ var pieOptions = {
           if (i == 3){ // Darker text color for lighter background
             ctx.fillStyle = '#444';
           }
-          var percent = String(Math.round(dataset.data[i]/total*100)) + "%";      
+          var percent = String(Math.round(dataset.data[i]/total*100)) + "%";
           //Don't Display If Legend is hide or value is 0
           if(dataset.data[i] != 0 && dataset._meta[0].data[i].hidden != true) {
             ctx.fillText(dataset.data[i], model.x + x, model.y + y);
@@ -888,7 +888,7 @@ var pieOptions = {
             ctx.fillText(percent, model.x + x, model.y + y + 15);
           }
         }
-      });               
+      });
     }
   }
 };

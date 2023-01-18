@@ -47,24 +47,23 @@
 
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                    href="{{ route('call_checklist.shojon.dashboard') }}">
+                        href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Dashboard - Tier 1</span>
+                        <span class="app-menu__label">Dashboard tier -1 </span>
                     </a>
                 </li>
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="#">
                         href="{{ route('call_checklist.shojon.manual_form') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Add Patient - Tier 1 </span>
+                        <span class="app-menu__label">Add - Tier 1 </span>
                     </a>
                 </li>
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.TierOneList') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Patient List - Tier 1 </span>
+                        <span class="app-menu__label">Client List - Tier 1 </span>
                     </a>
                 </li>
 
@@ -77,6 +76,13 @@
             </a>
             <ul class="treeview-menu">
 
+                <li>
+                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+                        href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">
+                        <i class="app-menu__icon fa fa-wpforms"></i>
+                        <span class="app-menu__label">Dashboard tier - 2 </span>
+                    </a>
+                </li>
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.tier2') }}">

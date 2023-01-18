@@ -10,7 +10,7 @@
         </fileTransfer>
       </webServer>
       <webServer id="9adc7847-9342-4cde-9196-4b0ff0675f8c" name="Shojon CRM">
-        <fileTransfer accessType="SFTP" host="172.30.24.36" port="9636" sshConfigId="52687a99-124d-41ab-85de-c72149e3f911" sshConfig="root@172.30.24.36:9636 password">
+        <fileTransfer rootFolder="/var/www/html/CRM" accessType="SFTP" host="172.30.24.36" port="9636" sshConfigId="52687a99-124d-41ab-85de-c72149e3f911" sshConfig="root@172.30.24.36:9636 password">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>

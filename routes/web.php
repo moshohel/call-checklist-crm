@@ -30,6 +30,8 @@ Route::get('success', function () {
 
 /*Route::get('login','Auth\LoginController@showLoginForm');
 Route::post('login','Auth\LoginController@login');*/
+Route::get('/add_patient', [Tier2Controller::class, 'tire2fromblade'])->name('call_checklist.shojon.tier2.create');
+Route::get('/add_patientt3', [shojonTierThree::class, 'tireThreefromblade'])->name('call_checklist.shojon.tierThree.create');
 
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
@@ -145,6 +147,10 @@ Route::group(['prefix' => 'call-checklist'], function () {
 
         Route::get('create/{referrence_id}/{phone_number}', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
         Route::get('create/{new}', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
+
+
+        // Route::get('/psychiatrist/tierOne', [TierOneController::class, 'tireOnemanual'])->name('psychiatrist.tierOne');
+        // Route::get('/tierOne/{uniqueid}', 'CallChecklist\ShojonController@tireOnefromblade')->name('psychiatrist.tierOne');
         // Route::get('create', function () {
         //     echo '------test';
         // })->name('call_checklist.shojon.create');
@@ -164,12 +170,12 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('/evaluation-details/{id}', [EvaluationController::class, 'evaluationDetails'])->name('call_checklist.shojon.evaluationdetalis');
             //tire 1 route
 
-            Route::get('/tierOne/{uniqueid}', [TierOneController::class, 'tireOnefromblade'])->name('call_checklist.shojon.tierOne');
             Route::get('/tierOne', [TierOneController::class, 'tireOnemanual'])->name('call_checklist.shojon.manual_form');
 
             Route::post('/store/tierOne', [TierOneController::class, 'store_tier_One'])->name('call_checklist.shojontierOne.store_tier_one');
             Route::get('/tierOne_list', [TierOneController::class, 'tireOneList'])->name('call_checklist.shojon.TierOneList');
-            Route::get('/tierOne/dashboard', [TierOneController::class, 'dashboard'])->name('call_checklist.shojon.dashboard');
+            Route::get('/tierOne/dashboard', [TierOneController::class, 'dashboard'])->name('call_checklist.shojon.tierOne.dashboard');
+            Route::get('/tierOne/{uniqueid}', [TierOneController::class, 'tireOnefromblade'])->name('call_checklist.shojon.tierOne');
 
             Route::get('/tier-one-details/{id}', [TierOneController::class, 'TierOneClientDetails'])->name('call_checklist.shojon.TierOneview');
             Route::get('/tier-one-edit/{caller_id}', [TierOneController::class, 'TierOneclientUpdate'])->name('call_checklist.shojon.TierOneedit');
