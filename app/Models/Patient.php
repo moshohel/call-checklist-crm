@@ -9,7 +9,7 @@ class Patient extends Model
     public $fillable = [
         'phone_number',
         'name',
-        'caller_id',
+        'unique_id',
         'sex',
         'age',
         'occupation',

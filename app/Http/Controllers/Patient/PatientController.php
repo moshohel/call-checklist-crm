@@ -14,8 +14,8 @@ use App\Models\ShojonMentalIllnessDiagnosis;
 use App\Models\ShojonSecondaryReasonForCalling;
 use Illuminate\Support\Facades\DB;
 use App\Models\CallChecklistForShojon;
-use App\Models\Unique; 
-use App\Models\ShojonTierOne; 
+use App\Models\Unique;
+use App\Models\ShojonTierOne;
 
 class PatientController extends Controller
 {
@@ -85,13 +85,14 @@ class PatientController extends Controller
         foreach ($patients as $item) {
             $id = $item->id;
             $phone = $item->phone_number;
-            $view_button = "<a href='patient/show/$id' class='btn btn-info m-1'>Info</a>";
-            $tier_two = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#ReferralModal'>R-Tier 2</a>";
-            $tier_three = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#ReferralModal'>R-Tier 3</a>";
-            $showInfo = "<a href='patient/showInfo/$phone' class='btn btn-info m-1'>History</a>";
+            $unique_id = $item->unique_id;
+            $view_button = "<a href='patient/show/$id' class='btn btn-info m-1'>Actions</a>";
+            // $tier_two = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#ReferralModal'>R-Tier 2</a>";
+            // $tier_three = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#ReferralModal'>R-Tier 3</a>";
+            $showInfo = "<a href='patient/showInfo/$unique_id' class='btn btn-info m-1'>History</a>";
             $output[] = array(
                 $item->name, $item->phone_number, $item->sex, $item->age, $item->location, $item->occupation,
-                $item->unique_id, "$tier_two&nbsp;&nbsp$tier_three&nbsp;&nbsp$showInfo&nbsp;&nbsp;$view_button&nbsp;&nbsp;"
+                $item->unique_id, "$showInfo&nbsp;&nbsp;$view_button&nbsp;&nbsp;"
             );
         }
 
@@ -109,56 +110,54 @@ class PatientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function searchExisting(Request $request){
+    public function searchExisting(Request $request)
+    {
 
-        if($request->ajax()) {
+        if ($request->ajax()) {
             $output = '';
 
-            $data = ShojonTierOne::where('caller_id','like',$request->Search.'%')->orWhere('phone_number','like',$request->Search.'%')->orWhere('caller_name','like',$request->Search.'%')->get();
+            $data = ShojonTierOne::where('caller_id', 'like', $request->Search . '%')->orWhere('phone_number', 'like', $request->Search . '%')->orWhere('caller_name', 'like', $request->Search . '%')->get();
             if ($data) {
-                foreach($data as $key=>$row){
+                foreach ($data as $key => $row) {
                     $output .=
-                            '<tr>
-                                <td>'.$key.'</td>
-                                <td>'.$row->caller_id.'</td>
-                                <td>'.$row->caller_name.'</td>
-                                <td>'.$row->phone_number.'</td>
-                                <td>'.$row->age.'</td>
-                                <td>'.$row->sex.'</td>
-                                <td>'.$row->location.'</td>
-                                <td>'.$row->socio_economic.'</td>
-                                <td>'.'<a href="' . route('call_checklist.shojon.TierOneedit', $row->caller_id) . '"><i class="fa-solid fa-eye"></a>'.'</td>
+                        '<tr>
+                                <td>' . $key . '</td>
+                                <td>' . $row->caller_id . '</td>
+                                <td>' . $row->caller_name . '</td>
+                                <td>' . $row->phone_number . '</td>
+                                <td>' . $row->age . '</td>
+                                <td>' . $row->sex . '</td>
+                                <td>' . $row->location . '</td>
+                                <td>' . $row->socio_economic . '</td>
+                                <td>' . '<a href="' . route('call_checklist.shojon.TierOneedit', $row->caller_id) . '"><i class="fa-solid fa-eye"></a>' . '</td>
                             </tr>
                             ';
                 }
-                 return response()->json($output);
+                return response()->json($output);
             }
-            
-      }
-      return view('call_checklist.patient.pupup');
+        }
+        return view('call_checklist.patient.pupup');
     }
     //uniqueGenerator//
-    protected function uniqueGenerator($model,$throw,$length,$prefix)
+    protected function uniqueGenerator($model, $throw, $length, $prefix)
     {
-        $data = $model::orderBy('id','desc')->first();
-        if(!$data)
-        {
-         $og_length = $length;
-         $last_number = '';
-        }else{
-         $code = substr($data->$throw, strlen($prefix)+1);
-         $actial_last_number = ($code/1)*1;
-         $increment_last_number = ((int)$actial_last_number+1);
-         $last_number_length = strlen($increment_last_number);
-         $og_length = $length - $last_number_length;
-         $last_number = $increment_last_number;
+        $data = $model::orderBy('id', 'desc')->first();
+        if (!$data) {
+            $og_length = $length;
+            $last_number = '';
+        } else {
+            $code = substr($data->$throw, strlen($prefix) + 1);
+            $actial_last_number = ($code / 1) * 1;
+            $increment_last_number = ((int)$actial_last_number + 1);
+            $last_number_length = strlen($increment_last_number);
+            $og_length = $length - $last_number_length;
+            $last_number = $increment_last_number;
         }
         $zeros = "";
-        for($i=0;$i<$og_length;$i++)
-        {
-         $zeros.="0";
+        for ($i = 0; $i < $og_length; $i++) {
+            $zeros .= "0";
         }
-        return $prefix.$zeros.$last_number;
+        return $prefix . $zeros . $last_number;
     }
     // new client popup
     public function pupup($number)
@@ -168,13 +167,13 @@ class PatientController extends Controller
     // new 
     public function create($number)
     {
-        $uniqueId = $this->uniqueGenerator(new Unique,'unique_id',6,'SHO');
+        $uniqueId = $this->uniqueGenerator(new Unique, 'unique_id', 6, 'SHO');
         $data = new Unique;
         $data->unique_id = $uniqueId;
         $data->save();
         $getuniqueId = DB::table('uniques')->latest()->first();
         $districts = District::orderBy('name')->pluck('name');
-        return view('call_checklist.patient.create', compact('districts', 'getuniqueId','number'));
+        return view('call_checklist.patient.create', compact('districts', 'getuniqueId', 'number'));
     }
 
     /**
@@ -200,7 +199,7 @@ class PatientController extends Controller
         $patient->save();
         //session()->flash('success', 'New patient has added successfully !!');
         // return redirect()->route('admin.products');
-        return redirect()->route('call_checklist.shojon.tierOne',$request->uniqueId);
+        return redirect()->route('call_checklist.shojon.tierOne', $request->uniqueId);
     }
 
     /**
@@ -216,7 +215,7 @@ class PatientController extends Controller
         return view('call_checklist.patient.show', compact('patient'));
     }
 
-    public function showInfo($phone)
+    public function showInfo($unique_id)
     {
         $pageTitle = $this->pageTitle;
         // dd($phone);
@@ -224,15 +223,18 @@ class PatientController extends Controller
         $previous_data = null;
         $last = null;
 
-        $is_phone_no = CallChecklistForShojon::where('phone_number', $phone)->first();
-        if ($is_phone_no) {
-            $previous_data = CallChecklistForShojon::where('phone_number', $phone)->get();
-        }
+        // $is_phone_no = CallChecklistForShojon::where('phone_number', $phone)->first();
+        // if ($is_phone_no) {
+        //     $previous_data = CallChecklistForShojon::where('phone_number', $phone)->get();
+        // }
 
-        $patient = DB::select("SELECT * FROM patients WHERE phone_number = $phone");
+        $patient = DB::select("SELECT * FROM `patients` WHERE unique_id = '$unique_id'");
+        // $previous_data = DB::select("SELECT * FROM shojon_tier_ones WHERE unique_id = '$unique_id'");
+        $previous_data = ShojonTierOne::where('caller_id', '=', $unique_id)->get();
+
         // $queries = DB::select("SELECT * FROM queries WHERE phone = $phone");
         // dd($previous_data);
-        return view('call_checklist.patient.showInfo', compact('pageTitle', 'is_phone_no', 'previous_data', 'patient'));
+        return view('call_checklist.patient.showInfo', compact('pageTitle', 'previous_data', 'patient'));
     }
 
     /**

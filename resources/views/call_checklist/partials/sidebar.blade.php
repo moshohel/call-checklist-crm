@@ -163,7 +163,7 @@
                     </a>
                 </li>
             </ul>
-            <ul class="treeview-menu">
+            {{-- <ul class="treeview-menu">
                 @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
                 <li>
                     <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
@@ -174,7 +174,7 @@
                     </a>
                 </li>
                 @endif
-            </ul>
+            </ul> --}}
         </li>
 
         <li class="treeview">
@@ -206,7 +206,7 @@
             </ul>
         </li>
 
-        <li class="treeview">
+        {{-- <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
                 <span class="app-menu__label">Shojon Patient</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
@@ -231,7 +231,7 @@
                 </li>
                 @endif
             </ul>
-        </li>
+        </li> --}}
 
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-retweet"></i>

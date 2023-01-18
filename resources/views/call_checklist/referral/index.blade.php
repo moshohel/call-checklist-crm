@@ -39,7 +39,7 @@
                         <td>
                           
                           <a href="{{ route('referral.edit', [$referral->unique_id, $referral->id]) }}" class="btn btn-info btn-default">Edit</a>
-                          <a href="{{ route('referral.showInfo', [$referral->unique_id, $referral->id]) }}" class="btn btn-info btn-default">Refer</a>
+                          <a href="{{ route('referral.showInfo', [$referral->unique_id, $referral->id]) }}" class="btn btn-info btn-default">Counselor Refer</a>
                         </td>
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $referral->department }}</td> --}}
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $referral->con_name }}</td> --}}
