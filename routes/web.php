@@ -181,11 +181,13 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::post('store/patient', [Tier2Controller::class, 'store'])->name('call_checklist.shojontier2.store');
 
             Route::get('/patientList', [Tier2Controller::class, 'tire2patientlist'])->name('call_checklist.shojon.Patientlist');
-            Route::get('/details/{id}', [Tier2Controller::class, 'clientDetails'])->name('shojon.tireTwo.view');
-            Route::get('/edit/{id}', [Tier2Controller::class, 'clientUpdate'])->name('shojon.tireTwo.edit');
-            Route::post('/update', [Tier2Controller::class, 'TierTwoUpdate'])->name('tierTwo.update');
+            Route::get('/details-tier-two/{id}', [Tier2Controller::class, 'clientDetailsTierTwo'])->name('shojon.tireTwo.view');
+            Route::get('/edit-tier-two/{id}', [Tier2Controller::class, 'clientUpdateTierTwo'])->name('shojon.tireTwo.edit');
+            Route::post('/update-tier-two', [Tier2Controller::class, 'TierTwoUpdate'])->name('tierTwo.update');
             Route::post('/submit', [Tier2Controller::class, 'TerminationSave_form'])->name('call_checklist.shojon.termination_form');
             Route::get('/referral_t_two', [Tier2Controller::class, 'ReferralSave_form'])->name('call_checklist.shojon.Referral_form');
+            //Shojon tier two report route
+            Route::get('/tierTow-report', [Tier2Controller::class, 'tierTow_report'])->name('shojonTierTow.report.picker');
             //Shojon tier Three route  call_checklist.shojontierThree.store
             Route::get('/add_patientt3', [shojonTierThree::class, 'tireThreefromblade'])->name('call_checklist.shojon.tierThree');
             Route::post('store_tier3', [shojonTierThree::class, 'store'])->name('call_checklist.shojontierThree.store');

@@ -592,17 +592,25 @@
         <div class="form-group" id="referred">
             <label class="control-label" for="client_referral">Referral</label>
             <div class="form-control">
-                <label class="control-label">Internal Referral:( single select )</label><br>
+                <label class="control-label">
+                    <input type="radio" id="chkSHOJONTierThree" class="TierThreeChe" name="Internal_referral" value="Yes"onclick="ShowSHOJONTierTowInternalReferralBox()"/>
+                    Internal Referral
+                </label><br>
+                <label id="SHOJONTierThreeBox" class="TierThree">
                 <label class="control-label">
                  <a href="#" class="btn btn-primary btn-sm Referral_form " data-id="#" data-toggle="modal" data-target="#ReferralModal" >Referral Tier 3</a>
 
+              </label>
              </label>
              @include('call_checklist.shojon.tier2._referral')
-         </label>
      </div>
      <div class="form-control">
-        <label class="control-label" for="client_referral"><b>External referral:  </label>
-            <div class="form-control @error('TreatmentGoal') is-invalid @enderror">
+        <label class="control-label" for="client_referral">
+            <input type="radio" id="chkSHOJONTierTwo" class="TierTwoChe" name="External_referral" value="Yes" onclick="ShowSHOJONTierTwoExternalreferralBox()"/>
+            External referral  
+            </label>
+            <label id="SHOJONTierTwoBox" class="TierTwo">
+            <div class="form-control">
                 <label class="control-label">Reason for referral:</label><br>
                 <label class="control-label"style="width: 90%;">
                     <input type="text" name="ReasonForReferral" class="form-control">
@@ -615,7 +623,7 @@
                 </label>
             </div>
             @php $types = ['Health Hotline 09678771511','KPR 01777772215']; @endphp
-            <div class="form-control @error('client_referral') is-invalid @enderror">
+            <div class="form-control">
                 <label>
                     @foreach($types as $item)
                     <input type="radio" name="client_referral" value="{{ $item }}"/>
@@ -630,7 +638,8 @@
                     value="{{ old('client_referral') }}" placeholder="Explain"/>
                 </span>
             </div>
-            @error('client_referral') {{ $message }} @enderror   
+            @error('client_referral') {{ $message }} @enderror
+            </label>   
         </div>
     </div>
 
@@ -840,7 +849,25 @@
        // ShowClientReferralBox();
         //showFinancialAffordability();
         showMessageBox();
+        ShowSHOJONTierTwoExternalreferralBox();
+        ShowSHOJONTierTowInternalReferralBox();
     });
+    function ShowSHOJONTierTowInternalReferralBox()
+    {
+        var radio = document.getElementById("chkSHOJONTierThree");
+        var Box = document.getElementById("SHOJONTierThreeBox");
+        Box.style.display = radio.checked ? "block" : "none";
+        var other = Box.getElementsByTagName('input')[0];
+        radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
+    }
+    function ShowSHOJONTierTwoExternalreferralBox()
+    {
+        var radio = document.getElementById("chkSHOJONTierTwo");
+        var Box = document.getElementById("SHOJONTierTwoBox");
+        Box.style.display = radio.checked ? "block" : "none";
+        var other = Box.getElementsByTagName('input')[0];
+        radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
+    }
     function ShowReferralBox() {
         var radio = document.getElementById("CliKReferral");
         var Box = document.getElementById("ReferralBox");
@@ -965,5 +992,17 @@
         };
         window.onload = init;
     })();
+    $(document).on('dblclick','.TierTwoChe',function(){
+        if(this.checked){
+            $(this).prop('checked', false);
+            $('.TierTwo').hide();
+        }
+    });
+    $(document).on('dblclick','.TierThreeChe',function(){
+        if(this.checked){
+            $(this).prop('checked', false);
+            $('.TierThree').hide();
+        }
+    });
     
 </script>
