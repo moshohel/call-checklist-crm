@@ -4,7 +4,7 @@
 
         @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
         <li>
-            <a class="app-menu__item" href="{{ route('call_checklist.kpr.dashboard') }}">
+            <a class="app-menu__item" href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">
                 <i class="app-menu__icon fa fa-wpforms"></i>
                 <span class="app-menu__label">Dashboard</span>
             </a>
@@ -78,7 +78,7 @@
 
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">
+                        href="#">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Dashboard tier - 2 </span>
                     </a>
@@ -206,20 +206,20 @@
             </ul>
         </li>
 
-        {{-- <li class="treeview">
+        <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
-                <span class="app-menu__label">Shojon Patient</span>
+                <span class="app-menu__label">Reschedule / Cancelation</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
                 <li>
-                    <a class="app-menu__item" href="{{ route('patients') }}">
+                    <a class="app-menu__item" href="{{ route('session.rescheduleOrCancelations') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Patients</span>
+                        <span class="app-menu__label">List</span>
                     </a>
                 </li>
             </ul>
-            <ul class="treeview-menu">
+            {{-- <ul class="treeview-menu">
                 @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
                 <li>
                     <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
@@ -230,8 +230,8 @@
                     </a>
                 </li>
                 @endif
-            </ul>
-        </li> --}}
+            </ul> --}}
+        </li>
 
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-retweet"></i>

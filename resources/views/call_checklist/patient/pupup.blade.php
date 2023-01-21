@@ -42,7 +42,7 @@
                             href="{{ route('call_checklist.shojon.create',  ['referrence_id'=>1, 'phone_number'=> $number ] ) }}"
                             class="btn btn-outline-primary">Exiting
                             Caller</a> --}}
-                        <a href="#"
+                        <a href="{{ route('patients') }}"
                             class="btn btn-outline-primary">Exiting
                             Caller</a>
                         {{-- <a href="/call-checklist/shojon/create/9876/{{ $number }}"
@@ -55,15 +55,13 @@
                     <div class="card-body text-center">
                         {{-- <h5 class="card-title text-primary">Card Title</h5> --}}
 
-                        <a href="#" class="btn btn-outline-primary">Appoinment Request</a>
+                        <a href="{{ route('session.rescheduleOrCancelationForm', $number) }}" class="btn btn-outline-primary">Reschedule / Cancelation</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-6 col-xl-4">
+            {{-- <div class="col-md-6 col-xl-4">
                 <div class="card mb-4 py-3">
                     <div class="card-body text-center">
-                        {{-- <h5 class="card-title text-primary">Card Title</h5> --}}
-
                         <a href="#" class="btn btn-outline-primary">Go somewhere</a>
                     </div>
                 </div>
@@ -71,8 +69,6 @@
             <div class="col-md-6 col-xl-4">
                 <div class="card mb-4 py-3">
                     <div class="card-body text-center">
-                        {{-- <h5 class="card-title text-primary">Card Title</h5> --}}
-
                         <a href="#" class="btn btn-outline-primary">Go somewhere</a>
                     </div>
                 </div>
@@ -80,12 +76,10 @@
             <div class="col-md-6 col-xl-4">
                 <div class="card mb-4 py-3">
                     <div class="card-body text-center">
-                        {{-- <h5 class="card-title text-primary">Card Title</h5> --}}
-
                         <a href="#" class="btn btn-outline-primary">Go somewhere</a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
         </div>
     </div>

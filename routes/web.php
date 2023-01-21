@@ -53,7 +53,7 @@ Route::get('/uniqueid', [TierOneController::class, 'uniqueId']);
 Route::get('generate-pdf-patient/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');
 Route::group(['prefix' => 'patient'], function () {
     //Route::get('', 'CallChecklist\PatientController@pupup');
-    Route::get('/pupup/{number}', [PatientController::class, 'pupup']);
+    Route::get('/popup/{number}', [PatientController::class, 'pupup']);
     Route::get('/livesearch', [PatientController::class, 'searchExisting']);
     Route::get('/create/{number}', [PatientController::class, 'create'])->name('patient.create');
 

@@ -101,6 +101,28 @@
     <div class="content">
         <div class="row">
 
+          <div class="col-12 col-lg-6">
+            <div class="card card-default">
+                <div class="card-header justify-content-center">
+                    <h2 class="text-center">Pie Chart </h2>
+                </div>
+                <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                    <canvas id="myChart" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div class="card card-default">
+              <div class="card-header justify-content-center">
+                  <h2 class="text-center">Refer Summary </h2>
+              </div>
+              <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                  <canvas id="pieChart" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
+              </div>
+          </div>
+      </div>
+
             <div class="col-12 col-lg-6">
                 <div class="card card-default">
                     <div class="card-header justify-content-center">
@@ -167,7 +189,7 @@
                 </div>
             </div>
 
-            <div class="col-12 col-lg-6">
+            {{-- <div class="col-12 col-lg-6">
               <div class="card card-default">
                   <div class="card-header justify-content-center">
                       <h2 class="text-center">Refer Summary </h2>
@@ -176,12 +198,12 @@
                       <canvas id="pieChart" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
                   </div>
               </div>
-          </div>
+          </div> --}}
 
             <div class="col-12 col-lg-6">
               <div class="card card-default">
                   <div class="card-header justify-content-center">
-                      <h2 class="text-center">Test </h2>
+                      <h2 class="text-center">Test Bar </h2>
                   </div>
                   <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                       <canvas id="mmyChart" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
@@ -189,14 +211,25 @@
               </div>
           </div>
 
-          <div class="col-12 col-lg-6">
+          {{-- <div class="col-12 col-lg-6">
+            <div class="card card-default">
+                <div class="card-header justify-content-center">
+                    <h2 class="text-center">Pie Chart </h2>
+                </div>
+                <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                    <canvas id="myChart" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+        </div> --}}
+
+          {{-- <div class="col-12 col-lg-6">
             <div class="card card-default">
               <div class="card-body">
 
                 <canvas id="myChart"></canvas>
               </div>
             </div>
-          </div>
+          </div> --}}
 
           <canvas id="pieChart" width=200 height=200></canvas>
 
@@ -219,7 +252,7 @@
     {{-- <script type="text/javascript" src="{{ asset('backend/js/chart.js') }}"></script> --}}
     {{-- <script type="text/javascript" src="{{ asset('backend/js/Chart1.min.js') }}"></script> --}}
     <script type="text/javascript" src="{{ asset('backend/js/Chart2019.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('backend/js/chartjs-plugin-labels.js') }}"></script>
+    {{-- <script type="text/javascript" src="{{ asset('backend/js/chartjs-plugin-labels.js') }}"></script> --}}
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shCore.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/styles/shThemeDefault.css" rel="stylesheet">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/SyntaxHighlighter/3.0.83/scripts/shCore.js"></script>
