@@ -89,7 +89,7 @@
 
 <script>
   $(document).ready(function(){
-  
+  // console.log('{{ env('BASE_URL') }}'+"/patient/paging");
   $("#search-btn").click(function(){
     // $("#print_pdf").show();
     // $("#print_excel").show();
@@ -105,7 +105,9 @@
     serverSide: true,
     "scrollX": true,
     ajax: {
-        url: "http://127.0.0.1:8000/patient/paging"
+      url: '{{ env('BASE_URL') }}'+"/patient/paging"
+
+        // url: "http://127.0.0.1:8000/patient/paging"
         // url: '{{ route("patient.paging") }}'
         ,type: 'GET'
         ,data:{_token: CSRF_TOKEN,additional_query: additional_query} //,'records_total': records_total

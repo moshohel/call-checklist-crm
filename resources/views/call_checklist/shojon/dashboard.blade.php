@@ -1,6 +1,14 @@
 @extends('call_checklist.app')
 @push('styles')
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.min.js"></script> --}}
+<link
+      href="https://fonts.googleapis.com/css?family=Montserrat:400,500|Poppins:400,500,600,700|Roboto:400,500"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.materialdesignicons.com/3.0.39/css/materialdesignicons.min.css"
+      rel="stylesheet"
+    />
 @endpush
 @section('title') {{ $pageTitle }} @endsection
 @section('content')
@@ -49,8 +57,8 @@
                         <hr>
                     </div>
 
+                    <p>Call Summary</p>
                     <div class="row">
-
                         <div class="col-xl-3 col-sm-6">
                             <div class="card widget-block p-4 rounded bg-primary ">
                                 <div class="card-block">
@@ -87,9 +95,111 @@
 
                             </div>
                         </div>
-
                     </div>
 
+                    <p>Refer Overview</p>
+                    <div class="row">
+                      <div class="col-6">
+                        <div class="row">
+
+                          <div class="col">
+                              <div class="card widget-block p-4 rounded bg-primary ">
+                                  <div class="card-block">
+                                      <h3 class="text-white">{{ $total_cnt }}</h3>
+                                      <p class="py-2">Total Inbound Calls</p>
+                                  </div>
+    
+                              </div>
+                          </div>
+                          <div class="col">
+                              <div class="card widget-block p-4 rounded bg-warning ">
+                                  <div class="card-block">
+                                      <h3 class="text-white">{{ $ref_cnt_tier2 }}</h3>
+                                      <p class="py-2">Total Outbound Calls</p>
+                                  </div>
+    
+                              </div>
+                          </div>
+                        </div>
+
+                        <p>Session Overview</p>
+                        <div class="row">
+                          <div class="col">
+                              <div class="border border-5 p-4 rounded">
+                                  <div >
+                                      <h3 class="text-white">{{ $total_cnt }}</h3>
+                                      <p >NEW CLIENTS</p>
+                                  </div>
+    
+                              </div>
+                          </div>
+                          <div class="col">
+                              <div class="border border-5 p-4 rounded">
+                                  <div >
+                                      <h3 class="text-white">{{ $ref_cnt_tier2 }}</h3>
+                                      <p >REFERRED TO TIER 2</p>
+                                  </div>
+    
+                              </div>
+                          </div>
+                          <div class="col">
+                            <div class="border border-5 p-4 rounded">
+                                <div >
+                                    <h3 class="text-white">{{ $ref_cnt_tier2 }}</h3>
+                                    <p >REFERRED TO TIER 2</p>
+                                </div>
+  
+                            </div>
+                        </div>
+                        </div>
+                      </div>
+
+                      {{-- <div class="row">
+
+                        <div class="col">
+                            <div class="card widget-block rounded bg-warning ">
+                                <div class="card-block">
+                                    <h3 class="text-white">{{ $ref_cnt_tier2 }}</h3>
+                                    <p class="py-2">REFERRED TO TIER 2</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card widget-block rounded bg-danger ">
+                                <div class="card-block">
+                                    <h3 class="text-white">{{ $ref_cnt_tier3 }}</h3>
+                                    <p class="py-2">REFERRED TO TIER 3</p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="card widget-block rounded bg-success ">
+                                <div class="card-block">
+                                    <h3 class="text-white">{{ $total_call_cnt }}</h3>
+                                    <p class="py-2">TOTAL CALLS</p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                      </div> --}}
+
+                      <div class="col-6">
+                        <!-- Sales Graph -->
+                        <div class="card card-default" data-scroll-height="675">
+                          <div class="card-header">
+                            <h2>Sales Of The Year</h2>
+                          </div>
+                          <div class="card-body">
+                            <canvas id="linechart" class="chartjs"></canvas>
+                          </div>
+                          
+                        </div>
+                      </div>
+
+                    </div>
 
                 </div>
             </div>
@@ -126,7 +236,7 @@
         <div class="col-12 col-lg-6">
           <div class="card card-default">
               <div class="card-header justify-content-center">
-                  <h2 class="text-center">Refer Summary </h2>
+                  <h2 class="text-center">Source-wise Refer Summary </h2>
               </div>
               <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
                   <canvas id="referSummary" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
@@ -134,16 +244,121 @@
           </div>
       </div>
 
-            <div class="col-12 col-lg-6">
-                <div class="card card-default">
-                    <div class="card-header justify-content-center">
-                        <h2 class="text-center">Demographic - Gender</h2>
-                    </div>
-                    <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
-                        <canvas id="demographicGender" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
-                    </div>
-                </div>
+      <div class="col-12 col-lg-6">
+        <div class="card card-default">
+            <div class="card-header justify-content-center">
+                <h2 class="text-center">Suicide Risk</h2>
             </div>
+            <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                <canvas id="suicideRisk" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
+            </div>
+        </div>
+    </div>
+
+    {{-- <div class="col-12 col-lg-6">
+          <div class="card-body" style="height: 400px;">
+            <div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+              <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0">
+                </div>
+              </div>
+              <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                <div style="position:absolute;width:200%;height:200%;left:0; top:0">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> --}}
+        <div class="col-md-6">
+          <div class="row">
+            <div class="col">
+              <div class="media widget-media p-4 bg-white border">
+                <div class="media-body align-self-center">
+                  <h4 class="text-primary mb-2">Pending Referrals</h4>
+                  <h1>66</h1>
+                </div>
+              </div>
+            </div>
+            <div class="col">
+              <div class="media widget-media p-4 bg-white border">
+                <div class="media-body align-self-center">
+                  <h4 class="text-primary mb-2">Total Referrals</h4>
+                  <h1>55</h1>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+
+    <div class="col-lg-6">
+      <div class="card card-default">
+        <div class="card-header card-header-border-bottom">
+          <h2>Top Service Providers</h2>
+        </div>
+        <div class="card-body">
+          <table class="table table-hover ">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Tier</th>
+                <th scope="col">Sessions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td scope="row">1</td>
+                <td>Lucia</td>
+                <td>Tier-02</td>
+                <td>23</td>
+              </tr>
+              <tr>
+                <td scope="row">2</td>
+                <td>Catrin</td>
+                <td>Tier-03</td>
+                <td>23</td>
+              </tr>
+              <tr>
+                <td scope="row">3</td>
+                <td>Lilli</td>
+                <td>Tier-03</td>
+                <td>77</td>
+              </tr>
+              <tr>
+                <td scope="row">4</td>
+                <td>Else</td>
+                <td>Tier-02</td>
+                <td>21</td>
+              </tr>
+              <tr>
+                <td scope="row">5</td>
+                <td>Ursel</td>
+                <td>Tier-02</td>
+                <td>53</td>
+              </tr>
+              <tr>
+                <td scope="row">6</td>
+                <td>Anke</td>
+                <td>Tier-02</td>
+                <td>13</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+      <div class="col-12 col-lg-6">
+          <div class="card card-default">
+              <div class="card-header justify-content-center">
+                  <h2 class="text-center">Demographic - Gender</h2>
+              </div>
+              <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                  <canvas id="demographicGender" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
+              </div>
+          </div>
+      </div>
 
             <div class="col-12 col-lg-6">
                 <div class="card card-default">
@@ -168,6 +383,39 @@
             </div>
 
             <div class="col-12 col-lg-6">
+              <div class="card card-default">
+                  <div class="card-header justify-content-center">
+                      <h2 class="text-center">Primary Reason for Calling</h2>
+                  </div>
+                  <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                      <canvas id="primaryReasonForCall" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="card card-default">
+                <div class="card-header justify-content-center">
+                    <h2 class="text-center">Current Differential Diagnosis(Top 10) - T02</h2>
+                </div>
+                <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                    <canvas id="topDifferentialDiagnosisT2" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 col-lg-6">
+          <div class="card card-default">
+              <div class="card-header justify-content-center">
+                  <h2 class="text-center">Current Differential Diagnosis(Top 10) - T03</h2>
+              </div>
+              <div class="card-body" style="height: 400px;"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+                  <canvas id="topDifferentialDiagnosisT3" width="988" height="680" style="display: block; height: 340px; width: 494px;" class="chartjs-render-monitor"></canvas>
+              </div>
+          </div>
+      </div>
+
+            <div class="col-12 col-lg-6">
               <div class="card card-default" id="activity-user">
                 <div class="card-header justify-content-center">
                   <h2>Demographic - Occupation</h2>
@@ -188,6 +436,7 @@
                     </div>
                 </div>
             </div>
+
 
           {{-- <canvas id="pieChart" width=200 height=200></canvas> --}}
           {{-- <canvas id="testChart" style="width:100%;max-width:600px"></canvas> --}}
@@ -329,6 +578,44 @@
       }
     });
     }
+</script>
+
+<script>
+  var ctx = document.getElementById("suicideRisk");
+
+  var xValues = ["NO", "Don't Know", "Mild", "Moderate", "Severe", "Medical Emergency"];
+  var yValues = [55, 49, 44, 24, 15, 79];
+  var barColors = [
+    "#B8D6FA",
+    "#AD9F9F",
+    "#E6ACAB",
+    "#ED6565",
+    "#F03232",
+    "#FE0000",
+  ];
+
+  new Chart("suicideRisk", {
+    type: "pie",
+    data: {
+      labels: xValues,
+      datasets: [{
+        backgroundColor: barColors,
+        data: yValues
+      }]
+    },
+
+    options: {
+      responsive: true,
+      maintainAspectRatio: true,
+      plugins: {
+        labels: {
+          render: 'value',
+          fontColor: ['green', 'white', 'red']
+        }
+      }
+    }
+  });
+
 </script>
 
 <script>
@@ -661,13 +948,165 @@
 </script>
 
 <script>
-  var leadSource = document.getElementById("leadSource");
+  var primaryReasonForCall = document.getElementById("primaryReasonForCall");
+
+  var xValues = ["Mental Illness", "Substance Abuse", "Family/Relationship Issues", "Health/Physical Concerns", "Financial Concerns", "Immediate Emotional Crisis", "Child Abuse", "Education", "Bereavement", "Don’t know"];
+  var yValues = [55, 49, 44, 24, 5, 35, 9, 48, 24, 25];
+  var barColors = ["red", "green","blue","orange","brown"];
+
+  new Chart(primaryReasonForCall, {
+      type: "horizontalBar",
+      data: {
+        labels: xValues,
+        datasets: [
+          {
+            // label: "Italy",
+            data: yValues,
+            // data: [2, 3.2, 1.8, 2.1, 1.5, 3.5, 4, 2.3, 2.9, 4.5, 1.8, 3.4, 2.8],
+            backgroundColor: "#6f42c1",
+            // backgroundColor: "#4c84ff"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                drawBorder: true,
+                display: false,
+              },
+              ticks: {
+                // max: Math.max(...data.datasets[0].data) + 10,
+                fontColor: "#8a909d",
+                fontFamily: "Roboto, sans-serif",
+                display: true, // hide main x-axis line
+                beginAtZero: true,
+                callback: function(tick, index, array) {
+                  return index % 2 ? "" : tick;
+                }
+              },
+              barPercentage: 1.8,
+              categoryPercentage: 0.2
+            }
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                drawBorder: true,
+                display: true,
+                color: "#eee",
+                zeroLineColor: "#eee"
+              },
+              ticks: {
+                fontColor: "#8a909d",
+                fontFamily: "Roboto, sans-serif",
+                display: true,
+                beginAtZero: true
+              },
+              barPercentage: 1.8,
+              categoryPercentage: 0.2,
+              scaleLabel: {
+                display: false,
+                labelString: 'Age Group',
+              }
+            }
+          ]
+        },
+      }
+    });
+
+</script>
+
+<script>
+  var topDifferentialDiagnosisT2 = document.getElementById("topDifferentialDiagnosisT2");
 
   var xValues = ["Print Media", "TV", "Radio", "SF Microfinance", "SUDIN", "Refereed By Professional", "Word of Mouth", "Social Media", "KPR", "Search Engine/Online"];
   var yValues = [55, 49, 44, 24, 5, 35, 9, 48, 24, 25];
   var barColors = ["red", "green","blue","orange","brown"];
 
-  new Chart(leadSource, {
+  new Chart(topDifferentialDiagnosisT2, {
+      type: "horizontalBar",
+      data: {
+        labels: xValues,
+        datasets: [
+          {
+            // label: "Italy",
+            data: yValues,
+            // data: [2, 3.2, 1.8, 2.1, 1.5, 3.5, 4, 2.3, 2.9, 4.5, 1.8, 3.4, 2.8],
+            backgroundColor: "#2b5797",
+            // backgroundColor: "#4c84ff"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                drawBorder: true,
+                display: false,
+              },
+              ticks: {
+                // max: Math.max(...data.datasets[0].data) + 10,
+                fontColor: "#8a909d",
+                fontFamily: "Roboto, sans-serif",
+                display: true, // hide main x-axis line
+                beginAtZero: true,
+                callback: function(tick, index, array) {
+                  return index % 2 ? "" : tick;
+                }
+              },
+              barPercentage: 1.8,
+              categoryPercentage: 0.2
+            }
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                drawBorder: true,
+                display: true,
+                color: "#eee",
+                zeroLineColor: "#eee"
+              },
+              ticks: {
+                fontColor: "#8a909d",
+                fontFamily: "Roboto, sans-serif",
+                display: true,
+                beginAtZero: true
+              },
+              barPercentage: 1.8,
+              categoryPercentage: 0.2,
+              scaleLabel: {
+                display: false,
+                labelString: 'Age Group',
+              }
+            }
+          ]
+        },
+      }
+    });
+
+</script>
+
+<script>
+  var topDifferentialDiagnosisT3 = document.getElementById("topDifferentialDiagnosisT3");
+
+  var xValues = ["Print Media", "TV", "Radio", "SF Microfinance", "SUDIN", "Refereed By Professional", "Word of Mouth", "Social Media", "KPR", "Search Engine/Online"];
+  var yValues = [55, 49, 44, 24, 5, 35, 9, 48, 24, 25];
+  var barColors = ["red", "green","blue","orange","brown"];
+
+  new Chart(topDifferentialDiagnosisT3, {
       type: "horizontalBar",
       data: {
         labels: xValues,
@@ -734,6 +1173,214 @@
       }
     });
 
+</script>
+
+<script>
+  var leadSource = document.getElementById("leadSource");
+
+  var xValues = ["Print Media", "TV", "Radio", "SF Microfinance", "SUDIN", "Refereed By Professional", "Word of Mouth", "Social Media", "KPR", "Search Engine/Online"];
+  var yValues = [55, 49, 44, 24, 5, 35, 9, 48, 24, 25];
+  var barColors = ["red", "green","blue","orange","brown"];
+
+  new Chart(leadSource, {
+      type: "horizontalBar",
+      data: {
+        labels: xValues,
+        datasets: [
+          {
+            // label: "Italy",
+            data: yValues,
+            // data: [2, 3.2, 1.8, 2.1, 1.5, 3.5, 4, 2.3, 2.9, 4.5, 1.8, 3.4, 2.8],
+            backgroundColor: "#00aba9",
+            // backgroundColor: "#4c84ff"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                drawBorder: true,
+                display: false,
+              },
+              ticks: {
+                // max: Math.max(...data.datasets[0].data) + 10,
+                fontColor: "#8a909d",
+                fontFamily: "Roboto, sans-serif",
+                display: true, // hide main x-axis line
+                beginAtZero: true,
+                callback: function(tick, index, array) {
+                  return index % 2 ? "" : tick;
+                }
+              },
+              barPercentage: 1.8,
+              categoryPercentage: 0.2
+            }
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                drawBorder: true,
+                display: true,
+                color: "#eee",
+                zeroLineColor: "#eee"
+              },
+              ticks: {
+                fontColor: "#8a909d",
+                fontFamily: "Roboto, sans-serif",
+                display: true,
+                beginAtZero: true
+              },
+              barPercentage: 1.8,
+              categoryPercentage: 0.2,
+              scaleLabel: {
+                display: false,
+                labelString: 'Age Group',
+              }
+            }
+          ]
+        },
+      }
+    });
+
+</script>
+
+<script>
+  var ctx = document.getElementById("linechart");
+  if (ctx !== null) {
+    var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: "line",
+
+      // The data for our dataset
+      data: {
+        labels: [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec"
+        ],
+        datasets: [
+          {
+            label: "",
+            backgroundColor: "transparent",
+            borderColor: "rgb(82, 136, 255)",
+            data: [
+              100,
+              11000,
+              10000,
+              14000,
+              11000,
+              17000,
+              14500,
+              18000,
+              5000,
+              23000,
+              14000,
+              19000
+            ],
+            lineTension: 0.3,
+            pointRadius: 5,
+            pointBackgroundColor: "rgba(255,255,255,1)",
+            pointHoverBackgroundColor: "rgba(255,255,255,1)",
+            pointBorderWidth: 2,
+            pointHoverRadius: 8,
+            pointHoverBorderWidth: 1
+          }
+        ]
+      },
+
+      // Configuration options go here
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        legend: {
+          display: false
+        },
+        layout: {
+          padding: {
+            right: 10
+          }
+        },
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                display: false
+              }
+            }
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                display: true,
+                color: "#eee",
+                zeroLineColor: "#eee",
+              },
+              ticks: {
+                callback: function(value) {
+                  var ranges = [
+                    { divider: 1e6, suffix: "M" },
+                    { divider: 1e4, suffix: "k" }
+                  ];
+                  function formatNumber(n) {
+                    for (var i = 0; i < ranges.length; i++) {
+                      if (n >= ranges[i].divider) {
+                        return (
+                          (n / ranges[i].divider).toString() + ranges[i].suffix
+                        );
+                      }
+                    }
+                    return n;
+                  }
+                  return formatNumber(value);
+                }
+              }
+            }
+          ]
+        },
+        tooltips: {
+          callbacks: {
+            title: function(tooltipItem, data) {
+              return data["labels"][tooltipItem[0]["index"]];
+            },
+            label: function(tooltipItem, data) {
+              return "$" + data["datasets"][0]["data"][tooltipItem["index"]];
+            }
+          },
+          responsive: true,
+          intersect: false,
+          enabled: true,
+          titleFontColor: "#888",
+          bodyFontColor: "#555",
+          titleFontSize: 12,
+          bodyFontSize: 18,
+          backgroundColor: "rgba(256,256,256,0.95)",
+          xPadding: 20,
+          yPadding: 10,
+          displayColors: false,
+          borderColor: "rgba(220, 220, 220, 0.9)",
+          borderWidth: 2,
+          caretSize: 10,
+          caretPadding: 15
+        }
+      }
+    });
+  }
 </script>
 
 @endpush

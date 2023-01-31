@@ -4,7 +4,7 @@
 
         @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
         <li>
-            <a class="app-menu__item" href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">
+            <a class="app-menu__item" href="{{ route('call_checklist.shojon.admin.dashboard') }}">
                 <i class="app-menu__icon fa fa-wpforms"></i>
                 <span class="app-menu__label">Dashboard</span>
             </a>
