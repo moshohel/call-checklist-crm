@@ -6,7 +6,7 @@
     <div>
         <h1><i class="fa-solid fa-user"></i><a href="">{{ $data->caller_name }}</span></a>
         </h1>
-    </div>
+    </div> 
 </div>
 <section class="content">
   <div class="container-fluid">
