@@ -114,7 +114,7 @@
                             <h2 style="color: red;"><b>Data not found</b></h2>
                         </div>
                         <tbody id="content" class="serchValue">
-                             
+                           
                         </tbody>
                     </table>
                 </div>

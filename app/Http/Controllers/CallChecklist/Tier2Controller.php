@@ -9,6 +9,8 @@ use App\Models\Termination;
 use App\Models\Referral;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Exports\ShojonTierTowExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Tier2Controller extends Controller
 {
@@ -40,7 +42,7 @@ class Tier2Controller extends Controller
     public function store(Request $request)
     {
         //$params = $request->except('_token');
-        // dd($request);
+         //dd($request);
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -105,6 +107,8 @@ class Tier2Controller extends Controller
         $data['intervention'] = $request->Intervention;
         $data['homework'] = $request->Homework;
         $data['effective'] = $request->useful_effective;
+        $data['internal_referral'] = $request->Internal_referral;
+        $data['external_referral'] = $request->External_referral;
         $data['reason_for_referral'] = $request->ReasonForReferral;
         $data['name_of_agency'] = $request->NameOfAgency;
         $data['client_referral'] = $request->client_referral;
@@ -117,7 +121,7 @@ class Tier2Controller extends Controller
         return redirect()->back()->with('success', 'insert successfull');
     }
 
-    public function clientUpdate($id, $phone = '')
+    public function clientUpdateTierTwo($id, $phone = '')
     {
         $pageTitleUpdate = $this->pageTitleUpdate;
         $data = DB::table('sojon_tier2s')->where('id', $id)->first();
@@ -149,7 +153,7 @@ class Tier2Controller extends Controller
         $pageTitle = $this->pageTitle;
         return view('call_checklist.shojon.tier2.index', compact('data', 'pageTitle'));
     }
-    public function clientDetails($id)
+    public function clientDetailsTierTwo($id)
     {
         // $pageTitle = $this->pageTitle;
         $data = DB::table('sojon_tier2s')->where('id', $id)->first();
@@ -227,6 +231,14 @@ class Tier2Controller extends Controller
 
         return redirect()->back()->with('success', 'Update successfully!');
     }
+
+    public function tierTow_report(Request $request){
+        $fromdate = $request->FromDate;
+        $todate = $request->toDate;
+
+        return Excel::download(new ShojonTierTowExport($fromdate,$todate), "$fromdate-$todate.xlsx");
+    }
+
 
     public function TerminationSave_form(Request $request)
     {

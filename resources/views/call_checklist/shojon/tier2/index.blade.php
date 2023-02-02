@@ -3,9 +3,34 @@
 @section('content')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"/>
     <div class="app-title">
-        <div>
+        <div class="col-md-auto">
             <h1><i class="fa fa-tags"></i> <a href="{{ route('call_checklist.shojon.index') }}">{{ $pageTitle }}</span></a>
             </h1>
+        </div>
+        <div class="col-md-auto">
+        <form action="{{ route('shojonTierTow.report.picker') }}" method="get">
+	  		<div class="row">
+                <div class="col-md-12">
+                    <div class="row g-3">
+                       <div class="col-md-5">
+                         <div class="form-group">
+                             <input name="FromDate"  placeholder="From Date" class="form-control">
+                         </div>
+                     </div>
+                     <div class="col-md-5">
+                         <div class="form-group">
+                             <input name="toDate" placeholder="To Date" class="form-control">
+                         </div>
+                     </div>
+                     <div class="col-md-2">
+                         <div class="form-group">
+                            <input class="btn btn-primary" type="submit" name="button" value="Download">
+                        </div>
+                    </div>
+                </div>
+	  		</div>
+        </div>
+  		</form>
         </div>
     </div>
 
@@ -97,8 +122,8 @@
                                 <td>{{$row->age}}</td>
                                 <td>{{$row->location}}</td>
                                 <td>{{$row->session}}</td>
-                                <td><a href="{{ route('shojon.tireThree.view',$row->id) }}"><i class="fa-solid fa-eye"></i></a>
-                                 <a href="{{ route('shojon.tireThree.view',$row->id) }}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
+                                <td><a href="{{ route('shojon.tireTwo.view',$row->id) }}"><i class="fa-solid fa-eye"></i></a>
+                                 <a href="{{ route('shojon.tireTwo.edit',$row->id) }}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
                                 </td>
                             </tr>
                             @endforeach

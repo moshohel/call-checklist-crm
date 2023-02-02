@@ -59,6 +59,8 @@ class CreateSojonTier2sTable extends Migration
             $table->string('intervention')->nullable();
             $table->string('homework')->nullable();
             $table->string('effective')->nullable();
+            $table->string('internal_referral')->default('No');
+            $table->string('external_referral')->default('No');
             $table->string('reason_for_referral')->nullable();
             $table->string('name_of_agency')->nullable();
             $table->string('client_referral')->nullable();
