@@ -59,9 +59,6 @@ class CreateShojonTireThreesTable extends Migration
             $table->string('psychotherapy_session_suggested')->nullable();
             $table->text('client_ability_buy_medicine')->nullable();
             $table->string('suitable_session_type')->nullable();
-
-
-
             $table->string('effective')->nullable();
             $table->string('reason_for_referral')->nullable();
             $table->string('name_of_agency')->nullable();

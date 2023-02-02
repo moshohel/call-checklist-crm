@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\ShojonTierOne;
 use App\Models\Unique;
+use App\Models\Referral;
+use App\Models\Termination;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Carbon;
 
@@ -177,6 +179,137 @@ class TierOneController extends Controller
         DB::table('shojon_tier_ones')->where('id', $request->id)->update($data);
 
         return redirect()->route('call_checklist.shojon.TierOneList');
+    }
+
+    public function referral_table(Request $request){
+       $uniqueid=$request->caller_id;
+       if($request->ajax()) {
+            $output = '';
+            $data = Referral::where('unique_id',$uniqueid)->where('referr_to','Shojon Tier 1')->get(); 
+            if($data){
+                foreach($data as $key=>$row){
+                     $output .=
+                            '<tr>
+                               <td>'.$key.'</td>
+                               <td>'.$row->referr_to.'</td>
+                               <td>'.$row->referr_from.'</td>
+                               <td>'.$row->name.'</td>
+                               <td>'.$row->unique_id.'</td>
+                               <td>'.$row->age.'</td>
+                               <td>'.$row->phone_number.'</td>
+                               <td>'.$row->phone_number_two.'</td>
+                               <td>'.$row->reason_for_therapy.'</td>
+                               <td>'.$row->preferred_time.'</td>
+                               <td>'.$row->therapist.'</td>
+                               <td>'.$row->financial.'</td>
+                               <td>'.$row->Referral_types.'</td>
+                            </tr>';
+                }
+                return response()->json($output); 
+            }
+        }
+    }
+    public function termination_table(Request $request){
+        if($request->ajax()) {
+            $output = '';
+            $array_size = '';
+
+            $data = Termination::all();
+            if($data){
+                foreach($data as $key=>$row){
+                    
+                    $scheduled = explode(';', $row->scheduled);
+                    $attended = explode(';' ,$row->attended);
+                    $cancelled = explode(';' ,$row->cancelled);
+                    $not_attend = explode(';' ,$row->not_attend);
+                    $array_size = sizeof($scheduled);
+                    for ($i=1; $i <= $array_size ; $i++) { 
+                    if ($i == 1) {
+                     $output .=
+                            '<tr>
+                               <td>'.$key.'</td>
+                               <td>'.$row->project_name.'</td>
+                               <td>'.$row->counselor_name.'</td>
+                               <td>'.$row->client_name.'</td>
+                               <td>'.$row->client_id.'</td>
+                               <td>'.$row->main_reason.'</td>
+                               <td>'.$row->who_terminated.'</td>
+                               <td>'.$row->referred_date.'</td>
+                               <td>'.$row->first_contact.'</td>
+                               <td>'.$row->last_session.'</td>
+                               <td>'.$row->total_session.'</td>
+                               <td>'.'
+                               <table>
+                                   <thead>
+                                     <tr>
+                                       <th>Scheduled</th>
+                                       <th>Attended</th>
+                                       <th>Cancelled</th>
+                                       <th>Did not attend</th>
+                                     </tr>
+                                   </thead>
+                                   <tbody>
+                                   
+                                    <tr>
+                                       <td>'.$scheduled[$i-1].'</td>
+                                       <td>'.$attended[$i-1].'</td>
+                                       <td>'.$cancelled[$i-1].'</td>
+                                       <td>'.$not_attend[$i-1].'</td>
+                                    </tr>
+                                    
+                                   </tbody>
+                               </table>
+                               '.'</td>
+                               <td>Pre : '.$row->distress_pre.' Post: '.$row->distress_post.'</td>
+                               <td>Pre : '.$row->wellbeing_pre.' Post: '.$row->wellbeing_post.'</td>
+                               <td>Pre : '.$row->psychological_pre.' Post: '.$row->psychological_post.'</td>
+                               <td>'.$row->feedback.'</td>
+                               <td>'.$row->learning.'</td>
+                            </tr>';
+                     }else{
+                        $output .=
+                            '<tr style ="border-collapse: collapse;">
+                              <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td><table>
+                               <thead>
+                                     <tr>
+                                       <th>Scheduled</th>
+                                       <th>Attended</th>
+                                       <th>Cancelled</th>
+                                       <th>Did not attend</th>
+                                     </tr>
+                                   </thead>
+                               <tbody>
+                                   <td>'.$scheduled[$i-1].'</td>
+                                   <td>'.$attended[$i-1].'</td>
+                                   <td>'.$cancelled[$i-1].'</td>
+                                   <td>'.$not_attend[$i-1].'</td>
+                                   </tbody></table>
+                               </td>
+                               
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               <td></td>
+                               </tr>
+                               ';
+                     }
+                   }
+               }
+                return response()->json($output); 
+            }
+        }
     }
 
     // public function uniqueId()

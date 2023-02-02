@@ -31,7 +31,8 @@ class CreateReferralsTable extends Migration
             $table->boolean('already_referred')->default(0);
             $table->boolean('appointment_status')->default(0);
             $table->string('financial')->nullable();
-            $table->string('Referral_types')->nullable();
+            $table->string('therapist')->nullable();
+            $table->string('Referral_types')->nullable(); 
             $table->timestamps();
         });
     }

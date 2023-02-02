@@ -184,6 +184,10 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('/tier-one-edit/{caller_id}', [TierOneController::class, 'TierOneclientUpdate'])->name('call_checklist.shojon.TierOneedit');
             Route::post('/tier-One-update', [TierOneController::class, 'TierOneUpdate'])->name('call_checklist.shojon.tierOne_update');
             Route::get('/tierOne/{uniqueid}', [TierOneController::class, 'tireOnefromblade'])->name('call_checklist.shojon.tierOne');
+
+            Route::get('/referral_table', [TierOneController::class, 'referral_table']);
+            Route::get('/termination_table', [TierOneController::class, 'termination_table']);
+            
             //tire 2 route 
             Route::get('/add_patient', [Tier2Controller::class, 'tire2fromblade'])->name('call_checklist.shojon.tier2');
 

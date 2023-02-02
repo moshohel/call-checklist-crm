@@ -67,8 +67,8 @@
               </div>
               <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Therapist preference:</label>
-              <input type="text" class="form-control" name="Therapist" placeholder="Therapist preference" >
-             </div>
+              <input type="text" class="form-control" name="Therapist" placeholder="Therapist preference" > 
+             </div> 
              <div class="col-md-4">
               @php $types = ['Regular','Emergenct']; @endphp
               <label for="validationCustom01" class="form-label">Referral Types :</label>
