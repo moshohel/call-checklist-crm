@@ -268,6 +268,16 @@
             @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
             <ul class="treeview-menu">
                 <li>
+                    <a class="app-menu__item" href="{{ route('call_checklist.shojon.doctor.dashboard') }}">
+                        <i class="app-menu__icon fa fa-user-circle"></i>
+                        <span class="app-menu__label">Doctor Dashboard</span>
+                    </a>
+                </li>
+            </ul>
+            @endif
+            @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+            <ul class="treeview-menu">
+                <li>
                     <a class="app-menu__item" href="{{ route('users') }}">
                         <i class="app-menu__icon fa fa-user-circle"></i>
                         <span class="app-menu__label">User List</span>
