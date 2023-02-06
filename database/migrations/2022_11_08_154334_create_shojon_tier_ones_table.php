@@ -19,6 +19,7 @@ class CreateShojonTierOnesTable extends Migration
             $table->string('service_providers_name')->nullable();
             $table->string('service_providers_di')->nullable();
             $table->string('date')->nullable();
+            $table->string('time')->nullable();
             $table->string('time_call_started')->nullable();
             $table->string('time_call_ended')->nullable();
             $table->string('duration')->nullable();

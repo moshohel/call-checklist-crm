@@ -29,6 +29,7 @@
                         <tr>
                             <th>#</th>
                             <th>Date</th>
+                            <th>Time</th>
                             <th>Phone No</th>
                             <th>Caller ID</th>
                             <th>Caller Name</th>
@@ -45,6 +46,7 @@
                             <tr>
                                 <td>{{$key}}</td>
                                 <td>{{$row->date}}</td>
+                                <td>{{$row->time}}</td>
                                 <td>{{$row->phone_number}}</td>
                                 <td>{{$row->caller_id}}</td>
                                 <td>{{$row->caller_name}}</td>
@@ -63,8 +65,6 @@
             </div>
         </div>
     </div>  
-    
-
 @endsection
 @push('scripts')
     <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>
