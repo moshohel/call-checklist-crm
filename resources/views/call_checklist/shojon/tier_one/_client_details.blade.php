@@ -63,7 +63,7 @@
                 <label for="validationCustom01" class="form-label">Call Type :</label><br>
                 <label for="validationCustom01" class="form-label">Caller :</label><br>
                 <label for="validationCustom01" class="form-label">Distress Rating: </label><br>
-                <label for="validationCustom01" class="form-label">Rating of wellbeing:</label><br>
+                <label for="validationCustom01" class="form-label">GHQ:</label><br>
             </div>
             <div class="col-md-7">
                 <label for="validationCustom01" class="form-label"><b>{{ $data->date }}</b></label><br>

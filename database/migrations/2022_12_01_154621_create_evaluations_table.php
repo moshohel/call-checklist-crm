@@ -19,6 +19,8 @@ class CreateEvaluationsTable extends Migration
             $table->string('counselor_name')->nullable();
             $table->string('duration_call')->nullable();
             $table->string('date')->nullable();
+            $table->string('rating_score')->nullable();
+            $table->text('recommendation')->nullable();
             $table->text('assessment')->nullable();
             $table->text('observation')->nullable();
             $table->timestamps();

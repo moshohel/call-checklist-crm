@@ -18,23 +18,23 @@
         	<div class="row g-4">
               <div class="col-md-3">
                   <label for="validationCustom01" class="form-label">Observer's Name:</label>
-                  <input type="text" class="form-control" name="name" placeholder="Observer's Name">
+                  <input type="text" class="form-control" name="name" placeholder="Observer's Name" required>
               </div> 
               <div class="col-md-3">
                   <label for="validationCustom01" class="form-label">Counselor's Name:</label>
-                  <input type="text" class="form-control" name="counselor_name" placeholder="Counselor's Name">
+                  <input type="text" class="form-control" name="counselor_name" placeholder="Counselor's Name" required>
                   
               </div>
               <div class="col-md-3">
                   <div class="form-group">
                       <label for="validationCustom01" class="form-label">Total duration of the Call</label>
-                       <input type="text" class="form-control" name="duration_call" placeholder="Total duration">
+                       <input type="text" class="form-control" name="duration_call" placeholder="Total duration" required>
                   </div>
               </div>
               <div class="col-md-3">
                   <div class="form-group">
                       <label for="validationCustom01" class="form-label">Date and Time:</label>
-                      <input type="datetime-local" class="form-control" name="date">
+                      <input type="datetime-local" class="form-control" name="date" required>
 
                   </div>
               </div>
@@ -102,6 +102,20 @@
           	</div>
           </div>
         </div>
+
+        <h4>Call rating</h4>
+        <p>According to observers, how effective was this call? <br>
+           Rate between 0 and 10 where 0 means not very effective and 10 means maximum effective.</p>
+        <div class="col-md-3">
+            <label for="validationCustom01" class="form-label">Rating Score:</label>
+            <input type="number" class="form-control" name="rating_score" placeholder="Rating Score" min="0" max="10" required>
+        </div> 
+        <div class="col-md-6">
+            <label for="validationCustom01" class="form-label">Recommendation</label>
+            {{-- <input type="textarea" class="form-control" name="recommendation"> --}}
+            <textarea id="recommendation" name="recommendation" rows="4" cols="50">
+            </textarea>
+        </div> 
         <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 <button type="submit" class="btn btn-primary save_ter_btn">Submit</button>

@@ -148,6 +148,17 @@
           	</div>
           </div>
         </div>
+
+        <div class="col-md-3">
+            <label for="validationCustom01" class="form-label">Rating Score:</label>
+            <input type="number" class="form-control" name="rating_score" value="{{$data->rating_score}}" min="0" max="10" required>
+        </div> 
+        <div class="col-md-6">
+            <label for="validationCustom01" class="form-label">Recommendation:</label>
+            <h6>--- {{$data->recommendation}}</h6>
+            
+            </textarea>
+        </div> 
         <div class="modal-footer">
                 <label class="control-label" style="text-align: center; color: red;">This file only for Evaluation View</label>
         </div>
