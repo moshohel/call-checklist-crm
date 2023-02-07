@@ -33,6 +33,7 @@
                             <th>Observer's Name</th>
                             <th>Counselor's Name</th>
                             <th>Total duration</th>
+                            <th>Call Rating</th>
                             <th class="text-center">Action</th>
                              
                         </tr>
@@ -45,6 +46,7 @@
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->counselor_name}}</td>
                                 <td>{{$row->duration_call}}</td>
+                                <td>{{$row->rating_score}}</td>
                                 <td><a href="{{ route('call_checklist.shojon.evaluationdetalis',$row->id) }}"><i class="fa-solid fa-eye"></i></a>
                                 </td>
                             </tr>

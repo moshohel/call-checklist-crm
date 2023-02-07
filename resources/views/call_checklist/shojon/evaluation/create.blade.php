@@ -27,8 +27,8 @@
               </div>
               <div class="col-md-3">
                   <div class="form-group">
-                      <label for="validationCustom01" class="form-label">Total duration of the Call</label>
-                       <input type="text" class="form-control" name="duration_call" placeholder="Total duration" required>
+                      <label for="validationCustom01" class="form-label">Total Duration of the Call(Minute)</label>
+                       <input type="number" class="form-control" name="duration_call" placeholder="Total duration" min="0.1" max="500" step="0.1" required>
                   </div>
               </div>
               <div class="col-md-3">
@@ -93,7 +93,7 @@
                            <td><input type="checkbox" name="Observation[]"value="Not agree"/></td> 
                            <td><input type="checkbox" name="Observation[]" value="Slightly agree" /></td> 
                            <td><input type="checkbox" name="Observation[]"value="Agree"/></td> 
-                           <td><input type="checkbox" name="Observation[]"value="Comment"/></td>
+                           <td><input type="text" name="Observation[]"value=""/></td>
                        </tr>
                        @endforeach
                    </tbody> 
@@ -113,7 +113,7 @@
         <div class="col-md-6">
             <label for="validationCustom01" class="form-label">Recommendation</label>
             {{-- <input type="textarea" class="form-control" name="recommendation"> --}}
-            <textarea id="recommendation" name="recommendation" rows="4" cols="50">
+            <textarea id="recommendation" name="recommendation" rows="4" cols="50" required>
             </textarea>
         </div> 
         <div class="modal-footer">

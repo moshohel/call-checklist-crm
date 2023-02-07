@@ -25,7 +25,7 @@
               </div>
               <div class="col-md-3">
                   <div class="form-group">
-                      <label for="validationCustom01" class="form-label">Total duration of the Call</label>
+                      <label for="validationCustom01" class="form-label">Total Duration of the Call(Minute)</label>
                        <input type="text" class="form-control" value="{{$data->duration_call}}">
                   </div>
               </div>
