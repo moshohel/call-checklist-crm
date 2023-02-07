@@ -60,6 +60,7 @@ class TierOneController extends Controller
 
     public function store_tier_One(Request $request)
     {
+        //dd($request->all());
         $request->validate([
             'client_id' => 'required|unique:shojon_tier_ones,caller_id|max:25',
         ]);
@@ -83,7 +84,8 @@ class TierOneController extends Controller
         $data['program_name'] = $request->project_name;
         $data['service_providers_name'] = $request->service_providers_name;
         $data['service_providers_di'] = $request->service_providers_id;
-        $data['date'] = date('Y-m-d H:i:s');
+        $data['date'] = date('Y-m-d');
+        $data['time'] = date('H:i:s');
         $data['time_call_started'] = $request->call_started;
         $data['time_call_ended'] = $request->call_end;
         $data['duration'] = $request->duration;

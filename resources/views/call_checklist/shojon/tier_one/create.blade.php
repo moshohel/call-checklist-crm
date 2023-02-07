@@ -17,7 +17,7 @@
         @csrf
         <div class="tile-body">
             <!-- general form elements -->
-            <input type="hidden" name="project_name" value="#">
+            <input type="hidden" name="project_name" value="SHOJON">
             <input type="hidden" name="service_providers_name" value="#">
             <input type="hidden" name="service_providers_id" value="#">
             <input type="hidden" name="call_started" value="#">
@@ -37,7 +37,7 @@
                   <div class="form-group">
                       @php $types = ['Male','Female','Intersex','Others']; @endphp 
                       <label for="validationCustom01" class="form-label">Sex:</label>
-                      <select class="form-control" readonly  name="sex">
+                      <select class="form-control" readonly  name="sex" required>
                           <option disabled selected>Select Sex</option>
                           @foreach($types as $item)
                           @if($newPatient->sex == $item)
@@ -53,7 +53,7 @@
                   <div class="form-group">
                       @php $types = ['0-12','13-19','20-30','30-40','40-65','65+','Don’t know.','Don’t want to share']; @endphp 
                       <label for="validationCustom01" class="form-label">Age:</label>
-                      <select class="form-control" readonly name="age">
+                      <select class="form-control" readonly name="age" required>
                           <option disabled selected>Select age</option>
                           @foreach($types as $item)
                           @if($newPatient->age == $item)
@@ -89,7 +89,7 @@
               <div class="col-md-3">
                   <div class="form-group">
                       <label for="validationCustom01" class="form-label">Location:</label>
-                      <select class="form-control" readonly  name="location">
+                      <select class="form-control" readonly  name="location" required>
                           <option disabled selected>Select Location</option>
                           @foreach($districts as $item)
                           @if($newPatient->location == $item->name)

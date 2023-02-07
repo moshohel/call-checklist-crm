@@ -9,23 +9,23 @@
             <div class="row">
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput1">Name</label>
-                    <input type="text" name="name" class="form-control" id="exampleFormControlInput1"
+                    <input type="text" required name="name" class="form-control" id="exampleFormControlInput1"
                         placeholder="patient name">
                     <input type="hidden" name="uniqueId" value="{{ $getuniqueId->unique_id }}">
                 </div>
 
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput2">Phone</label>
-                    <input type="number" name="phone_number" class="form-control" 
+                    <input type="number" required name="phone_number" class="form-control" 
                     value="">
                 </div>
 
                 <div class="form-group col-6">
                     <label class="control-label" for="sex"><b>Sex: <span class="required">*</span></b></label>
                     @php $types = ['Male','Female','Intersex','Others']; @endphp
-                    <select name="sex" id="sex" list="sex_list" class="form-control @error('sex') is-invalid @enderror">
+                    <select name="sex" id="sex" list="sex_list" required class="form-control @error('sex') is-invalid @enderror">
                         <datalist id="sex_list">
-                            <option value="">Select Sex</option>
+                            <option value="" selected disabled>Select Sex</option>
                             @foreach($types as $item)
 
 
@@ -40,9 +40,9 @@
                 <div class="form-group col-6">
                     <label class="control-label" for="age"><b>Age: <span class="required">*</span></b></label><br>
                     @php $types = ['0-12','13-19','20-30','30-40','40-65','65+','Don’t know.','Don’t want to share']; @endphp
-                    <select name="age" id="age" list="age_list" class="form-control @error('age') is-invalid @enderror">
+                    <select name="age" id="age" list="age_list" required class="form-control @error('age') is-invalid @enderror">
                         <datalist id="age_list">
-                            <option value="">Select Age</option>
+                            <option value="" selected disabled>Select Age</option>
                             @foreach($types as $item)
 
                             <option value="{{ $item }}">{{ $item }}</option>
@@ -58,12 +58,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group" @error('district') is-invalid @enderror">
-                                <input type="text" class="form-control" name="location" list="location_list" value="">
-                                <datalist id="location_list">
+                                <select type="text" class="form-control" required name="location" list="location_list" value="">
+                                <option value="" selected disabled>Select Location</option>
                                     @foreach ($districts as $item)
                                     <option value="{{ $item->name }}">{{ $item->name }}</option>
                                     @endforeach
-                                </datalist>
                             </div>
                             @error('district') {{ $message }} @enderror
                         </div>
