@@ -11,7 +11,7 @@
           @include('call_checklist.partials.messages')
           <div class="card-body pt-4 pb-5">
             {{-- @include('call_checklist.partials.messages') --}}
-            <table class="table card-table table-responsive table-responsive-large" style="width:100%" id="sampleTable">
+            <table class="table card-table" style="width:100%" id="sampleTable">
               <thead>
                 <tr>
                   <th>Reffer To</th>

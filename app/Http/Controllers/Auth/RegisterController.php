@@ -83,21 +83,34 @@ class RegisterController extends Controller
         // dd($data['image']->getClientOriginalName());
         // dd($data['image']);
 
-        return User::create([
-            'full_name' => $data['full_name'],
-            'user' => $data['user'],
-            'pass' => $data['password'],
-            'user_group' => $data['user_group'],
-            'image' => date('YmdHi') . $data['image']->getClientOriginalName(),
-            'user_level' => 8,
-            // 'password' => Hash::make($data['password']),
-        ]);
-        session()->flash('success', 'New User has added successfully !!');
+        $user = new User();
+        $user->full_name = $data['full_name'];
+        $user->user = $data['user'];
+        $user->pass = $data['password'];
+        $user->user_group = $data['user_group'];
+
+        if (array_key_exists("image", $data)) {
+            $user->image = date('YmdHi') . $data['image']->getClientOriginalName();
+        }
+        $user->user_level = 8;
+
+        return $user->save();
+
+        // return User::create([
+        //     'full_name' => $data['full_name'],
+        //     'user' => $data['user'],
+        //     'pass' => $data['password'],
+        //     'user_group' => $data['user_group'],
+        //     'image' => date('YmdHi') . $data['image']->getClientOriginalName(),
+        //     'user_level' => 8,
+        //     // 'password' => Hash::make($data['password']),
+        // ]);
+
     }
 
     public function register(Request $request)
     {
-        // dd($request->file('image'));
+
         if ($request->file('image')) {
             $file = $request->file('image');
             $filename = date('YmdHi') . $file->getClientOriginalName();
@@ -111,9 +124,10 @@ class RegisterController extends Controller
         // $this->guard()->login($user); //The line: $this->guard()->login($user); is where the user gets logged in auto
 
         if ($response = $this->registered($request, $user)) {
+
             return $response;
         }
-
+        session()->flash('success', 'New User has added successfully !!');
         return $request->wantsJson()
             ? new JsonResponse([], 201)
             : redirect($this->redirectPath());

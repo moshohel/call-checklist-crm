@@ -31,6 +31,10 @@
                             <label for="exampleFormControlInput5">User type</label>
                             <h3>{{ $user[0]->user_group }}</h3>
                         </div>
+                        <div class="col" style="float:right;">
+                            <label for="exampleFormControlInput5">User name</label>
+                            <h3>{{ $user[0]->user }}</h3>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -42,19 +46,19 @@
                         id="exampleFormControlInput1">
                 </div>
 
-                <div class="form-group col-6">
+                {{-- <div class="form-group col-6" style="display: none">
                     <label for="exampleFormControlInput2">User Name</label>
                     <input type="text" name="user" value="{{ $user[0]->user }}" class="form-control"
                         id="exampleFormControlInput2">
-                </div>
+                </div> --}}
 
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput3">Password</label>
-                    <input type="text" name="pass" value="{{ $user[0]->pass }}" class="form-control"
+                    <input type="password" name="pass" value="{{ $user[0]->pass }}" class="form-control"
                         id="exampleFormControlInput3">
                 </div>
-
-                <div class="form-group col-6">
+                
+                <div class="form-group col-6" style="display: none">
                     @if ( auth()->user()->user_group == "ADMIN")
                     <label for="exampleFormControlInput5">User type</label>
                     <select class="form-control" name="user_group" id="exampleFormControlSelect3" readonly>

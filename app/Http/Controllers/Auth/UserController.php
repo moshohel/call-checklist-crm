@@ -79,7 +79,14 @@ class UserController extends Controller
     public function update(Request $request, $user_id)
     {
         global $image;
-
+        $request->validate([
+            'full_name' => ['required', 'string', 'max:255'],
+            // 'user' => ['required', 'unique:vicidial_users', 'string', 'max:255'],
+            // 'user_type' => ['required', 'string', 'max:255'],
+            // 'user_group' => ['required', 'string', 'max:255'],
+            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'pass' => ['required', 'string', 'min:8'],
+        ]);
         // Post::where('id', 3)->$data = array();
         if ($request->file('image')) {
             $file = $request->file('image');

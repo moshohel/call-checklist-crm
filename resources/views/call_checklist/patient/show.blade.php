@@ -53,6 +53,7 @@
                 <button type="submit" class="btn btn-danger">Permanent Delete</button>
             </form>
         </div> --}}
+        @if( (auth()->user()->user_group != "SHOJON"))
         <div class="row">
             <div class="col">
 
@@ -69,6 +70,7 @@
                 <p class='btn btn-info' id="three" > Reffer - Tier 3 </p>
             </div>
         </div>
+        @endif
 
         <div class="modal fade" id="deleteModal{{ $patient->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">

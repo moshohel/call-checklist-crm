@@ -6,15 +6,14 @@
         <!-- Product Table -->
         <div class="card card-table-border-none" id="recent-orders">
           <div class="card-header justify-content-between">
-            <h2>All users</h2>
-            {{-- <div class="date-range-report ">
-              <span>Jan 25, 2021 - Feb 23, 2021</span>
-            </div> --}}
+            <div>
+              <h2>User List</h2>
+              <a href="{{ route('register') }}" class="btn btn-info btn-default" style="float: right;">New User</a>
+            </div>
           </div>
-          
           <div class="card-body pt-4 pb-5">
             @include('call_checklist.partials.messages')
-            <table class="table card-table table-responsive table-responsive-large" style="width:100%" id="sampleTable">
+            <table class="table card-table" id="sampleTable">
               <thead>
                 <tr>
                   <th>Last Login</th>
@@ -49,6 +48,8 @@
             </table>
           </div>
         </div>
+
+        
     </div>
 </div>
 @endsection
