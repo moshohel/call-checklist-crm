@@ -3,7 +3,7 @@
         
     {{-- <a href="#">SHOJON CRM</a> --}}
         <img src="{{ asset('Image/logo/SHOJON LOgo.png') }}" alt="logo" style="float:left;width:3%;height:3%;">
-        <a class="app-header__logo" href="#">{{ config('app.name') }}</a>
+        {{-- <a class="app-header__logo" href="#">{{ config('app.name') }}</a> --}}
         <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
     @endif
     <ul class="app-nav">
@@ -15,8 +15,8 @@
         </li> --}}
         <!-- User Menu-->
         <li class="dropdown">
-            <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu"><i
-                    class="fa fa-user fa-lg"></i></a>
+            <a class="app-nav__item" href="#" data-toggle="dropdown" aria-label="Open Profile Menu">{{ auth()->user()->full_name }}<i
+                    class="fa fa-user fa-lg ml-4"></i></a>
             <ul class="dropdown-menu settings-menu dropdown-menu-right">
                 {{-- <li>
                     <a class="dropdown-item" href="#"><i class="fa fa-cog fa-lg"></i> Settings</a>

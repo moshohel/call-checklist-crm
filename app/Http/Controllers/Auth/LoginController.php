@@ -64,7 +64,7 @@ class LoginController extends Controller
         $user_id = Auth::user()->user_id;
         $redirectPath = '/';
         if (($user->user_level == 9) && ($user->user_group == 'ADMIN')) {
-            $redirectPath = 'call-checklist/index';
+            $redirectPath = 'call-checklist/shojon/dashboard';
         } else if (($user->user_level == 8) && ($user->user_group == 'SHOJON')) {
             $redirectPath = 'call-checklist/shojon/dashboard';
         } else if (($user->user_level == 8) && ($user->user_group == 'KPR')) {
@@ -73,6 +73,8 @@ class LoginController extends Controller
             $redirectPath = 'call-checklist/shojon/index';
         } else if (($user->user_level == 1) && ($user->user_group == 'KPR')) {
             $redirectPath = 'call-checklist/kpr/index';
+        } else if (($user->user_level == 8) && ($user->user_group == 'Supervisor')) {
+            $redirectPath = '/referral';
         } else if (($user->user_level == 8) && ($user->user_group == 'Therapist')) {
             $redirectPath = '/show/' . $user_id;
         } else if (($user->user_level == 8) && ($user->user_group == 'Psychiatrist')) {

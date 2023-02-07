@@ -96,30 +96,35 @@
 
 <body>
     <div class="main">
-        <p class="sign" align="center">Sign in</p>
+
+
+        {{-- <p class="sign" align="center">Sign in</p> --}}
+        <img class="sign" src="{{ asset('Image/logo/SHOJON LOgo.png') }}" alt="logo" style="margin: auto;width:15%;height:15%;">
         <form class="form1" method="POST" action="{{ route('login') }}">
             @csrf
             {{-- <input class="un " type="text" name="name" align="center" placeholder="Username"> --}}
             {{-- <input class="pass" type="password" name="password" align="center" placeholder="Password"> --}}
             <input id="email" type="text" class="un @error('user') is-invalid @enderror" name="user"
-                value="{{ old('user') }}" required autocomplete="user" autofocus>
+                value="{{ old('user') }}"  autocomplete="user" autofocus>
 
             @error('user')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+            <div class="">
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            </div>
             @enderror
             <input id="password" type="password" class="pass @error('password') is-invalid @enderror" name="password"
-                required autocomplete="current-password">
+                 autocomplete="current-password">
 
             @error('password')
-            <span class="invalid-feedback" role="alert">
-                <strong>{{ $message }}</strong>
-            </span>
+            <div>
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            </div>
             @enderror
-            {{-- <a class="submit" align="center" href="#">Sign in</a>
-            <p class="forgot" align="center"><a href="#">Forgot Password?</a></p> --}}
-
+            
             <div class="form-group row mb-0">
                 <div class="col-md-8 offset-md-4">
                     <button type="submit" class="submit">

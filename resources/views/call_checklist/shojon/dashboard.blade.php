@@ -14,7 +14,7 @@
 @section('content')
     <div class="app-title">
         <div>
-            <h1><i class="fa fa-tags"></i> <a href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">Dashboard Tier-1</span></a>
+            <h1><i class="fa fa-tags"></i> <a href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">{{ $pageTitle }} </span></a>
             </h1>
         </div>
     </div>
