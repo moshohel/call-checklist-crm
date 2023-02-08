@@ -53,9 +53,9 @@ Route::get('/uniqueid', [TierOneController::class, 'uniqueId']);
 Route::get('generate-pdf-patient/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');
 Route::group(['prefix' => 'patient'], function () {
     //Route::get('', 'CallChecklist\PatientController@pupup');
-    Route::get('/popup/{number}', [PatientController::class, 'pupup']);
-    Route::get('/livesearch', [PatientController::class, 'searchExisting']);
-    Route::get('/create/{number}', [PatientController::class, 'create'])->name('patient.create');
+    Route::get('/popup/{number}', [PatientController::class, 'pupup'])->middleware('auth');
+    Route::get('/livesearch', [PatientController::class, 'searchExisting'])->middleware('auth');
+    Route::get('/create/{number}', [PatientController::class, 'create'])->name('patient.create')->middleware('auth');
 
     Route::get('/', 'Patient\PatientController@index')->name('patients')->middleware('auth');
     Route::get('/show/{id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');

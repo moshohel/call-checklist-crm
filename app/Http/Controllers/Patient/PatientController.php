@@ -129,7 +129,8 @@ class PatientController extends Controller
                                 <td>' . $row->sex . '</td>
                                 <td>' . $row->location . '</td>
                                 <td>' . $row->socio_economic . '</td>
-                                <td>' . '<a href="' . route('call_checklist.shojon.TierOneedit', $row->caller_id) . '"><i class="fa-solid fa-eye"></a>' . '</td>
+                                <td>' . '<a class="btn btn-info m-1" href="' . route('call_checklist.shojon.TierOneedit', $row->caller_id) . '">Last T1</a>' . '</td>
+                                <td>' . '<a class="btn btn-info m-1" href="' . route('patient.showInfo', $row->caller_id) . '"> History </a>' . '</td>
                             </tr>
                             ';
                 }
