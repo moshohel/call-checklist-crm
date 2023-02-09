@@ -26,7 +26,7 @@ class ShojonController extends Controller
 
     public function index(Request $request)
     {
-        $data = $this->setFilterParams();
+        $data = $this->setFilterParams(); 
 
         $pageTitle = $this->pageTitle;
 

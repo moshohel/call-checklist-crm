@@ -217,6 +217,26 @@
             @endif  
         </ul>
     </div>
+</div><hr>
+ <div class="row">
+     <div class="col-md-12">
+        <label for="validationCustom01" class="form-label"><b>Call Ddescription</b></label><br>
+        <ul>
+            @if($data->call_description !="")
+            <li><b>{{ $data->call_description }}</b></li> 
+            @endif  
+        </ul>
+    </div>
+</div><hr>
+ <div class="row">
+     <div class="col-md-12">
+        <label for="validationCustom01" class="form-label"><b>Message</b></label><br>
+        <ul>
+            @if($data->message !="")
+            <li><b>{{ $data->message }}</b></li> 
+            @endif  
+        </ul>
+    </div>
 </div>
 </div>
 </div>

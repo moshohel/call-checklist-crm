@@ -65,6 +65,10 @@ class TierOneController extends Controller
         $request->validate([
         'client_id' => 'required|unique:shojon_tier_ones,caller_id|max:25',
     ]);
+
+       if ($request->message) {
+            $this->sendSms($request->message, $request->phone_number);
+        }
        if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -111,12 +115,36 @@ class TierOneController extends Controller
         $data['internal_referr'] = $request->Internal_Referral;
         $data['reason_for_referral'] = $request->reason_for_referral;
         $data['name_of_agency'] = $request->name_of_agency;
+        $data['call_description'] = $request->call_description;
+        $data['message'] = $request->message;
 
         DB::table('shojon_tier_ones')->insert($data);
         
         return redirect()->route('call_checklist.shojon.TierOneList');
     }
 
+    private function sendSms($message, $phone)
+    {
+        $url = "https://portal.metrotel.com.bd/smsapi";;
+        $data = [
+            "api_key" => "C200111761581ef3d46af1.78303603",
+            "type" => "text",
+            "contacts" => $phone,
+            "senderid" => "8809612119900",
+            "msg" => $message,
+        ];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
+    }
 
     public function tireOneList()
     {
@@ -141,6 +169,9 @@ class TierOneController extends Controller
     }
     public function TierOneUpdate(Request $request)
     {
+        if ($request->message) {
+            $this->sendSms($request->message, $request->phone_number);
+        }
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -178,6 +209,8 @@ class TierOneController extends Controller
         $data['internal_referr'] = $request->Internal_Referral;
         $data['reason_for_referral'] = $request->reason_for_referral;
         $data['name_of_agency'] = $request->name_of_agency;
+        $data['call_description'] = $request->call_description;
+        $data['message'] = $request->message;
 
         DB::table('shojon_tier_ones')->where('id', $request->id)->update($data);
 
