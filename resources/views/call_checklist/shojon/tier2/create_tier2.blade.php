@@ -29,67 +29,91 @@
                 <input type="hidden" name="call_started" value="#">
                 <input type="hidden" name="call_end" value="#">
                 <input type="hidden" name="duration" value="#">
+                <input type="hidden" name="session_id" value="{{ $session_id }}">
 
-                <div class="form-group">
-                    <label class="control-label" for="phone_number"><b>Phone Number:</b></label><br>
-                    <input class="form-control" type="text" name="phone_number" id="phone_number"
-                    value="1">
-                </div>
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <label for="validationCustom01" class="form-label">Phone Number:</label>
+                        <input type="number" class="form-control" readonly name="phone_number"value="{{$newPatient->phone_number}}" >
+                    </div>
+                    <div class="col-md-3">
+                        <label for="validationCustom01" class="form-label">Client Name:</label>
+                        <input type="text" class="form-control" name="client_name" readonly value="{{$newPatient->name}}">
+                        <input type="hidden" class="form-control" name="client_id" placeholder="Enter client name" value="{{ $uniqueid }}">
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @php $types = ['Male','Female','Intersex','Others']; @endphp 
+                            <label for="validationCustom01" class="form-label">Sex:</label>
+                            <select class="form-control" readonly  name="sex" required>
+                                <option disabled selected>Select Sex</option>
+                                @foreach($types as $item)
+                                @if($newPatient->sex == $item)
+                                <option selected value="{{$item}}">{{$item}}</option>
+                                @else
+                                <option value="{{$item}}">{{$item}}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @php $types = ['0-12','13-19','20-30','30-40','40-65','65+','Don’t know.','Don’t want to share']; @endphp 
+                            <label for="validationCustom01" class="form-label">Age:</label>
+                            <select class="form-control" readonly name="age" required>
+                                <option disabled selected>Select age</option>
+                                @foreach($types as $item)
+                                @if($newPatient->age == $item)
+                                <option selected value="{{$item}}">{{$item}}</option>
+                                @else
+                                <option value="{{$item}}">{{$item}}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div><hr>
 
-                <div class="form-group">
-                    <label class="control-label" for="caller_id"><b>Caller ID:</b></label>
-                    <input class="form-control" type="text" name="caller_id" id="caller_id"
-                    value="{{ old('caller_id',$last? $last->caller_id : null) }}"
-                    placeholder="Enter caller name"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="caller_name"><b>Caller Name:</b></label>
-                    <input class="form-control" type="text" name="caller_name" id="caller_name"
-                    value="{{ old('caller_name',$last? $last->caller_name : null) }}"
-                    placeholder="Enter caller name"/>
-                </div>
 
                 <input type="hidden" name="referrence_id" value="1">
 
+                <!-- second line -->
 
+          <div class="row g-4">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label class="control-label" for="sex"><b>Sex:</label>
-                        @php $types = ['Male', 'Female', 'Intersex', 'Others']; @endphp
-                        <select name="sex" id="sex" list="sex_list"
-                        class="form-control @error('sex') is-invalid @enderror">
-                        <datalist id="sex_list">
-                            <option value="">Select Sex</option>
-                            @foreach($types as $item)
-                            @if($last && ($last->sex == $item))
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
-                            @else
-                            <option value="{{ $item }}">{{ $item }}</option>
-                            @endif
-                            @endforeach
-                        </datalist>
+                    @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower Class', 'Lower Class']; @endphp 
+                    <label for="validationCustom01" class="form-label">Socio-economic Status (SES):</label>
+                    <select class="form-control" readonly  name="socio_economic">
+                        <option disabled selected>Select Socio-economic</option>
+                        @foreach($types as $item)
+                        @if($newPatient->socio_economic_status ==$item )
+                        <option selected value="{{$item}}">{{$item}}</option>
+                        @else
+                        <option value="{{$item}}">{{$item}}</option>
+                        @endif
+                        @endforeach
                     </select>
-                    @error('sex') {{ $message }} @enderror
                 </div>
-
+            </div>
+            <div class="col-md-3">
                 <div class="form-group">
-                    <label class="control-label" for="age"><b>Age: </label><br>
-                        @php $types = ['0-12','13-19', '20-30', '31-40', '41-65', '65+', 'Do not know', 'Do not want to share']; @endphp
-                        <select name="age" id="age" list="age_list"
-                        class="form-control @error('age') is-invalid @enderror">
-                        <datalist id="age_list">
-                            <option value="">Select Age</option>
-                            @foreach($types as $item)
-                            @if( $last && ($last->age == $item))
-                            <option selected value="{{ $item }}">{{ $item }}</option>
-                            @else
-                            <option value="{{ $item }}">{{ $item }}</option>
-                            @endif
-                            @endforeach
-                        </datalist>
+                    <label for="validationCustom01" class="form-label">Location:</label>
+                    <select class="form-control" readonly  name="location" required>
+                        <option disabled selected>Select Location</option>
+                        @foreach($districts as $item)
+                        @if($newPatient->location == $item->name)
+                        <option selected value="{{$item->name}}">{{$item->name}}</option>
+                        @else
+                        <option value="{{$item->name}}">{{$item->name}}</option>
+                        @endif
+                        @endforeach
                     </select>
-                    @error('age') {{ $message }} @enderror
                 </div>
+            </div>
+            
+        </div><hr>
 
                 <div class="form-group">
                     <label class="control-label" for="occupation"><b>Occupation:</label>
@@ -113,52 +137,12 @@
                             </label>
                             <span id="OccupationBox" style="display: none;">
                                 <input class="form-control" type="text" name="other_occupation"
-                                value="{{ old('other_occupation',$last ? $last->other_occupation : null) }}"
+                                value=""
                                 placeholder="Explain"/>
                             </span>
                         </div>
                         @error('occupation') {{ $message }} @enderror
                     </div>
-
-
-                    <div>
-                        <label class="control-label" for="district"><b>Location:</label>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <select type="text" class="form-control" name="location" list="location_list">
-                                            <option disabled selected="">Select districts</option>
-                                            @foreach ($districts as $item)
-                                            <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    @error('district') {{ $message }} @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="control-label" for="socio_economic_status"><b>Socio-economic
-                            Status:</b></label>
-                            @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower Class', 'Lower Class']; @endphp
-                            <select name="socio_economic_status" list="socio_economic_status_list"
-                            id="socio_economic_status" class="form-control">
-
-                            <datalist id="socio_economic_status_list">
-                                <option value="">Select SES</option>
-                                @foreach($types as $item)
-                                @if( old('socio_economic_status') == $item))
-                                <option value="{{ $item }}">{{ $item }}</option>
-                                @else
-                                <option value="{{ $item }}">{{ $item }}</option>
-                                @endif
-                                @endforeach
-                            </datalist>
-                        </select>
-                    </div>
-
-
 
                     <div class="form-group">
                         <label class="control-label" for="Educational_Qualification"><b> Educational Qualification: (mandatory single select):</b></label>
@@ -220,7 +204,7 @@
                     </label>
                     <span id="SessionBox" style="display: none;">
                         <input class="form-control" type="text" name="other_Session_Number"
-                        value="{{ old('other_occupation',$last ? $last->other_occupation : null) }}"
+                        value=""
                         placeholder="Explain"/>
                     </span>
                 </div>
@@ -399,7 +383,7 @@
                 </label>
                 <span id="Present_Continuation1" style="display: none;">
                     <input class="form-control" type="text" name="other_PresentCotinuation"
-                    value="{{ old('other_hearing_source',$last ? $last->other_hearing_source : null) }}"
+                    value=""
                     placeholder="Explain"/>
                 </span>
             </div>
@@ -598,11 +582,11 @@
                 </label><br>
                 <label id="SHOJONTierThreeBox" class="TierThree">
                 <label class="control-label">
-                 <a href="#" class="btn btn-primary btn-sm Referral_form " data-id="#" data-toggle="modal" data-target="#ReferralModal" >Referral Tier 3</a>
+                 <a href="#" class="btn btn-primary btn-sm Referral_form " data-id="#" data-toggle="modal" data-target="#Referral_tier_threeModal" >Referral Tier 3</a>
 
               </label>
              </label>
-             @include('call_checklist.shojon.tier2._referral')
+             @include('call_checklist.shojon.tier2._referral_tier_three')
      </div>
      <div class="form-control">
         <label class="control-label" for="client_referral">

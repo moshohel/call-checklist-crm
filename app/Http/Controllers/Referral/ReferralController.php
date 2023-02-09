@@ -52,6 +52,7 @@ class ReferralController extends Controller
         } else {
             $consultants = DB::select('SELECT full_name, user_id, user as user_name FROM vicidial_users WHERE user_group="Psychiatrist"');
         }
+        // dd($referral);
         return view('call_checklist.referral.edit', compact('referral', 'consultants'));
     }
 

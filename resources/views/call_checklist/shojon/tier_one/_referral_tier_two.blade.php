@@ -13,11 +13,11 @@
               <div class="row g-2">
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Referral Form:</label>
-              <input type="text" class="form-control" readonly name="referral_to"  value="Shojon Tier 1">
+              <input type="text" class="form-control" readonly name="referral_from"  value="Shojon Tier 1">
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Referral To:</label>
-              <input type="text" class="form-control" readonly name="referral_from" value="Shojon Tier 2">
+              <input type="text" class="form-control" readonly name="referral_to" value="Shojon Tier 2">
              </div>
              </div><hr>
              <div class="row g-3">
@@ -30,6 +30,10 @@
               <input type="text" class="form-control" name="client_name" value="{{$newPatient->name}}" readonly>
              </div>
              <div class="col-md-4">
+              <label for="validationCustom01" class="form-label">Sex:</label>
+              <input type="text" class="form-control" readonly name="gender" value="{{ $newPatient->sex }}">
+             </div>
+             <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Age:</label>
               <input type="text" class="form-control" name="age" readonly value="{{ $newPatient->age }}">
              </div>
@@ -37,7 +41,7 @@
              <div class="row g-2">
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Phone Number:</label>
-              <input type="number" class="form-control" name="phone_number" value="{{$newPatient->phone_number}}" readonly>
+              <input type="number" class="form-control" name="phone_number" value="{{$newPatient->phone_number}}">
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Emergency number in case of unavailability:</label>

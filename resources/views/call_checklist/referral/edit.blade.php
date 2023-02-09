@@ -14,7 +14,7 @@
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput1">Name</label>
                     <input type="text" name="name" value="{{ $referral[0]->name }}" class="form-control"
-                        id="exampleFormControlInput1">
+                        id="exampleFormControlInput1" readonly>
                 </div>
 
                 <div class="form-group col-6">
@@ -33,29 +33,46 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="form-group col-6">
+                    <label for="exampleFormControlInput1">Diagnosis</label>
+                    <input type="text" name="referr_from" value="{{ $referral[0]->diagnosis }}" class="form-control"
+                        id="exampleFormControlInput1">
+                </div>
 
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput7">Preferred Contultent</label>
                     <input type="text" class="form-control" name="preferred_therapist_or_psychiatrist"  value="{{ $referral[0]->preferred_therapist_or_psychiatrist }}" id="exampleFormControlInput7"
-                        placeholder="Preferred Contultent" >
+                        placeholder="Preferred Contultent" readonly >
                 </div>
 
                 <div class="form-group col-6">
-                    <label for="exampleFormControlInput1">Referr From</label>
+                    <label for="exampleFormControlInput1">Refer From</label>
                     <input type="text" name="referr_from" value="{{ $referral[0]->referr_from }}" class="form-control"
-                        id="exampleFormControlInput1">
+                        id="exampleFormControlInput1" readonly>
                 </div>
+
+                <div class="form-group col-6">
+                    <label for="exampleFormControlInput1">Referral type</label>
+                    <input type="text" name="referr_from" value="{{ $referral[0]->Referral_types }}" class="form-control"
+                        id="exampleFormControlInput1" readonly>
+                </div>
+
                 
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput1">Client Id</label>
                     <input type="text" name="unique_id" value="{{ $referral[0]->unique_id }}" class="form-control"
-                        id="exampleFormControlInput1">
+                        id="exampleFormControlInput1" readonly>
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="exampleFormControlInput1">Gender</label>
+                    <input type="text" name="referr_from" value="{{ $referral[0]->gender }}" class="form-control"
+                        id="exampleFormControlInput1" readonly>
                 </div>
 
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput6">age</label>
-                    <input type="number" class="form-control" name="age" id="exampleFormControlInput6"
-                        placeholder="age" min="1" max="50000">
+                    <input type="text" class="form-control" name="age" value="{{ $referral[0]->age }}" id="exampleFormControlInput6" readonly >
                 </div>
 
                 

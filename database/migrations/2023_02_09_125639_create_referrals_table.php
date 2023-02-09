@@ -20,6 +20,8 @@ class CreateReferralsTable extends Migration
             $table->string('name')->nullable();
             $table->string('unique_id')->nullable();
             $table->string('age')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('occupation')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('phone_number_two')->nullable();
             $table->string('reason_for_therapy')->nullable();
@@ -32,7 +34,9 @@ class CreateReferralsTable extends Migration
             $table->boolean('appointment_status')->default(0);
             $table->string('financial')->nullable();
             $table->string('therapist')->nullable();
-            $table->string('Referral_types')->nullable(); 
+            $table->string('Referral_types')->nullable();
+            $table->string('diagnosis')->nullable();
+            $table->string('assigned_date_time')->nullable();
             $table->timestamps();
         });
     }

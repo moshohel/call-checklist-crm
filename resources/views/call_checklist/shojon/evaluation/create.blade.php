@@ -28,7 +28,7 @@
               <div class="col-md-3">
                   <div class="form-group">
                       <label for="validationCustom01" class="form-label">Total Duration of the Call(Minute)</label>
-                       <input type="number" class="form-control" name="duration_call" placeholder="Total duration" min="0.1" max="500" step="0.1" required>
+                       <input type="number" class="form-control" name="duration_call" placeholder="Total duration" min="0.1" max="500" step=".01" required>
                   </div>
               </div>
               <div class="col-md-3">
@@ -117,7 +117,7 @@
             </textarea>
         </div> 
         <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                {{-- <button type="button" class="btn btn-danger" >Close</button> --}}
                 <button type="submit" class="btn btn-primary save_ter_btn">Submit</button>
         </div>
         </form>

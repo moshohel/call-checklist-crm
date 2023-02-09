@@ -11,27 +11,44 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Exports\ShojonTierTowExport;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Session;
+use Illuminate\Support\Facades\Auth;
 
 class Tier2Controller extends Controller
 {
     protected $pageTitle = 'Shojon Tier 2 Service';
     protected $pageTitleUpdate = 'Shojon Tier 2 Update';
 
-
-    public function tire2fromblade($refId = 0, $phone = '')
+    public function tireOnefromblade($uniqueid)
     {
+        $uniqueid = $uniqueid;
         $pageTitle = $this->pageTitle;
-        $previous_data = null;
-        $last = null;
+        $districts = DB::table('districts')->get();
+        $newPatient = DB::table('patients')->where('unique_id', $uniqueid)->first();
+        return view('call_checklist.shojon.tier_one.create', compact('pageTitle', 'districts', 'uniqueid', 'newPatient'));
+    }
+
+    public function tire2fromblade($uniqueid, $session_id)
+    {
+        // $uniqueid = $uniqueid;
+        // $pageTitle = $this->pageTitle;
+        // $districts = DB::table('districts')->get();
+        $session_id = $session_id;
 
         try {
-            $is_phone_no = DB::table('call_checklist_for_shojon')->where('phone_number', $phone)->first();
-            if ($is_phone_no) {
-                $previous_data = DB::table('call_checklist_for_shojon')->where('phone_number', $phone)->get();
-                $last = $previous_data->last();
-            }
+            $uniqueid = $uniqueid;
+            $pageTitle = $this->pageTitle;
             $districts = DB::table('districts')->get();
-            return view('call_checklist.shojon.tier2.create_tier2', compact('pageTitle', 'districts', 'refId', 'phone', 'is_phone_no', 'previous_data', 'last'));
+            $newPatient = DB::table('patients')->where('unique_id', $uniqueid)->first();
+            // print_r($uniqueid);
+            // dd($newPatient);
+            // $is_phone_no = DB::table('call_checklist_for_shojon')->where('phone_number', $phone)->first();
+            // if ($is_phone_no) {
+            //     $previous_data = DB::table('call_checklist_for_shojon')->where('phone_number', $phone)->get();
+            //     $last = $previous_data->last();
+            // }
+            // $districts = DB::table('districts')->get();
+            return view('call_checklist.shojon.tier2.create_tier2', compact('pageTitle', 'districts', 'uniqueid', 'newPatient', 'session_id'));
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         } catch (\Exception $e) {
@@ -42,7 +59,8 @@ class Tier2Controller extends Controller
     public function store(Request $request)
     {
         //$params = $request->except('_token');
-         //dd($request);
+
+        // dd($session->session_taken);
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -118,7 +136,15 @@ class Tier2Controller extends Controller
 
 
         DB::table('sojon_tier2s')->insert($data);
-        return redirect()->back()->with('success', 'insert successfull');
+
+        $id = $request['session_id'];
+        // dd($request);
+        $session = Session::find($id);
+        $session->session_taken = "DONE";
+        $session->save();
+        $user_id = auth()->user()->user_id;
+        // return redirect()->back()->with('success', 'insert successfull');
+        return redirect()->route('user.show', $user_id)->with('success', 'insert successfull');
     }
 
     public function clientUpdateTierTwo($id, $phone = '')
@@ -232,11 +258,12 @@ class Tier2Controller extends Controller
         return redirect()->back()->with('success', 'Update successfully!');
     }
 
-    public function tierTow_report(Request $request){
+    public function tierTow_report(Request $request)
+    {
         $fromdate = $request->FromDate;
         $todate = $request->toDate;
 
-        return Excel::download(new ShojonTierTowExport($fromdate,$todate), "$fromdate-$todate.xlsx");
+        return Excel::download(new ShojonTierTowExport($fromdate, $todate), "$fromdate-$todate.xlsx");
     }
 
 
@@ -280,14 +307,14 @@ class Tier2Controller extends Controller
         $data->name = $request->client_name;
         $data->unique_id = $request->client_id;
         $data->age = $request->age;
+        $data->gender = $request->gender;
         $data->phone_number = $request->phone_number;
         $data->phone_number_two = $request->Emergency_number;
         $data->reason_for_therapy = $request->reason_for_therapy;
         $data->preferred_time = $request->preferred_time;
-        $data->preferred_therapist_or_psychiatrist = $request->preferred_therapist_or_psychiatrist;
         $data->financial = $request->Financial;
         $data->Referral_types = $request->Referral_types;
-        $data->therapist = $request->Therapist;
+        $data->preferred_therapist_or_psychiatrist = $request->Therapist;
         $data->save();
     }
 }

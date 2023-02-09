@@ -51,7 +51,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Are sure to delete?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Assign Counselor</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -62,14 +62,32 @@
 
                             <div class="form-group col-6">
                                 <label for="exampleFormControlInput7">Preferred Contultent</label>
-                                <input type="text" class="form-control" name="preferred_therapist_or_psychiatrist" readonly  value="{{ $referral[0]->preferred_therapist_or_psychiatrist }}" id="exampleFormControlInput7"
-                                    placeholder="No Preferrence" >
+                                <input type="text" class="form-control" name="preferred_therapist_or_psychiatrist" readonly  value="{{ $referral[0]->preferred_therapist_or_psychiatrist }}" id="exampleFormControlInput7" >
                             </div>
 
                             <div class="form-group col-6">
                                 <label for="exampleFormControlInput7">Preferred Time</label>
-                                <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->preferred_time }}" id="exampleFormControlInput7"
-                                    placeholder="No Preferrence" >
+                                <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->preferred_time }}" id="exampleFormControlInput7" >
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="exampleFormControlInput7">Gender</label>
+                                <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->gender }}" id="exampleFormControlInput7" >
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="exampleFormControlInput7">Referral types</label>
+                                <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->Referral_types }}" id="exampleFormControlInput7" >
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="exampleFormControlInput7">Diagnosis</label>
+                                <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->diagnosis }}" id="exampleFormControlInput7" >
+                            </div>
+
+                            <div class="form-group col-6">
+                                <label for="exampleFormControlInput7">Reason</label>
+                                <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->reason_for_therapy }}" id="exampleFormControlInput7" >
                             </div>
 
                             <div class="form-group col-6">

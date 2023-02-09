@@ -30,8 +30,11 @@ Route::get('success', function () {
 
 /*Route::get('login','Auth\LoginController@showLoginForm');
 Route::post('login','Auth\LoginController@login');*/
-Route::get('/add_patient', [Tier2Controller::class, 'tire2fromblade'])->name('call_checklist.shojon.tier2.create');
-Route::get('/add_patientt3', [shojonTierThree::class, 'tireThreefromblade'])->name('call_checklist.shojon.tierThree.create');
+Route::get('/add_patient/{user_id}/{session_id}', [Tier2Controller::class, 'tire2fromblade'])->name('call_checklist.shojon.tier2.create')->middleware('auth');
+Route::post('store/patient', [Tier2Controller::class, 'store'])->name('call_checklist.shojontier2.store')->middleware('auth');
+
+
+Route::get('/add_patientt3/{user_id}', [shojonTierThree::class, 'tireThreefromblade'])->name('call_checklist.shojon.tierThree.create')->middleware('auth');
 
 Route::get('/', 'Auth\LoginController@showLoginForm')->name('login');
 Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
@@ -194,7 +197,7 @@ Route::group(['prefix' => 'call-checklist'], function () {
             //tire 2 route 
             Route::get('/add_patient', [Tier2Controller::class, 'tire2fromblade'])->name('call_checklist.shojon.tier2');
 
-            Route::post('store/patient', [Tier2Controller::class, 'store'])->name('call_checklist.shojontier2.store');
+            // Route::post('store/patient', [Tier2Controller::class, 'store'])->name('call_checklist.shojontier2.store');
 
             Route::get('/patientList', [Tier2Controller::class, 'tire2patientlist'])->name('call_checklist.shojon.Patientlist');
             Route::get('/details-tier-two/{id}', [Tier2Controller::class, 'clientDetailsTierTwo'])->name('shojon.tireTwo.view');

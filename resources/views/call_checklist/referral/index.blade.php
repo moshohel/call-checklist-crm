@@ -18,6 +18,7 @@
                   <th>Reffer Form</th>
                   <th>Name</th>
                   <th class="d-none d-md-table-cell">Client ID</th>
+                  <th class="d-none d-md-table-cell">Reason for referral</th>
                   <th class="d-none d-md-table-cell">Already Referred</th>
                   <th class="d-none d-md-table-cell">Referred To</th>
                   <th class="d-none d-md-table-cell">Options</th>
@@ -34,12 +35,13 @@
                         <td class="d-none d-md-table-cell text-dark">{{ $referral->referr_from }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $referral->name }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $referral->unique_id }}</td>
+                        <td class="d-none d-md-table-cell text-dark">{{ $referral->reason_for_therapy }}</td>
                         <td class="d-none d-md-table-cell text-dark already_referred">{{ $referral->already_referred }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $referral->referred_therapist_or_psychiatrist }}</td>
                         <td>
                           
                           <a href="{{ route('referral.edit', [$referral->unique_id, $referral->id]) }}" class="btn btn-info btn-default">Edit</a>
-                          <a href="{{ route('referral.showInfo', [$referral->unique_id, $referral->id]) }}" class="btn btn-info btn-default">Counselor Refer</a>
+                          <a href="{{ route('referral.showInfo', [$referral->unique_id, $referral->id]) }}" class="btn btn-info btn-default">Assign Counselor</a>
                         </td>
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $referral->department }}</td> --}}
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $referral->con_name }}</td> --}}

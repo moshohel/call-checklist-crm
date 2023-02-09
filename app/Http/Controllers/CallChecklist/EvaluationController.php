@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 class EvaluationController extends Controller
 {
-   protected $pageTitle = 'Call Evaluation Service';
+   protected $pageTitle = 'Call Evaluation Form';
    protected $pageTitlelist = 'Call Evaluation List';
    protected $pagedetails = 'Call evaluation details';
    public function callEvaluationblade()
@@ -30,7 +30,8 @@ class EvaluationController extends Controller
       $data['observation'] = json_encode($request->Observation);
 
       DB::table('evaluations')->insert($data);
-      return redirect()->back()->with('success', 'insert successfull');
+      // return redirect()->back()->with('success', 'insert successfull');
+      return redirect()->route('call_checklist.shojon.eva_index')->with('success', 'Added Successfull');
    }
 
    function callEvaluationIndex()

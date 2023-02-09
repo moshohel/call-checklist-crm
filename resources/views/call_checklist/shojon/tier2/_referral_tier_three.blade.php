@@ -13,7 +13,7 @@
               <div class="row g-2">
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Referral From:</label>
-              <input type="text" class="form-control" readonly name="referral_from"  value="Shojon Tier 1">
+              <input type="text" class="form-control" readonly name="referral_from"  value="Shojon Tier 2">
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Referral To:</label>

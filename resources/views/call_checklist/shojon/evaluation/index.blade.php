@@ -12,27 +12,29 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
+                    @include('call_checklist.partials.messages')
                     <div>
                         <div class="text-center">
-                            
+                            <a href="{{ route('call_checklist.shojon.callEvaluation') }}" class="btn btn-info btn-default mt-2 mb-2" style="float: right;">New Evalution</a>
                         </div>
 
                         <div class="collapse" id="filter">
                             <div class="alert alert-warning" role="alert">
-                                
+                                {{-- <a href="{{ route('register') }}" class="btn btn-info btn-default" style="float: right;">New User</a> --}}
                             </div>
                         </div>
                         <hr>
                     </div>
+                    
 
-                    <table class="table table-hover table-bordered table-responsive" id="sampleTable">
+                    <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                         <tr>
                             <th>#</th>
                             <th>Date and Time</th>
                             <th>Observer's Name</th>
                             <th>Counselor's Name</th>
-                            <th>Total duration</th>
+                            <th>Total duration of the Call (Minutes) </th>
                             <th>Call Rating</th>
                             <th class="text-center">Action</th>
                              
@@ -41,7 +43,7 @@
                         <tbody>
                              @foreach($data as $key=>$row)
                             <tr>
-                                <td>{{$key}}</td>
+                                <td>{{$key + 1}}</td>
                                 <td>{{$row->date}}</td>
                                 <td>{{$row->name}}</td>
                                 <td>{{$row->counselor_name}}</td>
@@ -59,3 +61,10 @@
     </div>
 
 @endsection
+
+
+@push('scripts')
+<script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('backend/js/plugins/dataTables.bootstrap.min.js') }}"></script>
+<script type="text/javascript">$('#sampleTable').DataTable();</script>
+@endpush
