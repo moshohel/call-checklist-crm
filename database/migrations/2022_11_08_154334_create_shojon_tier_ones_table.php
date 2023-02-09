@@ -44,6 +44,8 @@ class CreateShojonTierOnesTable extends Migration
             $table->string('internal_referr')->nullable();
             $table->string('reason_for_referral')->nullable();
             $table->string('name_of_agency')->nullable();
+            $table->text('call_description')->nullable();
+            $table->text('message')->nullable();
             $table->timestamps(); 
         });
     }

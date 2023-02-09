@@ -26,7 +26,7 @@
             <div class="row g-4">
               <div class="col-md-3">
                   <label for="validationCustom01" class="form-label">Phone Number:</label>
-                  <input type="number" class="form-control" readonly name="phone_number"value="{{$newPatient->phone_number}}" >
+                  <input type="number" class="form-control" min="7" max="15" readonly name="phone_number"value="{{$newPatient->phone_number}}" >
               </div>
               <div class="col-md-3">
                   <label for="validationCustom01" class="form-label">Client Name:</label>
@@ -35,7 +35,7 @@
               </div>
               <div class="col-md-3">
                   <div class="form-group">
-                      @php $types = ['Male','Female','Intersex','Others']; @endphp 
+                      @php $types = ['Male','Female','LGBTQ','Others']; @endphp 
                       <label for="validationCustom01" class="form-label">Sex:</label>
                       <select class="form-control" readonly  name="sex" required>
                           <option disabled selected>Select Sex</option>
@@ -133,7 +133,7 @@
               <div class="col-md-4">
                   <div class="form-group">
                       <label for="validationCustom01" class="form-label">Occupation :</label> 
-                      @php $types = ['Student', 'Job holder', 'Businessperson', 'Housewife', 'Unemployed', 'Retired', 'Could not tell']; @endphp
+                      @php $types = ['Student', 'Job holder', 'Businessperson', 'Housewife', 'Unemployed','self employed', 'Retired', 'Could not tell']; @endphp
                       <div class="form-control">
                           <label>
                             @foreach($types as $item)
@@ -160,7 +160,7 @@
             <div class="col-md-4">
               <div class="form-group">
                   <label for="validationCustom01" class="form-label">Where/how did the Client hear about SHOJON:</label> 
-                  @php $types = ['Search engine','KPR', 'Social Media', 'Word of mouth', 'Referred by professional', 'SUDIN', 'SF Microfinance','Radio','TV','Print Media','Don’t know.']; @endphp
+                  @php $types = ['Search engine','KPR', 'Social Media', 'Word of mouth', 'Referred by professional', 'SUDIN', 'SF Microfinance','Radio','TV','Print Media','Oboyob','Lamb Hospital','Incidin BD','Don’t know.']; @endphp
                   <div class="form-control">
                       <label>
                         @foreach($types as $item)
@@ -187,10 +187,10 @@
         <div class="col-md-4">
           <div class="form-group">
               <label class="control-label" for="distress_rating"><b>Distress Rating (pre-stage):</b></label> 
-              @php $types = ['1', '2', '3', '4', '5', '6', '7','8','9','10']; @endphp
+              @php $types = ['0','1', '2', '3', '4', '5', '6', '7','8','9','10']; @endphp
               <div class="form-control">
                   <label>
-                    <label><b>[0 means
+                    <label><b style="color: black;">[0 means
                     lowest wellbeing, 10 means Highest wellbeing]</b></label><br>
                     @foreach($types as $item)
                     @if((old('occupation') == $item))
@@ -213,7 +213,7 @@
   <div class="col-md-4">
       <div class="form-group">
           <label for="validationCustom01" class="form-label">Primary Reason for Calling (CHOOSE ONLY ONE) :</label> 
-          @php $types = ['COVID19 related Issues', 'Mental Illness', 'Substance Abuse', 'Family/Relationship Issues', 'Health/Physical Concerns', 'Financial Concerns', 'Immediate Emotional Crisis','Suicidal Feelings','Domestic Abuse','Child Abuse','Discrimination due to gender','Discrimination due to minority status','Education','Bereavement','Work related stress','Disability','Anger','Parenting issue','Don’t know']; @endphp
+          @php $types = ['COVID19 related Issues', 'Mental Illness', 'Substance Abuse', 'Family/Relationship Issues', 'Health/Physical Concerns', 'Financial Concerns', 'Immediate Emotional Crisis','Suicidal Feelings','Domestic Abuse','Child Abuse','Discrimination due to gender','Mental Health Related Symptoms','Discrimination due to minority status','Education','Bereavement','Work related stress','Disability','Anger','Parenting issue','Don’t know']; @endphp
           <div class="form-control">
               <label>
                 @foreach($types as $item)
@@ -240,7 +240,7 @@
 <div class="col-md-4">
   <div class="form-group">
       <label for="validationCustom01" class="form-label">Secondary reason (Multiple select) :</label> 
-      @php $types = ['COVID19 related Issues', 'Mental Illness', 'Substance Abuse', 'Family/Relationship Issues', 'Health/Physical Concerns', 'Financial Concerns', 'Immediate Emotional Crisis','Suicidal Feelings','Domestic Abuse','Child Abuse','Discrimination due to gender','Discrimination due to minority status','Education','Bereavement','Work related stress','Disability','Anger','Parenting issue','Don’t know','Not applicable']; @endphp
+      @php $types = ['COVID19 related Issues', 'Mental Illness', 'Substance Abuse', 'Family/Relationship Issues', 'Health/Physical Concerns', 'Financial Concerns', 'Immediate Emotional Crisis','Suicidal Feelings','Mental Health Related Symptoms','Domestic Abuse','Child Abuse','Discrimination due to gender','Discrimination due to minority status','Education','Bereavement','Work related stress','Disability','Anger','Parenting issue','Don’t know','Not applicable']; @endphp
       <div class="form-control">
           <label>
             @foreach($types as $item)
@@ -331,7 +331,7 @@
   <div class="col-md-6">
    <div class="form-group">
       <label class="control-label" for="Internal_Referral"><b>Internal Referral:</b></label> 
-      @php $types = ['No','SAJIDA Health Hotline', 'KPR']; @endphp
+      @php $types = ['No', 'KPR']; @endphp
       <div class="form-control">
           <label>
             @foreach($types as $item)
@@ -381,16 +381,9 @@
   </div>
   <div class="form-control">
       <label>
-        @foreach($types as $item)
-        @if((old('occupation') == $item))
-        <input type="radio" name="name_of_agency" value="{{ $item }}" checked="checked"
-        onclick=" ShoExternal_ReferralBox()()"/>
-        @else
+        @foreach($types as $item)        
         <input type="radio" name="name_of_agency" value="{{ $item }}"
-        onclick=" ShoExternal_ReferralBox()()"/>
-        @endif
-        {{ $item }}
-        <br>
+        onclick=" ShoExternal_ReferralBox()()"/>{{ $item }}<br>
         @endforeach
         <input type="radio" id="chkExternal_Referral" name="name_of_agency"
         onclick=" ShoExternal_ReferralBox()()"/>
@@ -402,28 +395,89 @@
 </div> 
 </div>
 </div>
-</div>
+</div><hr>
+<div class="row g-1">
+  <div class="col-md-12">
+     <div class="form-group">
+        <label class="control-label"for="distress_rating"><b>Call Description:</b></label>
+        <textarea rows="4" cols="50" class="form-control" name="call_description"> </textarea>
+     </div>
+  </div>
+</div><hr>  
+<span class="btn btn-success" id="messageButton" style="margin: 5px" onClick="showMessageBox()">Message</span>
+                    <div class="form-group" id="messageBox" style="display: none">
+                        <select name="sms_switch" type="text" class="form-control" id="sms_type" list="sms_types"
+                                onchange="change_sms()">
+                            <datalist id="sms_types">
+                                <option value="" selected>Please Select Type</option>
+                                <option value="tier2" <?php if (old('sms_switch') == 'tier2') echo "selected" ?> >Tier
+                                    2
+                                </option>
+                                <option value="tier3" <?php if (old('sms_switch') == 'tier3') echo "selected" ?> >Tier
+                                    3
+                                </option>
+                                <option
+                                    value="health_hotline" <?php if (old('sms_switch') == 'health_hotline') echo "selected" ?> >
+                                    Health Hotline
+                                </option>
+                                <option value="kpr" <?php if (old('sms_switch') == 'kpr') echo "selected" ?> >KPR
+                                </option>
+                                <option
+                                    value="inner_circle" <?php if (old('sms_switch') == 'inner_circle') echo "selected" ?> >
+                                    Inner Circle
+                                </option>
+                            </datalist>
 
-<div class="tile-footer">
+                            <label class="control-label" for="message"><b>Message: </b></label>
+                            <textarea rows="3" cols="50"
+                                      class="form-control
+                                @error('message') is-invalid @enderror"
+                                      name="message"
+                                      id="message"
+                                      value="{{ old('message') }}"
+                                      placeholder="Write your message"
+                            ></textarea>
+                        @error('message') {{ $message }} @enderror
+                    </div>
+
+
+  <div class="tile-footer">
     <button class="btn btn-primary" type="Submit"><i class="fa fa-fw fa-lg fa-check-circle"></i>Save Tier One
     </button>
     &nbsp;&nbsp;&nbsp;
-    <a class="btn btn-secondary" onclick="cancel()"><i
+    <a class="btn btn-secondary" style="background-color:red;" onclick="cancel()"><i
         class="fa fa-fw fa-lg fa-times-circle"></i>Cancel</a>
-    </div>
+  </div>
 </form>
 </div>
 </div>
 </div>  
-
-
-
 
 @endsection
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script type="text/javascript">
+     function change_sms() {
+        var tier2 = "স্বজন-এ কল করার জন্য আপনাকে ধন্যবাদ। আপনার মানসিক স্বাস্থ্যসেবা নিশ্চিত করতে সব সময় পাশে আছে স্বজন। কাউন্সেলিং সেবা নেয়ার জন্য খুব দ্রুত আপনার সাথে যোগাযোগ করা হবে।";
+        var tier3 = "স্বজন-এ কল করার জন্য আপনাকে ধন্যবাদ। মনঃ চিকিৎসা থেকে সেবা ও পরামর্শ দেওয়ার জন্য খুব দ্রুত আপনার সাথে যোগাযোগ করা হবে। আপনার মানসিক স্বাস্থ্যসেবা নিশ্চিতে সবসময় পাশে আছে স্বজন।";
+        var health_hotline = "স্বজন-এ কল করার জন্য আপনাকে ধন্যবাদ। আপনার যে কোন শারীরিক স্বাস্থ্য সংক্রান্ত সাহায্যের জন্য কল করতে পারেন সাজেদা হাসপাতাল এর হটলাইন নাম্বারে ০৯৬৭৮৭৭১৫১১।";
+        var KPR = "স্বজন-এ কল করার জন্য আপনাকে ধন্যবাদ। আত্মহত্যা প্রবণতা মূলক বিষয়ে কথা বলতে এবং যেকোন সাহায্যের জন্য \"কান পেতে রই\" রয়েছে দুপুর ৩টা থেকে রাত ৩টা পর্যন্ত ০৯৬১২১১৯৯১১ নম্বরে।";
+        var Inner_Circle = "স্বজন-এ কল করার জন্য আপনাকে ধন্যবাদ। অটিজম এবং শিশুর বিকাশ সম্পর্কিত বিজ্ঞান সম্পর্কিত তথ্য এবং সেবা নিয়ে বিস্তারিত জানতে কল করুন ০১৭৭৭৭৭২২১৫ নাম্বারে।";
+
+        var sms_type = $("#sms_type").val();
+        if (sms_type == "tier2")
+            $("#message").html(tier2);
+        else if (sms_type == "tier3")
+            $("#message").html(tier3);
+        else if (sms_type == "health_hotline")
+            $("#message").html(health_hotline);
+        else if (sms_type == "kpr")
+            $("#message").html(KPR);
+        else if (sms_type == "inner_circle")
+            $("#message").html(Inner_Circle);
+    }
+
     function cancel() {
         if (confirm('Are you sure you want to cancel?')) {
             open('/', '_self').close();
@@ -431,12 +485,6 @@
 
         }
     }
-
-    $(document).ready(function () {
-        $('#myForm input').on('change', function () {
-        });
-        change_sms();
-    });
 </script>
 <script>
     $(document).ready(function(){
@@ -448,8 +496,22 @@
         ShowSHOJONTierTwoBox();
         ShowSHOJONTierThreeBox();
         ShoExternal_ReferralBox();
+        showMessageBox();
 
     });
+    function showMessageBox() {
+      var x = document.getElementById("messageBox");
+      if (x.style.display == "block") {
+        x.style.display = "none";
+      } else {
+        x.style.display = "block";
+      }
+    }
+ // function showMessageBox() {
+ //        var messageButton = document.getElementById("messageButton");
+ //        var messageBox = document.getElementById("messageBox");
+ //        messageBox.style.display = messageButton.click ? "block" : "none";
+ //    }
 
     function ShowOccupationBox()
     {

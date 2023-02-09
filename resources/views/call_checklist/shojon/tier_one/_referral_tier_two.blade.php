@@ -23,11 +23,11 @@
              <div class="row g-3">
               <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Client ID:</label>
-              <input type="text" class="form-control" name="client_id" readonly value="{{ $uniqueid }}">
+              <input type="text" class="form-control" required name="client_id" readonly value="{{ $uniqueid }}">
               </div>
               <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Client Name:</label>
-              <input type="text" class="form-control" name="client_name" value="{{$newPatient->name}}" readonly>
+              <input type="text" class="form-control" required name="client_name" value="{{$newPatient->name}}" readonly>
              </div>
              <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Sex:</label>
@@ -35,34 +35,34 @@
              </div>
              <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Age:</label>
-              <input type="text" class="form-control" name="age" readonly value="{{ $newPatient->age }}">
+              <input type="text" class="form-control" required name="age" readonly value="{{ $newPatient->age }}">
              </div>
              </div><br>
              <div class="row g-2">
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Phone Number:</label>
-              <input type="number" class="form-control" name="phone_number" value="{{$newPatient->phone_number}}">
+              <input type="number" class="form-control" readonly name="phone_number" value="{{$newPatient->phone_number}}">
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Emergency number in case of unavailability:</label>
-              <input type="number" class="form-control" name="Emergency_number" placeholder="Emergency number" >
+              <input type="number" class="form-control" required name="Emergency_number" placeholder="Emergency number" >
              </div>
              </div><br>
              <div class="row g-2">
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Reason for therapy:</label>
-              <input type="text" class="form-control" name="reason_for_therapy"  placeholder="Reason for therapy">
+              <input type="text" class="form-control" required name="reason_for_therapy"  placeholder="Reason for therapy">
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Preferred time for session:</label>
-              <input type="datetime-local" class="form-control" name="preferred_time" placeholder="Preferred time for session">
+              <input type="datetime-local" class="form-control" required name="preferred_time" placeholder="Preferred time for session">
              </div>
              </div><br>
              <div class="row g-3">
               <div class="col-md-4">
-                @php $types = ['Free of cost','200']; @endphp 
+                @php $types = ['Free of cost','50','100','150','200']; @endphp 
               <label for="validationCustom01" class="form-label">Financial affordability:</label>
-              <select class="form-control" name="Financial">
+              <select class="form-control" required name="Financial">
                 <option selected disabled>Select Referral Types</option>
                 @foreach($types as $item)
                 <option value="{{$item}}">{{$item}}</option>
@@ -71,12 +71,12 @@
               </div>
               <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Therapist preference:</label>
-              <input type="text" class="form-control" name="Therapist" placeholder="Therapist preference" > 
+              <input type="text" class="form-control" required name="Therapist" placeholder="Therapist preference" > 
              </div> 
              <div class="col-md-4">
-              @php $types = ['Regular','Emergenct']; @endphp
+              @php $types = ['Regular','Emergency']; @endphp
               <label for="validationCustom01" class="form-label">Referral Types :</label>
-              <select class="form-control" name="Referral_types">
+              <select class="form-control" required name="Referral_types">
                 <option selected disabled>Select Referral Types</option>
                 @foreach($types as $item)
                 <option value="{{$item}}">{{$item}}</option>

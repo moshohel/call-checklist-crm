@@ -8,21 +8,21 @@
             @csrf
             <div class="row">
                 <div class="form-group col-6">
-                    <label for="exampleFormControlInput1">Name</label>
+                    <label for="exampleFormControlInput1">Name<span class="required">*</span></label>
                     <input type="text" required name="name" class="form-control" id="exampleFormControlInput1"
                         placeholder="patient name">
                     <input type="hidden" name="uniqueId" value="{{ $getuniqueId->unique_id }}">
                 </div>
 
                 <div class="form-group col-6">
-                    <label for="exampleFormControlInput2">Phone</label>
+                    <label for="exampleFormControlInput2">Phone<span class="required">*</span></label>
                     <input type="number" required name="phone_number" class="form-control" 
                     value="">
                 </div>
 
                 <div class="form-group col-6">
                     <label class="control-label" for="sex"><b>Sex: <span class="required">*</span></b></label>
-                    @php $types = ['Male','Female','Intersex','Others']; @endphp
+                    @php $types = ['Male','Female','LGBTQ','Others']; @endphp
                     <select name="sex" id="sex" list="sex_list" required class="form-control @error('sex') is-invalid @enderror">
                         <datalist id="sex_list">
                             <option value="" selected disabled>Select Sex</option>
@@ -57,27 +57,24 @@
                     <label class="control-label" for="district"><b>Location: <span class="required">*</span></b></label>
                     <div class="row">
                         <div class="col-md-12">
-                            <div class="form-group" @error('district') is-invalid @enderror">
+                            <div class="form-group">
                                 <select type="text" class="form-control" required name="location" list="location_list" value="">
                                 <option value="" selected disabled>Select Location</option>
                                     @foreach ($districts as $item)
                                     <option value="{{ $item->name }}">{{ $item->name }}</option>
                                     @endforeach
+                                </select>
                             </div>
-                            @error('district') {{ $message }} @enderror
+                            
                         </div>
                     </div>
                 </div>
-
-
-                
-
                 <div class="form-group col-6">
                     <label class="control-label" for="socio_economic_status"><b>Socio-economic
-                            Status:</b></label>
+                            Status:<span class="required">*</span></b></label>
                     @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower
                     Class', 'Lower Class']; @endphp
-                    <select name="socio_economic_status" list="socio_economic_status_list" id="socio_economic_status"
+                    <select name="socio_economic_status" required list="socio_economic_status_list" id="socio_economic_status"
                         class="form-control">
 
                         <datalist id="socio_economic_status_list">
@@ -96,7 +93,6 @@
 
             <div class="form-footer pt-4 mt-4">
                 <button type="submit" class="btn btn-primary btn-default">Add Client</button>
-                <button type="submit" class="btn btn-secondary btn-default">Cancel</button>
             </div>
         </form>
     </div>
