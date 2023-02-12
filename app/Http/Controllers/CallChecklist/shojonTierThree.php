@@ -6,18 +6,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Referral;
 use Illuminate\Support\Facades\DB;
+use App\Models\Session;
 
 class shojonTierThree extends Controller
 {
     protected $pageTitle = 'Shojon Tier 3 Service';
 
-    public function tireThreefromblade()
+    public function tireThreefromblade($uniqueid, $session_id)
     {
+        // dd($session_id);
 
         $pageTitle = $this->pageTitle;
+        $session_id = $session_id;
         $last = null;
         $districts = DB::table('districts')->get();
-        return view('call_checklist.shojon.tierThree.create', compact('pageTitle', 'last', 'districts'));
+        return view('call_checklist.shojon.tierThree.create', compact('pageTitle', 'last', 'districts', 'session_id'));
     }
     public function tireThreepatientlist()
     {
@@ -106,7 +109,15 @@ class shojonTierThree extends Controller
 
 
         DB::table('shojon_tire_threes')->insert($data);
-        return redirect()->route('call_checklist.shojon.TierThreePatientlist')->with('success', 'Tire three insert successfull');
+        $id = $request['session_id'];
+        dd($id);
+        $session = Session::find($id);
+        $session->session_taken = "DONE";
+        $session->save();
+        $user_id = auth()->user()->user_id;
+
+        // return redirect()->route('call_checklist.shojon.TierThreePatientlist')->with('success', 'Tire three insert successfull');
+        return redirect()->route('user.show', $user_id)->with('success', 'insert successfull');
     }
 
     public function tireThreeList(Request $request)

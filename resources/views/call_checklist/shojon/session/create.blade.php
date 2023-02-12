@@ -39,7 +39,7 @@
                 </div>
 
                 <div class="form-group col-3">
-                    <label for="exampleFormControlInput5">Preferred time</label>
+                    <label for="exampleFormControlInput5">Preferred Time - </label>
                     <input type="text" name="preferred_time" class="form-control" readonly id="exampleFormControlInput5" value="{{ $referral->preferred_time }}">
                 </div>
 
@@ -89,7 +89,7 @@
                     </div>
                 </div>
 
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <label class="control-label" for="Session_Number"><b>Session Number (mandatory single select
                             )</b></label>
                     @php $types = ['1st session', '2nd session', '3rd session', '4th session', '6th session', '7th
@@ -116,7 +116,7 @@
                         </span>
                     </div>
                     @error('Session_Number') {{ $message }} @enderror
-                </div>
+                </div> --}}
 
             </div>
             

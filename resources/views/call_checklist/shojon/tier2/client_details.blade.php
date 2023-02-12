@@ -325,7 +325,7 @@
         @endphp
         <label for="validationCustom01" class="form-label">Previous psychiatric diagnosis?</label><br>
         <ul>
-            @if ($data->differential_diagnosis != "")
+            @if ($check_item != "")
             @foreach($check_item as $info) 
             <li><b>{{$info}}</b></li>
             @endforeach
@@ -348,7 +348,7 @@
      $check_item = json_decode($data->concern_history);
      @endphp
      <ul>
-      @if($data->concern_history != "")
+      @if($check_item != "")
       @foreach($check_item as $info) 
       <li><b>{{$info}}</b></li>
       @endforeach
@@ -363,7 +363,7 @@
      $check_item = json_decode($data->differential_diagnosis);
      @endphp
      <ul>
-        @if($data->differential_diagnosis != "")
+        @if($check_item != "")
         @foreach($check_item as $info) 
         <li><b>{{$info}}</b></li>
         @endforeach

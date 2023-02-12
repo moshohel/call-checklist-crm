@@ -13,19 +13,11 @@
               <div class="row g-2">
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Referral From:</label>
-<<<<<<< HEAD
               <input type="text" class="form-control" readonly name="referral_from"  value="Shojon Tier 1">
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Referral To:</label>
               <input type="text" class="form-control" readonly name="referral_to" value="Shojon Tier 3">
-=======
-              <input type="text" class="form-control" required readonly name="referral_to"  value="Shojon Tier 1">
-              </div>
-              <div class="col-md-6">
-              <label for="validationCustom01" class="form-label">Referral To:</label>
-              <input type="text" class="form-control" required readonly name="referral_from" value="Shojon Tier 3">
->>>>>>> f7f872618bb3597b9a6f255a82f68c6869d1a3f9
              </div>
              </div><hr>
              <div class="row g-3">

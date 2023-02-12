@@ -57,57 +57,14 @@
                             <th>#</th>
                             <th>Date</th>
                             <th>Phone No</th>
-                            <th>Time Call Started</th>
+                            
                             <th>Caller Name</th>
                             <th> Sex </th>
                             <th> Age </th>
                             <th class="text-center"> Location </th>
                             <th class="text-center"> Session Number </th>
                             <th class="text-center">Action</th>
-                             <!-- <th>Program Name</th>
-                             <th class="text-center"> Location </th>
-
-                            <th>Service Providers Name</th>
-                            <th>Service Providers ID</th>
                             
-                            <th>Time Call Started</th>
-                            
-                            <th>Time Call Ended</th>
-                            <th>Duration of Call</th>
-                            
-                            <th>Caller ID</th>
-                            
-                            <th class="text-center"> Occupation </th>
-                            <th class="text-center"> Location </th>
-                            <th class="text-center"> SES </th>
-                            <th class="text-center"> Educational Qualification </th>
-                            <th class="text-center"> Marital Status </th>
-                           
-                            <th class="text-center"> Distress Rating </th>
-                            <th class="text-center"> GHQ </th>
-                            <th class="text-center"> Problem duration </th>
-                            <th class="text-center"> Hearing Source </th>
-                            <th class="text-center"> Call Type </th>
-                            <th class="text-center"> Caller </th>
-                            <th class="text-center"> Mood Rating (Pre) </th>
-                            <th class="text-center"> Main Reason </th>
-                            <th class="text-center"> Secondary Reason </th>
-                            <th class="text-center"> MID </th>
-                            
-                            <th class="text-center"> Suicidal Risk </th>
-                            <th class="text-center"> Mood Rating (Post) </th>
-                            <th class="text-center"> Caller Effectiveness </th>
-                            <th class="text-center"> Client Referral </th>
-                            <th class="text-center" style="width: 500px"> Caller Descriprion </th>
-                            <th class="text-center"> Client name </th>
-                            <th class="text-center"> Age </th>
-                            <th class="text-center"> Therapy Reason </th>
-                            <th class="text-center"> Phone Number </th>
-                            <th class="text-center"> Preferred Time </th>
-                            <th class="text-center"> Emergency Number </th>
-                            <th class="text-center"> Financial Effort </th>
-                            <th class="text-center"> Therapist Prefrrence </th>
-                            <th class="text-center">Actio</th> -->
                         </tr>
                         </thead>
                         <tbody>
@@ -115,8 +72,8 @@
                             <tr>
                                 <td>{{$key}}</td>
                                 <td>{{$row->date}}</td>
-                                <td>{{$row->time_call_started}}</td>
                                 <td>{{$row->phone_number}}</td>
+                                
                                 <td>{{$row->caller_name}}</td>
                                 <td>{{$row->sex}}</td>
                                 <td>{{$row->age}}</td>

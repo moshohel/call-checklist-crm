@@ -86,13 +86,13 @@
                         <span class="app-menu__label">Dashboard tier - 2 </span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.tier2') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Add Patient - Tier 2 </span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.Patientlist') }}">
@@ -110,13 +110,13 @@
             </a>
             <ul class="treeview-menu">
 
-                <li>
+                {{-- <li>
                     <a class="app-menu__item"
                         href="{{ route('call_checklist.shojon.tierThree') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Add Patient - Tier 3 </span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a class="app-menu__item"
                         href="{{ route('shojon.tierThreeList') }}">
