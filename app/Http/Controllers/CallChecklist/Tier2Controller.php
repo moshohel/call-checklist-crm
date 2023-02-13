@@ -58,10 +58,10 @@ class Tier2Controller extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->all());
-        //$params = $request->except('_token');
-
-        // dd($session->session_taken);
+        
+        if ($request->message) {
+            $this->sendSms($request->message, $request->phone_number);
+        }
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -146,6 +146,28 @@ class Tier2Controller extends Controller
         $user_id = auth()->user()->user_id;
         // return redirect()->back()->with('success', 'insert successfull');
         return redirect()->route('user.show', $user_id)->with('success', 'insert successfull');
+    }
+    private function sendSms($message, $phone)
+    {
+        $url = "https://portal.metrotel.com.bd/smsapi";;
+        $data = [
+            "api_key" => "C200111761581ef3d46af1.78303603",
+            "type" => "text",
+            "contacts" => $phone,
+            "senderid" => "8809612119900",
+            "msg" => $message,
+        ];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
     }
 
     public function clientUpdateTierTwo($id, $phone = '')
@@ -289,11 +311,11 @@ class Tier2Controller extends Controller
     }
     public function termination_table(Request $request)
     {
+        $uniqueid = $request->caller_id;
         if ($request->ajax()) {
             $output = '';
             $array_size = '';
-
-            $data = Termination::all();
+            $data = Termination::where('client_id', $uniqueid)->where('flag', 'tier2')->get();
             if ($data) {
                 foreach ($data as $key => $row) {
 
@@ -407,6 +429,7 @@ class Tier2Controller extends Controller
         }
 
         $data = new Termination;
+        $data->flag = $request->flag;
         $data->project_name = $request->project_name;
         $data->counselor_name = $request->Counselor_name;
         $data->client_name = $request->Client_name;

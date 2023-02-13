@@ -227,8 +227,8 @@ class TierOneController extends Controller
                     $output .=
                     '<tr>
                     <td>' . $key . '</td>
-                    <td>' . $row->referr_to . '</td>
                     <td>' . $row->referr_from . '</td>
+                    <td>' . $row->referr_to . '</td>
                     <td>' . $row->name . '</td>
                     <td>' . $row->unique_id . '</td>
                     <td>' . $row->age . '</td>

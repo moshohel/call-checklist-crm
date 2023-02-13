@@ -15,6 +15,7 @@ class CreateTerminationsTable extends Migration
     {
         Schema::create('terminations', function (Blueprint $table) {
             $table->id();
+            $table->string('flag')->nullable();
             $table->string('project_name')->nullable();
             $table->string('counselor_name')->nullable();
             $table->string('client_name')->nullable();

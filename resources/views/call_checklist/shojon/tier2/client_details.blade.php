@@ -504,9 +504,11 @@
         });
     });
     $(document).ready(function(){
+        var caller_id = $("#caller_id").val();
         $.ajax({
             type: "get",
             url: "/call-checklist/shojon/termination_table_t2",
+            data: {caller_id: caller_id},
             success: function (data) {
                 console.log(data);
                 $('#termination_Tb').html(data);

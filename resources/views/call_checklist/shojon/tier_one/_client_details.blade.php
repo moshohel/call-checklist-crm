@@ -262,7 +262,7 @@
             <thead>
                 <tr>
                     <th class="text-center">#</th>
-                    <th class="text-center">Referr Fom</th>
+                    <th class="text-center">Referr Fom</th> 
                     <th class="text-center">Referr To</th>
                     <th class="text-center">Client Name</th>
                     <th class="text-center">Client ID</th>
@@ -285,7 +285,7 @@
 </div> 
 </div>  
 </div>
-</div>      
+</div>       
 </section> 
 @endsection
 @push('scripts')

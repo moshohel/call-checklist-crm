@@ -24,7 +24,7 @@
 
                 <!-- Auto generated field -->
                 <input type="hidden" name="project_name" value="#">
-                <input type="hidden" name="service_providers_name" value="#">
+                <input type="hidden" name="service_providers_name" value="{{ auth()->user()->full_name }}">
                 <input type="hidden" name="service_providers_id" value="#">
                 <input type="hidden" name="call_started" value="#">
                 <input type="hidden" name="call_end" value="#">
@@ -395,9 +395,9 @@
     <div class="form-control @error('Physical_Concern_history') is-invalid @enderror">
 
         @foreach($types as $item)
-        <input type="checkbox" name="Physical_Concern_history[]" required value="{{$item}}"> {{$item}}<br>
+        <input type="checkbox" name="Physical_Concern_history[]" value="{{$item}}"> {{$item}}<br>
         @endforeach
-        <input type="checkbox" id="chkSecondaryReason" required name="Physical_Concern_history"
+        <input type="checkbox" id="chkSecondaryReason" name="Physical_Concern_history"
         onclick="ShowSecondaryReasonBox()"/>
         Others (please explain)<br> 
 
@@ -415,9 +415,9 @@
     @php $types = ['Major Depressive Disorder', 'Anxiety Disorder', 'Panic Disorder','Obsessive Compulsive Disorder','Social Anxiety Disorder','Eating Disorder','Insomnia/sleep related disorder','Schizophrenia','Bipolar Disorder','Personality Disorder','Autism spectrum disorder','Attention deficit hyperactivity disorder','Learning disorder (LD)','Dementia','Alzheimer','Phobia','Post-traumatic stress disorder (PTSD)','Substance Abuse Disorder','Sexual disorder','Gender Identity disorder','Conversion disorder','Conduct','No']; @endphp     
     <div class="form-control @error('current_differential_diagnosis') is-invalid @enderror">
         @foreach($types as $item)
-        <input type="checkbox" name="current_differential_diagnosis[]" required value="{{ $item }}"> {{ $item }}<br>
+        <input type="checkbox" name="current_differential_diagnosis[]" value="{{ $item }}"> {{ $item }}<br>
         @endforeach
-        <input type="checkbox" id="chkCurrentDiagnosis" required name="current_differential_diagnosis"
+        <input type="checkbox" id="chkCurrentDiagnosis" name="current_differential_diagnosis"
         onclick="ShowCurrentDiagnosis()"/>
         Other (please explain)<br>
         <span id="CurrentDiagnosisBox" style="display: none;">
