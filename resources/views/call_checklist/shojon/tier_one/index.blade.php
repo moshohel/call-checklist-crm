@@ -11,6 +11,7 @@
         <div class="col-md-12">
             <div class="tile">
                 <div class="tile-body">
+                    @include('call_checklist.partials.messages')
                     <div>
                         <div class="text-center">
                             

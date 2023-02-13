@@ -213,7 +213,7 @@ class TierOneController extends Controller
 
         DB::table('shojon_tier_ones')->where('id', $request->id)->update($data);
 
-        return redirect()->route('call_checklist.shojon.TierOneList');
+        return redirect()->route('call_checklist.shojon.TierOneList')->with('success', 'insert successfull');
     }
 
     public function referral_table(Request $request)
