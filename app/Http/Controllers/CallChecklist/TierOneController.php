@@ -9,7 +9,7 @@ use App\Models\Unique;
 use App\Models\Referral;
 use App\Models\Termination;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Carbon; 
 
 class TierOneController extends Controller
 {
@@ -221,134 +221,30 @@ class TierOneController extends Controller
         $uniqueid = $request->caller_id;
         if ($request->ajax()) {
             $output = '';
-            $data = Referral::where('unique_id', $uniqueid)->where('referr_to', 'Shojon Tier 1')->get();
+            $data = Referral::where('unique_id', $uniqueid)->where('referr_from', 'Shojon Tier 1')->get();
             if ($data) {
                 foreach ($data as $key => $row) {
                     $output .=
-                        '<tr>
-                               <td>' . $key . '</td>
-                               <td>' . $row->referr_to . '</td>
-                               <td>' . $row->referr_from . '</td>
-                               <td>' . $row->name . '</td>
-                               <td>' . $row->unique_id . '</td>
-                               <td>' . $row->age . '</td>
-                               <td>' . $row->phone_number . '</td>
-                               <td>' . $row->phone_number_two . '</td>
-                               <td>' . $row->reason_for_therapy . '</td>
-                               <td>' . $row->preferred_time . '</td>
-                               <td>' . $row->therapist . '</td>
-                               <td>' . $row->financial . '</td>
-                               <td>' . $row->Referral_types . '</td>
-                            </tr>';
+                    '<tr>
+                    <td>' . $key . '</td>
+                    <td>' . $row->referr_from . '</td>
+                    <td>' . $row->referr_to . '</td>
+                    <td>' . $row->name . '</td>
+                    <td>' . $row->unique_id . '</td>
+                    <td>' . $row->age . '</td>
+                    <td>' . $row->phone_number . '</td>
+                    <td>' . $row->phone_number_two . '</td>
+                    <td>' . $row->reason_for_therapy . '</td>
+                    <td>' . $row->preferred_time . '</td>
+                    <td>' . $row->therapist . '</td>
+                    <td>' . $row->financial . '</td>
+                    <td>' . $row->Referral_types . '</td>
+                    </tr>';
                 }
                 return response()->json($output);
             }
         }
     }
-    public function termination_table(Request $request)
-    {
-        if ($request->ajax()) {
-            $output = '';
-            $array_size = '';
-
-            $data = Termination::all();
-            if ($data) {
-                foreach ($data as $key => $row) {
-
-                    $scheduled = explode(';', $row->scheduled);
-                    $attended = explode(';', $row->attended);
-                    $cancelled = explode(';', $row->cancelled);
-                    $not_attend = explode(';', $row->not_attend);
-                    $array_size = sizeof($scheduled);
-                    for ($i = 1; $i <= $array_size; $i++) {
-                        if ($i == 1) {
-                            $output .=
-                                '<tr>
-                               <td>' . $key . '</td>
-                               <td>' . $row->project_name . '</td>
-                               <td>' . $row->counselor_name . '</td>
-                               <td>' . $row->client_name . '</td>
-                               <td>' . $row->client_id . '</td>
-                               <td>' . $row->main_reason . '</td>
-                               <td>' . $row->who_terminated . '</td>
-                               <td>' . $row->referred_date . '</td>
-                               <td>' . $row->first_contact . '</td>
-                               <td>' . $row->last_session . '</td>
-                               <td>' . $row->total_session . '</td>
-                               <td>' . '
-                               <table>
-                                   <thead>
-                                     <tr>
-                                       <th>Scheduled</th>
-                                       <th>Attended</th>
-                                       <th>Cancelled</th>
-                                       <th>Did not attend</th>
-                                     </tr>
-                                   </thead>
-                                   <tbody>
-                                   
-                                    <tr>
-                                       <td>' . $scheduled[$i - 1] . '</td>
-                                       <td>' . $attended[$i - 1] . '</td>
-                                       <td>' . $cancelled[$i - 1] . '</td>
-                                       <td>' . $not_attend[$i - 1] . '</td>
-                                    </tr>
-                                    
-                                   </tbody>
-                               </table>
-                               ' . '</td>
-                               <td>Pre : ' . $row->distress_pre . ' Post: ' . $row->distress_post . '</td>
-                               <td>Pre : ' . $row->wellbeing_pre . ' Post: ' . $row->wellbeing_post . '</td>
-                               <td>Pre : ' . $row->psychological_pre . ' Post: ' . $row->psychological_post . '</td>
-                               <td>' . $row->feedback . '</td>
-                               <td>' . $row->learning . '</td>
-                            </tr>';
-                        } else {
-                            $output .=
-                                '<tr style ="border-collapse: collapse;">
-                              <td></td>
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               <td><table>
-                               <thead>
-                                     <tr>
-                                       <th>Scheduled</th>
-                                       <th>Attended</th>
-                                       <th>Cancelled</th>
-                                       <th>Did not attend</th>
-                                     </tr>
-                                   </thead>
-                               <tbody>
-                                   <td>' . $scheduled[$i - 1] . '</td>
-                                   <td>' . $attended[$i - 1] . '</td>
-                                   <td>' . $cancelled[$i - 1] . '</td>
-                                   <td>' . $not_attend[$i - 1] . '</td>
-                                   </tbody></table>
-                               </td>
-                               
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               <td></td>
-                               </tr>
-                               ';
-                        }
-                    }
-                }
-                return response()->json($output);
-            }
-        }
-    }
-
     // public function uniqueId()
     // {
     //    $url = "https://masking.viatech.com.bd/smsnet/bulk/api";       
@@ -414,44 +310,44 @@ class TierOneController extends Controller
         $pageTitle = $this->pageTitle;
 
         $call_type = DB::select("select
-        count(case when call_type='Hang up call'  then 1 end) as hang_up_call,
-        count(case when call_type='Received Service'  then 1 end) as received_service,
-        count(case when call_type='Information related call'  then 1 end) as information,
-        count(case when call_type='Inappropriate Call'  then 1 end) as inappropriate,
-        count(case when call_type='Silent Call'  then 1 end) as silent_calls,
-        count(*) as total_cnt 
-        from call_checklist_for_shojon
-        where (DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time');");
+            count(case when call_type='Hang up call'  then 1 end) as hang_up_call,
+            count(case when call_type='Received Service'  then 1 end) as received_service,
+            count(case when call_type='Information related call'  then 1 end) as information,
+            count(case when call_type='Inappropriate Call'  then 1 end) as inappropriate,
+            count(case when call_type='Silent Call'  then 1 end) as silent_calls,
+            count(*) as total_cnt 
+            from call_checklist_for_shojon
+            where (DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time');");
 
         $sex_cnt = DB::select("select count(case when sex='Male'  then 1 end) as male_cnt, 
-        count(case when sex='Female'  then 1 end) as female_cnt, count(*) as total_cnt 
-        from call_checklist_for_shojon where (DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time');");
+            count(case when sex='Female'  then 1 end) as female_cnt, count(*) as total_cnt 
+            from call_checklist_for_shojon where (DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time');");
 
         $call_age = DB::select("select count(case when age='13-19'  then 1 end) as age13_19, 
-        count(case when age='20-30'  then 1 end) as age20_30, 
-        count(case when age='31-40'  then 1 end) as age31_40, 
-        count(case when age='41-65'  then 1 end) as age40_65
-        from call_checklist_for_shojon where (DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time');");
+            count(case when age='20-30'  then 1 end) as age20_30, 
+            count(case when age='31-40'  then 1 end) as age31_40, 
+            count(case when age='41-65'  then 1 end) as age40_65
+            from call_checklist_for_shojon where (DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time');");
 
         $ref_cnt = DB::select("select  
-        count(case when client_referral ='SHOJON Tier 2 for Psychotherapy'  then 1 end) as ref_no_tier2,
-        count(case when client_referral ='SHOJON Tier 3 for Psychiatric Consultation'  then 1 end) as ref_no_tier3
-        from call_checklist_for_shojon where (DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time');");
+            count(case when client_referral ='SHOJON Tier 2 for Psychotherapy'  then 1 end) as ref_no_tier2,
+            count(case when client_referral ='SHOJON Tier 3 for Psychiatric Consultation'  then 1 end) as ref_no_tier3
+            from call_checklist_for_shojon where (DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time');");
         // echo gettype($ref_cnt[0])."\n";
         // dd($ref_cnt[0]);
 
         $hearing_source = DB::select("select
-        count(case when hearing_source='Social Media'  then 1 end) as social_medial,
-        count(case when hearing_source='Word of mouth'  then 1 end) as word_of_mouth,
-        count(case when hearing_source='Shojon Counselor'  then 1 end) as shojon_counselor,
-        count(case when hearing_source='Don\'t know'  then 1 end) as dont_know,
-        count(case when hearing_source='From his friend'  then 1 end) as friend
+            count(case when hearing_source='Social Media'  then 1 end) as social_medial,
+            count(case when hearing_source='Word of mouth'  then 1 end) as word_of_mouth,
+            count(case when hearing_source='Shojon Counselor'  then 1 end) as shojon_counselor,
+            count(case when hearing_source='Don\'t know'  then 1 end) as dont_know,
+            count(case when hearing_source='From his friend'  then 1 end) as friend
 
-        from call_checklist_for_shojon
-        where (DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time');");
+            from call_checklist_for_shojon
+            where (DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time');");
 
         $financial = DB::select("SELECT CAST(ref_financial_affort AS UNSIGNED) as afford, ref_financial_affort FROM 
-        `call_checklist_for_shojon` where DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time' and ref_financial_affort IS NOT NULL;");
+            `call_checklist_for_shojon` where DATE(created_at) >= '$start_time' and DATE(created_at) <= '$end_time' and ref_financial_affort IS NOT NULL;");
         // dd($financial);
 
         // $total_call_cnt = DB::select("select count(*)
@@ -460,91 +356,91 @@ class TierOneController extends Controller
         // and (DATE(start_time) >= '$start_time' and DATE(start_time) <= '$end_time');");
 
         $total_call_cnt = DB::select("select count(*) as total_calls
-        from 
-        (
-        SELECT vl.status 
-        from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi 
-        where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
-        and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('AGENTDIRECT','AGENTDIRECT_CHAT','SHOJON_In')  
-        
-        union all
-        
-        SELECT vl.status 
-        from vicidial_users vu,vicidial_log vl,vicidial_list vi 
-        where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
-        and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('SHOJON') 
+            from 
+            (
+            SELECT vl.status 
+            from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi 
+            where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
+            and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('AGENTDIRECT','AGENTDIRECT_CHAT','SHOJON_In')  
+
+            union all
+
+            SELECT vl.status 
+            from vicidial_users vu,vicidial_log vl,vicidial_list vi 
+            where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
+            and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('SHOJON') 
         ) A ");
 
 
         $afther_call = DB::select("select count(*) as total_calls
-        from 
-        (
-        SELECT vl.status 
-        from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi 
-        where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
-        and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('AGENTDIRECT','AGENTDIRECT_CHAT','SHOJON_In')  
-        
-        union all
-        
-        SELECT vl.status 
-        from vicidial_users vu,vicidial_log vl,vicidial_list vi 
-        where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
-        and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('SHOJON') 
-        ) A 
-        where A.status='AFTHRS';");
+            from 
+            (
+            SELECT vl.status 
+            from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi 
+            where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
+            and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('AGENTDIRECT','AGENTDIRECT_CHAT','SHOJON_In')  
+
+            union all
+
+            SELECT vl.status 
+            from vicidial_users vu,vicidial_log vl,vicidial_list vi 
+            where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
+            and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('SHOJON') 
+            ) A 
+            where A.status='AFTHRS';");
 
 
         $drop_call = DB::select("select count(*) as total_calls
-        from 
-        (
-        SELECT vl.status 
-        from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi 
-        where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
-        and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('AGENTDIRECT','AGENTDIRECT_CHAT','SHOJON_In')  
-        
-        union all
-        
-        SELECT vl.status 
-        from vicidial_users vu,vicidial_log vl,vicidial_list vi 
-        where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
-        and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('SHOJON') 
-        ) A 
-        where A.status='DROP';");
+            from 
+            (
+            SELECT vl.status 
+            from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi 
+            where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
+            and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('AGENTDIRECT','AGENTDIRECT_CHAT','SHOJON_In')  
+
+            union all
+
+            SELECT vl.status 
+            from vicidial_users vu,vicidial_log vl,vicidial_list vi 
+            where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
+            and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('SHOJON') 
+            ) A 
+            where A.status='DROP';");
 
 
         $time_out = DB::select("select count(*) as total_calls from 
-        (
-        SELECT vl.status 
-        from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi 
-        where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
-        and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('AGENTDIRECT','AGENTDIRECT_CHAT','SHOJON_In')  
-        
-        union all
-        
-        SELECT vl.status 
-        from vicidial_users vu,vicidial_log vl,vicidial_list vi 
-        where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
-        and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('SHOJON') 
-        ) A 
-        
-        where A.status='TIMEOT';");
+            (
+            SELECT vl.status 
+            from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi 
+            where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
+            and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('AGENTDIRECT','AGENTDIRECT_CHAT','SHOJON_In')  
+
+            union all
+
+            SELECT vl.status 
+            from vicidial_users vu,vicidial_log vl,vicidial_list vi 
+            where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
+            and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('SHOJON') 
+            ) A 
+
+            where A.status='TIMEOT';");
 
         $recived_call = DB::select("select count(*) as total_calls from 
-        (
-        SELECT vl.user 
-        from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi 
-        where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
-        and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('AGENTDIRECT','AGENTDIRECT_CHAT','SHOJON_In')  
-        
-        union all
-        
-        SELECT vl.user
-        from vicidial_users vu,vicidial_log vl,vicidial_list vi 
-        where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
-        and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('SHOJON') 
-        ) A 
-        
-        where A.user!='VDCL';");
+            (
+            SELECT vl.user 
+            from vicidial_users vu,vicidial_closer_log vl,vicidial_list vi 
+            where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
+            and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('AGENTDIRECT','AGENTDIRECT_CHAT','SHOJON_In')  
+
+            union all
+
+            SELECT vl.user
+            from vicidial_users vu,vicidial_log vl,vicidial_list vi 
+            where vl.call_date >= '$start_time' and vl.call_date <= '$end_time' 
+            and vu.user=vl.user and vi.lead_id=vl.lead_id  and vl.campaign_id IN('SHOJON') 
+            ) A 
+
+            where A.user!='VDCL';");
         // dd($recived_call);
         // dd($dropp_call->total_calls);
 

@@ -91,7 +91,7 @@ class PatientController extends Controller
             // $tier_three = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#ReferralModal'>R-Tier 3</a>";
             $showInfo = "<a href='patient/showInfo/$unique_id' class='btn btn-info m-1'>History</a>";
             $output[] = array(
-                $item->name, $item->phone_number, $item->sex, $item->age, $item->location, $item->occupation,
+                $item->name, $item->phone_number, $item->sex, $item->age, $item->location,
                 $item->unique_id, "$showInfo&nbsp;&nbsp;$view_button&nbsp;&nbsp;"
             );
         }

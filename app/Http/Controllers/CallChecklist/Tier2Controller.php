@@ -19,7 +19,7 @@ class Tier2Controller extends Controller
     protected $pageTitle = 'Shojon Tier 2 Service';
     protected $pageTitleUpdate = 'Shojon Tier 2 Update';
 
-    public function tireOnefromblade($uniqueid)
+    public function tireOnefromblade($uniqueid) 
     {
         $uniqueid = $uniqueid;
         $pageTitle = $this->pageTitle;
@@ -30,7 +30,7 @@ class Tier2Controller extends Controller
 
     public function tire2fromblade($uniqueid, $session_id)
     {
-        // $uniqueid = $uniqueid;
+        // $uniqueid = $uniqueid; 
         // $pageTitle = $this->pageTitle;
         // $districts = DB::table('districts')->get();
         $session_id = $session_id;
@@ -58,9 +58,10 @@ class Tier2Controller extends Controller
     }
     public function store(Request $request)
     {
-        //$params = $request->except('_token');
-
-        // dd($session->session_taken);
+        
+        if ($request->message) {
+            $this->sendSms($request->message, $request->phone_number);
+        }
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -145,6 +146,28 @@ class Tier2Controller extends Controller
         $user_id = auth()->user()->user_id;
         // return redirect()->back()->with('success', 'insert successfull');
         return redirect()->route('user.show', $user_id)->with('success', 'insert successfull');
+    }
+    private function sendSms($message, $phone)
+    {
+        $url = "https://portal.metrotel.com.bd/smsapi";;
+        $data = [
+            "api_key" => "C200111761581ef3d46af1.78303603",
+            "type" => "text",
+            "contacts" => $phone,
+            "senderid" => "8809612119900",
+            "msg" => $message,
+        ];
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($ch);
+        curl_close($ch);
+
+        return $response;
     }
 
     public function clientUpdateTierTwo($id, $phone = '')
@@ -258,6 +281,138 @@ class Tier2Controller extends Controller
 
         return redirect()->back()->with('success', 'Update successfully!');
     }
+        public function referral_table(Request $request)
+    {
+        $uniqueid = $request->caller_id;
+        if ($request->ajax()) {
+            $output = '';
+            $data = Referral::where('unique_id', $uniqueid)->where('referr_from', 'Shojon Tier 2')->get();
+            if ($data) {
+                foreach ($data as $key => $row) {
+                    $output .=
+                        '<tr>
+                               <td>' . $key . '</td>
+                               <td>' . $row->referr_to . '</td>
+                               <td>' . $row->referr_from . '</td>
+                               <td>' . $row->name . '</td>
+                               <td>' . $row->unique_id . '</td>
+                               <td>' . $row->age . '</td>
+                               <td>' . $row->phone_number . '</td>
+                               <td>' . $row->phone_number_two . '</td>
+                               <td>' . $row->reason_for_therapy . '</td>
+                               <td>' . $row->preferred_time . '</td>
+                               <td>' . $row->therapist . '</td>
+                               <td>' . $row->financial . '</td>
+                               <td>' . $row->Referral_types . '</td>
+                            </tr>';
+                }
+                return response()->json($output);
+            }
+        }
+    }
+    public function termination_table(Request $request)
+    {
+        $uniqueid = $request->caller_id;
+        if ($request->ajax()) {
+            $output = '';
+            $array_size = '';
+            $data = Termination::where('client_id', $uniqueid)->where('flag', 'tier2')->get();
+            if ($data) {
+                foreach ($data as $key => $row) {
+
+                    $scheduled = explode(';', $row->scheduled);
+                    $attended = explode(';', $row->attended);
+                    $cancelled = explode(';', $row->cancelled);
+                    $not_attend = explode(';', $row->not_attend);
+                    $array_size = sizeof($scheduled);
+                    for ($i = 1; $i <= $array_size; $i++) {
+                        if ($i == 1) {
+                            $output .=
+                            '<tr>
+                            <td>' . $key . '</td>
+                            <td>' . $row->project_name . '</td>
+                            <td>' . $row->counselor_name . '</td>
+                            <td>' . $row->client_name . '</td>
+                            <td>' . $row->client_id . '</td>
+                            <td>' . $row->main_reason . '</td>
+                            <td>' . $row->who_terminated . '</td>
+                            <td>' . $row->referred_date . '</td>
+                            <td>' . $row->first_contact . '</td>
+                            <td>' . $row->last_session . '</td>
+                            <td>' . $row->total_session . '</td>
+                            <td>' . '
+                            <table>
+                            <thead>
+                            <tr>
+                            <th>Scheduled</th>
+                            <th>Attended</th>
+                            <th>Cancelled</th>
+                            <th>Did not attend</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            
+                            <tr>
+                            <td>' . $scheduled[$i - 1] . '</td>
+                            <td>' . $attended[$i - 1] . '</td>
+                            <td>' . $cancelled[$i - 1] . '</td>
+                            <td>' . $not_attend[$i - 1] . '</td>
+                            </tr>
+                            
+                            </tbody>
+                            </table>
+                            ' . '</td>
+                            <td>Pre : ' . $row->distress_pre . ' Post: ' . $row->distress_post . '</td>
+                            <td>Pre : ' . $row->wellbeing_pre . ' Post: ' . $row->wellbeing_post . '</td>
+                            <td>Pre : ' . $row->psychological_pre . ' Post: ' . $row->psychological_post . '</td>
+                            <td>' . $row->feedback . '</td>
+                            <td>' . $row->learning . '</td>
+                            </tr>';
+                        } else {
+                            $output .=
+                            '<tr style ="border-collapse: collapse;">
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td><table>
+                            <thead>
+                            <tr>
+                            <th>Scheduled</th>
+                            <th>Attended</th>
+                            <th>Cancelled</th>
+                            <th>Did not attend</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <td>' . $scheduled[$i - 1] . '</td>
+                            <td>' . $attended[$i - 1] . '</td>
+                            <td>' . $cancelled[$i - 1] . '</td>
+                            <td>' . $not_attend[$i - 1] . '</td>
+                            </tbody></table>
+                            </td>
+                            
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            </tr>
+                            ';
+                        }
+                    }
+                }
+                return response()->json($output);
+            }
+        }
+    }
 
     public function tierTow_report(Request $request)
     {
@@ -275,6 +430,7 @@ class Tier2Controller extends Controller
         }
 
         $data = new Termination;
+        $data->flag = $request->flag;
         $data->project_name = $request->project_name;
         $data->counselor_name = $request->Counselor_name;
         $data->client_name = $request->Client_name;

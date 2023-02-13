@@ -61,7 +61,7 @@
               <th>Gender</th>
               <th>Age</th>
               <th class="d-none d-md-table-cell">Address</th>
-              <th>Occupation</th>
+              
               <th>Client Id</th>
 
               <th>Options</th>

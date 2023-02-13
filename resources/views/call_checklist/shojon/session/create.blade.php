@@ -68,7 +68,7 @@
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput3">How many times tried to reach the client: </label>
                     <input type="text" name="number_of_time_called_to_client" class="form-control"  id="exampleFormControlInput3" >
-                </div>
+                </div> 
 
                 <div class="col-lg-6">
                     <label for="exampleFormControlSelect5">Communication mode</label>
