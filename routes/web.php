@@ -62,7 +62,7 @@ Route::group(['prefix' => 'patient'], function () {
     Route::get('/create/{number}', [PatientController::class, 'create'])->name('patient.create')->middleware('auth');
 
     Route::get('/', 'Patient\PatientController@index')->name('patients')->middleware('auth');
-    Route::get('/show/{id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');
+    Route::get('/show/{unique_id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');
     Route::get('/showInfo/{phone}', 'Patient\PatientController@showInfo')->name('patient.showInfo')->middleware('auth');
     Route::get('/paging', 'Patient\PatientController@paging')->name('patient.paging')->middleware('auth');
     Route::get('/search', 'Patient\PatientController@search')->name('patient.search')->middleware('auth');

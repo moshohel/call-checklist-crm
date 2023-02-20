@@ -3,38 +3,54 @@
 @section('content')
 <div class="card card-default">
     <div class="card-header card-header-border-bottom">
-        <h2>Detail of - {{ $patient->name }}</h2>
+        @if(isset($patient[0]->name)) 
+            <h2>Detail of - {{ $patient[0]->name }}</h2>
+        @endif
     </div>
     <div class="card-body">
         <div class="" id="recent-orders">
             <table class="table table-responsive table-responsive-large" style="width:100%" id="sampleTable">
                 <tr>
                     <th class="d-none d-md-table-cell">Name</th>
-                    <td>{{ $patient->name }}</td>
+                    @if(isset($patient[0]->name)) 
+                    <td>{{ $patient[0]->name }}</td>
+                    @endif
                 </tr>
                 <tr>
                     <th class="d-none d-md-table-cell">Phone</th>
-                    <td>{{ $patient->phone_number }}</td>
+                    @if(isset($patient[0]->phone_number)) 
+                    <td>{{ $patient[0]->phone_number }}</td>
+                    @endif
                 </tr>
                 <tr>
                     <th class="d-none d-md-table-cell">Client ID</th>
-                    <td>{{ $patient->unique_id }}</td>
+                    @if(isset($patient[0]->unique_id)) 
+                    <td>{{ $patient[0]->unique_id }}</td>
+                    @endif
                 </tr>
                 <tr>
                     <th class="d-none d-md-table-cell">Gender</th>
-                    <td>{{ $patient->sex }}</td>
+                    @if(isset($patient[0]->sex)) 
+                    <td>{{ $patient[0]->sex }}</td>
+                    @endif
                 </tr>
                 <tr>
                     <th class="d-none d-md-table-cell">Age</th>
-                    <td>{{ $patient->age }}</td>
+                    @if(isset($patient[0]->age)) 
+                    <td>{{ $patient[0]->age }}</td>
+                    @endif
                 </tr>
                 <tr>
-                    <th class="d-none d-md-table-cell">Address</th>
-                    <td>{{ $patient->occupotion }}</td>
+                    <th class="d-none d-md-table-cell">occupotion</th>
+                    @if(isset($patient[0]->occupotion)) 
+                    <td>{{ $patient[0]->occupotion }}</td>
+                    @endif
                 </tr>
                 <tr>
                     <th class="d-none d-md-table-cell">Department</th>
-                    <td>{{ $patient->department }}</td>
+                    @if(isset($patient[0]->department)) 
+                    <td>{{ $patient[0]->department }}</td>
+                    @endif
                 </tr>
                 {{-- <tr>
                     <th class="d-none d-md-table-cell">Consultant</th>
@@ -43,25 +59,27 @@
                 --}}
                 <tr>
                     <th class="d-none d-md-table-cell">Created At</th>
-                    <td>{{ $patient->created_at }}</td>
+                    @if(isset($patient[0]->created_at)) 
+                    <td>{{ $patient[0]->created_at }}</td>
+                    @endif
                 </tr>
             </table>
         </div>
         {{-- <div class="modal-body">
-            <form action="{!! route('patient.delete', $patient->id) !!}" method="get">
+            <form action="{!! route('patient.delete', $patient[0]->id) !!}" method="get">
                 {{ csrf_field() }}
                 <button type="submit" class="btn btn-danger">Permanent Delete</button>
             </form>
         </div> --}}
-        @if( (auth()->user()->user_group != "SHOJON"))
+        @if( (auth()->user()->user_group == "Supervisor"))
         <div class="row">
             <div class="col">
 
-                <a href="{{ route('patient.edit', $patient->id) }}" class='btn btn-info'>Edit</a>
+                <a href="{{ route('patient.edit', $patient[0]->id) }}" class='btn btn-info'>Edit</a>
             </div>
             <div class="col">
 
-                <a href="#deleteModal{{ $patient->id }}" data-toggle="modal" class="btn btn-danger">Delete</a>
+                <a href="#deleteModal{{ $patient[0]->id }}" data-toggle="modal" class="btn btn-danger">Delete</a>
             </div>
             <div class="col">
                 <p class='btn btn-info' id="two" > Reffer - Tier 2 </p>
@@ -72,7 +90,7 @@
         </div>
         @endif
 
-        <div class="modal fade" id="deleteModal{{ $patient->id }}" tabindex="-1" role="dialog"
+        <div class="modal fade" id="deleteModal{{ $patient[0]->id }}" tabindex="-1" role="dialog"
             aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -83,7 +101,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{!! route('patient.delete', $patient->id) !!}" method="get">
+                        <form action="{!! route('patient.delete', $patient[0]->id) !!}" method="get">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger">Permanent Delete</button>
                         </form>
@@ -126,21 +144,30 @@
                 <div class="row g-3">
                     <div class="col-md-4">
                         <label for="validationCustom01" class="form-label">Client ID:</label>
-                        <input type="text" class="form-control" name="client_id" readonly value="{{ $patient->unique_id }}">
+                        @if(isset($patient[0]->unique_id)) 
+                            <input type="text" class="form-control" name="client_id" readonly value="{{ $patient[0]->unique_id }}">
+                        @endif
                     </div>
                     <div class="col-md-4">
                         <label for="validationCustom01" class="form-label">Client Name:</label>
-                        <input type="text" class="form-control" name="client_name" readonly value="{{ $patient->name }}">
+                        @if(isset($patient[0]->name)) 
+                            <input type="text" class="form-control" name="client_name" readonly value="{{ $patient[0]->name }}">
+                        @endif
                     </div>
                     <div class="col-md-4">
                         <label for="validationCustom01" class="form-label">Age:</label>
-                        <input type="text" class="form-control" name="age" readonly value="{{ $patient->age }}">
+                        @if(isset($patient[0]->age)) 
+                        <input type="text" class="form-control" name="age" readonly value="{{ $patient[0]->age }}">
+                        @endif
                     </div>
                 </div><br>
                 <div class="row g-2">
                     <div class="col-md-6">
                         <label for="validationCustom01" class="form-label">Phone Number:</label>
-                        <input type="number" class="form-control" name="phone_number" value="{{ $patient->phone_number }}">
+                        @if(isset($patient[0]->phone_number)) 
+                        
+                        <input type="number" class="form-control" name="phone_number" value="{{ $patient[0]->phone_number }}">
+                        @endif
                     </div>
                     <div class="col-md-6">
                         <label for="validationCustom01" class="form-label">Emergency number in case of unavailability:</label>

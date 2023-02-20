@@ -37,7 +37,7 @@
                 <div class="form-group col-md-4 col-sm-12">
                     <label for="exampleFormControlInput1">Full Name</label>
                     <input type="text" name="client_name"  class="form-control"
-                        id="exampleFormControlInput1">
+                        id="exampleFormControlInput1" required>
                 </div>
 
                 <div class="form-group col-md-4 col-sm-12">
@@ -49,7 +49,7 @@
                 <div class="form-group col-md-4 col-sm-12">
                     <label for="exampleFormControlInput2">Client Id</label>
                     <input type="text" name="unique_id"  class="form-control"
-                        id="exampleFormControlInput2">
+                        id="exampleFormControlInput2" required>
                 </div>
                 
                 <div class="form-group col-md-4 col-sm-12">
