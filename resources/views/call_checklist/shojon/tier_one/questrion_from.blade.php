@@ -114,7 +114,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button type="Submit"  class="btn btn-primary save_btn">Update</button>
+        <button type="Submit"  class="btn btn-primary save_btn">Generate Score</button>
       </div>
     </form> 
   </div>

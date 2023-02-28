@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput1">Name</label>
-                    <input type="text" name="name" class="form-control" id="exampleFormControlInput1"
+                    <input type="text" name="name" required class="form-control" id="exampleFormControlInput1"
                         placeholder="patient name">
                     <input type="hidden" name="uniqueId" value="{{ $getuniqueId->unique_id }}">
                 </div>
@@ -22,8 +22,8 @@
 
                 <div class="form-group col-6">
                     <label class="control-label" for="sex"><b>Sex: <span class="required">*</span></b></label>
-                    @php $types = ['Male','Female','Intersex','Others']; @endphp
-                    <select name="sex" id="sex" list="sex_list" class="form-control @error('sex') is-invalid @enderror">
+                    @php $types = ['Male','Female','LGBTQ','Others']; @endphp
+                    <select name="sex" id="sex" list="sex_list" required class="form-control @error('sex') is-invalid @enderror">
                         <datalist id="sex_list">
                             <option value="">Select Sex</option>
                             @foreach($types as $item)
@@ -40,7 +40,7 @@
                 <div class="form-group col-6">
                     <label class="control-label" for="age"><b>Age: <span class="required">*</span></b></label><br>
                     @php $types = ['0-12','13-19','20-30','30-40','40-65','65+','Don’t know.','Don’t want to share']; @endphp
-                    <select name="age" id="age" list="age_list" class="form-control @error('age') is-invalid @enderror">
+                    <select name="age" id="age" list="age_list" required class="form-control @error('age') is-invalid @enderror">
                         <datalist id="age_list">
                             <option value="">Select Age</option>
                             @foreach($types as $item)
@@ -58,12 +58,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group" @error('district') is-invalid @enderror">
-                                <input type="text" class="form-control" name="location" list="location_list" value="">
+                                <select type="text" class="form-control" required name="location" list="location_list" value="">
                                 <datalist id="location_list">
+                                    <option selected disabled value="">Select Location</option>
                                     @foreach ($districts as $item)
                                     <option value="{{ $item }}">{{ $item }}</option>
                                     @endforeach
                                 </datalist>
+                            </select>
                             </div>
                             @error('district') {{ $message }} @enderror
                         </div>
@@ -78,7 +80,7 @@
                             Status:</b></label>
                     @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower
                     Class', 'Lower Class']; @endphp
-                    <select name="socio_economic_status" list="socio_economic_status_list" id="socio_economic_status"
+                    <select name="socio_economic_status" required list="socio_economic_status_list" id="socio_economic_status"
                         class="form-control">
 
                         <datalist id="socio_economic_status_list">

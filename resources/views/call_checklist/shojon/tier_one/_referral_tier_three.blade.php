@@ -13,19 +13,11 @@
               <div class="row g-2">
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Referral From:</label>
-<<<<<<< HEAD
               <input type="text" class="form-control" readonly name="referral_from"  value="Shojon Tier 1">
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Referral To:</label>
               <input type="text" class="form-control" readonly name="referral_to" value="Shojon Tier 3">
-=======
-              <input type="text" class="form-control" required readonly name="referral_to"  value="Shojon Tier 1">
-              </div>
-              <div class="col-md-6">
-              <label for="validationCustom01" class="form-label">Referral To:</label>
-              <input type="text" class="form-control" required readonly name="referral_from" value="Shojon Tier 3">
->>>>>>> f7f872618bb3597b9a6f255a82f68c6869d1a3f9
              </div>
              </div><hr>
              <div class="row g-3">
@@ -36,21 +28,37 @@
               </div>
               <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Client Name:</label>
+              @if(empty($newPatient->name))
+              <input type="text" class="form-control" required  name="client_name">
+              @else
               <input type="text" class="form-control" required readonly name="client_name" value="{{$newPatient->name}}">
-             </div>
-             <div class="col-md-4">
-              <label for="validationCustom01" class="form-label">Age:</label>
-              <input type="text" class="form-control" required readonly name="age" value="{{ $newPatient->age }}">
+              @endif
              </div>
              <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Sex:</label>
+              @if(empty($newPatient->sex))
+              <input type="text" class="form-control" required name="gender" >
+              @else
               <input type="text" class="form-control" readonly name="gender" value="{{ $newPatient->sex }}">
+              @endif
+             </div>
+             <div class="col-md-4">
+              <label for="validationCustom01" class="form-label">Age:</label>
+              @if(empty($newPatient->age))
+              <input type="text" class="form-control" required name="age" >
+              @else
+              <input type="text" class="form-control" required name="age" readonly value="{{ $newPatient->age }}">
+              @endif
              </div>
              </div><br>
              <div class="row g-2">
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Phone Number:</label>
+              @if(empty($newPatient->phone_number))
+              <input type="number" class="form-control" required name="phone_number">
+              @else
               <input type="number" class="form-control" required readonly name="phone_number" value="{{$newPatient->phone_number}}">
+              @endif
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Emergency number in case of unavailability:</label>

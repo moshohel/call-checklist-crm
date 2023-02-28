@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            @php $types = ['Male','Female','Intersex','Others']; @endphp 
+                            @php $types = ['Male','Female','LGBTQ','Others']; @endphp 
                             <label for="validationCustom01" class="form-label">Sex:</label>
                             <select class="form-control" readonly  name="sex" required>
                                 <option disabled selected>Select Sex</option>

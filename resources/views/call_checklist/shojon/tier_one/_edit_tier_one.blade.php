@@ -20,11 +20,13 @@
         <div class="row g-4">
           <div class="col-md-3">
             <label for="validationCustom01" class="form-label">Phone Number:</label>
-            <input type="number" class="form-control" disabled readonly max="15" min="7" name="phone_number" placeholder="Enter Phone Number" value="{{ $data->phone_number }}" >
+            <input type="number" class="form-control" readonly max="15" min="7" name="phone_number" placeholder="Enter Phone Number" value="{{ $data->phone_number }}" >
           </div>
           <div class="col-md-3">
             <label for="validationCustom01" class="form-label">Client Name:</label>
+            @isset($data->caller_name)
             <input type="text" class="form-control" name="client_name" value="{{ $data->caller_name }}" >
+            @endisset
           </div>
           <div class="col-md-3">
             <div class="form-group">
@@ -136,7 +138,6 @@
               <label for="validationCustom01" class="form-label">Occupation :</label> 
               @php $types = ['Student', 'Job holder', 'Businessperson', 'Housewife', 'Unemployed','self employed', 'Retired', 'Could not tell']; @endphp
               <div class="form-control">
-                <label>
                   @foreach($types as $item)
                   @if($data->occupation == $item)
                   <input type="radio" name="occupation" value="{{ $item }}" checked="checked"
@@ -151,7 +152,6 @@
                   <input type="radio" id="chkOccupation" name="occupation"
                   onclick="ShowOccupationBox()"/>
                   Other (please explain)
-                </label>
                 <span id="OccupationBox" style="display: none;">
                   <input class="form-control" type="text" name="other_occupation" placeholder="Explain"/>
                 </span>
@@ -163,7 +163,6 @@
               <label for="validationCustom01" class="form-label">Where/how did the Client hear about SHOJON:</label> 
               @php $types = ['Search engine','KPR', 'Social Media', 'Word of mouth', 'Referred by professional', 'SUDIN', 'SF Microfinance','Radio','TV','Print Media','Don’t know.']; @endphp
               <div class="form-control">
-                <label>
                   @foreach($types as $item)
                   @if($data->hear_about_shojon == $item)
                   <input type="radio" name="about_shojon" value="{{ $item }}" checked="checked"
@@ -178,7 +177,6 @@
                   <input type="radio" id="chkabout_shojon" name="about_shojon"
                   onclick="Showabout_shojonBox()"/>
                   Other, comment (please explain)
-                </label>
                 <span id="about_shojonBox" style="display: none;">
                   <input class="form-control" type="text" name="other_about_shojon" placeholder="Explain"/>
                 </span>
@@ -190,7 +188,6 @@
               <label class="control-label" for="distress_rating"><b>Distress Rating (pre-stage):</b></label> 
               @php $types = ['0','1', '2', '3', '4', '5', '6', '7','8','9','10']; @endphp
               <div class="form-control">
-                <label>
                   <label><b style="color: black;">[0 means
                   lowest wellbeing, 10 means Highest wellbeing]</b></label><br>
                   @foreach($types as $item)
@@ -203,7 +200,6 @@
                   {{ $item }}
                   <br>
                   @endforeach
-                </label>
               </div> 
             </div>
           </div>
@@ -216,7 +212,6 @@
               <label for="validationCustom01" class="form-label">Primary Reason for Calling (CHOOSE ONLY ONE) :</label> 
               @php $types = ['COVID19 related Issues', 'Mental Illness', 'Substance Abuse', 'Family/Relationship Issues', 'Health/Physical Concerns', 'Financial Concerns', 'Immediate Emotional Crisis','Suicidal Feelings','Domestic Abuse','Child Abuse','Discrimination due to gender','Mental Health Related Symptoms','Discrimination due to minority status','Education','Bereavement','Work related stress','Disability','Anger','Parenting issue','Don’t know']; @endphp
               <div class="form-control">
-                <label>
                   @foreach($types as $item)
                   @if($data->primary_reason == $item)
                   <input type="radio" name="primary_reason" value="{{ $item }}" checked="checked"
@@ -231,7 +226,6 @@
                   <input type="radio" id="chkprimary_reason" name="primary_reason"
                   onclick="Showprimary_reasonBox()"/>
                   Other, comment (please explain)
-                </label>
                 <span id="primary_reasonBox" style="display: none;">
                   <input class="form-control" type="text" name="other_primary_reason" placeholder="Explain"/>
                 </span>
@@ -246,7 +240,6 @@
               $check_item = json_decode($data->secondary_reason);
               @endphp
               <div class="form-control">
-                <label>
                   @if($check_item !="")
                   @foreach($types as $item)
                   <input type="checkbox" name="secondary_reason[]" value="{{ $item }}"
@@ -264,7 +257,6 @@
                   <input type="checkbox" id="chksecondary_reason" name="secondary_reason[]"
                   onclick="Showsecondary_reasonBox()"/>
                   Other, comment (please explain)
-                </label>
                 <span id="secondary_reasonBox" style="display: none;">
                   <input class="form-control" type="text" name="other_secondary_reason" placeholder="Explain"/>
                 </span>
@@ -279,7 +271,6 @@
               $check_item = json_decode($data->mental_illness_diagnosis);
               @endphp 
               <div class="form-control">
-                <label>
                   @if($check_item !="")
                   @foreach($types as $item)
                   <input type="checkbox" name="mental_illness_diagnosis[]" value="{{ $item }}"
@@ -297,7 +288,6 @@
                   <input type="checkbox" id="chkmental_illness" name="mental_illness_diagnosis[]"
                   onclick="Showmental_illnessBox()"/>
                   Other, comment (please explain)
-                </label>
                 <span id="mental_illnessBox" style="display: none;">
                   <input class="form-control" type="text" name="other_mental_illness_diagnosis" placeholder="Explain"/>
                 </span>
@@ -369,7 +359,6 @@
             <label class="control-label" for="Internal_Referral"><b>Internal Referral:</b></label> 
             @php $types = ['No', 'KPR']; @endphp
             <div class="form-control">
-              <label>
                 @foreach($types as $item)
                 @if($data->internal_referr == $item)
                 <input type="radio" name="Internal_Referral" value="{{ $item }}" checked="checked"/>
@@ -401,14 +390,13 @@
                 @include('call_checklist.shojon.tier_one._referral_tier_three')
               </span>
             </label>
-          </label>
         </div> 
       </div>
     </div>
     <div class="col-md-6">
       <div class="form-group">
         <label class="control-label" for="distress_rating"><b>External Referral :</b></label> 
-        @php $types = ['NIMH (contact No)', 'BSMMU- IPNA (contact No)',]; @endphp
+        @php $types = ['NIMH (contact No)', 'BSMMU- IPNA (contact No)','No']; @endphp
         <div class="form-control">
           <label class="control-label"for="distress_rating"><b>Reason for referral:</b></label><br>
           <label class="control-label"  style="width: 100%;" >
@@ -421,7 +409,6 @@
           </label>
         </div>
         <div class="form-control">
-          <label>
             @foreach($types as $item)
             @if($data->name_of_agency == $item)
             <input type="radio" name="name_of_agency" value="{{ $item }}" checked="checked"
@@ -436,7 +423,6 @@
             <input type="radio" id="chkExternal_Referral" name="name_of_agency"
             onclick=" ShoExternal_ReferralBox()()"/>
             Other, comment (please explain)
-          </label>
           <span id="External_ReferralBox" style="display: none;">
             <input class="form-control" type="text" name="other_name_of_agency" placeholder="Explain"/>
           </span>

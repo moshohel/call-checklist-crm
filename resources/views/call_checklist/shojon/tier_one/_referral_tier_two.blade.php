@@ -27,21 +27,37 @@
               </div>
               <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Client Name:</label>
-              <input type="text" class="form-control" required name="client_name" value="{{$newPatient->name}}" readonly>
+             @if(empty($newPatient->name))
+              <input type="text" class="form-control" required name="client_name">
+              @else
+              <input type="text" class="form-control" required readonly name="client_name" value="{{$newPatient->name}}">
+              @endif
              </div>
              <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Sex:</label>
+              @if(empty($newPatient->sex))
+              <input type="text" class="form-control" required name="gender" >
+              @else
               <input type="text" class="form-control" readonly name="gender" value="{{ $newPatient->sex }}">
+              @endif
              </div>
              <div class="col-md-4">
               <label for="validationCustom01" class="form-label">Age:</label>
+              @if(empty($newPatient->age))
+              <input type="text" class="form-control" required name="age" >
+              @else
               <input type="text" class="form-control" required name="age" readonly value="{{ $newPatient->age }}">
+              @endif
              </div>
              </div><br>
              <div class="row g-2">
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Phone Number:</label>
-              <input type="number" class="form-control" readonly name="phone_number" value="{{$newPatient->phone_number}}">
+              @if(empty($newPatient->phone_number))
+              <input type="number" class="form-control" required name="phone_number">
+              @else
+              <input type="number" class="form-control" required readonly name="phone_number" value="{{$newPatient->phone_number}}">
+              @endif
               </div>
               <div class="col-md-6">
               <label for="validationCustom01" class="form-label">Emergency number in case of unavailability:</label>
