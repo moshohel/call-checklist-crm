@@ -11,6 +11,7 @@
 <div class="row">
         <div class="col-md-12">
             <div class="tile">
+                <a href="{{ route('call_checklist.shojon.evaluationExcel') }}" class="btn btn-info btn-default">Excel</a>
                 <div class="tile-body">
                     @include('call_checklist.partials.messages')
                     <div>

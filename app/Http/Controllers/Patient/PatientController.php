@@ -137,7 +137,7 @@ class PatientController extends Controller
                 return response()->json($output);
             }
         }
-        return view('call_checklist.patient.pupup');
+        return view('call_checklist.patient.popup');
     }
     //uniqueGenerator//
     protected function uniqueGenerator($model, $throw, $length, $prefix)

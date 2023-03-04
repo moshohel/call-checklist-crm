@@ -5,6 +5,9 @@ namespace App\Http\Controllers\CallChecklist;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\EvaluationExport;
+use App\Models\Evaluation;
 
 class EvaluationController extends Controller
 {
@@ -46,5 +49,16 @@ class EvaluationController extends Controller
       $data = DB::table('evaluations')->where('id', $id)->first();
       // dd($data);
       return view('call_checklist.shojon.evaluation.view', compact('pagedetails', 'data'));
+   }
+
+   public function evaluationExcel(Request $request)
+   {
+      return Excel::download(new EvaluationExport, 'evaluationlist.xlsx');
+   }
+
+   public function evaluationTable()
+   {
+      $data = Evaluation::all();
+      return view('Export.evaluation', compact('data'));
    }
 }

@@ -105,7 +105,7 @@
             {{-- <input class="un " type="text" name="name" align="center" placeholder="Username"> --}}
             {{-- <input class="pass" type="password" name="password" align="center" placeholder="Password"> --}}
             <input id="email" type="text" class="un @error('user') is-invalid @enderror" name="user"
-                value="{{ old('user') }}"  autocomplete="user" autofocus>
+                value="{{ old('user') }}" placeholder="User Name" autocomplete="user" autofocus>
 
             @error('user')
             <div class="">
@@ -114,7 +114,7 @@
                 </span>
             </div>
             @enderror
-            <input id="password" type="password" class="pass @error('password') is-invalid @enderror" name="password"
+            <input id="password" type="password" placeholder="Password" class="pass @error('password') is-invalid @enderror" name="password"
                  autocomplete="current-password">
 
             @error('password')

@@ -171,6 +171,8 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('supervisor/dashboard', 'DashboardController@supervisorDashboard')->name('call_checklist.shojon.supervisor.dashboard');
 
             //call evaluation
+            Route::get('/evaluationTable', [EvaluationController::class, 'evaluationTable'])->name('call_checklist.shojon.evaluationTable');
+            Route::get('/evaluationExcel', [EvaluationController::class, 'evaluationExcel'])->name('call_checklist.shojon.evaluationExcel');
             Route::get('/evaluation', [EvaluationController::class, 'callEvaluationblade'])->name('call_checklist.shojon.callEvaluation');
             Route::post('/evaluation-sote', [EvaluationController::class, 'store'])->name('call_checklist.evaluation.store');
             Route::get('/eva-list', [EvaluationController::class, 'callEvaluationIndex'])->name('call_checklist.shojon.eva_index');
