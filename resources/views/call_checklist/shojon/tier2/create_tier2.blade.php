@@ -383,7 +383,7 @@
     @error('Present_Continuation') {{ $message }} @enderror
 </div>
 <div class="form-group">
-    <label class="control-label">Mantion the name of medicine if any :</label>
+    <label class="control-label">Mention the name of medicine if any :</label>
     <textarea class="form-control" name="name_of_medicine"></textarea>
 </div>
 
