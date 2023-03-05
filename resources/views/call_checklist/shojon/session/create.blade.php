@@ -39,24 +39,23 @@
                 </div>
 
                 <div class="form-group col-3">
-                    <label for="exampleFormControlInput5">Preferred time</label>
+                    <label for="exampleFormControlInput5">Preferred Time - </label>
                     <input type="text" name="preferred_time" class="form-control" readonly id="exampleFormControlInput5" value="{{ $referral->preferred_time }}">
                 </div>
 
                 <div class="form-group col-6">
-                    <label for="exampleFormControlInput3">Appointment Date</label>
+                    <label for="exampleFormControlInput3">Upcoming Appointment Date</label>
                     <input type="date" name="session_date" class="form-control"  id="exampleFormControlInput3">
                 </div>
 
                 <div class="form-group col-6">
-                    <label for="exampleFormControlInput3">Appointment Time</label>
+                    <label for="exampleFormControlInput3">Upcoming Appointment Time</label>
                     <input type="time" name="session_time" class="form-control"  id="exampleFormControlInput3">
                 </div>
 
                 
                 <div class="form-group col-6">
                     <label for="exampleFormControlSelect5">Call Status</label>
-                    
                     <select class="form-control" name="status" id="exampleFormControlSelect5" >
                         <option value=""disabled selected hidden>Call Status</option>
                         <option value="Successful call">Successful call </option>
@@ -89,34 +88,22 @@
                     </div>
                 </div>
 
-                <div class="form-group">
-                    <label class="control-label" for="Session_Number"><b>Session Number (mandatory single select
-                            )</b></label>
-                    @php $types = ['1st session', '2nd session', '3rd session', '4th session', '6th session', '7th
-                    session','8th session','8th session','9th session','10th session','Last session']; @endphp
-                    <div class="form-control @error('Session_Number') is-invalid @enderror">
-                        <label>
-                            @foreach($types as $item)
-                            @if((old('Session_Number') == $item))
-                            <input type="radio" name="Session_Number" value="{{ $item }}" checked="checked"
-                                onclick="ShowSessionBox()" />
-                            @else
-                            <input type="radio" name="Session_Number" value="{{ $item }}" onclick="ShowSessionBox()" />
-                            @endif
-                            {{ $item }}
-                            <br>
-                            @endforeach
-                            <input type="radio" id="chkSession" name="Session_Number" onclick="ShowSessionBox()" />
-                            Other (please explain)
-                        </label>
-                        <span id="SessionBox" style="display: none;">
-                            <input class="form-control" type="text" name="other_Session_Number"
-                                value=""
-                                placeholder="Explain" />
-                        </span>
-                    </div>
-                    @error('Session_Number') {{ $message }} @enderror
+                
+                <div class="form-group col-6">
+                    <label for="appointment_status">Appointment Status</label>
+                    <select class="form-control" name="appointment_status_flag" id="appointment_status_flag" onchange="addForm(this.value)" required>
+                        
+                        <option value=""disabled selected hidden>Status</option>
+                        <option value="Confirmed appointment">Confirmed appointment</option>
+                        <option value="Decline">Decline</option>
+                        <option value="Drop Out">Drop Out</option>
+                        <option value="Other">Other</option>
+                    </select>
                 </div>
+
+                  <div class="form-group col-6" id="guestDetails">
+                  
+                  </div>
 
             </div>
             
@@ -128,6 +115,8 @@
     </div>
 </div>
 @endsection
+
+@section('script')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -143,4 +132,36 @@
         var other = Box.getElementsByTagName('input')[0];
         radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
     }
+
+    function addForm(values) {
+            var element = document.getElementById('guestDetails');
+            element.innerHTML = "" //empty 
+
+            if(values == "Decline")
+            {
+                element.innerHTML = ""
+                element.innerHTML += `<label for="exampleFormControlInput3">Decline Reason </label>
+                                <input type="text" name="appointment_decline_reason" class="form-control"  id="exampleFormControlInput3" required>`;
+            }
+            else if(values == "Other")
+            {
+                element.innerHTML = ""
+                element.innerHTML += `<label for="exampleFormControlInput3">Other Reason </label>
+                                <input type="text" name="appointment_other_reason" class="form-control"  id="exampleFormControlInput3" required>`;
+            }
+
+            else if(values == "Drop Out")
+            {
+                element.innerHTML = "";   
+            }
+
+            else if(values == "Confirmed appointment")
+            {
+                element.innerHTML = "";
+                
+            }
+
+    }
 </script>
+@endsection
+    

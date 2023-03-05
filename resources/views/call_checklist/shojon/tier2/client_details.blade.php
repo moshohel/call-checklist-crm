@@ -326,7 +326,7 @@
         @endphp
         <label for="validationCustom01" class="form-label">Previous psychiatric diagnosis?</label><br>
         <ul>
-            @if ($data->differential_diagnosis != "")
+            @if ($check_item != "")
             @foreach($check_item as $info) 
             <li><b>{{$info}}</b></li>
             @endforeach
@@ -343,28 +343,28 @@
    </div>
 </div><hr>
 <div class="row">
-   <div class="col-md-12">
-       <label for="validationCustom01" class="form-label">Physical Concern history:</label><br>
-       @php
-       $check_item = json_decode($data->concern_history);
-       @endphp
-       <ul>
-          @if($data->concern_history != "")
-          @foreach($check_item as $info) 
-          <li><b>{{$info}}</b></li>
-          @endforeach
-          @endif
-      </ul>
-  </div>
+ <div class="col-md-12">
+     <label for="validationCustom01" class="form-label">Physical Concern history:</label><br>
+     @php
+     $check_item = json_decode($data->concern_history);
+     @endphp
+     <ul>
+      @if($check_item != "")
+      @foreach($check_item as $info) 
+      <li><b>{{$info}}</b></li>
+      @endforeach
+      @endif
+  </ul>
+</div>
 </div><hr>
 <div class="row">
-   <div class="col-md-12">
-       <label for="validationCustom01" class="form-label">Current Differential Diagnosis</label><br>
-       @php
-       $check_item = json_decode($data->differential_diagnosis);
-       @endphp
-       <ul>
-        @if($data->differential_diagnosis != "")
+ <div class="col-md-12">
+     <label for="validationCustom01" class="form-label">Current Differential Diagnosis</label><br>
+     @php
+     $check_item = json_decode($data->differential_diagnosis);
+     @endphp
+     <ul>
+        @if($check_item != "")
         @foreach($check_item as $info) 
         <li><b>{{$info}}</b></li>
         @endforeach

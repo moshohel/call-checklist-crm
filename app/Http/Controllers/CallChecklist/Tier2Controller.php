@@ -199,6 +199,7 @@ class Tier2Controller extends Controller
     public function tire2patientlist(Request $request)
     {
         $data = DB::table('sojon_tier2s')->get();
+        // dd($data);
         $pageTitle = $this->pageTitle;
         return view('call_checklist.shojon.tier2.index', compact('data', 'pageTitle'));
     }

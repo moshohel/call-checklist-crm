@@ -33,7 +33,7 @@
         </div>
         <div class="col-md-3">
           <div class="form-group">
-            <label for="validationCustom01" class="form-label">Date and Time:</label>
+            <label  class="form-label">Date and Time:</label>
             <input type="datetime-local" class="form-control" name="date" required>
           </div>
         </div>

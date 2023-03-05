@@ -30,6 +30,8 @@
                         <input type="hidden" name="call_end" value="#">
                         <input type="hidden" name="duration" value="#">
 
+                        <input type="hidden" name="session_id" value="{{ $session_id }}">
+
                         <div class="form-group">
                             <label class="control-label" for="phone_number"><b>Phone Number:</b></label><br>
                             <input class="form-control" type="text" name="phone_number" id="phone_number"
@@ -639,7 +641,7 @@
                         <div class="form-control">
                             <label class="control-label">Internal Referral:( single select )</label><br>
                         <label class="control-label">
-                           <a href="#" class="btn btn-primary btn-sm Referral_form " data-id="#" data-toggle="modal" data-target="#ReferralModal" >Referral Tier 3</a>
+                           <a href="#" class="btn btn-primary btn-sm Referral_form " data-id="#" data-toggle="modal" data-target="#ReferralModal" >Referral Tier 2</a>
 
                                 </label>
                              @include('call_checklist.shojon.tier2._referral')
@@ -689,7 +691,7 @@
                         </select>
                         @error('financial_affordability') {{ $message }} @enderror --}} -->
                     <div class="form-group">
-                        <label class="control-label" for="next_session_plan"><b>Next session plan</label>
+                        <label class="control-label" for="next_session_plan"><b>Followup Session</label>
                         <textarea rows="2" cols="50"
                                   class="form-control
                                 @error('next_session_plan') is-invalid @enderror"

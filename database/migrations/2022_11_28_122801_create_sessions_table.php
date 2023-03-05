@@ -28,6 +28,9 @@ class CreateSessionsTable extends Migration
             $table->string('session_time')->nullable();
             $table->string('session_date')->nullable();
             $table->string('session_number')->nullable();
+            $table->string('appointment_status_flag')->nullable();
+            $table->string('appointment_decline_reason')->nullable();
+            $table->string('appointment_other_reason')->nullable();
             $table->string('communication_medium')->nullable();
             $table->string('appointment_status')->nullable();
             $table->boolean('reshedule_request')->default(0);

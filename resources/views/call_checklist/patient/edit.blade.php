@@ -86,6 +86,27 @@
                 </div>
 
                 <div class="form-group col-3">
+                    <label class="control-label" for="socio_economic_status"><b>Socio-economic
+                            Status:</b></label>
+                    @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower
+                    Class', 'Lower Class']; @endphp
+                    <select name="socio_economic_status" list="socio_economic_status_list" id="socio_economic_status"
+                        class="form-control">
+
+                        <datalist id="socio_economic_status_list">
+                            <option value="">Select SES</option>
+                            @foreach($types as $item)
+                            @if( old('socio_economic_status') == $item))
+                            <option value="{{ $item }}">{{ $item }}</option>
+                            @else
+                            <option value="{{ $item }}">{{ $item }}</option>
+                            @endif
+                            @endforeach
+                        </datalist>
+                    </select>
+                </div>
+
+                <div class="form-group col-3">
                     <label class="control-label" for="occupation"><b>Occupation: <span
                                 class="required">*</span></b></label>
                     @php $types = ['Student', 'Job holder', 'Businessperson', 'Housewife', 'Unemployed', 'Retired',
@@ -112,27 +133,6 @@
                         </span> --}}
                     </div>
                     @error('occupation') {{ $message }} @enderror
-                </div>
-
-                <div class="form-group col-3">
-                    <label class="control-label" for="socio_economic_status"><b>Socio-economic
-                            Status:</b></label>
-                    @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower
-                    Class', 'Lower Class']; @endphp
-                    <select name="socio_economic_status" list="socio_economic_status_list" id="socio_economic_status"
-                        class="form-control">
-
-                        <datalist id="socio_economic_status_list">
-                            <option value="">Select SES</option>
-                            @foreach($types as $item)
-                            @if( old('socio_economic_status') == $item))
-                            <option value="{{ $item }}">{{ $item }}</option>
-                            @else
-                            <option value="{{ $item }}">{{ $item }}</option>
-                            @endif
-                            @endforeach
-                        </datalist>
-                    </select>
                 </div>
 
                 <div class="form-group col-3">

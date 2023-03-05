@@ -41,13 +41,16 @@
                 </ul>
             @endif
         </li>
+        @endif
+
+        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") || (auth()->user()->user_group == "MHW"))
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
                 <span class="app-menu__label">Tier 1</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-
+                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON")|| (auth()->user()->user_group == "Supervisor"))
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">
@@ -55,6 +58,7 @@
                         <span class="app-menu__label">Dashboard tier -1 </span>
                     </a>
                 </li>
+                @endif
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.manual_form') }}">
@@ -72,6 +76,9 @@
 
             </ul>
         </li>
+        @endif
+        
+        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
         <li class="treeview">
             <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
                 <span class="app-menu__label">Tier 2</span>
@@ -86,13 +93,13 @@
                         <span class="app-menu__label">Dashboard tier - 2 </span>
                     </a>
                 </li>
-                <li>
+                {{-- <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.tier2') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Add Patient - Tier 2 </span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.Patientlist') }}">
@@ -110,13 +117,13 @@
             </a>
             <ul class="treeview-menu">
 
-                <li>
+                {{-- <li>
                     <a class="app-menu__item"
                         href="{{ route('call_checklist.shojon.tierThree') }}">
                         <i class="app-menu__icon fa fa-wpforms"></i>
                         <span class="app-menu__label">Add Patient - Tier 3 </span>
                     </a>
-                </li>
+                </li> --}}
                 <li>
                     <a class="app-menu__item"
                         href="{{ route('shojon.tierThreeList') }}">
@@ -211,7 +218,7 @@
             </li>
         @endif 
 
-        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON" || (auth()->user()->user_group == "MHW")))
             <li class="treeview">
                 <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
                     <span class="app-menu__label">Reschedule / Cancelation</span>
@@ -262,7 +269,7 @@
                 <span class="app-menu__label">User</span>
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
-            @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+            @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") || (auth()->user()->user_group == "Psychiatrist") || (auth()->user()->user_group == "Therapist"))
             <ul class="treeview-menu">
                 <li>
                     <a class="app-menu__item" href="{{ route('call_checklist.shojon.doctor.dashboard') }}">
@@ -283,6 +290,16 @@
             </ul>
             @endif
             <ul class="treeview-menu">
+
+                <li>
+                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                        == "SHOJON") ? 'active' : '' }}"
+                        href="{{ route('user.edit', auth()->user()->user_id) }}">
+                        <i class="app-menu__icon fa fa-user-circle"></i>
+                        <span class="app-menu__label">Profile</span>
+                    </a>
+                </li>
+
                 @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
                 <li>
                     <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
@@ -294,6 +311,7 @@
                 </li>
                 @endif
                 
+                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") || (auth()->user()->user_group == "Psychiatrist") || (auth()->user()->user_group == "Therapist"))
                 <li>
                     <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
                         == "SHOJON") ? 'active' : '' }}"
@@ -302,7 +320,6 @@
                         <span class="app-menu__label">Client Details</span>
                     </a>
                 </li>
-
                 <li>
                     <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
                         == "SHOJON") ? 'active' : '' }}"
@@ -311,6 +328,7 @@
                         <span class="app-menu__label">Calendar</span>
                     </a>
                 </li>
+                @endif
             </ul>
 
         </li>

@@ -63,7 +63,8 @@
                 header: {
                     left: 'prev, next today',
                     center: 'title',
-                    right: 'month',
+                    right: 'month, list',
+                    // right: 'month, agendaWeek, agendaDay, list',
                 },
                 events: sessions,
                 selectable: true,

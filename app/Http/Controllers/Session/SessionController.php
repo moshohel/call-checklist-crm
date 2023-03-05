@@ -58,10 +58,9 @@ class SessionController extends Controller
      */
     public function store(Request $request, $unique_id, $id)
     {
-
-
         $session = new Session();
         $data = $request->only($session->getFillable());
+        // dd($data);
         $session->fill($data);
         $session->therapist_or_psychiatrist_user_id = Auth::user()->user_id;
         $session->therapist_or_psychiatrist = Auth::user()->full_name;

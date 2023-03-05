@@ -86,7 +86,7 @@ class PatientController extends Controller
             $id = $item->id;
             $phone = $item->phone_number;
             $unique_id = $item->unique_id;
-            $view_button = "<a href='patient/show/$id' class='btn btn-info m-1'>Actions</a>";
+            $view_button = "<a href='patient/show/$unique_id' class='btn btn-info m-1'>Actions</a>";
             // $tier_two = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#ReferralModal'>R-Tier 2</a>";
             // $tier_three = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#ReferralModal'>R-Tier 3</a>";
             $showInfo = "<a href='patient/showInfo/$unique_id' class='btn btn-info m-1'>History</a>";
@@ -137,7 +137,7 @@ class PatientController extends Controller
                 return response()->json($output);
             }
         }
-        return view('call_checklist.patient.pupup');
+        return view('call_checklist.patient.popup');
     }
     //uniqueGenerator//
     protected function uniqueGenerator($model, $throw, $length, $prefix)
@@ -209,9 +209,14 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($unique_id)
     {
-        $patient = Patient::find($id);
+        // dd($unique_id);
+        $patient = DB::table('patients')
+            ->where('unique_id', '=', $unique_id)
+            ->get();
+        // $patient = Patient::distinct()->get(['unique_id']);
+        // dd($patient);
         // return view('pages.patient.show')->with('patient', $patient);
         return view('call_checklist.patient.show', compact('patient'));
     }
