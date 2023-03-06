@@ -5,17 +5,19 @@
     <div class="card-header card-header-border-bottom">
         <h2>Call From - {{ $number }}</h2>
     </div>
+    @include('call_checklist.partials.messages')
     <div class="card-body">
         <div class="row">
             
             <div class="col-md-6 col-xl-4 card-body" style="height: 15ch;">
                 <a href="{{ route('patient.create',$number) }}" class="btn btn-outline-primary" style="width: 100%; height: 100%;">New
                             Caller</a>
+                {{-- <a href="{{ route('call_checklist.shojon.manual_form') }}" class="btn btn-outline-primary" style="width: 100%; height: 100%;">New
+                    Caller</a> --}}
             </div>
             <div class="col-md-6 col-xl-4 card-body" style="height: 15ch;">
                 <a href="{{ route('patients') }}"
-                    class="btn btn-outline-primary" style="width: 100%; height: 100%;">Exiting
-                    Caller</a>
+                    class="btn btn-outline-primary" style="width: 100%; height: 100%;">Existing Caller</a>
             </div>
             <div class="col-md-6 col-xl-4 card-body" style="height: 15ch;">
                 

@@ -8,6 +8,7 @@
                 <tr>
                     <th>Name</th>
                     <th class="d-none d-md-table-cell">Client ID</th>
+                    <th class="d-none d-md-table-cell">Request Type</th>
                     <th class="d-none d-md-table-cell">Phone</th>
                     <th class="d-none d-md-table-cell">Reson</th>
                     <th class="d-none d-md-table-cell">Status</th>
@@ -20,12 +21,22 @@
                     
                         <td >{{ $rescheduleOrCancelation->client_name }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $rescheduleOrCancelation->unique_id }}</td>
+                            @if ( $rescheduleOrCancelation->reshedule_request )
+                            <td class="d-none d-md-table-cell text-dark">
+                              Reshedule request
+                            </td>
+                            @else
+                            <td class="d-none d-md-table-cell text-dark">
+                              Cancelation request
+                            </td>
+                            @endif
+                          
                         <td class="d-none d-md-table-cell text-dark">{{ $rescheduleOrCancelation->phone_number }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $rescheduleOrCancelation->reason }}</td>
                         <td class="d-none d-md-table-cell text-dark  already_referred">{{ $rescheduleOrCancelation->status }}</td>
                         
                         <td>
-                            <a href="{{ route('patient.show', [ $rescheduleOrCancelation->unique_id]) }}" class="btn btn-info btn-default">Info</a>
+                            <a href="{{ route('session.sessionRescheduleCancelationShow', [ $rescheduleOrCancelation->id]) }}" class="btn btn-info btn-default">Info</a>
                         </td>
 
                     </tr>

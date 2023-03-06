@@ -91,7 +91,7 @@ class SessionController extends Controller
 
     public function sessionRescheduleCancelationStore(Request $request)
     {
-        // dd($request);
+        dd($request);
         $rescheduleOrCancelation = new RescheduleOrCancelation();
         $data = $request->only($rescheduleOrCancelation->getFillable());
         $rescheduleOrCancelation->fill($data);
@@ -103,7 +103,9 @@ class SessionController extends Controller
         $rescheduleOrCancelation->save();
         $consultants = DB::select('SELECT full_name, user_id, user as user_name FROM vicidial_users WHERE user_group="Psychiatrist" or user_group="Therapist"');
         // return view('call_checklist.shojon.session.rescheduleCancelation.index', compact('consultants'));
-        return redirect()->route('session.rescheduleOrCancelations');
+        // return redirect()->route('session.rescheduleOrCancelations');
+        session()->flash('success', 'Request submitted successfully !!');
+        return redirect()->back();
     }
 
     /**
@@ -112,9 +114,12 @@ class SessionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function sessionRescheduleCancelationShow($id)
     {
-        //
+        $rescheduleOrCancelation = RescheduleOrCancelation::find($id);
+        // dd($rescheduleOrCancelation);
+
+        return view('call_checklist.shojon.session.rescheduleCancelation.show', compact('rescheduleOrCancelation'));
     }
 
     /**
@@ -123,7 +128,7 @@ class SessionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function sessionRescheduleFrom($id)
     {
         //
     }
@@ -135,7 +140,7 @@ class SessionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function sessionReschedule(Request $request, $id)
     {
         //
     }
@@ -146,7 +151,7 @@ class SessionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function sessionCancelation($id)
     {
         //
     }

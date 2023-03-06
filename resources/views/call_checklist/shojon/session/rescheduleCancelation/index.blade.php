@@ -27,7 +27,8 @@
                         <td class="d-none d-md-table-cell text-dark  already_referred">{{ $rescheduleOrCancelation->status }}</td>
                         
                         <td>
-                            <a href="{{ route('patient.show', ['unique_id' => $rescheduleOrCancelation->unique_id]) }}" class="btn btn-info btn-default">Info</a>
+                            {{-- <a href="{{ route('patient.show', ['unique_id' => $rescheduleOrCancelation->unique_id]) }}" class="btn btn-info btn-default">Info</a> --}}
+                            <a href="{{ route('session.sessionRescheduleCancelationShow', [ $rescheduleOrCancelation->id]) }}" class="btn btn-info btn-default">Info</a>
                         </td>
 
                     </tr>

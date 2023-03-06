@@ -58,7 +58,6 @@
                         <span class="app-menu__label">Dashboard tier -1 </span>
                     </a>
                 </li>
-                @endif
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.manual_form') }}">
@@ -66,6 +65,7 @@
                         <span class="app-menu__label">Add - Tier 1 </span>
                     </a>
                 </li>
+                @endif
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.TierOneList') }}">

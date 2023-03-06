@@ -57,7 +57,7 @@ Route::get('/uniqueid', [TierOneController::class, 'uniqueId']);
 Route::get('generate-pdf-patient/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');
 Route::group(['prefix' => 'patient'], function () {
     //Route::get('', 'CallChecklist\PatientController@pupup');
-    Route::get('/popup/{number}', [PatientController::class, 'pupup'])->middleware('auth');
+    Route::get('/popup/{number}', [PatientController::class, 'pupup'])->name('patient.popup')->middleware('auth');
     Route::get('/livesearch', [PatientController::class, 'searchExisting'])->middleware('auth');
     Route::get('/create/{number}', [PatientController::class, 'create'])->name('patient.create')->middleware('auth');
 
@@ -110,6 +110,10 @@ Route::group(['prefix' => 'session'], function () {
     Route::get('/reschedule/cancelation/{number}', 'Session\SessionController@sessionRescheduleCancelationForm')->name('session.rescheduleOrCancelationForm');
     Route::post('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelationStore')->name('session.rescheduleOrCancelationStore');
     Route::get('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelation')->name('session.rescheduleOrCancelations');
+    Route::get('/reschedule/cancelation/show/{id}', 'Session\SessionController@sessionRescheduleCancelationShow')->name('session.sessionRescheduleCancelationShow');
+
+    Route::post('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelationStore')->name('session.rescheduleOrCancelationStore');
+    Route::get('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelation')->name('session.rescheduleOrCancelations');
 });
 
 // Calendar routes
@@ -145,11 +149,11 @@ Route::group(['prefix' => 'call-checklist'], function () {
         });
     });
 
+
     Route::group(['prefix' => 'shojon'], function () {
 
         Route::get('create/{referrence_id}/{phone_number}', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
         Route::get('create/{new}', 'CallChecklist\ShojonController@create')->name('call_checklist.shojon.create');
-
 
         // Route::get('/psychiatrist/tierOne', [TierOneController::class, 'tireOnemanual'])->name('psychiatrist.tierOne');
         // Route::get('/tierOne/{uniqueid}', 'CallChecklist\ShojonController@tireOnefromblade')->name('psychiatrist.tierOne');
@@ -158,6 +162,7 @@ Route::group(['prefix' => 'call-checklist'], function () {
         // })->name('call_checklist.shojon.create');
         Route::post('store', 'CallChecklist\ShojonController@store')->name('call_checklist.shojon.store');
         Route::resource('questionair', 'QuestionairController');
+
 
         Route::group(['middleware' => 'auth.shojon'], function () {
             Route::get('index', 'CallChecklist\ShojonController@index')->name('call_checklist.shojon.index');
@@ -185,12 +190,10 @@ Route::group(['prefix' => 'call-checklist'], function () {
 
             Route::post('/store/tierOne', [TierOneController::class, 'store_tier_One'])->name('call_checklist.shojontierOne.store_tier_one');
             Route::get('/tierOne_list', [TierOneController::class, 'tireOneList'])->name('call_checklist.shojon.TierOneList');
-            Route::get('/tierOne/{uniqueid}', [TierOneController::class, 'tireOnefromblade'])->name('call_checklist.shojon.tierOne');
 
             Route::get('/tier-one-details/{id}', [TierOneController::class, 'TierOneClientDetails'])->name('call_checklist.shojon.TierOneview');
             Route::get('/tier-one-edit/{caller_id}', [TierOneController::class, 'TierOneclientUpdate'])->name('call_checklist.shojon.TierOneedit');
             Route::post('/tier-One-update', [TierOneController::class, 'TierOneUpdate'])->name('call_checklist.shojon.tierOne_update');
-            Route::get('/tierOne/{uniqueid}', [TierOneController::class, 'tireOnefromblade'])->name('call_checklist.shojon.tierOne');
 
             Route::get('/referral_table', [TierOneController::class, 'referral_table']);
             // Route::get('/termination_table', [TierOneController::class, 'termination_table']);

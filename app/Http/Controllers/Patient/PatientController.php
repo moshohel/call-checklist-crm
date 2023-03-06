@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\CallChecklistForShojon;
 use App\Models\Unique;
 use App\Models\ShojonTierOne;
+use App\User;
 
 class PatientController extends Controller
 {
@@ -271,10 +272,9 @@ class PatientController extends Controller
     public function update(Request $request, $id)
     {
         $patient = Patient::find($id);
-        //   dd($patient);
         $data = $request->only($patient->getFillable());
         $patient->fill($data);
-        $patient->updated_by = auth()->id();
+        $patient->updated_by = auth()->user()->user_id;
         $patient->save();
         session()->flash('success', 'Patient Edited successfully !!');
         // return redirect()->route('admin.products');
