@@ -66,7 +66,8 @@ class CreateSojonTier2sTable extends Migration
             $table->string('client_referral')->nullable();
             $table->string('session_plan')->nullable();
             $table->text('session_summary')->nullable();
-            $table->string('session_date')->nullable();
+            $table->string('next_session_date')->nullable();
+            $table->string('next_session_time')->nullable();
             $table->timestamps();
         });
     }

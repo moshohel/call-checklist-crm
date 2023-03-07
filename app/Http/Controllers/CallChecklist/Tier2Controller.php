@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Exports\ShojonTierTowExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Session;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth; 
 
 class Tier2Controller extends Controller
 {
@@ -136,8 +136,8 @@ class Tier2Controller extends Controller
         $data['client_referral'] = $request->client_referral;
         $data['session_plan'] = $request->next_session_plan;
         $data['session_summary'] = $request->session_summary;
-        $data['session_date'] = $request->next_session_date;
-        $data['session_time'] = $request->next_session_time;
+        $data['next_session_date'] = $request->next_session_date;
+        $data['next_session_time'] = $request->next_session_time;
 
 
         DB::table('sojon_tier2s')->insert($data);
@@ -226,7 +226,9 @@ class Tier2Controller extends Controller
 
     public function TierTwoUpdate(Request $request)
     {
-
+        if ($request->next_session_date && $request->next_session_time) {
+            $this->nextSession($request->client_id,$request->next_session_date, $request->next_session_time);
+        }
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -289,7 +291,8 @@ class Tier2Controller extends Controller
         $data['client_referral'] = $request->client_referral;
         $data['session_plan'] = $request->next_session_plan;
         $data['session_summary'] = $request->session_summary;
-        $data['session_date'] = $request->next_session;
+        $data['next_session_date'] = $request->next_session_date;
+        $data['next_session_time'] = $request->next_session_time;
 
         DB::table('sojon_tier2s')->where('id', $request->id)->update($data);
 

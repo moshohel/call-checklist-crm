@@ -8,7 +8,7 @@
     <div>
         <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
     </div>
-</div>
+</div> 
 
 
 
@@ -25,7 +25,7 @@
                 <!-- Auto generated field -->
                 <input type="hidden" name="project_name" value="SHOJON">
                 <input type="hidden" name="service_providers_name" value="{{ auth()->user()->full_name }}">
-                <input type="hidden" name="service_providers_id" value="{{ auth()->user()->id }}">
+                <input type="hidden" name="service_providers_id" value="{{ auth()->user()->user_id }}">
                 <input type="hidden" name="call_started" value="#">
                 <input type="hidden" name="call_end" value="#">
                 <input type="hidden" name="duration" value="#">
