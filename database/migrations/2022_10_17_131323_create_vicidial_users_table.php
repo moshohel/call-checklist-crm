@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use function GuzzleHttp\default_user_agent;
+
 class CreateVicidialUsersTable extends Migration
 {
     /**
@@ -154,6 +156,8 @@ class CreateVicidialUsersTable extends Migration
             $table->text('max_inbound_filter_ingroups')->nullable();
             $table->smallInteger('max_inbound_filter_min_sec')->nullable()->default(-1);
             $table->string('status_group_id', 20)->nullable()->default('');
+            $table->string('image')->nullable();
+            $table->timestamps();
         });
     }
 

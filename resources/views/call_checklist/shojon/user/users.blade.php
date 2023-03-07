@@ -16,11 +16,11 @@
             <table class="table card-table" id="sampleTable">
               <thead>
                 <tr>
-                  <th>Last Login</th>
                   <th>User Name</th>
                   <th>Name</th>
                   <th class="d-none d-md-table-cell">User Type</th>
                   <th class="d-none d-md-table-cell">Options</th>
+                  <th>Created Time</th>
                   {{-- <th>Options</th> --}}
                 </tr>
               </thead>
@@ -30,14 +30,23 @@
                         {{-- <td>
                           <a class="text-dark" href="{{ route('user.show', $user->id) }}">{{ $user->name }}</a>
                         </td> --}}
-                        <td class="d-none d-md-table-cell text-dark">{{ $user->last_login_date }}</td>
+                        @if(isset($user->user)) 
                         <td class="d-none d-md-table-cell text-dark">{{ $user->user }}</td>
+                        @endif
+                      
+                        @if(isset($user->full_name)) 
                         <td class="d-none d-md-table-cell text-dark">{{ $user->full_name }}</td>
+                        @endif
+                        @if(isset($user->user_group)) 
                         <td class="d-none d-md-table-cell text-dark">{{ $user->user_group }}</td>
+                        @endif
                         <td>
                           <a href="{{ route('user.show', $user->user_id) }}" class="btn btn-info btn-default">Details</a>
                           <a href="{{ route('user.edit', $user->user_id) }}" class="btn btn-info btn-default">Edit</a>
                         </td>
+                        @if(isset($user->created_at)) 
+                        <td class="d-none d-md-table-cell text-dark">{{ $user->created_at }}</td>
+                        @endif
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $user->department }}</td> --}}
                         {{-- <td class="d-none d-md-table-cell text-dark">{{ $user->con_name }}</td> --}}
                         

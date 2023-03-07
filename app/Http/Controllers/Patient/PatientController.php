@@ -215,7 +215,8 @@ class PatientController extends Controller
         // dd($unique_id);
         $patient = DB::table('patients')
             ->where('unique_id', '=', $unique_id)
-            ->get();
+            ->first();
+        // dd($patient);
         // $patient = Patient::distinct()->get(['unique_id']);
         // dd($patient);
         // return view('pages.patient.show')->with('patient', $patient);
