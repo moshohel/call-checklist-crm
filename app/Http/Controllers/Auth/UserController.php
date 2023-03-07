@@ -48,7 +48,7 @@ class UserController extends Controller
         $patients = DB::select("SELECT patients.* FROM sessions, patients WHERE therapist_or_psychiatrist_user_id = $user_id and patients.unique_id = sessions.unique_id ORDER BY sessions.id;");
         // dd($patients);
         return view('call_checklist.shojon.user.show', compact('user', 'referrals', 'sessions', 'patients', 'rescheduleOrCancelations'));
-    }
+    } 
 
     /**
      * Show the form for editing the specified resource.

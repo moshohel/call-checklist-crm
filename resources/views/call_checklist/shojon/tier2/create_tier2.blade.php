@@ -23,9 +23,9 @@
             <div class="tile-body">
 
                 <!-- Auto generated field -->
-                <input type="hidden" name="project_name" value="#">
+                <input type="hidden" name="project_name" value="SHOJON">
                 <input type="hidden" name="service_providers_name" value="{{ auth()->user()->full_name }}">
-                <input type="hidden" name="service_providers_id" value="#">
+                <input type="hidden" name="service_providers_id" value="{{ auth()->user()->id }}">
                 <input type="hidden" name="call_started" value="#">
                 <input type="hidden" name="call_end" value="#">
                 <input type="hidden" name="duration" value="#">
@@ -238,7 +238,7 @@
     <div class="form-group">
         <label class="control-label" for="ghq"><b>WHO-5 wellbeing question and scale:</b></label> 
 
-        <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Qiestionniare</a>
+        <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Questionniare</a>
         <br>
         @include('call_checklist.shojon.tier2.questrion_from')
         <input type="text" id="ghq" name="ghq" value="{{old('ghq','Incomplete')}}"
@@ -480,13 +480,13 @@
       </thead>
       <tbody>
         <tr>
-         <td><input type="text" name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td>  
-         <td><input type="text" name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td> 
-         <td><input type="text" name="Perpetuating[]" placeholder="Perpetuating factor" class="form-control name_list" /></td> 
-         <td><input type="text" name="Protective[]" placeholder="ProtectiveFactor" class="form-control name_list" /></td> 
-         <td><button type="button" name="addmore" id="addmore_formulation" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
-     </tr>
- </tbody> 
+           <td><input type="text" name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td>  
+           <td><input type="text" name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td> 
+           <td><input type="text" name="Perpetuating[]" placeholder="Perpetuating factor" class="form-control name_list" /></td> 
+           <td><input type="text" name="Protective[]" placeholder="ProtectiveFactor" class="form-control name_list" /></td> 
+           <td><button type="button" name="addmore" id="addmore_formulation" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
+       </tr>
+   </tbody> 
 </table>  
 </div>
 <div class="form-group">
@@ -566,14 +566,14 @@
         </label><br>
         <label id="SHOJONTierThreeBox" class="TierThree">
             <label class="control-label">
-               <a href="#" class="btn btn-primary btn-sm Referral_form " data-id="#" data-toggle="modal" data-target="#Referral_tier_threeModal" >Referral Tier 3</a>
+             <a href="#" class="btn btn-primary btn-sm Referral_form " data-id="#" data-toggle="modal" data-target="#Referral_tier_threeModal" >Referral Tier 3</a>
 
-           </label>
-       </label>
-       @include('call_checklist.shojon.tier2._referral_tier_three')
-   </div>
+         </label>
+     </label>
+     @include('call_checklist.shojon.tier2._referral_tier_three')
+ </div>
 
-   <div class="form-control">
+ <div class="form-control">
     <label class="control-label" for="client_referral">
         <input type="radio" id="chkSHOJONTierTwo" class="TierTwoChe" name="External_referral" value="Yes" onclick="ShowSHOJONTierTwoExternalreferralBox()"/>
         External referral  
@@ -652,10 +652,19 @@
                     </label><br>
                     <div class="form-control @error('TreatmentGoal') is-invalid @enderror">
                         <label class="control-label">Schedule next session</label><br>
-                        <label class="control-label"style="width: 90%;">
+                        <div class="row">
+                            <div class="col">
+                              <input type="date" class="form-control" name="next_session_date">
+                            </div>
+                            <div class="col">
+                              <input type="time" class="form-control" name="next_session_time">
+                            </div>
+                        </div>
+                        <br>
+                        <!-- <label class="control-label"style="width: 90%;">
                             <input type="date" name="next_session" class="form-control">
 
-                        </label><br>
+                        </label><br> -->
                         <label class="control-label"> 
                             <a href="#" class="btn btn-primary btn-sm Termination_form " data-id="#" data-toggle="modal" data-target="#TerminationModal" >Termination</a>
                         </label>
@@ -778,32 +787,32 @@
 
 <script>
     $(document).ready(function(){      
-       var postURL = "<?php echo url('addmore'); ?>";
-       var i=1;  
-       $('#add').click(function(){  
+     var postURL = "<?php echo url('addmore'); ?>";
+     var i=1;  
+     $('#add').click(function(){  
         i++;  
         $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text"  name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" /></td><td><input type="text"  name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
     });  
-       $(document).on('click', '.btn_remove', function(){  
+     $(document).on('click', '.btn_remove', function(){  
         var button_id = $(this).attr("id");   
         $('#row'+button_id+'').remove();  
     });  
-   }); 
+ }); 
 </script>
 
 <script>
     $(document).ready(function(){      
-       var postURL = "<?php echo url('multipulField_formulation'); ?>";
-       var i=1;  
-       $('#addmore_formulation').click(function(){  
+     var postURL = "<?php echo url('multipulField_formulation'); ?>";
+     var i=1;  
+     $('#addmore_formulation').click(function(){  
         i++;  
         $('#dynamic_field_formulation').append('<tr id="row_formulation'+i+'" class="dynamic-added"><td><input type="text"  name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td><td><input type="text"  name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td><td><input type="text"  name="Perpetuating[]" placeholder="Perpetuating  factor" class="form-control name_list" /></td><td><input type="text"  name="Protective[]" placeholder="Protective Factor" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove_formulation">X</button></td></tr>');  
     });  
-       $(document).on('click', '.btn_remove_formulation', function(){  
+     $(document).on('click', '.btn_remove_formulation', function(){  
         var button_id_formulation = $(this).attr("id");   
         $('#row_formulation'+button_id_formulation+'').remove();  
     });  
-   }); 
+ }); 
 </script>
 <script>
     $(document).ready(function () {

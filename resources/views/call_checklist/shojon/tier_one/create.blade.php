@@ -283,7 +283,7 @@
         </div>
         <label class="control-label" for="ghq"><b>GHQ (appendix - questionnaire and
         scoring):</b></label>
-        <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Qiestionniare</a>
+        <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Questionniare</a>
         @include('call_checklist.shojon.tier_one.questrion_from')
         <input type="text" id="ghq"  name="ghq" value="{{old('ghq','Incomplete')}}"
         style="text-align:center;" readonly>

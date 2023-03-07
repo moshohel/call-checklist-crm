@@ -15,6 +15,7 @@
            <table class="table table-bordered border-primary" id="dynamic_field_two">
             <thead>
               <tr>
+                <th scope="col">SR#</th>
                 <th scope="col">গত দুই সপ্তাহে</th>
                 <th scope="col">সবসময়</th>
                 <th scope="col">বেশিরভাগ সময়</th>
@@ -25,7 +26,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr><td>1</td>
                 <td>আমি উৎফুল্ল এবং উৎসাহিতবোধ করেছি।</td>  
                 <td><input type="checkbox" id="oneSelect" class="value_1" name="value_1[]" value="5" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect" name="value_2[]" value="4" /></td> 
@@ -35,6 +36,7 @@
                 <td><input type="checkbox"class="value_6" id="sixSelect" name="value_6[]" value="0" /></td>
               </tr>
               <tr>
+                <td>2</td>
                 <td>আমি শান্ত এবং হালকা বোধ করেছি।</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect1" name="value_1[]" value="5" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect1" name="value_2[]" value="4" /></td> 
@@ -44,6 +46,7 @@
                 <td><input type="checkbox"class="value_6" id="sixSelect1" name="value_6[]" value="0" /></td>
               </tr>
               <tr>
+                <td>3</td>
                 <td>আমি কর্মক্ষম এবং সজীব অনুভব করেছি।</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect2" name="value_1[]" value="5" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect2" name="value_2[]" value="4" /></td> 
@@ -53,6 +56,7 @@
                 <td><input type="checkbox"class="value_6" id="sixSelect2" name="value_6[]" value="0" /></td>
               </tr>
               <tr>
+                <td>4</td>
                 <td>সতেজ এবং আরামের অনুভূতি নিয়ে আমি ঘুম থেকে জেগে উঠেছি।</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect3" name="value_1[]" value="5" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect3" name="value_2[]" value="4" /></td> 
@@ -62,6 +66,7 @@
                 <td><input type="checkbox"class="value_6" id="sixSelect3" name="value_6[]" value="0" /></td>
               </tr>
               <tr>
+                <td>5</td>
                 <td>আমি যা কিছু পছন্দ করি তা দিয়ে আমার দৈনন্দিন জীবন পূর্ণ রয়েছে।</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect4" name="value_1[]" value="5" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect4" name="value_2[]" value="4" /></td> 

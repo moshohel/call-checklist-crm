@@ -31,7 +31,7 @@
               @if(empty($newPatient->name))
               <input type="text" class="form-control" required  name="client_name">
               @else
-              <input type="text" class="form-control" required readonly name="client_name" value="{{$newPatient->name}}">
+              <input type="text" class="form-control" required readonly name="client_name" value="{{$newPatient->name}}"> 
               @endif
              </div>
              <div class="col-md-4">

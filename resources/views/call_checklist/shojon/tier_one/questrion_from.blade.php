@@ -14,6 +14,7 @@
            <table class="table table-bordered border-primary" id="dynamic_field_two">
             <thead>
               <tr>
+                <th scope="col">SR#</th>
                 <th scope="col">প্রশ্ন মালা !</th>
                 <th scope="col">মোটেই না</th>
                 <th scope="col">কিছুটা</th>
@@ -25,6 +26,7 @@
              
              
               <tr>
+                <td>1</td>
                 <td>ইদানিং আপনি যা করছেন তাতে কি মনোনিবেশ করতে পারছেন ?</td>  
                 <td><input type="checkbox" id="oneSelect" class="value_1" name="value_1[]" value="1" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect" name="value_2[]" value="1" /></td> 
@@ -32,6 +34,7 @@
                 <td><input type="checkbox"class="value_4" id="fourSelect" name="value_4[]" value="0" /></td>
               </tr>
               <tr>
+                <td>2</td>
                 <td>ইদানিং দুশ্চিন্তায় আপনার নিদ্রার অত্যন্ত ব্যাঘাত ঘটে কি?</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect1" name="value_1[]" value="0" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect1" name="value_2[]" value="0" /></td> 
@@ -39,6 +42,7 @@
                 <td><input type="checkbox"class="value_4" id="fourSelect1" name="value_4[]" value="1" /></td>
               </tr>
               <tr>
+                <td>3</td>
                 <td>আপনি আজকাল প্রয়োজনীয় কাজে মনোযোগ দিতে পারেন কি?</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect2" name="value_1[]" value="1" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect2" name="value_2[]" value="1" /></td> 
@@ -46,6 +50,7 @@
                 <td><input type="checkbox"class="value_4" id="fourSelect2" name="value_4[]" value="0" /></td>
               </tr>
               <tr>
+                <td>4</td>
                 <td>আপনি কি বর্তমানে কোন কিছু সম্পর্কে সিদ্ধান্ত গ্রহণ করতে সমর্থ?</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect3" name="value_1[]" value="1" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect3" name="value_2[]" value="1" /></td> 
@@ -53,6 +58,7 @@
                 <td><input type="checkbox"class="value_4" id="fourSelect3" name="value_4[]" value="0" /></td>
               </tr>
               <tr>
+                <td>5</td>
                 <td>আপনি কি ইদানিং সর্বদা মানসিক চাপের মধ্যে থাকছেন?</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect4" name="value_1[]" value="0" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect4" name="value_2[]" value="0" /></td> 
@@ -60,6 +66,7 @@
                 <td><input type="checkbox"class="value_4" id="fourSelect4" name="value_4[]" value="1" /></td>
               </tr>
               <tr>
+                <td>6</td>
                 <td>আপনার কি মনে হয় ইদানিং আপনার অসুবিধাগুলি দুর করতে সক্ষম হচ্ছেন না?</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect5" name="value_1[]" value="0" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect5" name="value_2[]" value="0" /></td> 
@@ -67,6 +74,7 @@
                 <td><input type="checkbox"class="value_4" id="fourSelect5" name="value_4[]" value="1" /></td>
               </tr>
               <tr>
+                <td>7</td>
                 <td>আপনার দৈনন্দিন কাজগুলি উপভোগে করতে সক্ষম হচেছন কি?</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect6" name="value_1[]" value="1" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect6" name="value_2[]" value="1" /></td> 
@@ -74,6 +82,7 @@
                 <td><input type="checkbox"class="value_4" id="fourSelect6" name="value_4[]" value="0" /></td>
               </tr>
               <tr>
+                <td>8</td>
                 <td>আপনি কি ইদানিং আপনার সমস্যা গুলির মোকাবেলা করতে সক্ষম?</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect7" name="value_1[]" value="1" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect7" name="value_2[]" value="1" /></td> 
@@ -81,6 +90,7 @@
                 <td><input type="checkbox"class="value_4" id="fourSelect7" name="value_4[]" value="0" /></td>
               </tr>
               <tr>
+                <td>9</td>
                 <td>আপনি কি ইদানিং অসুখী ও বিমর্ষ বোধ করছেন?</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect8" name="value_1[]" value="0" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect8" name="value_2[]" value="0" /></td> 
@@ -88,6 +98,7 @@
                 <td><input type="checkbox"class="value_4" id="fourSelect8" name="value_4[]" value="1" /></td>
               </tr>
               <tr>
+                <td>10</td>
                 <td>বর্তমানে আপনি কি আবিশ্বাস হারিয়ে ফেলেছেন বলে মনে করেন?</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect9" name="value_1[]" value="0" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect9" name="value_2[]" value="0" /></td> 
@@ -95,6 +106,7 @@
                 <td><input type="checkbox"class="value_4" id="fourSelect9" name="value_4[]" value="1" /></td>
               </tr>
               <tr>
+                <td>11</td>
                 <td>ইদানিং আপনি কি নিজেকে একজন অযোগ্য ব্যক্তি হিসাবে গণ্য করেন?</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect10" name="value_1[]" value="0" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect10" name="value_2[]" value="0" /></td> 
@@ -102,6 +114,7 @@
                 <td><input type="checkbox"class="value_4" id="fourSelect10" name="value_4[]" value="1" /></td>
               </tr>
               <tr>
+                <td>12</td>
                 <td>সবদিক বিবেচনা করে বর্তমানে আপনি কি নিজেকে মোটামুটিভাবে সুখী মনে করেন?</td>  
                 <td><input type="checkbox" class="value_1" id="oneSelect11" name="value_1[]" value="1" /></td> 
                 <td><input type="checkbox"class="value_2" id="twoSelect11" name="value_2[]" value="1" /></td> 

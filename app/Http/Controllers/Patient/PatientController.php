@@ -290,7 +290,7 @@ class PatientController extends Controller
     public function delete($id)
     {
         $patient = Patient::find($id);
-        if (!is_null($patient)) {
+        if (!is_null($patient)) { 
             $patient->delete();
         }
 

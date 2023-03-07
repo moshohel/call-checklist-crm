@@ -22,11 +22,19 @@
 						</div>
 						<div class="col-md-3">
 							<label for="validationCustom01" class="form-label">Client name:</label>
+							@if(empty($newPatient->name))
+							<input type="text" class="form-control"name="Client_name"  placeholder="Client name">
+							@else
 							<input type="text" class="form-control" readonly value="{{$newPatient->name}}" name="Client_name"  placeholder="Client name">
+							@endif
 						</div>
 						<div class="col-md-3">
 							<label for="validationCustom01" class="form-label">Client ID:</label>
+							@if(empty($uniqueid))
+							<input type="text" class="form-control"name="Client_id" placeholder="Client Id">
+							@else
 							<input type="text" class="form-control"name="Client_id" readonly value="{{ $uniqueid }}" placeholder="Client id">
+							@endif
 						</div>
 					</div><br>
 

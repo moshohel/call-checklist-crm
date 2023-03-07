@@ -35,10 +35,10 @@
                         @if ($session->referr_to == "Shojon Tier 3")                           
                         <td>
                             <a href="{{ route('call_checklist.shojon.tierThree.create', [$session->unique_id, $session->id]) }}" class="btn btn-info btn-default">session</a>
-                        </td
+                        </td>
                         @endif
 
-                    </tr>
+                    </tr> 
                 @endforeach
                 </tbody>
             
