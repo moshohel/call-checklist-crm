@@ -45,6 +45,7 @@
          <table class="table table-bordered border-primary" id="dynamic_field_formulation">
           <thead>
             <tr>
+              <th scope="col">SR#</th>
               <th scope="col">Basic skills</th>
               <th scope="col">Not good at all</th>
               <th scope="col">Okay</th>
@@ -54,6 +55,7 @@
           </thead>
           <tbody>
            <tr>
+            <td>1</td>
              <td><label for="validationCustom01" class="form-label">Counselor greeted the client nicely</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect" value="Okay" /></td> 
@@ -61,6 +63,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>2</td>
              <td><label for="validationCustom01" class="form-label">Informed the client about confidentially</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect1" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect1" value="Okay" /></td> 
@@ -68,6 +71,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect1" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>3</td>
              <td><label for="validationCustom01" class="form-label">Listens to the client attentively</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect2" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect2" value="Okay" /></td> 
@@ -75,6 +79,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect2" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>4</td>
              <td><label for="validationCustom01" class="form-label">Showed proper empathy towards the client</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect3" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect3" value="Okay" /></td> 
@@ -82,6 +87,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect3" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>5</td>
              <td><label for="validationCustom01" class="form-label">Build a good rapport with the client</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect4" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect4" value="Okay" /></td> 
@@ -89,6 +95,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect4" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>6</td>
              <td><label for="validationCustom01" class="form-label">Spoke softly and Patiently with the client.</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect5" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect5" value="Okay" /></td> 
@@ -96,6 +103,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect5" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>7</td>
              <td><label for="validationCustom01" class="form-label">Gave reassurance to the client</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect6" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect6" value="Okay" /></td> 
@@ -103,6 +111,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect6" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>8</td>
              <td><label for="validationCustom01" class="form-label">Ask open ended question</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect7" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect7" value="Okay" /></td> 
@@ -110,6 +119,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect7" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>9</td>
              <td><label for="validationCustom01" class="form-label">Discusses in detail the difficulties / problems with the client</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect8" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect8" value="Okay" /></td> 
@@ -117,6 +127,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect8" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>10</td>
              <td><label for="validationCustom01" class="form-label">Discussed with the client about how to stay well</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect9" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect9" value="Okay" /></td> 
@@ -124,6 +135,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect9" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>11</td>
              <td><label for="validationCustom01" class="form-label">Being able to apply the psychometric scale properly and share the score of the scale.</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect10" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect10" value="Okay" /></td> 
@@ -131,6 +143,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect10" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>12</td>
              <td><label for="validationCustom01" class="form-label">Did the financial assessment properly if necessary</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect11" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect11" value="Okay" /></td> 
@@ -138,6 +151,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect11" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>13</td>
              <td><label for="validationCustom01" class="form-label">Informs the client about the next step of the service</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect12" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect12" value="Okay" /></td> 
@@ -145,6 +159,7 @@
              <td><input type="checkbox" name="Assessment[]" id="fourSelect12" value="Excellen"/></td>
            </tr>
            <tr>
+            <td>14</td>
              <td><label for="validationCustom01" class="form-label">Answered to the enquiries of client correctly</label></td> 
              <td><input type="checkbox" name="Assessment[]" id="oneSelect13" value="Not good at all"/></td> 
              <td><input type="checkbox" name="Assessment[]" id="twoSelect13" value="Okay" /></td> 
@@ -165,6 +180,7 @@
      <table class="table table-bordered border-primary" id="dynamic_field_formulation">
       <thead>
         <tr>
+          <th scope="col">SR#</th>
           <th scope="col">Caller’s Response</th>
           <th scope="col">Not agree</th>
           <th scope="col">Slightly agree</th>
@@ -174,6 +190,7 @@
       </thead>
       <tbody>   
        <tr>
+        <td>1</td>
          <td><label for="validationCustom01" class="form-label">Feeling comfortable talking to the counselor</label></td>  
          <td><input type="checkbox" name="Observation[]" id="oneSelect14" value="Not agree"/></td> 
          <td><input type="checkbox" name="Observation[]" id="twoSelect14" value="Slightly agree" /></td> 
@@ -181,6 +198,7 @@
          <td><input type="text" name="Observation[]" value="" /></td>
        </tr>
        <tr>
+        <td>2</td>
          <td><label for="validationCustom01" class="form-label">The distress/stress of the client reduced somewhat</label></td>  
          <td><input type="checkbox" name="Observation[]" id="oneSelect15" value="Not agree"/></td> 
          <td><input type="checkbox" name="Observation[]" id="twoSelect15" value="Slightly agree" /></td> 
@@ -188,6 +206,7 @@
          <td><input type="text" name="Observation[]" value=""/></td>
        </tr>
        <tr>
+        <td>3</td>
          <td><label for="validationCustom01" class="form-label">There is a positive change in client’s response after talking with counselor</label></td>  
          <td><input type="checkbox" name="Observation[]" id="oneSelect16" value="Not agree"/></td> 
          <td><input type="checkbox" name="Observation[]" id="twoSelect16" value="Slightly agree" /></td> 
@@ -195,6 +214,7 @@
          <td><input type="text" name="Observation[]" value=""/></td>
        </tr>
        <tr>
+        <td>4</td>
          <td><label for="validationCustom01" class="form-label">Express their feelings as “felt good” after completing the session</label></td>  
          <td><input type="checkbox" name="Observation[]" id="oneSelect17" value="Not agree"/></td> 
          <td><input type="checkbox" name="Observation[]" id="twoSelect17" value="Slightly agree" /></td> 
@@ -202,6 +222,7 @@
          <td><input type="text" name="Observation[]" value=""/></td>
        </tr>
        <tr>
+        <td>5</td>
          <td><label for="validationCustom01" class="form-label">The purpose for which the client made the call has been fulfilled</label></td>  
          <td><input type="checkbox" name="Observation[]" id="oneSelect18" value="Not agree"/></td> 
          <td><input type="checkbox" name="Observation[]" id="twoSelect18" value="Slightly agree" /></td> 

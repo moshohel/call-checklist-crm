@@ -61,7 +61,7 @@
              </div><br>
              <div class="row g-3">
               <div class="col-md-4">
-                @php $types = ['Free of cost','200']; @endphp 
+                @php $types = ['Free of cost','50','100','150','200']; @endphp 
               <label for="validationCustom01" class="form-label">Financial affordability:</label>
               <select class="form-control" name="Financial">
                 <option selected disabled>Select Referral Types</option>

@@ -56,7 +56,7 @@ class SessionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $unique_id, $id)
+    public function store(Request $request, $unique_id, $id) 
     {
         $session = new Session();
         $data = $request->only($session->getFillable());

@@ -41,7 +41,7 @@
 
                 <div class="form-group">
                     <label class="control-label" for="sex"><b>Sex:</label>
-                        @php $types = ['Male', 'Female', 'Intersex', 'Others']; @endphp
+                        @php $types = ['Male', 'Female', 'LGBTQ', 'Others']; @endphp
                         <select name="sex" id="sex" list="sex_list"
                         class="form-control">
                         <datalist id="sex_list">
@@ -81,22 +81,20 @@
                     <label class="control-label" for="occupation"><b>Occupation:</label>
                         @php $types = ['Student', 'Job holder', 'Businessperson', 'Housewife', 'Unemployed', 'Retired', 'Could not tell']; @endphp
                         <div class="form-control @error('occupation') is-invalid @enderror">
-                            <label>
-                                @foreach($types as $item)
-                                @if($data->occupation == $item)
-                                <input type="radio" name="occupation" value="{{ $item }}" checked="checked"
-                                onclick="ShowOccupationBox()"/>
-                                @else
-                                <input type="radio" name="occupation" value="{{ $item }}"
-                                onclick="ShowOccupationBox()"/>
-                                @endif
-                                {{ $item }}
-                                <br>
-                                @endforeach
-                                <input type="radio" id="chkOccupation" name="occupation"
-                                onclick="ShowOccupationBox()"/>
-                                Other (please explain)
-                            </label>
+                            @foreach($types as $item)
+                            @if($data->occupation == $item)
+                            <input type="radio" name="occupation" value="{{ $item }}" checked="checked"
+                            onclick="ShowOccupationBox()"/>
+                            @else
+                            <input type="radio" name="occupation" value="{{ $item }}"
+                            onclick="ShowOccupationBox()"/>
+                            @endif
+                            {{ $item }}
+                            <br>
+                            @endforeach
+                            <input type="radio" id="chkOccupation" name="occupation"
+                            onclick="ShowOccupationBox()"/>
+                            Other (please explain)
                             <span id="OccupationBox" style="display: none;">
                                 <input class="form-control" type="text" name="other_occupation"
                                 value="{{ old('other_occupation',$last ? $last->other_occupation : null) }}"
@@ -140,7 +138,7 @@
                             id="socio_economic_status" class="form-control">
 
                             <datalist id="socio_economic_status_list">
-                                <option value=" ">Select Socio-economic</option>
+                                <option selected disabled value=" ">Select Socio-economic</option>
                                 @foreach($types as $item)
                                 @if($data->socio_economic == $item)
                                 <option selected value="{{ $item }}">{{ $item}}</option>
@@ -196,7 +194,6 @@
                 <label class="control-label" for="Session_Number"><b>Session Number (mandatory single select )</b></label>
                 @php $types = ['1st session', '2nd session', '3rd session', '4th session', '6th session', '7th session','8th session','8th session','9th session','10th session','Last session']; @endphp
                 <div class="form-control @error('Session_Number') is-invalid @enderror">
-                    <label>
                         @foreach($types as $item)
                         @if($data->session == $item)
                         <input type="radio" name="Session_Number" value="{{ $item }}" checked="checked"
@@ -211,7 +208,6 @@
                         <input type="radio" id="chkSession" name="Session_Number"
                         onclick="ShowSessionBox()"/>
                         Other (please explain)
-                    </label>
                     <span id="SessionBox" style="display: none;">
                         <input class="form-control" type="text" name="other_Session_Number"
                         value="{{ old('other_occupation',$last ? $last->other_occupation : null) }}"
@@ -246,7 +242,7 @@
         </div>
         <label class="control-label" for="ghq"><b>GHQ (appendix - questionnaire and
         scoring):</b></label>
-        <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Qiestionniare</a>
+        <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Questionniare</a>
         @include('call_checklist.shojon.tier2.questrion_from')
         @if($data->WHO != ' ')
         <input type="text" id="ghq" name="ghq" value="{{$data->WHO}}"
@@ -273,24 +269,24 @@
             @foreach(explode(';', $data->severity) as $key2 =>$infoSev)
             @if($key1 === $key2)
             <tr> 
-               <td><input type="text" name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" value="{{$info}}" /></td>  
-               <td><input type="text" name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" value="{{$infoSev}}" /></td>
-               @if($key1<1)
-               <td><button type="button" name="add" id="add" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
-               @endif
-           </tr>
-           @endif
-           @endforeach
-           @endforeach
-           @else
-           <tr>
-              <td><input type="text" name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" /></td>  
-              <td><input type="text" name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" /></td> 
-              <td><button type="button" name="add" id="add" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
-          </tr>
-          @endif
-      </tbody> 
-  </table> 
+             <td><input type="text" name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" value="{{$info}}" /></td>  
+             <td><input type="text" name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" value="{{$infoSev}}" /></td>
+             @if($key1<1)
+             <td><button type="button" name="add" id="add" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
+             @endif
+         </tr>
+         @endif
+         @endforeach
+         @endforeach
+         @else
+         <tr>
+          <td><input type="text" name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" /></td>  
+          <td><input type="text" name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" /></td> 
+          <td><button type="button" name="add" id="add" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
+      </tr>
+      @endif
+  </tbody> 
+</table> 
 
 </div>
 
@@ -383,23 +379,19 @@
         $check_item = json_decode($data->diagnosis);
         @endphp        
         <div class="form-control @error('mental_illness_diagnosis') is-invalid @enderror">
-            <label>
-
-                <label>
-                 @if($check_item != null)
-                 @foreach($types as $item)
-                 <input type="checkbox" name="mental_illness_diagnosis[]" value="{{$item}}" {{ in_array($item,$check_item)? 'checked':''}}> {{$item}}<br>
-                 @endforeach
-                 @else
-                 @foreach($types as $item)
-                 <input type="checkbox" name="mental_illness_diagnosis[]" value="{{$item}}"> {{$item}}<br>
-                 @endforeach
-                 @endif
-                 <input type="checkbox" id="chkMentalIllness" name="mental_illness_diagnosis"
-                 onclick="ShowMentalIllnessBox()"/>
-                 Other (please explain)<br>
-             </label>
-             <span id="MentalIllnessBox" style="display: none;">
+                   @if($check_item != null)
+                   @foreach($types as $item)
+                   <input type="checkbox" name="mental_illness_diagnosis[]" value="{{$item}}" {{ in_array($item,$check_item)? 'checked':''}}> {{$item}}<br>
+                   @endforeach
+                   @else
+                   @foreach($types as $item)
+                   <input type="checkbox" name="mental_illness_diagnosis[]" value="{{$item}}"> {{$item}}<br>
+                   @endforeach
+                   @endif
+                   <input type="checkbox" id="chkMentalIllness" name="mental_illness_diagnosis"
+                   onclick="ShowMentalIllnessBox()"/>
+                   Other (please explain)<br>
+               <span id="MentalIllnessBox" style="display: none;">
                 <input class="form-control" type="text" name="other_mental_illness_diagnosis[]"
                 placeholder="Explain"/>
                 <!-- MUST BE A PROBLEM FOR ARRAY TO SHOW OLD VALUE-->
@@ -413,7 +405,6 @@
         </label><br>
         @php $types = ['Yes','No']; @endphp
         <div class="form-control @error('hearing_source') is-invalid @enderror">
-            <label>
                 @foreach($types as $item)
                 @if( $data->psychiatric_medication == $item)
                 <input type="radio" name="PresentCotinuation" value="{{ $item }}"
@@ -428,7 +419,6 @@
                 <input type="radio" id="Present_Continuation" name="PresentCotinuation"
                 onclick="showPresentCotinuation()"/>
                 Others (please explain)
-            </label>
             <span id="Present_Continuation1" style="display: none;">
                 <input class="form-control" type="text" name="other_PresentCotinuation"
                 value="{{ old('other_hearing_source',$last ? $last->other_hearing_source : null) }}"
@@ -457,7 +447,6 @@
         $check_item = json_decode($data->concern_history);
         @endphp
         <div class="form-control">
-            <label>
                 @if($check_item !=null)
                 @foreach($types as $item)
                 <input type="checkbox" name="Physical_Concern_history[]" value="{{$item}}" 
@@ -471,8 +460,6 @@
                 <input type="checkbox" id="chkSecondaryReason" name="Physical_Concern_history[]"
                 onclick="ShowSecondaryReasonBox()"/>
                 Others (please explain)<br>
-
-            </label>
             <span id="SecondaryReasonBox" style="display: none;">
                 <input class="form-control" type="text" name="other_Physical_Concern_history[]"
                 placeholder="Explain"/>
@@ -484,117 +471,113 @@
 
     <div class="form-group">
         <label class="control-label" for="current_differential_diagnosis"><b>Current Differential Diagnosis:</b></label>
-            @php $types = ['Major Depressive Disorder', 'Anxiety Disorder', 'Panic Disorder','Obsessive Compulsive Disorder','Social Anxiety Disorder','Eating Disorder','Insomnia/sleep related disorder','Schizophrenia','Bipolar Disorder','Personality Disorder','Autism spectrum disorder','Attention deficit hyperactivity disorder','Learning disorder (LD)','Dementia','Alzheimer','Phobia','Post-traumatic stress disorder (PTSD)','Substance Abuse Disorder','Sexual disorder','Gender Identity disorder','Conversion disorder','Conduct','No']; @endphp 
+        @php $types = ['Major Depressive Disorder', 'Anxiety Disorder', 'Panic Disorder','Obsessive Compulsive Disorder','Social Anxiety Disorder','Eating Disorder','Insomnia/sleep related disorder','Schizophrenia','Bipolar Disorder','Personality Disorder','Autism spectrum disorder','Attention deficit hyperactivity disorder','Learning disorder (LD)','Dementia','Alzheimer','Phobia','Post-traumatic stress disorder (PTSD)','Substance Abuse Disorder','Sexual disorder','Gender Identity disorder','Conversion disorder','Conduct','No']; @endphp 
 
-            @php
-            $check_item = json_decode($data->differential_diagnosis);
-            @endphp       
-            <div class="form-control">
-                @if($check_item != 0)
-                @foreach($types as $item)
-                <input type="checkbox" name="current_differential_diagnosis[]" value="{{$item}}"{{ in_array($item,$check_item)? 'checked':''}} > {{$item}}<br>
-                @endforeach
-                @else
-                @foreach($types as $item)
-                <input type="checkbox" name="current_differential_diagnosis[]" value="{{$item}}"> {{$item}}<br>
-                @endforeach
-                @endif        
-                <input type="checkbox" id="chkCurrentDiagnosis" name="current_differential_diagnosis[]"
-                onclick="ShowCurrentDiagnosis()"/>
-                Other (please explain)<br>
-                <span id="CurrentDiagnosisBox" style="display: none;">
-                    <input class="form-control" type="text" name="other_current_differential_diagnosis[]"
-                    placeholder="Explain"/>
-                    <!-- MUST BE A PROBLEM FOR ARRAY TO SHOW OLD VALUE-->
-                </span>
-            </div>
-
+        @php
+        $check_item = json_decode($data->differential_diagnosis);
+        @endphp       
+        <div class="form-control">
+            @if($check_item != 0)
+            @foreach($types as $item)
+            <input type="checkbox" name="current_differential_diagnosis[]" value="{{$item}}"{{ in_array($item,$check_item)? 'checked':''}} > {{$item}}<br>
+            @endforeach
+            @else
+            @foreach($types as $item)
+            <input type="checkbox" name="current_differential_diagnosis[]" value="{{$item}}"> {{$item}}<br>
+            @endforeach
+            @endif        
+            <input type="checkbox" id="chkCurrentDiagnosis" name="current_differential_diagnosis[]"
+            onclick="ShowCurrentDiagnosis()"/>
+            Other (please explain)<br>
+            <span id="CurrentDiagnosisBox" style="display: none;">
+                <input class="form-control" type="text" name="other_current_differential_diagnosis[]"
+                placeholder="Explain"/>
+                <!-- MUST BE A PROBLEM FOR ARRAY TO SHOW OLD VALUE-->
+            </span>
         </div>
 
-        <div class="form-group">
-            <label class="control-label" for="PsychometricToolscore"><b>Psychometric Tool score & Interpretation:
+    </div>
+
+    <div class="form-group">
+        <label class="control-label" for="PsychometricToolscore"><b>Psychometric Tool score & Interpretation:
+        </label><br>
+        @php $types = ['Depression scale','Anxiety','Social Interaction Anxiety scale','Obsessive- compulsive disorder ','Beck hopelessness scale','Cognitive distortion scale','Depression, Anxiety, stress scale','Somatic complaint scale','Event'];@endphp       
+        <div class="form-control @error('PsychometricToolscore') is-invalid @enderror">
+            <label class="control-label">Tool Name:</label><br>
+            <label class="control-label"style="width: 90%;">
+                <div class="form-control @error('PsychometricTool') is-invalid @enderror">
+                        @foreach($types as $item)
+                        @if( $data->tool_name == $item)
+                        <input type="radio" name="PsychometricTool" value="{{ $item }}" checked="checked" /> {{ $item }}<br>
+                        @else
+                        <input type="radio" name="PsychometricTool" value="{{ $item }}"/> {{ $item }}<br>
+                        @endif
+                        @endforeach
+                </div>
             </label><br>
-            @php $types = ['Depression scale','Anxiety','Social Interaction Anxiety scale','Obsessive- compulsive disorder ','Beck hopelessness scale','Cognitive distortion scale','Depression, Anxiety, stress scale','Somatic complaint scale','Event'];@endphp       
-            <div class="form-control @error('PsychometricToolscore') is-invalid @enderror">
-                <label class="control-label">Tool Name:</label><br>
-                <label class="control-label"style="width: 90%;">
-                    <div class="form-control @error('PsychometricTool') is-invalid @enderror">
-                        <label>
-                            @foreach($types as $item)
-                            @if( $data->tool_name == $item)
-                            <input type="radio" name="PsychometricTool" value="{{ $item }}" checked="checked" /> {{ $item }}<br>
-                            @else
-                            <input type="radio" name="PsychometricTool" value="{{ $item }}"/> {{ $item }}<br>
-                            @endif
-                            @endforeach
-
-                        </label>
-
-                    </div>
-                </label><br>
-                <label class="control-label">Score:</label><br>
-                <label class="control-label" style="width: 90%;">
-                  @if($data->score !="")  
-                  <input type="text" name="Psychometricscore" class="form-control" value="{{$data->score}}">
-                  @else
-                  <input type="text" name="Psychometricscore" class="form-control">
-                  @endif  
-              </label>
-          </div>
-          @error('PsychometricToolscore') {{ $message }} @enderror
+            <label class="control-label">Score:</label><br>
+            <label class="control-label" style="width: 90%;">
+              @if($data->score !="")  
+              <input type="text" name="Psychometricscore" class="form-control" value="{{$data->score}}">
+              @else
+              <input type="text" name="Psychometricscore" class="form-control">
+              @endif  
+          </label>
       </div>
+      @error('PsychometricToolscore') {{ $message }} @enderror
+  </div>
 
-      <div class="form-group">
-          <label class="control-label" for="Problem_duration"><b> Client’s Expectation from therapy:</b></label> 
-          @if($data->therapy !="") 
-          <textarea class="form-control" name="therapy">{{$data->therapy}}</textarea>
-          @else
-          <textarea class="form-control" name="therapy"> </textarea>
-          @endif  
-      </div>
-      <div class="form-group">
-        <label class="control-label">Formulation:</label><br>
-        <table class="table table-bordered border-primary" id="dynamic_field_formulation">
-            <thead>
-                <tr>
-                  <th scope="col">Predisposing Factor</th>
-                  <th scope="col">Precipitatory factor </th>
-                  <th scope="col">Perpetuating (maintaining) factor</th>
-                  <th scope="col">ProtectiveFactor</th>
-                  <th scope="col">Action</th>
-              </tr>
-          </thead>
-          <tbody>
-            @if ($data->predisposing != "" && $data->precipitatory != "" && $data->perpetuating != "" && $data->protective != "" )
-            @foreach(explode(';', $data->predisposing) as $key1 => $info1)
-            @foreach(explode(';', $data->precipitatory) as $key2 =>$info2)
-            @foreach(explode(';', $data->perpetuating) as $key3 =>$info3)
-            @foreach(explode(';', $data->protective) as $key4 =>$info4)
-            @if($key1 === $key2 && $key2 === $key3 && $key3 === $key4)
+  <div class="form-group">
+      <label class="control-label" for="Problem_duration"><b> Client’s Expectation from therapy:</b></label> 
+      @if($data->therapy !="") 
+      <textarea class="form-control" name="therapy">{{$data->therapy}}</textarea>
+      @else
+      <textarea class="form-control" name="therapy"> </textarea>
+      @endif  
+  </div>
+  <div class="form-group">
+    <label class="control-label">Formulation:</label><br>
+    <table class="table table-bordered border-primary" id="dynamic_field_formulation">
+        <thead>
             <tr>
-             <td><input type="text" name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" value="{{$info1}}" /></td>  
-             <td><input type="text" name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list"value="{{$info2}}" /></td> 
-             <td><input type="text" name="Perpetuating[]" placeholder="Perpetuating factor" class="form-control name_list"value="{{$info3}}" /></td> 
-             <td><input type="text" name="Protective[]" placeholder="ProtectiveFactor" class="form-control name_list" value="{{$info4}}" /></td>@if($key1<1)
-             <td><button type="button" name="addmore" id="addmore_formulation" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
-             @endif
-         </tr>
-         @endif
-         @endforeach
-         @endforeach
-         @endforeach
-         @endforeach
-         @else
-         <tr>
-             <td><input type="text" name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td>  
-             <td><input type="text" name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td> 
-             <td><input type="text" name="Perpetuating[]" placeholder="Perpetuating factor" class="form-control name_list" /></td> 
-             <td><input type="text" name="Protective[]" placeholder="ProtectiveFactor" class="form-control name_list" /></td> 
-             <td><button type="button" name="addmore" id="addmore_formulation" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
-         </tr>
-         @endif
-     </tbody> 
- </table>  
+              <th scope="col">Predisposing Factor</th>
+              <th scope="col">Precipitatory factor </th>
+              <th scope="col">Perpetuating (maintaining) factor</th>
+              <th scope="col">ProtectiveFactor</th>
+              <th scope="col">Action</th>
+          </tr>
+      </thead>
+      <tbody>
+        @if ($data->predisposing != "" && $data->precipitatory != "" && $data->perpetuating != "" && $data->protective != "" )
+        @foreach(explode(';', $data->predisposing) as $key1 => $info1)
+        @foreach(explode(';', $data->precipitatory) as $key2 =>$info2)
+        @foreach(explode(';', $data->perpetuating) as $key3 =>$info3)
+        @foreach(explode(';', $data->protective) as $key4 =>$info4)
+        @if($key1 === $key2 && $key2 === $key3 && $key3 === $key4)
+        <tr>
+           <td><input type="text" name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" value="{{$info1}}" /></td>  
+           <td><input type="text" name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list"value="{{$info2}}" /></td> 
+           <td><input type="text" name="Perpetuating[]" placeholder="Perpetuating factor" class="form-control name_list"value="{{$info3}}" /></td> 
+           <td><input type="text" name="Protective[]" placeholder="ProtectiveFactor" class="form-control name_list" value="{{$info4}}" /></td>@if($key1<1)
+           <td><button type="button" name="addmore" id="addmore_formulation" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
+           @endif
+       </tr>
+       @endif
+       @endforeach
+       @endforeach
+       @endforeach
+       @endforeach
+       @else
+       <tr>
+           <td><input type="text" name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td>  
+           <td><input type="text" name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td> 
+           <td><input type="text" name="Perpetuating[]" placeholder="Perpetuating factor" class="form-control name_list" /></td> 
+           <td><input type="text" name="Protective[]" placeholder="ProtectiveFactor" class="form-control name_list" /></td> 
+           <td><button type="button" name="addmore" id="addmore_formulation" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
+       </tr>
+       @endif
+   </tbody> 
+</table>  
 </div>
 
 <div class="form-group">
@@ -683,13 +666,13 @@
                         <div class="form-control">
                             <label class="control-label">Internal Referral:( single select )</label><br>
                             <label class="control-label">
-                               <a href="#" class="btn btn-primary btn-sm Referral_form " data-id="#" data-toggle="modal" data-target="#ReferralModal" >Referral Tier 3</a>
+                             <a href="#" class="btn btn-primary btn-sm Referral_form " data-id="#" data-toggle="modal" data-target="#ReferralModal" >Referral Tier 3</a>
 
-                           </label>
-                           @include('call_checklist.shojon.tier2._referral')
-                       </label>
-                   </div>
-                   <div class="form-control">
+                         </label>
+                         @include('call_checklist.shojon.tier2._referral')
+                     </label>
+                 </div>
+                 <div class="form-control">
                     <label class="control-label" for="client_referral"><b>External referral:  </label>
                         <div class="form-control @error('TreatmentGoal') is-invalid @enderror">
                             <label class="control-label">Reason for referral:</label><br>
@@ -713,7 +696,6 @@
                         </div>
                         @php $types = ['Health Hotline 09678771511','KPR 01777772215']; @endphp
                         <div class="form-control @error('client_referral') is-invalid @enderror">
-                            <label>
                                 @foreach($types as $item)
                                 @if($data->client_referral == $item)
                                 <input type="radio" checked name="client_referral" value="{{ $item }}"/>{{ $item }}
@@ -726,7 +708,6 @@
                                 @endforeach
                                 <input type="radio" id="CliKReferral" name="client_referral" value="other" onclick="ShowReferralBox()" />
                                 Other (please explain)
-                            </label>
                             <span id="ReferralBox" style="display: none;">
                                 <input class="form-control" type="text" name="other_client_referral"
                                 value="{{ old('client_referral') }}" placeholder="Explain"/>
@@ -807,7 +788,6 @@
                             <a href="#" class="btn btn-primary btn-sm Termination_form " data-id="#" data-toggle="modal" data-target="#TerminationModal" >Termination</a>
                         </label>
                         @include('call_checklist.shojon.tier2.Termination_form')    
-                    </label>
                 </div>
                 @error('TreatmentGoal') {{ $message }} @enderror
             </div>
@@ -924,32 +904,32 @@
 
 <script>
     $(document).ready(function(){      
-       var postURL = "<?php echo url('addmore'); ?>";
-       var i=1;  
-       $('#add').click(function(){  
+     var postURL = "<?php echo url('addmore'); ?>";
+     var i=1;  
+     $('#add').click(function(){  
         i++;  
         $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text"  name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" /></td><td><input type="text"  name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
     });  
-       $(document).on('click', '.btn_remove', function(){  
+     $(document).on('click', '.btn_remove', function(){  
         var button_id = $(this).attr("id");   
         $('#row'+button_id+'').remove();  
     });  
-   }); 
+ }); 
 </script>
 
 <script>
     $(document).ready(function(){      
-       var postURL = "<?php echo url('multipulField_formulation'); ?>";
-       var i=1;  
-       $('#addmore_formulation').click(function(){  
+     var postURL = "<?php echo url('multipulField_formulation'); ?>";
+     var i=1;  
+     $('#addmore_formulation').click(function(){  
         i++;  
         $('#dynamic_field_formulation').append('<tr id="row_formulation'+i+'" class="dynamic-added"><td><input type="text"  name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td><td><input type="text"  name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td><td><input type="text"  name="Perpetuating[]" placeholder="Perpetuating  factor" class="form-control name_list" /></td><td><input type="text"  name="Protective[]" placeholder="Protective Factor" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove_formulation">X</button></td></tr>');  
     });  
-       $(document).on('click', '.btn_remove_formulation', function(){  
+     $(document).on('click', '.btn_remove_formulation', function(){  
         var button_id_formulation = $(this).attr("id");   
         $('#row_formulation'+button_id_formulation+'').remove();  
     });  
-   }); 
+ }); 
 </script>
 <script>
 

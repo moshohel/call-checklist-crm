@@ -19,7 +19,7 @@ class Tier2Controller extends Controller
     protected $pageTitle = 'Shojon Tier 2 Service';
     protected $pageTitleUpdate = 'Shojon Tier 2 Update';
 
-    public function tireOnefromblade($uniqueid) 
+    public function tireOnefromblade($uniqueid)
     {
         $uniqueid = $uniqueid;
         $pageTitle = $this->pageTitle;
@@ -58,9 +58,12 @@ class Tier2Controller extends Controller
     }
     public function store(Request $request)
     {
-        
+
         if ($request->message) {
             $this->sendSms($request->message, $request->phone_number);
+        }
+        if ($request->next_session_date && $request->next_session_time) {
+            $this->nextSession($request->client_id, $request->next_session_date, $request->next_session_time);
         }
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
@@ -90,8 +93,8 @@ class Tier2Controller extends Controller
         $data['time_call_ended'] = $request->call_end;
         $data['duration'] = $request->duration;
         $data['phone_number'] = $request->phone_number;
-        $data['caller_id'] = $request->caller_id;
-        $data['caller_name'] = $request->caller_name;
+        $data['caller_id'] = $request->client_id;
+        $data['caller_name'] = $request->client_name;
         $data['sex'] = $request->sex;
         $data['age'] = $request->age;
         $data['occupation'] = $request->occupation;
@@ -133,7 +136,8 @@ class Tier2Controller extends Controller
         $data['client_referral'] = $request->client_referral;
         $data['session_plan'] = $request->next_session_plan;
         $data['session_summary'] = $request->session_summary;
-        $data['session_date'] = $request->next_session;
+        $data['next_session_date'] = $request->next_session_date;
+        $data['next_session_time'] = $request->next_session_time;
 
 
         DB::table('sojon_tier2s')->insert($data);
@@ -146,6 +150,16 @@ class Tier2Controller extends Controller
         $user_id = auth()->user()->user_id;
         // return redirect()->back()->with('success', 'insert successfull');
         return redirect()->route('user.show', $user_id)->with('success', 'insert successfull');
+    }
+    function nextSession($id, $date, $time)
+    {
+        $session = Session::where('unique_id', $id)->first();
+
+        $duplicatePost = $session->replicate();
+        $duplicatePost->session_date = $date;
+        $duplicatePost->session_time = $time;
+        $duplicatePost->session_taken = "NO";
+        $duplicatePost->save();
     }
     private function sendSms($message, $phone)
     {
@@ -275,13 +289,13 @@ class Tier2Controller extends Controller
         $data['client_referral'] = $request->client_referral;
         $data['session_plan'] = $request->next_session_plan;
         $data['session_summary'] = $request->session_summary;
-        $data['session_date'] = $request->next_session;
+        $data['next_session_date'] = $request->next_session;
 
         DB::table('sojon_tier2s')->where('id', $request->id)->update($data);
 
         return redirect()->back()->with('success', 'Update successfully!');
     }
-        public function referral_table(Request $request)
+    public function referral_table(Request $request)
     {
         $uniqueid = $request->caller_id;
         if ($request->ajax()) {
@@ -291,20 +305,20 @@ class Tier2Controller extends Controller
                 foreach ($data as $key => $row) {
                     $output .=
                         '<tr>
-                               <td>' . $key . '</td>
-                               <td>' . $row->referr_to . '</td>
-                               <td>' . $row->referr_from . '</td>
-                               <td>' . $row->name . '</td>
-                               <td>' . $row->unique_id . '</td>
-                               <td>' . $row->age . '</td>
-                               <td>' . $row->phone_number . '</td>
-                               <td>' . $row->phone_number_two . '</td>
-                               <td>' . $row->reason_for_therapy . '</td>
-                               <td>' . $row->preferred_time . '</td>
-                               <td>' . $row->therapist . '</td>
-                               <td>' . $row->financial . '</td>
-                               <td>' . $row->Referral_types . '</td>
-                            </tr>';
+                    <td>' . $key . '</td>
+                    <td>' . $row->referr_to . '</td>
+                    <td>' . $row->referr_from . '</td>
+                    <td>' . $row->name . '</td>
+                    <td>' . $row->unique_id . '</td>
+                    <td>' . $row->age . '</td>
+                    <td>' . $row->phone_number . '</td>
+                    <td>' . $row->phone_number_two . '</td>
+                    <td>' . $row->reason_for_therapy . '</td>
+                    <td>' . $row->preferred_time . '</td>
+                    <td>' . $row->therapist . '</td>
+                    <td>' . $row->financial . '</td>
+                    <td>' . $row->Referral_types . '</td>
+                    </tr>';
                 }
                 return response()->json($output);
             }
@@ -328,7 +342,7 @@ class Tier2Controller extends Controller
                     for ($i = 1; $i <= $array_size; $i++) {
                         if ($i == 1) {
                             $output .=
-                            '<tr>
+                                '<tr>
                             <td>' . $key . '</td>
                             <td>' . $row->project_name . '</td>
                             <td>' . $row->counselor_name . '</td>
@@ -370,7 +384,7 @@ class Tier2Controller extends Controller
                             </tr>';
                         } else {
                             $output .=
-                            '<tr style ="border-collapse: collapse;">
+                                '<tr style ="border-collapse: collapse;">
                             <td></td>
                             <td></td>
                             <td></td>

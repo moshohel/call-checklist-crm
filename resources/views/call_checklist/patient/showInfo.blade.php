@@ -19,11 +19,11 @@
                     <p>{{ $patient[0]->name }}</p>
                     <p class="text-dark font-weight-medium pt-4 mb-2">Phone</p>
                     <p>{{ $patient[0]->phone_number }}</p>
-                    <p class="text-dark font-weight-medium pt-4 mb-2">Email</p>
+                    <p class="text-dark font-weight-medium pt-4 mb-2">Age</p>
                     <p>{{ $patient[0]->age }}</p>
-                    <p class="text-dark font-weight-medium pt-4 mb-2">Address</p>
+                    <p class="text-dark font-weight-medium pt-4 mb-2">Location</p>
                     <p>{{ $patient[0]->location }}</p>
-                    <p class="text-dark font-weight-medium pt-4 mb-2">Department</p>
+                    <p class="text-dark font-weight-medium pt-4 mb-2">Sex</p>
                     <p>{{ $patient[0]->sex }}</p>
                 </div>
             </div>

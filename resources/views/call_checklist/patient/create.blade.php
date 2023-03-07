@@ -57,10 +57,12 @@
                             <div class="form-group" @error('district') is-invalid @enderror">
                                 <input type="text" class="form-control" required name="location" list="location_list" value="">
                                 <datalist id="location_list">
+                                    <option selected disabled value="">Select Location</option>
                                     @foreach ($districts as $item)
                                     <option value="{{ $item }}">{{ $item }}</option>
                                     @endforeach
                                 </datalist>
+                            </select>
                             </div>
                             @error('district') {{ $message }} @enderror
                         </div>

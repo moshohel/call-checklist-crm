@@ -38,7 +38,7 @@
 
                 <div class="form-group col-3">
                     <label class="control-label" for="sex"><b>Sex: <span class="required">*</span></b></label>
-                    @php $types = ['Male', 'Female', 'Intersex', 'Others']; @endphp
+                    @php $types = ['Male', 'Female', 'LGBTQ', 'Others']; @endphp
                     <select name="sex" id="sex" list="sex_list" class="form-control @error('sex') is-invalid @enderror">
                         <datalist id="sex_list">
                             <option value="">Select Sex</option>
