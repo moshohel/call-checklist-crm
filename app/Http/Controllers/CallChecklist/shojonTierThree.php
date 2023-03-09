@@ -29,6 +29,9 @@ class shojonTierThree extends Controller
     public function store(Request $request)
     {
         // dd($request->all());
+        if ($request->next_session_date && $request->next_session_time) {
+            $this->nextSession($request->caller_id, $request->next_session_date, $request->next_session_time);
+        }
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -105,7 +108,8 @@ class shojonTierThree extends Controller
         $data['client_referral'] = $request->client_referral;
         $data['session_plan'] = $request->next_session_plan;
         $data['session_summary'] = $request->session_summary;
-        $data['next_session_date'] = $request->next_session;
+        $data['next_session_date'] = $request->next_session_date;
+        $data['next_session_time'] = $request->next_session_time;
 
 
         DB::table('shojon_tire_threes')->insert($data);
@@ -118,6 +122,16 @@ class shojonTierThree extends Controller
 
         // return redirect()->route('call_checklist.shojon.TierThreePatientlist')->with('success', 'Tire three insert successfull');
         return redirect()->route('user.show', $user_id)->with('success', 'insert successfull');
+    }
+    function nextSession($id, $date, $time)
+    {
+        $session = Session::where('unique_id', $id)->first();
+
+        $duplicatePost = $session->replicate();
+        $duplicatePost->session_date = $date;
+        $duplicatePost->session_time = $time;
+        $duplicatePost->session_taken = "NO";
+        $duplicatePost->save();
     }
 
     public function tireThreeList(Request $request)

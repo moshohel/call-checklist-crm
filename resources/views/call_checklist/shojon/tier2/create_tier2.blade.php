@@ -8,7 +8,7 @@
     <div>
         <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
     </div>
-</div>
+</div> 
 
 
 
