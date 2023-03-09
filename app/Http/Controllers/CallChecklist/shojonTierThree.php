@@ -110,7 +110,7 @@ class shojonTierThree extends Controller
 
         DB::table('shojon_tire_threes')->insert($data);
         $id = $request['session_id'];
-        dd($id);
+        // dd($id);
         $session = Session::find($id);
         $session->session_taken = "DONE";
         $session->save();
@@ -134,7 +134,7 @@ class shojonTierThree extends Controller
         return view('call_checklist.shojon.tierThree.client_details', compact('data'));
     }
 
-    public function TierTwoUpdate(Request $request)
+    public function tireThreeUpdate(Request $request)
     {
 
         if ($request['occupation'] == "on") {
@@ -198,10 +198,10 @@ class shojonTierThree extends Controller
         $data['name_of_agency'] = $request->NameOfAgency;
         $data['client_referral'] = $request->client_referral;
         $data['session_plan'] = $request->next_session_plan;
-        $data['session_summary'] = $request->session_summary;
-        $data['session_date'] = $request->next_session;
+        $data['next_session_time'] = $request->session_summary;
+        $data['next_session_date'] = $request->next_session;
 
-        DB::table('sojon_tier2s')->where('id', $request->id)->update($data);
+        DB::table('shojon_tire_threes')->where('id', $request->id)->update($data);
 
         return redirect()->back()->with('success', 'Update successfully!');
     }
