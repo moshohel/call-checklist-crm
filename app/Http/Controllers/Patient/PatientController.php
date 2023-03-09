@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\CallChecklistForShojon;
 use App\Models\Unique;
 use App\Models\ShojonTierOne;
+use App\Models\Cilent_call;
 
 class PatientController extends Controller
 {
@@ -120,19 +121,19 @@ class PatientController extends Controller
             if ($data) {
                 foreach ($data as $key => $row) {
                     $output .=
-                        '<tr>
-                                <td>' . $key . '</td>
-                                <td>' . $row->caller_id . '</td>
-                                <td>' . $row->caller_name . '</td>
-                                <td>' . $row->phone_number . '</td>
-                                <td>' . $row->age . '</td>
-                                <td>' . $row->sex . '</td>
-                                <td>' . $row->location . '</td>
-                                <td>' . $row->socio_economic . '</td>
-                                <td>' . '<a class="btn btn-info m-1" href="' . route('call_checklist.shojon.TierOneedit', $row->caller_id) . '">Last T1</a>' . '</td>
-                                <td>' . '<a class="btn btn-info m-1" href="' . route('patient.showInfo', $row->caller_id) . '"> History </a>' . '</td>
-                            </tr>
-                            ';
+                    '<tr>
+                    <td>' . $key . '</td>
+                    <td>' . $row->caller_id . '</td>
+                    <td>' . $row->caller_name . '</td>
+                    <td>' . $row->phone_number . '</td>
+                    <td>' . $row->age . '</td>
+                    <td>' . $row->sex . '</td>
+                    <td>' . $row->location . '</td>
+                    <td>' . $row->socio_economic . '</td>
+                    <td>' . '<a class="btn btn-info m-1" href="' . route('call_checklist.shojon.TierOneedit', $row->caller_id) . '">Last T1</a>' . '</td>
+                    <td>' . '<a class="btn btn-info m-1" href="' . route('patient.showInfo', $row->caller_id) . '"> History </a>' . '</td>
+                    </tr>
+                    ';
                 }
                 return response()->json($output);
             }
@@ -164,6 +165,31 @@ class PatientController extends Controller
     public function pupup($number)
     {
         return view('call_checklist.patient.pupup', compact('number'));
+    }
+    public function cilent_calls(Request $request){
+        $data = new Cilent_call;
+        $data->number = $request->Number;
+        $data->date = date('Y-m-d H:i:s');
+        $data->save();
+    }
+    public function allcilent_calls_number(Request $request){
+
+        if ($request->ajax()) {
+            $output = '';
+            $data = DB::table('cilent_calls')->orderBy('id', 'DESC')->get();
+            if ($data) {
+                foreach ($data as $key => $row) {
+                    $output .=
+                    '<tr>
+                    <td class="text-center">' . $key+1 . '</td>
+                    <td class="text-center">' . $row->number . '</td>
+                    <td class="text-center">' . $row->date . '</td>
+                    </tr>';
+                }
+                return response()->json($output);
+            }
+        }
+    return view('call_checklist.patient.popup');
     }
     // new 
     public function create($number)
@@ -213,8 +239,8 @@ class PatientController extends Controller
     {
         // dd($unique_id);
         $patient = DB::table('patients')
-            ->where('unique_id', '=', $unique_id)
-            ->get();
+        ->where('unique_id', '=', $unique_id)
+        ->get();
         // $patient = Patient::distinct()->get(['unique_id']);
         // dd($patient);
         // return view('pages.patient.show')->with('patient', $patient);

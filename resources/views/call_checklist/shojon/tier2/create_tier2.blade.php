@@ -33,18 +33,18 @@
 
                 <div class="row g-4">
                     <div class="col-md-3">
-                        <label for="validationCustom01" class="form-label">Phone Number:</label>
+                        <label for="validationCustom01" class="form-label"><b>Phone Number</b></label>
                         <input type="number" class="form-control" readonly name="phone_number"value="{{$newPatient->phone_number}}" >
                     </div>
                     <div class="col-md-3">
-                        <label for="validationCustom01" class="form-label">Client Name:</label>
+                        <label for="validationCustom01" class="form-label"><b>Client Name</b></label>
                         <input type="text" class="form-control" name="client_name" readonly value="{{$newPatient->name}}">
                         <input type="hidden" class="form-control" name="client_id" placeholder="Enter client name" value="{{ $uniqueid }}">
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             @php $types = ['Male','Female','LGBTQ','Others']; @endphp 
-                            <label for="validationCustom01" class="form-label">Sex:</label>
+                            <label for="validationCustom01" class="form-label"><b>Sex</b></label>
                             <select class="form-control" readonly  name="sex" required>
                                 <option disabled selected>Select Sex</option>
                                 @foreach($types as $item)
@@ -61,7 +61,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             @php $types = ['0-12','13-19','20-30','30-40','40-65','65+','Don’t know.','Don’t want to share']; @endphp 
-                            <label for="validationCustom01" class="form-label">Age:</label>
+                            <label for="validationCustom01" class="form-label"><b>Age</b></label>
                             <select class="form-control" readonly name="age" required>
                                 <option disabled selected>Select age</option>
                                 @foreach($types as $item)
@@ -85,7 +85,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower Class', 'Lower Class']; @endphp 
-                            <label for="validationCustom01" class="form-label">Socio-economic Status (SES):</label>
+                            <label for="validationCustom01" class="form-label"><b>Socio-economic Status (SES)</b></label>
                             <select class="form-control" readonly  name="socio_economic">
                                 <option disabled selected>Select Socio-economic</option>
                                 @foreach($types as $item)
@@ -100,7 +100,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label for="validationCustom01" class="form-label">Location:</label>
+                            <label for="validationCustom01" class="form-label"><b>Location</b></label>
                             <select class="form-control" readonly  name="location" required>
                                 <option disabled selected>Select Location</option>
                                 @foreach($districts as $item)
@@ -119,7 +119,7 @@
                 <hr>
 
                 <div class="form-control">
-                    <label class="control-label" for="occupation">Occupation:</label>
+                    <label class="control-label" for="occupation"><b>1. Occupation</b></label>
                     @php $types = ['Student', 'Job holder', 'Businessperson', 'Housewife', 'Unemployed', 'Retired', 'Could not tell']; @endphp
                     <div class="form-control @error('occupation') is-invalid @enderror">
 
@@ -146,13 +146,13 @@
                     @error('occupation') {{ $message }} @enderror
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="Educational_Qualification"><b> Educational Qualification:</b></label>
+                    <label class="control-label" for="Educational_Qualification"><b> 2. Educational Qualification:</b></label>
                     @php $types = ['Pre-primary(Jr/Sr KG or equivalent)', 'Primary (1st-5th)', 'Secondary (5th-SSC)', 'Higher Secondary ( 11th- HSC)', 'Graduate (degree and Hons)', 'Post-Graduate and above','Never been to school','Don’t know','Other']; @endphp
                     <select name="Educational_Qualification" list="Educational_Qualification"
                     id="Educational_Qualification" required class="form-control">
 
                     <datalist id="Educational_Qualification">
-                        <option value="" selected disabled>Select Educational Qualification</option>
+                        <option value="" selected disabled><b>Select Educational Qualification</b></option>
                         @foreach($types as $item)
                         @if( old('Educational_Qualification') == $item))
                         <option value="{{ $item }}">{{ $item }}</option>
@@ -165,7 +165,7 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label" for="Marital_Status"><b> Marital Status:</b></label>
+                <label class="control-label" for="Marital_Status"><b>3. Marital Status</b></label>
                 @php $types = ['Single', 'Married', 'Divorced', 'Separated', 'Don’t know', 'Don’t want to share']; @endphp
                 <select name="Marital_Status" list="Marital_Status"
                 id="Marital_Status" class="form-control">
@@ -184,7 +184,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="Session_Number"><b>Session Number</b></label>
+            <label class="control-label" for="Session_Number"><b>4. Session Number</b></label>
             @php $types = ['1st session', '2nd session', '3rd session', '4th session', '6th session', '7th session','8th session','8th session','9th session','10th session','Last session']; @endphp
             <div class="form-control @error('Session_Number') is-invalid @enderror">
 
@@ -213,7 +213,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="distress_rating"><b>Distress Rating</b> <br>[0 means
+            <label class="control-label" for="distress_rating"><b>5. Distress Rating</b> <br>[0 means
             lowest wellbeing, 10 means Highest wellbeing] </label>
             {{-- <div class="col-md-auto"> --}}
                 {{-- <input class="form-control @error('distress_rating') is-invalid @enderror" type="text"
@@ -236,7 +236,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label" for="ghq"><b>WHO-5 wellbeing question and scale:</b></label> 
+        <label class="control-label" for="ghq"><b>6. WHO-5 wellbeing question and scale</b></label> 
 
         <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Questionniare</a>
         <br>
@@ -246,7 +246,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label">Presenting Problems list and problem rating: </label><br>
+        <label class="control-label"><b>7. Presenting Problems list and problem rating</b></label><br>
         <table class="table table-bordered border-primary" id="dynamic_field">
             <thead>
                 <tr> 
@@ -266,7 +266,7 @@
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="Problem_duration"><b>Problem duration:</b></label>
+    <label class="control-label" for="Problem_duration"><b>8. Problem duration:</b></label>
     @php $types = ['<1 month', '1 to 3 months', '4 to 6 months ', '6 to 12 month ', '12 to 24 months ', '<24 month','More than 5 years','More than 10 years ','Don’t know','Other']; @endphp
     <select name="Problem_duration" required list="Problem_duration"
     id="Problem_duration" class="form-control">
@@ -285,20 +285,20 @@
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="Problem_duration"><b>    Illness/ problem history:</b></label>  
+  <label class="control-label" for="Problem_duration"><b>9. Illness/ problem history:</b></label>  
   <textarea class="form-control" name="problem_history">
 
   </textarea>
 </div>
 <div class="form-group">
-  <label class="control-label" for="Problem_duration"><b>Family History:</b></label>  
+  <label class="control-label" for="Problem_duration"><b>10. Family History:</b></label>  
   <textarea class="form-control" name="Family_History">
 
   </textarea>
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="suicidal_risk"><b>Does the client have suicidal Ideation?</b></label>
+    <label class="control-label" for="suicidal_risk"><b>11. Does the client have suicidal Ideation?</b></label>
     @php $types = ['Yes', 'No', 'Don’t know']; @endphp
     <select name="suicidal_risk" required id="suicidal_risk" list="suicidal_risk_list"
     class="form-control @error('suicidal_risk') is-invalid @enderror">
@@ -317,7 +317,7 @@
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="self_harm_history"><b>Does the client have any self-harm history?</b></label>
+    <label class="control-label" for="self_harm_history"><b>12. Does the client have any self-harm history?</b></label>
     @php $types = ['Yes', 'No', 'Don’t Know','Don’t want shere']; @endphp
     <select name="self_harm_history" required id="self_harm_history" list="suicidal_risk_list"
     class="form-control @error('self_harm_history') is-invalid @enderror">
@@ -337,7 +337,7 @@
 
 
 <div class="form-group">
-    <label class="control-label" for="mental_illness_diagnosis"><b>Previous psychiatric diagnosis? </b></label> <br>
+    <label class="control-label" for="mental_illness_diagnosis"><b>13. Previous psychiatric diagnosis? </b></label> <br>
     @php $types = ['Major Depressive Disorder', 'Anxiety Disorder', 'Panic Disorder','Obsessive Compulsive Disorder','Social Anxiety Disorder','Eating Disorder','Insomnia','Schizophrenia','Bipolar Disorder ','Personality Disorder','Autism spectrum disorder','Attention deficit hyperactivity disorder','Learning disorder (LD)','Phobia','Post-traumatic stress disorder (PTSD)','Substance Abuse Disorder','Sexual disorder','Gender Identity disorder','Conversion disorder','Conduct','No'];
     @endphp
     <div class="form-control @error('Physical_Concern_history') is-invalid @enderror">
@@ -354,7 +354,7 @@
 
 
 <div class="form-group">
-    <label class="control-label" for="PresentCotinuation"><b>Present Continuation of Psychiatric Medication:</b>
+    <label class="control-label" for="PresentCotinuation"><b>14. Present Continuation of Psychiatric Medication:</b>
     </label><br>
     @php $types = ['Yes','No']; @endphp
     <div class="form-control @error('hearing_source') is-invalid @enderror">
@@ -383,12 +383,12 @@
     @error('Present_Continuation') {{ $message }} @enderror
 </div>
 <div class="form-group">
-    <label class="control-label">Mention the name of medicine if any :</label>
+    <label class="control-label">15. Mention the name of medicine if any :</label>
     <textarea class="form-control" name="name_of_medicine"></textarea>
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="Physical_Concern_history"><b>Physical Concern history:</b></label>
+    <label class="control-label" for="Physical_Concern_history"><b>16. Physical Concern history:</b></label>
     @php
     $types = ['Diabetes','Hypertension','Chronic pain','Asthma','Hormonal issues','Life threatening disease','Obesity'];
     @endphp
@@ -411,7 +411,7 @@
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="current_differential_diagnosis"><b>Current Differential Diagnosis:</b></label>
+    <label class="control-label" for="current_differential_diagnosis"><b>17. Current Differential Diagnosis:</b></label>
     @php $types = ['Major Depressive Disorder', 'Anxiety Disorder', 'Panic Disorder','Obsessive Compulsive Disorder','Social Anxiety Disorder','Eating Disorder','Insomnia/sleep related disorder','Schizophrenia','Bipolar Disorder','Personality Disorder','Autism spectrum disorder','Attention deficit hyperactivity disorder','Learning disorder (LD)','Dementia','Alzheimer','Phobia','Post-traumatic stress disorder (PTSD)','Substance Abuse Disorder','Sexual disorder','Gender Identity disorder','Conversion disorder','Conduct','No']; @endphp     
     <div class="form-control @error('current_differential_diagnosis') is-invalid @enderror">
         @foreach($types as $item)
@@ -430,7 +430,7 @@
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="PsychometricToolscore"><b>Psychometric Tool score & Interpretation:</b>
+    <label class="control-label" for="PsychometricToolscore"><b>18. Psychometric Tool score & Interpretation</b>
     </label><br>
     @php $types = ['Depression scale','Anxiety','Social Interaction Anxiety scale ','Obsessive- compulsive disorder ','Beck hopelessness scale','Cognitive distortion scale','Depression, Anxiety, stress scale','Somatic complaint scale','Event'];@endphp       
     <div class="form-control @error('PsychometricToolscore') is-invalid @enderror">
@@ -460,7 +460,7 @@
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="Problem_duration"><b> Client’s Expectation from therapy:</b></label>  
+  <label class="control-label" for="Problem_duration"><b> 19. Client’s Expectation from therapy:</b></label>  
   <textarea class="form-control" name="therapy">
 
   </textarea>
@@ -490,7 +490,7 @@
 </table>  
 </div>
 <div class="form-group">
-    <label class="control-label" for="TreatmentGoal"><b>Treatment Goal </b>
+    <label class="control-label" for="TreatmentGoal"><b>20. Treatment Goal </b>
     </label><br>
     <div class="form-control @error('TreatmentGoal') is-invalid @enderror">
         <label class="control-label">Short term Goal:</label><br>
@@ -508,21 +508,21 @@
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="Problem_duration"><b> Intervention:</b></label>  
+  <label class="control-label" for="Problem_duration"><b>21. Intervention:</b></label>  
   <textarea class="form-control" name="Intervention">
 
   </textarea>
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="Problem_duration"><b>Homework:</b></label>  
+  <label class="control-label" for="Problem_duration"><b>22. Homework:</b></label>  
   <textarea class="form-control" required name="Homework">
 
   </textarea>
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="useful_effective"><b>How useful and effective do you think the call has been for you? 
+    <label class="control-label" for="useful_effective"><b>23. How useful and effective do you think the call has been for you? 
     </b></label><br>
     @php $types = ['Very useful and effective','Useful, but not so effective', 'Quite useful and effective', 'Neither useful, nor effective', 'No comment/Cannot decide']; @endphp
     <div class="form-control @error('useful_effective') is-invalid @enderror">
@@ -541,8 +541,8 @@
     @error('useful_effective') {{ $message }} @enderror
 </div>
 
-<div class="form-group" style="display: none">
-    <label class="control-label" for="yes_no_radio"><b>Consent for Recording: </b></label>
+<!-- <div class="form-group" style="display: none">
+    <label class="control-label" for="yes_no_radio"><b>24. Consent for Recording: </b></label>
     <div class="form-control @error('is_recordable') is-invalid @enderror">
         <div>
             <input type="radio" id="yes" name="is_recordable" value=1>
@@ -555,10 +555,10 @@
         </div>
     </div>
     @error('is_recordable') {{ $message }} @enderror
-</div>
+</div> -->
 
 <div class="form-group" id="referred">
-    <label class="control-label" for="client_referral">Referral</label>
+    <label class="control-label" for="client_referral">24. Referral</label>
     <div class="form-control">
         <label class="control-label">
             <input type="radio" id="chkSHOJONTierThree" class="TierThreeChe" name="Internal_referral" value="Yes"onclick="ShowSHOJONTierTowInternalReferralBox()"/>
@@ -623,7 +623,7 @@
                         @error('financial_affordability') {{ $message }} @enderror --}} -->
 
                         <div class="form-group">
-                            <label class="control-label" for="next_session_plan"><b>Next session plan</b></label>
+                            <label class="control-label" for="next_session_plan"><b>25. Next session plan</b></label>
                             <textarea rows="2" cols="50"
                             class="form-control
                             @error('next_session_plan') is-invalid @enderror"
@@ -635,7 +635,7 @@
                         @error('next_session_plan') {{ $message }} @enderror
                     </div>
                     <div class="form-group">
-                        <label class="control-label" for="session_summary"><b>Treatment Session summer: </b></label>
+                        <label class="control-label" for="session_summary"><b>26. Treatment Session summer: </b></label>
                         <textarea rows="2" cols="50"
                         class="form-control
                         @error('session_summary') is-invalid @enderror"
@@ -648,7 +648,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label" for="TreatmentGoal"><b>Session Outcomes</b>
+                    <label class="control-label" for="TreatmentGoal"><b>27. Session Outcomes</b>
                     </label><br>
                     <div class="form-control @error('TreatmentGoal') is-invalid @enderror">
                         <label class="control-label">Schedule next session</label><br>

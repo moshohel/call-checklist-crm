@@ -326,7 +326,7 @@ class Tier2Controller extends Controller
                 return response()->json($output);
             }
         }
-    }
+    } 
     public function termination_table(Request $request)
     {
         $uniqueid = $request->caller_id;

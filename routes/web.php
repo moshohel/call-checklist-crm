@@ -59,6 +59,8 @@ Route::group(['prefix' => 'patient'], function () {
     //Route::get('', 'CallChecklist\PatientController@pupup');
     Route::get('/popup/{number}', [PatientController::class, 'pupup'])->middleware('auth');
     Route::get('/livesearch', [PatientController::class, 'searchExisting'])->middleware('auth');
+    Route::get('/cilent_call', [PatientController::class, 'cilent_calls'])->name('patient.cilent_call')->middleware('auth');
+    Route::get('/cilent_call_Number', [PatientController::class, 'allcilent_calls_number'])->middleware('auth');
     Route::get('/create/{number}', [PatientController::class, 'create'])->name('patient.create')->middleware('auth');
 
     Route::get('/', 'Patient\PatientController@index')->name('patients')->middleware('auth');
