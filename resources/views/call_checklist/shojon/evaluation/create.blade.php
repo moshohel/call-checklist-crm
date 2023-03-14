@@ -262,6 +262,7 @@ Rate between 0 and 10 where 0 means not very effective and 10 means maximum effe
 <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 <script>
   config ={
+    allowInput: true,
     enableTime: true,
     dateFormat: "Y-m-d h:i K",
   }

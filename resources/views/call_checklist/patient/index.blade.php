@@ -34,7 +34,7 @@
           </div>
           <div class="form-group col-3" id="unique_id">
             <label for="exampleFormControlInput5">Client ID</label>
-            <input type="number" class="form-control" name="unique_id" id="exampleFormControlInput5"
+            <input type="text" class="form-control" name="unique_id" id="exampleFormControlInput5"
               placeholder="Client Id">
           </div>
           
@@ -131,13 +131,15 @@ $( "#search" ).submit(function( e ) {
             dataType : 'json',
             })
             .done(function( response ) {
-                var additional_query=response.additional_query;
-                load_datatable(additional_query);
+              var additional_query=response.additional_query;
+              load_datatable(additional_query);
+              console.log(additional_query);
                 var url = '{{ route("pdf.patient", ":id") }}';
                 url = url.replace(':id', additional_query);
                 document.getElementById("print_pdf").setAttribute("href",url);
                 
             });
+            console.log(additional_query);
         //alert('form submitted');
         
         return false;

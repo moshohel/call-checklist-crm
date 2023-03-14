@@ -13,6 +13,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use date;
+use Illuminate\Support\Carbon;
 
 class RegisterController extends Controller
 {
@@ -93,6 +94,7 @@ class RegisterController extends Controller
             $user->image = date('YmdHi') . $data['image']->getClientOriginalName();
         }
         $user->user_level = 8;
+        $user->created_at = Carbon::now();
 
         return $user->save();
 

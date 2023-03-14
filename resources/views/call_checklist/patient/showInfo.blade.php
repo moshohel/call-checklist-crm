@@ -38,13 +38,166 @@
                     <li class="nav-item">
                         <a class="nav-link active show" id="queries_Details-tab" data-toggle="tab"
                             href="#queries_Details" role="tab" aria-controls="queries_Details"
-                            aria-selected="true">Patient History</a>
+                            aria-selected="true">Tier 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tier2-tab" data-toggle="tab" href="#tier2" role="tab"
+                            aria-controls="tier2" aria-selected="false">Tier 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tier3-tab" data-toggle="tab" href="#tier3" role="tab"
+                            aria-controls="tier3" aria-selected="false">Tier 3</a>
                     </li>
                 </ul>
                 <div class="tab-content px-3 px-xl-5" id="myTabContent">
                     <div class="tab-pane fade active show" id="queries_Details" role="tabpanel"
                         aria-labelledby="queries_Details-tab">
                         <div id="accordion" class="accordion">
+                            @php($i = 1)
+                            @foreach ($previous_data as $query)
+                            <div class="card">
+                                <div class="card-header collapsible-title" id="headingOne"
+                                    style="background-color: #f2f2f2;">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse"
+                                        data-target="#collapseOne{{ $query->id }}" aria-expanded="false"
+                                        aria-controls="collapseOne{{ $query->id }}">
+                                        Number - {{ $i++ }}
+                                    </button>
+                                </div>
+                                <div id="collapseOne{{ $query->id}}" class="collapse"
+                                    aria-labelledby="headingOne{{ $query->id }}"
+                                    data-parent="#accordion{{ $query->id }}">
+                                    <div class="card-body">
+                                        <div class="media mt-1 profile-reportDetails-media">
+                                            <div class="media-body">
+                                                <h5 class="mt-0 text-dark" style="text-align: center;">
+                                                    Query of {{ $query->name }}
+                                                </h5>
+                                                <table class="table table-striped table-responsive table-details">
+                                                    <tbody>
+                                                        {{-- <tr>
+                                                            <td>$query->ID</td>
+                                                            <td>{{ $query->id }}</td>
+                                                        </tr> --}}
+                                                        <tr>
+                                                            <td>Call Received</td>
+                                                            <td>{{ $query->call_received }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Occupation</td>
+                                                            <td>{{ $query->occupation }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Call Type</td>
+                                                            <td>{{ $query->call_type }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Main Reason for Calling</td>
+                                                            <td>{{ $query->main_reason_for_calling }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Mental illness diagnosis</td>
+                                                            <td>{{ $query->mental_illness_diagnosis }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>GHQ</td>
+                                                            <td>{{ $query->ghq }}</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>Suicidal  risk</td>
+                                                            <td>{{ $query->suicidal_risk }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Client Referral</td>
+                                                            <td>{{ $query->client_referral }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tier2" role="tabpanel" aria-labelledby="tier2-tab">
+                        <div id="accordion" class="accordion">
+                            @php($i = 1)
+                            @foreach ($previous_data as $query)
+                            <div class="card">
+                                <div class="card-header collapsible-title" id="headingTwo"
+                                    style="background-color: #f2f2f2;">
+                                    <button class="btn btn-link collapsed" data-toggle="collapse"
+                                        data-target="#collapseTwo{{ $query->id }}" aria-expanded="false"
+                                        aria-controls="collapseTwo{{ $query->id }}">
+                                        Number - {{ $i++ }}
+                                    </button>
+                                </div>
+                                <div id="collapseTwo{{ $query->id}}" class="collapse"
+                                    aria-labelledby="headingTwo{{ $query->id }}"
+                                    data-parent="#accordion{{ $query->id }}">
+                                    <div class="card-body">
+                                        <div class="media mt-1 profile-reportDetails-media">
+                                            <div class="media-body">
+                                                <h5 class="mt-0 text-dark" style="text-align: center;">
+                                                    Query of {{ $query->name }}
+                                                </h5>
+                                                <table class="table table-striped table-responsive table-details">
+                                                    <tbody>
+                                                        {{-- <tr>
+                                                            <td>$query->ID</td>
+                                                            <td>{{ $query->id }}</td>
+                                                        </tr> --}}
+                                                        <tr>
+                                                            <td>Call Received</td>
+                                                            <td>{{ $query->call_received }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Occupation</td>
+                                                            <td>{{ $query->occupation }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Call Type</td>
+                                                            <td>{{ $query->call_type }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Main Reason for Calling</td>
+                                                            <td>{{ $query->main_reason_for_calling }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Mental illness diagnosis</td>
+                                                            <td>{{ $query->mental_illness_diagnosis }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>GHQ</td>
+                                                            <td>{{ $query->ghq }}</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td>Suicidal  risk</td>
+                                                            <td>{{ $query->suicidal_risk }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Client Referral</td>
+                                                            <td>{{ $query->client_referral }}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="tier3" role="tabpanel" aria-labelledby="tier3-tab">
+                        <div id="accordion" class="accordion">
+                            @php($i = 1)
                             @foreach ($previous_data as $query)
                             <div class="card">
                                 <div class="card-header collapsible-title" id="headingThree"
@@ -52,7 +205,7 @@
                                     <button class="btn btn-link collapsed" data-toggle="collapse"
                                         data-target="#collapseThree{{ $query->id }}" aria-expanded="false"
                                         aria-controls="collapseThree{{ $query->id }}">
-                                        Query #
+                                        Number - {{ $i++ }}
                                     </button>
                                 </div>
                                 <div id="collapseThree{{ $query->id}}" class="collapse"
@@ -71,36 +224,36 @@
                                                             <td>{{ $query->id }}</td>
                                                         </tr> --}}
                                                         <tr>
-                                                            <td>call_received</td>
+                                                            <td>Call Received</td>
                                                             <td>{{ $query->call_received }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>occupation</td>
+                                                            <td>Occupation</td>
                                                             <td>{{ $query->occupation }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>call_type</td>
+                                                            <td>Call Type</td>
                                                             <td>{{ $query->call_type }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>main_reason_for_calling</td>
+                                                            <td>Main Reason for Calling</td>
                                                             <td>{{ $query->main_reason_for_calling }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>mental_illness_diagnosis</td>
+                                                            <td>Mental illness diagnosis</td>
                                                             <td>{{ $query->mental_illness_diagnosis }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td> ghq</td>
+                                                            <td>GHQ</td>
                                                             <td>{{ $query->ghq }}</td>
                                                         </tr>
 
                                                         <tr>
-                                                            <td>suicidal_risk</td>
+                                                            <td>Suicidal  risk</td>
                                                             <td>{{ $query->suicidal_risk }}</td>
                                                         </tr>
                                                         <tr>
-                                                            <td>client_referral</td>
+                                                            <td>Client Referral</td>
                                                             <td>{{ $query->client_referral }}</td>
                                                         </tr>
                                                     </tbody>

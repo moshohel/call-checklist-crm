@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\CallChecklistForShojon;
 use App\Models\Unique;
 use App\Models\ShojonTierOne;
+use App\Models\Cilent_call;
 use App\User;
 
 class PatientController extends Controller
@@ -45,10 +46,10 @@ class PatientController extends Controller
 
         $str = '';
         if ($unique_id != '') {
-            $str .= " and patients.unique_id ='$unique_id' ";
+            $str .= " and patients.unique_id like '$unique_id%' ";
         }
         if ($phone_number != '') {
-            $str .= " and patients.phone_number ='$phone_number' ";
+            $str .= " and patients.phone_number like '$phone_number%' ";
         }
         if ($from_date != '') {
             $str .= " and DATE(patients.created_at) >= '$from_date' ";
@@ -75,6 +76,7 @@ class PatientController extends Controller
         // additional_query is the query string for filtering data 
         // form submit calles search which genarate this Query String 
         $additional_query = $request->additional_query;
+        // dd($request->additional_query);
         // $patients = DB::select("SELECT consultants.name as consultant_name, patients.* FROM patients LEFT JOIN consultants ON consultants.id= patients.consultant_id WHERE 1 $additional_query limit $start ,$length");
         $patients = DB::select("SELECT * FROM patients WHERE 1 $additional_query limit $start ,$length");
         $count_result = DB::select("SELECT count(*) as total FROM patients WHERE 1 $additional_query ");
@@ -122,18 +124,18 @@ class PatientController extends Controller
                 foreach ($data as $key => $row) {
                     $output .=
                         '<tr>
-                                <td>' . $key . '</td>
-                                <td>' . $row->caller_id . '</td>
-                                <td>' . $row->caller_name . '</td>
-                                <td>' . $row->phone_number . '</td>
-                                <td>' . $row->age . '</td>
-                                <td>' . $row->sex . '</td>
-                                <td>' . $row->location . '</td>
-                                <td>' . $row->socio_economic . '</td>
-                                <td>' . '<a class="btn btn-info m-1" href="' . route('call_checklist.shojon.TierOneedit', $row->caller_id) . '">Last T1</a>' . '</td>
-                                <td>' . '<a class="btn btn-info m-1" href="' . route('patient.showInfo', $row->caller_id) . '"> History </a>' . '</td>
-                            </tr>
-                            ';
+                    <td>' . $key . '</td>
+                    <td>' . $row->caller_id . '</td>
+                    <td>' . $row->caller_name . '</td>
+                    <td>' . $row->phone_number . '</td>
+                    <td>' . $row->age . '</td>
+                    <td>' . $row->sex . '</td>
+                    <td>' . $row->location . '</td>
+                    <td>' . $row->socio_economic . '</td>
+                    <td>' . '<a class="btn btn-info m-1" href="' . route('call_checklist.shojon.TierOneedit', $row->caller_id) . '">Last T1</a>' . '</td>
+                    <td>' . '<a class="btn btn-info m-1" href="' . route('patient.showInfo', $row->caller_id) . '"> History </a>' . '</td>
+                    </tr>
+                    ';
                 }
                 return response()->json($output);
             }
@@ -165,6 +167,33 @@ class PatientController extends Controller
     public function pupup($number)
     {
         return view('call_checklist.patient.pupup', compact('number'));
+    }
+    public function cilent_calls(Request $request)
+    {
+        $data = new Cilent_call;
+        $data->number = $request->Number;
+        $data->date = date('Y-m-d H:i:s');
+        $data->save();
+    }
+    public function allcilent_calls_number(Request $request)
+    {
+
+        if ($request->ajax()) {
+            $output = '';
+            $data = DB::table('cilent_calls')->orderBy('id', 'DESC')->get();
+            if ($data) {
+                foreach ($data as $key => $row) {
+                    $output .=
+                        '<tr>
+                    <td class="text-center">' . $key + 1 . '</td>
+                    <td class="text-center">' . $row->number . '</td>
+                    <td class="text-center">' . $row->date . '</td>
+                    </tr>';
+                }
+                return response()->json($output);
+            }
+        }
+        return view('call_checklist.patient.popup');
     }
     // new 
     public function create($number)
@@ -291,7 +320,7 @@ class PatientController extends Controller
     public function delete($id)
     {
         $patient = Patient::find($id);
-        if (!is_null($patient)) { 
+        if (!is_null($patient)) {
             $patient->delete();
         }
 

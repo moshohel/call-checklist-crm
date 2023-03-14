@@ -132,7 +132,7 @@
           <div class="row g-3">
               <div class="col-md-4">
                   <div class="form-group">
-                      <label for="validationCustom01" class="form-label">Occupation :</label> 
+                      <label for="validationCustom01" class="form-label">1.Occupation</label> 
                       @php $types = ['Student', 'Job holder', 'Businessperson', 'Housewife', 'Unemployed','self employed', 'Retired', 'Could not tell']; @endphp
                       <div class="form-control">
                           <label>
@@ -159,7 +159,7 @@
             </div>
             <div class="col-md-4">
               <div class="form-group">
-                  <label for="validationCustom01" class="form-label">Where/how did the Client hear about SHOJON:</label> 
+                  <label for="validationCustom01" class="form-label">2.Where/how did the Client hear about SHOJON</label> 
                   @php $types = ['Search engine','KPR', 'Social Media', 'Word of mouth', 'Referred by professional', 'SUDIN', 'SF Microfinance','Radio','TV','Print Media','Oboyob','Lamb Hospital','Incidin BD','Don’t know.']; @endphp
                   <div class="form-control">
                         @foreach($types as $item)
@@ -184,7 +184,7 @@
         </div>
         <div class="col-md-4">
           <div class="form-group">
-              <label class="control-label" for="distress_rating"><b>Distress Rating (pre-stage):</b></label> 
+              <label class="control-label" for="distress_rating"><b>3.Distress Rating (pre-stage)</b></label> 
               @php $types = ['0','1', '2', '3', '4', '5', '6', '7','8','9','10']; @endphp
               <div class="form-control">
                     <label><b style="color: black;">[0 means
@@ -208,7 +208,7 @@
 <div class="row g-3">
   <div class="col-md-4">
       <div class="form-group">
-          <label for="validationCustom01" class="form-label">Primary Reason for Calling (CHOOSE ONLY ONE) :</label> 
+          <label for="validationCustom01" class="form-label">4.Primary Reason for Calling (CHOOSE ONLY ONE)</label> 
           @php $types = ['COVID19 related Issues', 'Mental Illness', 'Substance Abuse', 'Family/Relationship Issues', 'Health/Physical Concerns', 'Financial Concerns', 'Immediate Emotional Crisis','Suicidal Feelings','Domestic Abuse','Child Abuse','Discrimination due to gender','Mental Health Related Symptoms','Discrimination due to minority status','Education','Bereavement','Work related stress','Disability','Anger','Parenting issue','Don’t know']; @endphp
           <div class="form-control">
                 @foreach($types as $item)
@@ -233,7 +233,7 @@
 </div>
 <div class="col-md-4">
   <div class="form-group">
-      <label for="validationCustom01" class="form-label">Secondary reason (Multiple select) :</label> 
+      <label for="validationCustom01" class="form-label">5.Secondary reason (Multiple select)</label> 
       @php $types = ['COVID19 related Issues', 'Mental Illness', 'Substance Abuse', 'Family/Relationship Issues', 'Health/Physical Concerns', 'Financial Concerns', 'Immediate Emotional Crisis','Suicidal Feelings','Mental Health Related Symptoms','Domestic Abuse','Child Abuse','Discrimination due to gender','Discrimination due to minority status','Education','Bereavement','Work related stress','Disability','Anger','Parenting issue','Don’t know','Not applicable']; @endphp
       <div class="form-control">
             @foreach($types as $item)
@@ -253,7 +253,7 @@
 </div>
 <div class="col-md-4">
   <div class="form-group">
-      <label class="control-label" for="distress_rating"><b>Does the client have any mental illness diagnosis? :</b></label> 
+      <label class="control-label" for="distress_rating"><b>6.Does the client have any mental illness diagnosis</b></label> 
       @php $types = ['Major Depressive Disorder', 'Anxiety Disorder', 'Panic Disorder','Obsessive Compulsive Disorder','Social Anxiety Disorder','Insomnia','Schizophrenia','Bipolar Disorder ','Personality Disorder','Autism spectrum disorder','Attention deficit hyperactivity disorder','Learning disorder (LD)','Phobia','Post-traumatic stress disorder (PTSD)','Substance Abuse Disorder','Sexual disorder','Gender Identity disorder','Conversion disorder','Conduct disorder','No']; @endphp 
       <div class="form-control">
             @foreach($types as $item)
@@ -281,8 +281,8 @@
         <div class="" id="notiDiv">
 
         </div>
-        <label class="control-label" for="ghq"><b>GHQ (appendix - questionnaire and
-        scoring):</b></label>
+        <label class="control-label" for="ghq"><b>7.GHQ (appendix - questionnaire and
+        scoring)</b></label>
         <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Questionniare</a>
         @include('call_checklist.shojon.tier_one.questrion_from')
         <input type="text" id="ghq"  name="ghq" value="{{old('ghq','Incomplete')}}"
@@ -292,7 +292,7 @@
 <div class="col-md-3">
   <div class="form-group">
       @php $types = ['No','Don’t know','Mild','Moderate','Severe','Medical emergency']; @endphp 
-      <label for="validationCustom01" class="form-label">Does the client have suicidal risk:</label>
+      <label for="validationCustom01" class="form-label"><b>8.Does the client have suicidal risk</b></label>
       <select class="form-control" name="suicidal_risk">
           <option disabled selected>Select suicidal risk</option>
           @foreach($types as $item)
@@ -304,7 +304,7 @@
 <div class="col-md-5">
   <div class="form-group">
       @php $types = ['Explicitly angry/upset and said something negative about call experience','Was not explicitly angry/upset, but you can tell they were dissatisfied with the call','Neutral about call experience: not positive or negative','Did not explicitly say anything about feeling better, but you can tell','They are calmer, less anxious, no longer crying, etc','Explicitly said “thank you” or that they were feeling better and was','Obviously much better at end of call','Was VERY HAPPY with call experience, multiple expressions of gratitude/thanks','Not applicable']; @endphp 
-      <label for="validationCustom01" class="form-label">How effective the session went for the client?</label>
+      <label for="validationCustom01" class="form-label"><b>9.How effective the session went for the client</b></label>
       <select class="form-control" name="effective">
           <option disabled selected>Select effectiveness</option>
           @foreach($types as $item)
@@ -320,7 +320,7 @@
 <div class="row g-2">
   <div class="col-md-6">
    <div class="form-group">
-      <label class="control-label" for="Internal_Referral"><b>Internal Referral:</b></label> 
+      <label class="control-label" for="Internal_Referral"><b>10.Internal Referral</b></label> 
       @php $types = ['No', 'KPR']; @endphp
       <div class="form-control">
             @foreach($types as $item)
@@ -359,7 +359,7 @@
 </div>
 <div class="col-md-6">
   <div class="form-group">
-    <label class="control-label" for="distress_rating"><b>External Referral :</b></label> 
+    <label class="control-label" for="distress_rating"><b>11.External Referral</b></label> 
     @php $types = ['NIMH (contact No)', 'BSMMU- IPNA (contact No)','No']; @endphp
     <div class="form-control">
       <label class="control-label"for="distress_rating"><b>Reason for referral:</b></label><br>
@@ -385,7 +385,7 @@
 <div class="row g-1">
   <div class="col-md-12">
      <div class="form-group">
-        <label class="control-label"for="distress_rating"><b>Call Description:</b></label>
+        <label class="control-label"for="distress_rating"><b>12.Call Description</b></label>
         <textarea rows="4" cols="50" class="form-control" name="call_description"> </textarea>
      </div>
   </div>
