@@ -9,28 +9,31 @@
     @include('call_checklist.partials.messages')
     <div class="card-body">
         <div class="row">
-
             <div class="col-md-6 col-xl-4 card-body text-center" style="height: 15ch;">
-                <a href="{{ route('patient.create',$number) }}" class="btn btn-primary text-center" style="width: 100%; height: 100%;">New Client</a>
+                <a href="{{ route('patient.create',$number) }}" class="btn btn-primary text-center" style="width: 100%; height: 100%;">
+                    <p style="margin-top: 1rem">New Client</p>
+                </a>
             </div>
             <div class="col-md-6 col-xl-4 card-body text-center " style="height: 15ch;">
                 <a href="{{ route('patients') }}"
-                class="btn btn-primary text-center" style="width: 100%; height: 100%;">Existing Client</a>
-        </div>
-        <div class="col-md-6 col-xl-4 card-body text-center" style="height: 15ch;">
-
-            <a href="{{ route('session.rescheduleOrCancelationForm', $number) }}" style="width: 100%; height: 100%;" class="btn btn-primary text-center">Reschedule/Cancelation</a>
-
-        </div>
+                class="btn btn-primary text-center" style="width: 100%; height: 100%;">
+                <p style="margin-top: 1rem">Existing Client</p>
+            </a>
+            </div>
+            <div class="col-md-6 col-xl-4 card-body text-center" style="height: 15ch;">
+                <a href="{{ route('session.rescheduleOrCancelationForm', $number) }}" style="width: 100%; height: 100%;" class="btn btn-primary text-center">
+                    <p style="margin-top: 1rem">Reschedule/Cancelation</p>
+                </a>
+            </div>
     </div>
     <div class="row">
 
         <div class="col-md-6 col-xl-4 card-body text-center" style="height: 15ch;">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Cilent_call_Modal" style="width: 100%; height: 100%;">Silent Call</button>
         </div>
-        <div class="col-md-6 col-xl-4 card-body text-center" style="height: 15ch;" style="width: 100%; height: 100%;" >
+        <div class="col-md-6 col-xl-4 card-body" style="height: 15ch;" style="width: 100%; height: 100%;" >
             <a href="#"
-            class="btn btn-primary text-center" style="width: 100%; height: 100%;">Reassign Request</a>
+            class="btn btn-primary text-center" style="width: 100%; height: 100%;"><p style="margin-top: 1rem">Reassign Request</p></a>
         </div>
         <div class="col-md-6 col-xl-4 card-body" style="height: 15ch;">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TerminationModal_pop" style="width: 100%; height: 100%;">Service Termination</button>

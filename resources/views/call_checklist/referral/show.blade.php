@@ -17,7 +17,7 @@
                     <td>{{ $referral[0]->phone_number }}</td>
                 </tr>
                 <tr>
-                    <th class="d-none d-md-table-cell">referr_to</th>
+                    <th class="d-none d-md-table-cell">Referr To</th>
                     <td>{{ $referral[0]->referr_to }}</td>
                 </tr>
                 <tr>
@@ -80,10 +80,10 @@
                                 <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->Referral_types }}" id="exampleFormControlInput7" >
                             </div>
 
-                            <div class="form-group col-6">
+                            {{-- <div class="form-group col-6">
                                 <label for="exampleFormControlInput7">Diagnosis</label>
                                 <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->diagnosis }}" id="exampleFormControlInput7" >
-                            </div>
+                            </div> --}}
 
                             <div class="form-group col-6">
                                 <label for="exampleFormControlInput7">Reason</label>

@@ -108,7 +108,7 @@
                 value="{{ old('user') }}" placeholder="User Name" autocomplete="user" autofocus>
 
             @error('user')
-            <div class="">
+            <div class="center">
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>
@@ -118,7 +118,7 @@
                  autocomplete="current-password">
 
             @error('password')
-            <div>
+            <div class="center">
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
                 </span>

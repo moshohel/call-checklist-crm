@@ -268,10 +268,12 @@ class PatientController extends Controller
         $patient = DB::select("SELECT * FROM `patients` WHERE unique_id = '$unique_id'");
         // $previous_data = DB::select("SELECT * FROM shojon_tier_ones WHERE unique_id = '$unique_id'");
         $previous_data = ShojonTierOne::where('caller_id', '=', $unique_id)->get();
+        $tierTwo = DB::select("SELECT * FROM `sojon_tier2s` WHERE caller_id = '$unique_id'");
+        $tierThree = DB::select("SELECT * FROM `shojon_tire_threes` WHERE caller_id = '$unique_id'");
 
         // $queries = DB::select("SELECT * FROM queries WHERE phone = $phone");
         // dd($previous_data);
-        return view('call_checklist.patient.showInfo', compact('pageTitle', 'previous_data', 'patient'));
+        return view('call_checklist.patient.showInfo', compact('pageTitle', 'previous_data', 'patient', 'tierTwo', 'tierThree'));
     }
 
     /**
