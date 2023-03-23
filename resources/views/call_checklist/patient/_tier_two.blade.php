@@ -1,6 +1,11 @@
 <div id="accordion" class="accordion">
     @php($i = 1)
     @foreach ($tierTwo as $query)
+    <?php
+     $dia=json_decode($query->diagnosis,true);
+     $con=json_decode($query->concern_history,true);
+     $diff=json_decode($query->differential_diagnosis,true);
+    ?>
         <div class="card">
             <div class="card-header collapsible-title" id="headingTwo"
                 style="background-color: #f2f2f2;">
@@ -98,10 +103,17 @@
                                         <td>Self harm history</td>
                                         <td>{{ $query->self_harm_history }}</td>
                                     </tr>
-                                    
                                     <tr>
                                         <td>Diagnosis</td>
-                                        <td>{{ $query->diagnosis }}</td>
+                                        <td>
+                                            <ul>
+                                                @foreach ($dia  as $keys=>$value)
+                                                <li>
+                                                    {{ $value }}
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </td
                                     </tr>
                                     <tr>
                                         <td>Psychiatric medication</td>
@@ -112,14 +124,31 @@
                                         <td>Name of medicine</td>
                                         <td>{{ $query->name_of_medicine }}</td>
                                     </tr>
+                                    
                                     <tr>
                                         <td>Concern history</td>
-                                        <td>{{ $query->concern_history }}</td>
+                                        <td>
+                                            <ul>
+                                                @foreach ($con  as $keys=>$value)
+                                                <li>
+                                                    {{ $value }}
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </td
                                     </tr>
-
+                                    
                                     <tr>
                                         <td>Differential diagnosis</td>
-                                        <td>{{ $query->differential_diagnosis }}</td>
+                                        <td>
+                                            <ul>
+                                                @foreach ($diff  as $keys=>$value)
+                                                <li>
+                                                    {{ $value }}
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </td
                                     </tr>
                                     <tr>
                                         <td>Tool name</td>

@@ -8,7 +8,7 @@
             @csrf
             <div class="row">
                 <div class="form-group col-6">
-                    <label for="exampleFormControlInput1">Name</label>
+                    <label for="exampleFormControlInput1"><b>Name: <span class="required">*</span></b></label>
                     <input type="text" name="name" class="form-control" id="exampleFormControlInput1"
                         placeholder="patient name" required>
                     <input type="hidden" name="uniqueId" value="{{ $getuniqueId->unique_id }}">
@@ -74,7 +74,7 @@
 
                 <div class="form-group col-6">
                     <label class="control-label" for="socio_economic_status"><b>Socio-economic
-                            Status:</b></label>
+                            Status: <span class="required">*</span></b></label>
                     @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower
                     Class', 'Lower Class']; @endphp
                     <select name="socio_economic_status" list="socio_economic_status_list" required id="socio_economic_status"
@@ -95,8 +95,8 @@
             </div>
 
             <div class="form-footer pt-4 mt-4">
-                <button type="submit" class="btn btn-primary btn-default">Add Client</button>
-                <button type="submit" class="btn btn-secondary btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-default">Proceed</button>
+                {{-- <button type="submit" class="btn btn-secondary btn-default">Cancel</button> --}}
             </div>
         </form>
     </div>
