@@ -15,12 +15,13 @@ class shojonTierThree extends Controller
     public function tireThreefromblade($uniqueid, $session_id)
     {
         // dd($session_id);
-
+        $uniqueid = $uniqueid;
         $pageTitle = $this->pageTitle;
         $session_id = $session_id;
         $last = null;
         $districts = DB::table('districts')->get();
-        return view('call_checklist.shojon.tierThree.create', compact('pageTitle', 'last', 'districts', 'session_id'));
+        $newPatient = DB::table('patients')->where('unique_id', $uniqueid)->first();
+        return view('call_checklist.shojon.tierThree.create', compact('pageTitle', 'last', 'districts', 'session_id', 'uniqueid', 'newPatient'));
     }
     public function tireThreepatientlist()
     {
