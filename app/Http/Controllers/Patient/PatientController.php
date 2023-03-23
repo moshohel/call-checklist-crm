@@ -17,6 +17,7 @@ use App\Models\CallChecklistForShojon;
 use App\Models\Unique;
 use App\Models\ShojonTierOne;
 use App\Models\Cilent_call;
+use App\Models\Reassign_request;
 
 class PatientController extends Controller
 {
@@ -170,6 +171,14 @@ class PatientController extends Controller
         $data = new Cilent_call;
         $data->number = $request->Number;
         $data->date = date('Y-m-d H:i:s');
+        $data->save();
+    }
+    public function createReassignRequest(Request $request){
+        $data = new Reassign_request;
+        $data->date = date('Y-m-d H:i:s');
+        $data->unique_id = $request->unique_id;
+        $data->phone_number = $request->phone_number;
+        $data->reason_for_reassing = $request->reason_for_reassing;
         $data->save();
     }
     public function allcilent_calls_number(Request $request){

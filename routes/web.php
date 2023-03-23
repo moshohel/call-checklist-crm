@@ -6,6 +6,7 @@ use App\Http\Controllers\CallChecklist\shojonTierThree;
 use App\Http\Controllers\CallChecklist\TierOneController;
 use App\Http\Controllers\CallChecklist\EvaluationController;
 use App\Http\Controllers\Patient\PatientController;
+use App\Http\Controllers\Patient\ReassignController;
 use Illuminate\Support\Facades\Auth;
 
 
@@ -62,6 +63,7 @@ Route::group(['prefix' => 'patient'], function () {
     Route::get('/cilent_call', [PatientController::class, 'cilent_calls'])->name('patient.cilent_call')->middleware('auth');
     Route::get('/cilent_call_Number', [PatientController::class, 'allcilent_calls_number'])->middleware('auth');
     Route::get('/create/{number}', [PatientController::class, 'create'])->name('patient.create')->middleware('auth');
+    Route::get('/reassign', [PatientController::class, 'createReassignRequest'])->name('patient.reassign')->middleware('auth');
 
     Route::get('/', 'Patient\PatientController@index')->name('patients')->middleware('auth');
     Route::get('/show/{unique_id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');
@@ -74,6 +76,10 @@ Route::group(['prefix' => 'patient'], function () {
     Route::post('/create', 'Patient\PatientController@store')->name('patient.store');
     Route::post('/edit/{id}', 'Patient\PatientController@update')->name('patient.update');
     Route::get('/delete/{id}', 'Patient\PatientController@delete')->name('patient.delete');
+});
+//reassign 
+Route::group(['prefix' => 'reassign'], function () {
+    Route::get('/list', [ReassignController::class, 'reassign_requests'])->name('reassign.requests')->middleware('auth');
 });
 
 // Referral Routes
