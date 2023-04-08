@@ -187,8 +187,7 @@
               <label class="control-label" for="distress_rating"><b>3.Distress Rating (pre-stage)</b></label> 
               @php $types = ['0','1', '2', '3', '4', '5', '6', '7','8','9','10']; @endphp
               <div class="form-control">
-                    <label><b style="color: black;">[0 means
-                    lowest wellbeing, 10 means Highest wellbeing]</b></label><br>
+                    <label><b style="color: black;">0-10 (0 Means no distress & 10 means highest distress)</b></label><br>
                     @foreach($types as $item)
                     @if((old('occupation') == $item))
                     <input type="radio" name="Distress" value="{{ $item }}" checked="checked"/>

@@ -7,6 +7,9 @@
         <h2>Call From - {{ $number }}</h2>
     </div>
     <div class="card-body">
+        <div>
+            @include('call_checklist.partials.messages')
+        </div>
         <div class="row">
 
             <div class="col-md-6 col-xl-4 card-body text-center" style="height: 15ch;">
@@ -167,8 +170,8 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="reason_for_reassing" class="form-label"><b>Reason for Reassing</b></label>
-            <textarea class="form-control" name="reason_for_reassing" id="reason_for_reassing" rows="3"></textarea>
+            <label for="reason_for_reassing" class="form-label"><b>Reason for Reassing</b> <span style="color: red;">*</span></label>
+            <textarea class="form-control" name="reason_for_reassing" required id="reason_for_reassing" rows="3"></textarea>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -424,7 +427,7 @@
             error:function(error)
             {
                 console.log(error)
-                alert("Request not save");
+                alert("Request not save  ! Invalid Client");
             }
         });
         });

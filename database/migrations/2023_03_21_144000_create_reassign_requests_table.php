@@ -15,6 +15,7 @@ class CreateReassignRequestsTable extends Migration
     {
         Schema::create('reassign_requests', function (Blueprint $table) {
             $table->id();
+            $table->string('session_id')->nullable();
             $table->string('date')->nullable();
             $table->string('unique_id')->nullable();
             $table->string('phone_number')->nullable();

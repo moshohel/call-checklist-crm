@@ -10,7 +10,7 @@
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput1">Name</label>
                     <input type="text" name="name" required class="form-control" id="exampleFormControlInput1"
-                        placeholder="patient name">
+                        placeholder="Client Name">
                     <input type="hidden" name="uniqueId" value="{{ $getuniqueId->unique_id }}">
                 </div>
 

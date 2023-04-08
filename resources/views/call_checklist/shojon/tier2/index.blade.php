@@ -51,7 +51,7 @@
                         <hr>
                     </div>
 
-                    <table class="table table-hover table-bordered table-responsive" id="sampleTable">
+                    <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                         <tr>
                             <th>#</th>

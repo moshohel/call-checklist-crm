@@ -18,6 +18,7 @@ use App\Models\Unique;
 use App\Models\ShojonTierOne;
 use App\Models\Cilent_call;
 use App\Models\Reassign_request;
+use App\Models\Session;
 
 class PatientController extends Controller
 {
@@ -174,12 +175,19 @@ class PatientController extends Controller
         $data->save();
     }
     public function createReassignRequest(Request $request){
-        $data = new Reassign_request;
-        $data->date = date('Y-m-d H:i:s');
-        $data->unique_id = $request->unique_id;
-        $data->phone_number = $request->phone_number;
-        $data->reason_for_reassing = $request->reason_for_reassing;
-        $data->save();
+        $s_id = Session::where('unique_id',$request->unique_id)->where('session_taken','No')->first();
+        if ($s_id) {
+            $data = new Reassign_request;
+            $data->session_id = $s_id->id;
+            $data->date = date('Y-m-d H:i:s');
+            $data->unique_id = $request->unique_id;
+            $data->phone_number = $request->phone_number;
+            $data->reason_for_reassing = $request->reason_for_reassing;
+            $data->save();
+        } else {
+            session()->flash('error', 'Invalid Client');
+            return redirect()->route('popup');
+        }
     }
     public function allcilent_calls_number(Request $request){
 
