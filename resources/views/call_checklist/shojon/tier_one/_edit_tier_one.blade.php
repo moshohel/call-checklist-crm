@@ -352,10 +352,29 @@
 
         <!-- six line -->
 
-        <div class="row g-2">
-          <div class="col-md-6">
+        <div class="row g-3">
+          <div class="col-md-3">
+            <div class="form-group">
+              <label class="control-label" for="distress_rating"><b>10.Distress Rating (Post-stage)</b></label> 
+              @php $types = ['0','1', '2', '3', '4', '5', '6', '7','8','9','10']; @endphp
+              <div class="form-control">
+                <label><b style="color: black;">0-10 (0 Means no distress & 10 means highest distress)</b></label><br>
+                @foreach($types as $item)
+                  @if($data->distress_post == $item)
+                  <input type="radio" name="Distress_post" value="{{ $item }}" checked="checked"/>
+                  @else
+                  <input type="radio" name="Distress_post" value="{{ $item }}"
+                  />
+                  @endif
+                  {{ $item }}
+                  <br>
+                  @endforeach
+              </div> 
+            </div>
+          </div>
+          <div class="col-md-4">
            <div class="form-group">
-            <label class="control-label" for="Internal_Referral"><b>10.Internal Referral:</b></label> 
+            <label class="control-label" for="Internal_Referral"><b>11.Internal Referral:</b></label> 
             @php $types = ['No', 'KPR']; @endphp
             <div class="form-control">
                 @foreach($types as $item)
@@ -392,9 +411,9 @@
         </div> 
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-5">
       <div class="form-group">
-        <label class="control-label" for="distress_rating"><b>11.External Referral </b></label> 
+        <label class="control-label" for="distress_rating"><b>12.External Referral </b></label> 
         @php $types = ['NIMH (contact No)', 'BSMMU- IPNA (contact No)','No']; @endphp
         <div class="form-control">
           <label class="control-label"for="distress_rating"><b>Reason for referral</b></label><br>
@@ -432,7 +451,7 @@
   <div class="row g-1">
   <div class="col-md-12">
      <div class="form-group">
-        <label class="control-label"for="distress_rating"><b>12.Call Description</b></label>
+        <label class="control-label"for="distress_rating"><b>13.Call Description</b></label>
         <textarea rows="4" cols="50" class="form-control" name="call_description">
           {{$data->call_description}}</textarea>
      </div>

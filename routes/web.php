@@ -98,7 +98,7 @@ Route::group(['prefix' => 'referral'], function () {
     Route::post('/create', 'Referral\ReferralController@store')->name('referral.store');
     Route::post('/edit/{id}', 'Referral\ReferralController@update')->name('referral.update');
     Route::post('/referConsultant/{id}', 'Referral\ReferralController@referConsultant')->name('referral.referConsultant');
-    Route::get('/delete/{id}', 'Referral\ReferralController@delete')->name('referral.delete');
+    Route::get('/delete/{id}', 'Referral\ReferralController@delete')->name('referral.delete'); 
 });
 
 // Session Routes

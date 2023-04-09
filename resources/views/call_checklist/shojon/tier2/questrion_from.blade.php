@@ -182,13 +182,12 @@
                 if (length == 5) {          
                   total = a+b+c+d+g+f;
                   data = total*4;
-                  
                   document.getElementById("ghq").value = data;
 
                   $('#editModal').modal('hide');
-        //alert(data);
-                }
-                
+                }else{
+                  alert("Warning! Please fill all the questions to generate the score.");
+                }         
               });
  });
 

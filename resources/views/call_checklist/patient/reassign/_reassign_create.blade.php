@@ -105,7 +105,9 @@
 			<form action="{{ route('reassign.store') }}" method="POST">
 				@csrf
 				<div class="modal-body">
+					<input type="hidden" name="unique_id" value="{{ $requesrt->unique_id }}">
 					<input type="hidden" name="session_id" value="{{ $requesrt->session_id }}">
+					
 					<input type="hidden" name="reassign_list_id" value="{{ $requesrt->id }}">
 					<div class="form-group col-12">
 						<label for="exampleFormControlSelect3">Consultent</label>

@@ -23,7 +23,7 @@ class Tier2Controller extends Controller
     {
         $uniqueid = $uniqueid;
         $pageTitle = $this->pageTitle;
-        $districts = DB::table('districts')->get();
+        $districts = DB::table('districts')->orderBy('name', 'ASC')->get();
         $newPatient = DB::table('patients')->where('unique_id', $uniqueid)->first();
         return view('call_checklist.shojon.tier_one.create', compact('pageTitle', 'districts', 'uniqueid', 'newPatient'));
     }
@@ -38,7 +38,7 @@ class Tier2Controller extends Controller
         try {
             $uniqueid = $uniqueid;
             $pageTitle = $this->pageTitle;
-            $districts = DB::table('districts')->get();
+            $districts = DB::table('districts')->orderBy('name', 'ASC')->get();
             $newPatient = DB::table('patients')->where('unique_id', $uniqueid)->first();
             // print_r($uniqueid);
             // dd($newPatient);
@@ -199,7 +199,7 @@ class Tier2Controller extends Controller
             }
             $previous = DB::table('sojon_tier2s')->where('id', $id)->get();
 
-            $districts = DB::table('districts')->get();
+            $districts = DB::table('districts')->orderBy('name', 'ASC')->get();
             return view('call_checklist.shojon.tier2.editTierTwo', compact('pageTitleUpdate', 'districts', 'phone', 'is_phone_no', 'previous_data', 'last', 'data', 'previous'));
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();

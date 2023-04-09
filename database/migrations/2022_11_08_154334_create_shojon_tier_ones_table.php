@@ -35,6 +35,7 @@ class CreateShojonTierOnesTable extends Migration
             $table->string('call_Type')->nullable();
             $table->string('caller')->nullable();
             $table->string('distress')->nullable();
+            $table->string('distress_post')->nullable();
             $table->string('primary_reason')->nullable();
             $table->text('secondary_reason')->nullable();
             $table->text('mental_illness_diagnosis')->nullable();

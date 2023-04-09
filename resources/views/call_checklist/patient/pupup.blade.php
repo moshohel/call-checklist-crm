@@ -91,7 +91,7 @@
             <div class="tile-body">
                 <div>
                     <div class="card-header card-header-border-bottom text-center showtableId">
-                      <h2>All Cilent Call</h2>
+                      <h2>Silent Call History</h2>
                   </div>
                   <hr>
               </div>

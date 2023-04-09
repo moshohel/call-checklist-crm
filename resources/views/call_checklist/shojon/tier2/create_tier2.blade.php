@@ -318,7 +318,7 @@
 
 <div class="form-group">
     <label class="control-label" for="self_harm_history"><b>12. Does the client have any self-harm history?</b></label>
-    @php $types = ['Yes', 'No', 'Don’t Know','Don’t want shere']; @endphp
+    @php $types = ['Yes', 'No']; @endphp
     <select name="self_harm_history" required id="self_harm_history" list="suicidal_risk_list"
     class="form-control @error('self_harm_history') is-invalid @enderror">
     <datalist id="suicidal_risk_list">

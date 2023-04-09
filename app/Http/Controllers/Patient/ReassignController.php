@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Session;
 use App\Models\Reassign_request;
+use App\Models\Referral;
 use DB;
 
 class ReassignController extends Controller
@@ -34,13 +35,15 @@ class ReassignController extends Controller
         $this->reassign($request->reassign_list_id);
 
         $consultant = DB::select("SELECT full_name, user_id, user as user_name FROM vicidial_users WHERE user_id = $request->referred_therapist_or_psychiatrist_user_id");
-        $session = Session::where('id',$request->session_id)->first();
 
-        $duplicatePost = $session->replicate();
-        $duplicatePost->therapist_or_psychiatrist = $consultant[0]->full_name;
-        $duplicatePost->therapist_or_psychiatrist_user_name = $consultant[0]->user_name;
-        $duplicatePost->therapist_or_psychiatrist_user_id = $request->referred_therapist_or_psychiatrist_user_id;
-        $duplicatePost->session_taken ="NO";
+        $referral = Referral::where('unique_id',$request->unique_id)->latest()->first();
+
+        $duplicatePost = $referral->replicate();
+        $duplicatePost->appointment_status = 0;
+        $duplicatePost->referred_therapist_or_psychiatrist = $consultant[0]->full_name;
+        $duplicatePost->referred_therapist_or_psychiatrist_user_name = $consultant[0]->user_name;
+        $duplicatePost->referred_therapist_or_psychiatrist_user_id = $request->referred_therapist_or_psychiatrist_user_id;
+
         $duplicatePost->save();
         session()->flash('success', 'Reassign Requests Successfully');
         return redirect()->route('reassign.requests');
