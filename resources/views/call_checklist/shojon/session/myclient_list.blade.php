@@ -12,6 +12,7 @@
                     <th class="d-none d-md-table-cell">Age</th>
                     <!-- <th class="d-none d-md-table-cell">Occupation</th> -->
                     <th class="d-none d-md-table-cell">Economic status</th>
+                    <th >History</th>
                     <th >Options</th>
                 </tr>
                 </thead>
@@ -24,7 +25,10 @@
                         <td class="d-none d-md-table-cell text-dark">{{ $patient->sex }}</td>
                         <td class="d-none d-md-table-cell text-dark">{{ $patient->age }}</td>
                         <!-- <td class="d-none d-md-table-cell text-dark">fghfds</td> -->
-                        <td class="d-none d-md-table-cell text-dark">sdfgf</td>
+                        <td class="d-none d-md-table-cell text-dark">{{ $patient->socio_economic_status }}</td>
+                        <td>
+                            <a href="{{ route('patient.showInfo', [$patient->unique_id]) }}" class="btn btn-info btn-default">History</a>
+                        </td>
                         <td>
                             <a href="{{ route('patient.show', [ $patient->unique_id]) }}" class="btn btn-info btn-default">Info</a>
                         </td>

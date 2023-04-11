@@ -53,7 +53,7 @@
 
       <div class="card-body pt-0 pb-5">
         {{-- @include('partials.messages') --}}
-        <table class="table card-table table-responsive table-responsive-large" style="width:100%" id="sampleTable">
+        <table class="table card-table" style="width:100%" id="sampleTable">
           <thead>
             <tr>
               <th>Name</th>
@@ -61,9 +61,8 @@
               <th>Gender</th>
               <th>Age</th>
               <th class="d-none d-md-table-cell">Address</th>
-              
               <th>Client Id</th>
-
+              <th>Create Date & Time</th>
               <th>Options</th>
             </tr>
           </thead>

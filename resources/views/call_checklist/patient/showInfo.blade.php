@@ -13,8 +13,7 @@
             <div class="profile-content-left pt-5 pb-3 px-3 px-xl-5">
                 <div class="contact-info pt-4">
                     <h3 class="text-dark mb-1">Patient Information</h3>
-                    {{-- <p class="text-dark font-weight-medium pt-4 mb-2">Case ID</p>
-                    <p>{{ $patient[0]->id }}</p> --}}
+                    
                     <p class="text-dark font-weight-medium pt-4 mb-2"> Name</p>
                     <p>{{ $patient[0]->name }}</p>
                     <p class="text-dark font-weight-medium pt-4 mb-2">Phone</p>

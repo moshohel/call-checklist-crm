@@ -40,8 +40,8 @@
                     <td>{{ $patient->age }}</td>
                     @endif
                 </tr>
-                <tr>
-                    <th class="d-none d-md-table-cell">occupotion</th>
+                {{-- <tr>
+                    <th class="d-none d-md-table-cell">Occupotion</th>
                     @if(isset($patient->occupotion)) 
                     <td>{{ $patient->occupotion }}</td>
                     @endif
@@ -51,7 +51,7 @@
                     @if(isset($patient->department)) 
                     <td>{{ $patient->department }}</td>
                     @endif
-                </tr>
+                </tr> --}}
                 {{-- <tr>
                     <th class="d-none d-md-table-cell">Consultant</th>
                     <td>{{ $consultant->name }}</td>

@@ -9,7 +9,8 @@ use App\Models\Unique;
 use App\Models\Referral;
 use App\Models\Termination;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Carbon; 
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class TierOneController extends Controller
 {
@@ -116,6 +117,7 @@ class TierOneController extends Controller
         $data['name_of_agency'] = $request->name_of_agency;
         $data['call_description'] = $request->call_description;
         $data['message'] = $request->message;
+        $data['created_at'] = Carbon::now();
 
         DB::table('shojon_tier_ones')->insert($data);
 
@@ -148,7 +150,14 @@ class TierOneController extends Controller
     public function tireOneList()
     {
         $pageTitle = $this->pageTitle;
-        $data = DB::table('shojon_tier_ones')->get();
+        $userGroup = Auth::user()->user_group;
+        $userId = Auth::user()->user_id;
+        if ($userGroup == "ADMIN") {
+            $data = DB::table('shojon_tier_ones')->get();
+        } else {
+            $data = DB::table('shojon_tier_ones')->where('service_providers_di', '=', $userId)->get();
+        }
+
         return view('call_checklist.shojon.tier_one.index', compact('pageTitle', 'data'));
     }
 
@@ -225,7 +234,7 @@ class TierOneController extends Controller
             if ($data) {
                 foreach ($data as $key => $row) {
                     $output .=
-                    '<tr>
+                        '<tr>
                     <td>' . $key . '</td>
                     <td>' . $row->referr_from . '</td>
                     <td>' . $row->referr_to . '</td>

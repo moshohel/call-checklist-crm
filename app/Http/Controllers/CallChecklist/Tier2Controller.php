@@ -58,7 +58,7 @@ class Tier2Controller extends Controller
     }
     public function store(Request $request)
     {
-
+        // dd($request);
         if ($request->message) {
             $this->sendSms($request->message, $request->phone_number);
         }
@@ -326,7 +326,7 @@ class Tier2Controller extends Controller
                 return response()->json($output);
             }
         }
-    } 
+    }
     public function termination_table(Request $request)
     {
         $uniqueid = $request->caller_id;
@@ -475,6 +475,7 @@ class Tier2Controller extends Controller
     }
     public function ReferralSave_form(Request $request)
     {
+        // dd($request);
         $data = new Referral;
         $data->referr_to = $request->referral_to;
         $data->referr_from = $request->referral_from;

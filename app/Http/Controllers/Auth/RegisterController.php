@@ -93,7 +93,11 @@ class RegisterController extends Controller
         if (array_key_exists("image", $data)) {
             $user->image = date('YmdHi') . $data['image']->getClientOriginalName();
         }
-        $user->user_level = 8;
+        if ($user->user_group == "MHW") {
+            $user->user_level = 1;
+        } else {
+            $user->user_level = 8;
+        }
         $user->created_at = Carbon::now();
 
         return $user->save();

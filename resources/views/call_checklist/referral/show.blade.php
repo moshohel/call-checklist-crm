@@ -61,7 +61,7 @@
                             {{ csrf_field() }}
 
                             <div class="form-group col-6">
-                                <label for="exampleFormControlInput7">Prefer Consultant</label>
+                                <label for="exampleFormControlInput7">Preferred Consultant</label>
                                 <input type="text" class="form-control" name="preferred_therapist_or_psychiatrist" readonly  value="{{ $referral[0]->preferred_therapist_or_psychiatrist }}" id="exampleFormControlInput7" >
                             </div>
 

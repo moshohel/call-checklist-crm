@@ -14,8 +14,8 @@
             <table class="table card-table" style="width:100%" id="sampleTable">
               <thead>
                 <tr>
-                  <th>Reffer To</th>
-                  <th>Reffer Form</th>
+                  <th>Refer To</th>
+                  <th>Refer Form</th>
                   <th>Name</th>
                   <th class="d-none d-md-table-cell">Client ID</th>
                   <th class="d-none d-md-table-cell">Reason for referral</th>

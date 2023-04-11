@@ -25,39 +25,28 @@
                         <hr>
                     </div>
 
-                    <table class="table table-hover table-bordered table-responsive" id="sampleTable">
+                    <table class="table table-hover table-bordered" id="sampleTable">
                         <thead>
                         <tr>
                             <th>#</th>
-                            <th>Date</th>
                             <th>Time</th>
+                            <th>Client ID</th>
                             <th>Phone No</th>
-                            <th>Caller ID</th>
-                            <th>Caller Name</th>
-                            <th> Sex </th>
-                            <th> Age </th>
-                            <th class="text-center"> Location </th>
-                            <th class="text-center"> Call Type </th>
-                            <th class="text-center">Action</th>
-                             
+                            <th>Reasion</th>
+                            <th>Status</th>
+                            <th class="text-center">Action</th> 
                         </tr>
                         </thead>
                         <tbody>
-                             @foreach($data as $key=>$row)
+                            @foreach($datas as $key=>$row)
                             <tr>
-                                <td>{{$key}}</td>
-                                <td>{{$row->date}}</td>
-                                <td>{{$row->time}}</td>
-                                <td>{{$row->phone_number}}</td>
-                                <td>{{$row->caller_id}}</td>
-                                <td>{{$row->caller_name}}</td>
-                                <td>{{$row->sex}}</td>
-                                <td>{{$row->age}}</td>
-                                <td>{{$row->location}}</td>
-                                <td>{{$row->call_Type}}</td>
-                                <td><a href="{{ route('call_checklist.shojon.TierOneview',$row->id) }}"><i class="fa-solid fa-eye"></i></a>
-                                 <a href="{{ route('call_checklist.shojon.TierOneedit',$row->caller_id) }}"><i class="fa-sharp fa-solid fa-pen-to-square"></i></a>
-                                </td>
+                                <td style="text-align:center;">{{ $key+1 }}</td>
+                                <td style="text-align:center;">{{ $row->date }}</td>
+                                <td style="text-align:center;">{{ $row->unique_id }}</td>
+                                <td style="text-align:center;">{{ $row->phone_number }}</td>
+                                <td style="text-align:center;">{{ $row->reason_for_reassing }}</td>
+                                <td style="text-align:center;">{{ $row->status }}</td>
+                                <td style="text-align:center;"><a href="#"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i></a></td>
                             </tr>
                             @endforeach
                         </tbody>

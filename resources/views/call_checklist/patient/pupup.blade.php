@@ -31,9 +31,8 @@
         <div class="col-md-6 col-xl-4 card-body text-center" style="height: 15ch;">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Cilent_call_Modal" style="width: 100%; height: 100%;">Silent Call</button>
         </div>
-        <div class="col-md-6 col-xl-4 card-body" style="height: 15ch;" style="width: 100%; height: 100%;" >
-            <a href="#"
-            class="btn btn-primary text-center" style="width: 100%; height: 100%;"><p style="margin-top: 1rem">Reassign Request</p></a>
+        <div class="col-md-6 col-xl-4 card-body text-center" style="height: 15ch;" style="width: 100%; height: 100%;" >
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Reassign_reaquest_Modal" style="width: 100%; height: 100%;">Reassign Request</button>
         </div>
         <div class="col-md-6 col-xl-4 card-body" style="height: 15ch;">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#TerminationModal_pop" style="width: 100%; height: 100%;">Service Termination</button>
@@ -93,7 +92,7 @@
             <div class="tile-body">
                 <div>
                     <div class="card-header card-header-border-bottom text-center showtableId">
-                      <h2>All Cilent Call</h2>
+                      <h2>Silent Call History</h2>
                   </div>
                   <hr>
               </div>
@@ -118,11 +117,14 @@
 
     </ul>
 </div>
+
+<!-- silent call modal -->
+
 <div class="modal fade" id="Cilent_call_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Cilent Call</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Silent Call</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
       </button>
@@ -143,6 +145,47 @@
 </div>
 </div>
 </div>
+
+<!-- Reassign request modal  -->
+
+<div class="modal fade" id="Reassign_reaquest_Modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Reassign Request</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+  </div>
+  <div class="modal-body">
+    <form id="_reassign_request_form">
+        @csrf
+        <div class="form-row">
+            <div class="col">
+                <label for="unique_id" class="form-label"><b>Client ID</b> <span style="color: red;">*</span></label>  
+                <input type="text" class="form-control" maxlength="9" minlength="9" required name="unique_id" placeholder="SHOXXXXXX">
+            </div>
+            <div class="col">
+                <label for="phone_number" class="form-label"><b>Phone Number</b> <span style="color: red;">*</span></label>  
+                <input type="number" class="form-control" id="phone_number" name="phone_number" required placeholder="01XXXXXXXXX">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="reason_for_reassing" class="form-label"><b>Reason for Reassing</b></label>
+            <textarea class="form-control" name="reason_for_reassing" id="reason_for_reassing" rows="3"></textarea>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Send Request</button>
+        </div>
+    </form>
+</div>
+</div>
+</div>
+</div>
+
+<!-- termination modal -->
+
 <div class="modal fade" id="TerminationModal_pop" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -368,6 +411,28 @@
         });
         });
     });
+</script>
+<script>
+    $(document).ready(function(){
+        $('#_reassign_request_form').on('submit',function(e){
+            e.preventDefault();
+            $.ajax({
+              type:"get",
+              url: '{{ route('patient.reassign') }}',
+              data:$('#_reassign_request_form').serialize(),
+              success:function(response){
+                console.log(response)
+                $('#Reassign_reaquest_Modal').modal('hide')
+                alert("Request save successfully");
+            },
+            error:function(error)
+            {
+                console.log(error)
+                alert("Request not save");
+            }
+        });
+        });
+    });
 </script> 
 <script>
     $(document).ready(function(){
@@ -436,10 +501,10 @@
 </script>
 @endsection
 @push('scripts')
-    <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('backend/js/plugins/dataTables.bootstrap.min.js') }}"></script>
-    <script type="text/javascript">$('#liveSearch_table').DataTable();</script>
-    <script type="text/javascript">$('#cilentCallTable').DataTable();</script>
+<script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('backend/js/plugins/dataTables.bootstrap.min.js') }}"></script>
+<script type="text/javascript">$('#liveSearch_table').DataTable();</script>
+<script type="text/javascript">$('#cilentCallTable').DataTable();</script>
 @endpush
 
 

@@ -18,6 +18,7 @@ use App\Models\Unique;
 use App\Models\ShojonTierOne;
 use App\Models\Cilent_call;
 use App\User;
+use App\Models\Reassign_request;
 
 class PatientController extends Controller
 {
@@ -46,10 +47,10 @@ class PatientController extends Controller
 
         $str = '';
         if ($unique_id != '') {
-            $str .= " and patients.unique_id like '$unique_id%' ";
+            $str .= " and patients.unique_id like '%$unique_id%' ";
         }
         if ($phone_number != '') {
-            $str .= " and patients.phone_number like '$phone_number%' ";
+            $str .= " and patients.phone_number like '%$phone_number%' ";
         }
         if ($from_date != '') {
             $str .= " and DATE(patients.created_at) >= '$from_date' ";
@@ -95,7 +96,7 @@ class PatientController extends Controller
             $showInfo = "<a href='patient/showInfo/$unique_id' class='btn btn-info m-1'>History</a>";
             $output[] = array(
                 $item->name, $item->phone_number, $item->sex, $item->age, $item->location,
-                $item->unique_id, "$showInfo&nbsp;&nbsp;$view_button&nbsp;&nbsp;"
+                $item->unique_id, $item->created_at, "$showInfo&nbsp;&nbsp;$view_button&nbsp;&nbsp;"
             );
         }
 
@@ -115,11 +116,11 @@ class PatientController extends Controller
      */
     public function searchExisting(Request $request)
     {
-
+        $date = \Carbon\Carbon::today()->subDays(7);
         if ($request->ajax()) {
             $output = '';
 
-            $data = ShojonTierOne::where('caller_id', 'like', $request->Search . '%')->orWhere('phone_number', 'like', $request->Search . '%')->orWhere('caller_name', 'like', $request->Search . '%')->get();
+            $data = ShojonTierOne::where('caller_id', 'like', $request->Search . '%')->orWhere('phone_number', 'like', $request->Search . '%')->orWhere('caller_name', 'like', $request->Search . '%')->where('created_at', '>=', $date)->get();
             if ($data) {
                 foreach ($data as $key => $row) {
                     $output .=
@@ -175,12 +176,21 @@ class PatientController extends Controller
         $data->date = date('Y-m-d H:i:s');
         $data->save();
     }
+    public function createReassignRequest(Request $request)
+    {
+        $data = new Reassign_request;
+        $data->date = date('Y-m-d H:i:s');
+        $data->unique_id = $request->unique_id;
+        $data->phone_number = $request->phone_number;
+        $data->reason_for_reassing = $request->reason_for_reassing;
+        $data->save();
+    }
     public function allcilent_calls_number(Request $request)
     {
-
+        $date = \Carbon\Carbon::today()->subDays(7);
         if ($request->ajax()) {
             $output = '';
-            $data = DB::table('cilent_calls')->orderBy('id', 'DESC')->get();
+            $data = DB::table('cilent_calls')->where('created_at', '>=', $date)->orderBy('id', 'DESC')->get();
             if ($data) {
                 foreach ($data as $key => $row) {
                     $output .=
