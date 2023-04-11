@@ -18,7 +18,7 @@ class CreateSessionsTable extends Migration
             $table->string('referr_to')->nullable();
             $table->string('referr_from')->nullable();
             $table->string('name')->nullable();
-            $table->string('unique_id')->nullable();
+            $table->string('unique_id')->nullable(); 
             $table->string('age')->nullable();
             $table->string('phone_number')->nullable();
             $table->string('phone_number_two')->nullable();

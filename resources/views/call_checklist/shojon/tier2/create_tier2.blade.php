@@ -435,7 +435,6 @@
     @php $types = ['Depression scale','Anxiety','Social Interaction Anxiety scale ','Obsessive- compulsive disorder ','Beck hopelessness scale','Cognitive distortion scale','Depression, Anxiety, stress scale','Somatic complaint scale','Event'];@endphp       
     <div class="form-control @error('PsychometricToolscore') is-invalid @enderror">
         <label class="control-label">Tool Name:</label><br>
-        <label class="control-label"style="width: 90%;">
             <div class="form-control @error('PsychometricTool') is-invalid @enderror">
                 @foreach($types as $item)
                 @if( old('hearing_source') == $item)
@@ -449,12 +448,8 @@
                 <br>
                 @endforeach
             </div>
-        </label><br>
         <label class="control-label">Score:</label><br>
-        <label class="control-label" style="width: 90%;">
             <input type="text" name="Psychometricscore" class="form-control">
-
-        </label>
     </div>
     @error('PsychometricToolscore') {{ $message }} @enderror
 </div>

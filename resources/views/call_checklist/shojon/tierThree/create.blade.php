@@ -41,7 +41,7 @@
                 <div class="form-group">
                     <label class="control-label" for="caller_id"><b>Caller ID:</b></label>
                     <input class="form-control" type="text" name="caller_id" id="caller_id"
-                    value="{{ old('caller_id',$last? $last->caller_id : null) }}"
+                    value="{{}}"
                     placeholder="Enter caller name"/>
                 </div>
 

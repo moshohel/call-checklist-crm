@@ -44,7 +44,7 @@ class TierOneController extends Controller
         $data->unique_id = $uniqueId;
         $data->save();
         $getuniqueId = DB::table('uniques')->latest()->first();
-        $districts = DB::table('districts')->get();
+        $districts = DB::table('districts')->orderBy('name', 'ASC')->get();
         return view('call_checklist.shojon.tier_one.manual_form', compact('districts', 'getuniqueId'));
     }
 

@@ -28,7 +28,7 @@ class shojonTierThree extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request->all());
+        dd($request->caller_id);
         if ($request->next_session_date && $request->next_session_time) {
             $this->nextSession($request->caller_id,$request->next_session_date, $request->next_session_time);
         }
@@ -114,7 +114,6 @@ class shojonTierThree extends Controller
 
         DB::table('shojon_tire_threes')->insert($data);
         $id = $request['session_id'];
-        dd($id);
         $session = Session::find($id);
         $session->session_taken = "DONE";
         $session->save();
@@ -123,8 +122,8 @@ class shojonTierThree extends Controller
         // return redirect()->route('call_checklist.shojon.TierThreePatientlist')->with('success', 'Tire three insert successfull');
         return redirect()->route('user.show', $user_id)->with('success', 'insert successfull');
     }
-    function nextSession($id,$date,$time){
-        $session = Session::where('unique_id', $id)->first();
+    function nextSession($id,$date,$time){ 
+        $session = Session::where('unique_id',$id)->first();
        
         $duplicatePost = $session->replicate();
         $duplicatePost->session_date = $date;
