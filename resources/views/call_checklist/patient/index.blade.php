@@ -19,7 +19,8 @@
       </div>
       @include('call_checklist.partials.messages')
       {{-- Filter --}}
-      <form class="pt-4 card-body" action="{{ route('patient.search') }}" method="get" enctype="multipart/form-data" id="search">
+      <form class="pt-4 card-body" action="{{ route('patient.search') }}" method="get" enctype="multipart/form-data"
+        id="search">
         @csrf
         <div class="row ">
           <div class="form-group col-3" id="from_date">
@@ -37,7 +38,7 @@
             <input type="text" class="form-control" name="unique_id" id="exampleFormControlInput5"
               placeholder="Client Id">
           </div>
-          
+
         </div>
         <div class="row">
           <div class="form-group col-3" id="phone_number">
@@ -62,12 +63,13 @@
               <th>Age</th>
               <th class="d-none d-md-table-cell">Address</th>
               <th>Client Id</th>
+              <th>Added By</th>
               <th>Create Date & Time</th>
               <th>Options</th>
             </tr>
           </thead>
           <tbody>
-            
+
           </tbody>
 
         </table>
@@ -94,7 +96,7 @@
     // $("#print_excel").show();
   });
 });
-  
+
   function load_datatable(additional_query=''){
   let CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
   // alert('load Table');
@@ -132,15 +134,15 @@ $( "#search" ).submit(function( e ) {
             .done(function( response ) {
               var additional_query=response.additional_query;
               load_datatable(additional_query);
-              console.log(additional_query);
+
                 var url = '{{ route("pdf.patient", ":id") }}';
                 url = url.replace(':id', additional_query);
                 document.getElementById("print_pdf").setAttribute("href",url);
-                
+                console.log(response);
             });
-            console.log(additional_query);
+
         //alert('form submitted');
-        
+
         return false;
     });
 

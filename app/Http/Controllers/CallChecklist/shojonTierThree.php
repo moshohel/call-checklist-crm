@@ -30,7 +30,7 @@ class shojonTierThree extends Controller
     }
     public function store(Request $request)
     {
-        // dd($request);
+        dd($request);
         // dd($request->client_id);
         if ($request->next_session_date && $request->next_session_time) {
             $this->nextSession($request->client_id, $request->next_session_date, $request->next_session_time);

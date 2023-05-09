@@ -45,9 +45,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label" for="client_id"><b>client_id:</b></label><br>
-                        <input type="text" class="form-control" name="client_id" placeholder="Enter client name"
-                            value="{{ $uniqueid }}">
+                        <label class="control-label" for="client_id"><b>Client Id:</b></label><br>
+                        <input type="text" class="form-control" name="client_id" value="{{ $uniqueid }}">
                     </div>
 
                     <input type="hidden" name="referrence_id" value="1">

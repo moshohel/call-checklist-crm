@@ -19,6 +19,7 @@ use App\Models\ShojonTierOne;
 use App\Models\Cilent_call;
 use App\User;
 use App\Models\Reassign_request;
+use App\Models\Session;
 
 class PatientController extends Controller
 {
@@ -34,6 +35,7 @@ class PatientController extends Controller
     {
         // dd(Auth::user()->user_id);
         $patients = Patient::orderBy('id', 'desc')->get();
+        //        dd($patients);
         return view('call_checklist.patient.index', compact('patients'));
     }
 
@@ -74,12 +76,14 @@ class PatientController extends Controller
         $start = $request->start;
         $length = $request->length;
 
-        // additional_query is the query string for filtering data 
-        // form submit calles search which genarate this Query String 
+        // additional_query is the query string for filtering data
+        // form submit calles search which genarate this Query String
         $additional_query = $request->additional_query;
         // dd($request->additional_query);
+        //        var_dump($additional_query);
+        //        print_r($additional_query . "********************");
         // $patients = DB::select("SELECT consultants.name as consultant_name, patients.* FROM patients LEFT JOIN consultants ON consultants.id= patients.consultant_id WHERE 1 $additional_query limit $start ,$length");
-        $patients = DB::select("SELECT * FROM patients WHERE 1 $additional_query limit $start ,$length");
+        $patients = DB::select("SELECT * FROM patients WHERE 1 $additional_query ORDER BY id DESC limit $start ,$length");
         $count_result = DB::select("SELECT count(*) as total FROM patients WHERE 1 $additional_query ");
 
         $recordsTotal = $count_result[0]->total;
@@ -96,7 +100,7 @@ class PatientController extends Controller
             $showInfo = "<a href='patient/showInfo/$unique_id' class='btn btn-info m-1'>History</a>";
             $output[] = array(
                 $item->name, $item->phone_number, $item->sex, $item->age, $item->location,
-                $item->unique_id, $item->created_at, "$showInfo&nbsp;&nbsp;$view_button&nbsp;&nbsp;"
+                $item->unique_id, $item->service_providers_name, $item->created_at, "$showInfo&nbsp;&nbsp;$view_button&nbsp;&nbsp;"
             );
         }
 
@@ -165,7 +169,7 @@ class PatientController extends Controller
         return $prefix . $zeros . $last_number;
     }
     // new client popup
-    public function pupup($number)
+    public function pupup($referrence_id, $number)
     {
         return view('call_checklist.patient.pupup', compact('number'));
     }
@@ -178,12 +182,19 @@ class PatientController extends Controller
     }
     public function createReassignRequest(Request $request)
     {
-        $data = new Reassign_request;
-        $data->date = date('Y-m-d H:i:s');
-        $data->unique_id = $request->unique_id;
-        $data->phone_number = $request->phone_number;
-        $data->reason_for_reassing = $request->reason_for_reassing;
-        $data->save();
+        $s_id = Session::where('unique_id', $request->unique_id)->where('session_taken', 'No')->first();
+        if ($s_id) {
+            $data = new Reassign_request;
+            $data->session_id = $s_id->id;
+            $data->date = date('Y-m-d H:i:s');
+            $data->unique_id = $request->unique_id;
+            $data->phone_number = $request->phone_number;
+            $data->reason_for_reassing = $request->reason_for_reassing;
+            $data->save();
+        } else {
+            session()->flash('error', 'Invalid Client');
+            return redirect()->route('patient.popup');
+        }
     }
     public function allcilent_calls_number(Request $request)
     {
@@ -205,7 +216,7 @@ class PatientController extends Controller
         }
         return view('call_checklist.patient.popup');
     }
-    // new 
+    // new
     public function create($number)
     {
         $uniqueId = $this->uniqueGenerator(new Unique, 'unique_id', 6, 'SHO');
@@ -234,8 +245,8 @@ class PatientController extends Controller
         $patient->age = $request->age;
         $patient->location = $request->location;
         $patient->socio_economic_status = $request->socio_economic_status;
-        //$patient->created_at = Carbon::now();
-        // $patient->created_date = Carbon::today();
+        $patient->service_providers_name =  auth()->user()->full_name;
+        $patient->service_providers_id = auth()->user()->user_id;
         //dd($patient);
         $patient->save();
         //session()->flash('success', 'New patient has added successfully !!');

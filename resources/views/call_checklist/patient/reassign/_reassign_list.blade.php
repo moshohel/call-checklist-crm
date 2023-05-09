@@ -46,7 +46,7 @@
                                 <td style="text-align:center;">{{ $row->phone_number }}</td>
                                 <td style="text-align:center;">{{ $row->reason_for_reassing }}</td>
                                 <td style="text-align:center;">{{ $row->status }}</td>
-                                <td style="text-align:center;"><a href="#"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i></a></td>
+                                <td style="text-align:center;"><a href="{{ route('reassign.requests.create',[$row->id, $row->unique_id]) }}"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i></a></td>
                             </tr>
                             @endforeach
                         </tbody>

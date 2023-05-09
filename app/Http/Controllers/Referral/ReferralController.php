@@ -17,7 +17,7 @@ class ReferralController extends Controller
         return view('call_checklist.referral.index', compact('referrals'));
     }
 
-    public function create()
+    public function create() 
     {
         return view('call_checklist.referral.create');
     }

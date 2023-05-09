@@ -225,6 +225,8 @@ if (length == 12) {
 
     $('#editModal').modal('hide');
   }
+}else{
+  alert("Warning! Please fill all the questions to generate the score.");
 }             
 });
  });

@@ -6,7 +6,7 @@
     <div>
         <h1><i class="fa-solid fa-user"></i><a href="">{{ $data->caller_name }}</span></a>
         </h1>
-    </div> 
+    </div>
 </div>
 <section class="content">
   <div class="container-fluid">
@@ -16,7 +16,7 @@
         <!-- general form elements -->
         <div class="card card-primary">
           <div class="card-header">
-            <h3 class="card-title">Client Details</h3> 
+            <h3 class="card-title">Client Details</h3>
         </div>
         <!-- /.card-header -->
         <div class="card-body">
@@ -114,7 +114,7 @@
     @foreach(explode(';', $data->perpetuating) as $key3 =>$info3)
     @foreach(explode(';', $data->protective) as $key4 =>$info4)
     @if($key1 === $key2 && $key2 === $key3 && $key3 === $key4)
-    <tr> 
+    <tr>
        <td>{{$info1}}</td>
        <td>{{$info2}}</td>
        <td>{{$info3}}</td>
@@ -126,8 +126,8 @@
    @endforeach
    @endforeach
    @endif
-</tbody> 
-</table>  
+</tbody>
+</table>
 </div>
 <div class="row g-1">
    <div class="col-md-12">
@@ -166,7 +166,7 @@
        <label for="validationCustom01" class="form-label">How useful and effective do you think the call has been for you? </label><br>
        <ul>
            @if ($data-> effective != "")
-           @foreach(explode(';', $data-> effective) as $info) 
+           @foreach(explode(';', $data-> effective) as $info)
            <li><b>{{$info}}</b></li>
            @endforeach
            @endif
@@ -199,7 +199,7 @@
 </div><hr>
 </div>
 </div>
-</div>  
+</div>
 </div>
 <div class="col-md-5">
     <!-- Form Element sizes -->
@@ -232,7 +232,7 @@
          </div>
      </div>
 
- </div> 
+ </div>
 </div>
 <div class="card card-primary">
   <div class="card-header">
@@ -259,7 +259,7 @@
                         @foreach(explode(';', $data->symptoms) as $key1 => $info)
                         @foreach(explode(';', $data->severity) as $key2 =>$infoSev)
                         @if($key1 === $key2)
-                        <tr> 
+                        <tr>
                            <td>{{$info}}</td>
                            <td>{{$infoSev}}</td>
                        </tr>
@@ -267,8 +267,8 @@
                        @endforeach
                        @endforeach
                        @endif
-                   </tbody> 
-               </table>  
+                   </tbody>
+               </table>
            </div>
        </div>
        <div class="row g-2">
@@ -327,10 +327,10 @@
         <label for="validationCustom01" class="form-label">Previous psychiatric diagnosis?</label><br>
         <ul>
             @if ($check_item != "")
-            @foreach($check_item as $info) 
+            @foreach($check_item as $info)
             <li><b>{{$info}}</b></li>
             @endforeach
-            @endif   
+            @endif
         </ul>
     </div>
 </div><hr>
@@ -350,7 +350,7 @@
      @endphp
      <ul>
       @if($check_item != "")
-      @foreach($check_item as $info) 
+      @foreach($check_item as $info)
       <li><b>{{$info}}</b></li>
       @endforeach
       @endif
@@ -365,7 +365,7 @@
      @endphp
      <ul>
         @if($check_item != "")
-        @foreach($check_item as $info) 
+        @foreach($check_item as $info)
         <li><b>{{$info}}</b></li>
         @endforeach
         @endif
@@ -390,9 +390,9 @@
 </div><hr>
 </div>
 </div>
-</div> 
 </div>
-</div>  
+</div>
+</div>
 </div>
 </div>
 </section>
@@ -424,19 +424,19 @@
                     <th class="text-center"> Financial affordability </th>
                     <th class="text-center"> Therapist preference </th>
                     <th class="text-center"> Referral Types </th>
-                    
+
                 </tr>
             </thead>
             <tbody id="content">
 
             </tbody>
         </table>
-    </div> 
-</div> 
-</div>  
+    </div>
 </div>
-</div>      
-</section> 
+</div>
+</div>
+</div>
+</section>
 <section>
    <div class="container-fluid">
     <div class="row">
@@ -469,19 +469,19 @@
                         <th class="text-center"> Psychological tools rating </th>
                         <th class="text-center"> Counselor overall feedback </th>
                         <th class="text-center"> Clients core learning from the session </th>
-                        
+
                     </tr>
                 </thead>
                 <tbody id="termination_Tb">
 
                 </tbody>
             </table>
-        </div> 
-    </div> 
-</div>  
+        </div>
+    </div>
 </div>
-</div>      
-</section>            
+</div>
+</div>
+</section>
 @endsection
 @push('scripts')
 <script type="text/javascript" src="{{ asset('backend/js/plugins/jquery.dataTables.min.js') }}"></script>
@@ -489,13 +489,13 @@
 <script type="text/javascript">$('#sampleTablereferral').DataTable();</script>
 <script type="text/javascript">$('#sampleTabletarmination').DataTable();</script>
 @endpush
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.3/dist/jquery.min.js"></script>
 <script>
     $(document).ready(function(){
         var caller_id = $("#caller_id").val();
         $.ajax({
             type: "get",
-            url: "/call-checklist/shojon/referral_table_t2",
+            url: "http://43.240.103.7/CRM/public/index.php/call-checklist/shojon/referral_table_t2",
             data: {caller_id: caller_id},
             success: function (data) {
                 console.log(data);
@@ -507,7 +507,7 @@
         var caller_id = $("#caller_id").val();
         $.ajax({
             type: "get",
-            url: "/call-checklist/shojon/termination_table_t2",
+            url: "http://43.240.103.7/CRM/public/index.php/call-checklist/shojon/termination_table_t2",
             data: {caller_id: caller_id},
             success: function (data) {
                 console.log(data);

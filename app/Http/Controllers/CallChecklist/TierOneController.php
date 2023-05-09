@@ -45,7 +45,7 @@ class TierOneController extends Controller
         $data->unique_id = $uniqueId;
         $data->save();
         $getuniqueId = DB::table('uniques')->latest()->first();
-        $districts = DB::table('districts')->get();
+        $districts = DB::table('districts')->orderBy('name', 'ASC')->get();
         return view('call_checklist.shojon.tier_one.manual_form', compact('districts', 'getuniqueId'));
     }
 
@@ -54,7 +54,7 @@ class TierOneController extends Controller
     {
         $uniqueid = $uniqueid;
         $pageTitle = $this->pageTitle;
-        $districts = DB::table('districts')->get();
+        $districts = DB::table('districts')->orderBy('name', 'ASC')->get();
         $newPatient = DB::table('patients')->where('unique_id', $uniqueid)->first();
         return view('call_checklist.shojon.tier_one.create', compact('pageTitle', 'districts', 'uniqueid', 'newPatient'));
     }
@@ -106,6 +106,7 @@ class TierOneController extends Controller
         $data['occupation'] = $request->occupation;
         $data['hear_about_shojon'] = $request->about_shojon;
         $data['distress'] = $request->Distress;
+        $data['distress_post'] = $request->Distress_post;
         $data['primary_reason'] = $request->primary_reason;
         $data['secondary_reason'] = json_encode($request->secondary_reason);
         $data['mental_illness_diagnosis'] = json_encode($request->mental_illness_diagnosis);
@@ -170,7 +171,7 @@ class TierOneController extends Controller
     {
         $uniqueid = $caller_id;
         $pageTitleUpdate = $this->pageTitleUpdate;
-        $districts = DB::table('districts')->get();
+        $districts = DB::table('districts')->orderBy('name', 'ASC')->get();
         $newPatient = DB::table('patients')->where('unique_id', $caller_id)->first();
         $data = DB::table('shojon_tier_ones')->where('caller_id', $caller_id)->first();
         return view('call_checklist.shojon.tier_one._edit_tier_one', compact('data', 'pageTitleUpdate', 'districts', 'uniqueid', 'newPatient'));
@@ -208,6 +209,7 @@ class TierOneController extends Controller
         $data['occupation'] = $request->occupation;
         $data['hear_about_shojon'] = $request->about_shojon;
         $data['distress'] = $request->Distress;
+        $data['distress_post'] = $request->Distress_post;
         $data['primary_reason'] = $request->primary_reason;
         $data['secondary_reason'] = json_encode($request->secondary_reason);
         $data['mental_illness_diagnosis'] = json_encode($request->mental_illness_diagnosis);

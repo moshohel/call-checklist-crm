@@ -58,7 +58,7 @@ Route::get('/uniqueid', [TierOneController::class, 'uniqueId']);
 Route::get('generate-pdf-patient/{query}', 'Patient\PatientController@generatePDF')->name('pdf.patient');
 Route::group(['prefix' => 'patient'], function () {
     //Route::get('', 'CallChecklist\PatientController@pupup');
-    Route::get('/popup/{number}', [PatientController::class, 'pupup'])->name('patient.popup')->middleware('shojon_agent');
+    Route::get('/popup/{referrence_id}/{number}', [PatientController::class, 'pupup'])->name('patient.popup')->middleware('shojon_agent');
     Route::get('/livesearch', [PatientController::class, 'searchExisting'])->middleware('auth');
     Route::get('/cilent_call', [PatientController::class, 'cilent_calls'])->name('patient.cilent_call')->middleware('auth');
     Route::get('/cilent_call_Number', [PatientController::class, 'allcilent_calls_number'])->middleware('auth');
@@ -80,6 +80,8 @@ Route::group(['prefix' => 'patient'], function () {
 //reassign 
 Route::group(['prefix' => 'reassign'], function () {
     Route::get('/list', [ReassignController::class, 'reassign_requests'])->name('reassign.requests')->middleware('auth');
+    Route::get('/create/{id}/{unique_id}', [ReassignController::class, 'reassign_requests_create'])->name('reassign.requests.create')->middleware('auth');
+    Route::post('/store', [ReassignController::class, 'reassign_store'])->name('reassign.store')->middleware('auth');
 });
 
 // Referral Routes
