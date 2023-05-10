@@ -490,6 +490,8 @@ class Tier2Controller extends Controller
         $data->financial = $request->Financial;
         $data->Referral_types = $request->Referral_types;
         $data->preferred_therapist_or_psychiatrist = $request->Therapist;
+        $data->referred_by =  auth()->user()->full_name;
+        $data->id_of_who_referred = auth()->user()->user_id;
         $data->save();
     }
 }

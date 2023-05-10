@@ -17,7 +17,7 @@ class ReferralController extends Controller
         return view('call_checklist.referral.index', compact('referrals'));
     }
 
-    public function create() 
+    public function create()
     {
         return view('call_checklist.referral.create');
     }
@@ -36,6 +36,8 @@ class ReferralController extends Controller
         $data->preferred_time = $request->preferred_time;
         $data->preferred_therapist_or_psychiatrist = $request->preferred_therapist_or_psychiatrist;
         $data->financial = $request->Financial;
+        $data->referred_by =  auth()->user()->full_name;
+        $data->id_of_who_referred = auth()->user()->user_id;
         // $data->therapist_or_psychiatrist = $request->therapist_or_psychiatrist;
         $data->save();
 
