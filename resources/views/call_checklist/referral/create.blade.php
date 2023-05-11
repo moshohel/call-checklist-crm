@@ -87,7 +87,7 @@
                     <div class="col-md-6">
                         <label for="validationCustom01" class="form-label">Preferred time for session:</label>
                         <input type="datetime-local" class="form-control" name="preferred_time"
-                            placeholder="Preferred time for session">
+                        placeholder="Preferred time for session">
                     </div>
                 </div><br>
                 <div class="row g-2">
@@ -98,7 +98,17 @@
                     <div class="col-md-6">
                         <label for="validationCustom01" class="form-label">Therapist preference:</label>
                         <input type="text" class="form-control" name="preferred_therapist_or_psychiatrist"
-                            placeholder="Therapist preference">
+                        placeholder="Therapist preference">
+                    </div>
+                    <div class="col-md-6">
+                        @php $types = ['Regular','Emergency']; @endphp
+                        <label for="validationCustom01" class="form-label">Referral Types :</label>
+                        <select class="form-control" required name="Referral_types">
+                            <option selected disabled>Select Referral Types</option>
+                            @foreach($types as $item)
+                            <option value="{{$item}}">{{$item}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
             </div>
@@ -158,7 +168,7 @@
     //               console.log(error)
     //               alert("Referral not save");
     //             }
-  
+
     //           });
     //    });
     });

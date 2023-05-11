@@ -6,35 +6,47 @@
         <h2>Reffer</h2>
     </div>
     <div class="card-body">
-        <div class="" id="recent-orders">
+        <div class="" id="recent-orders"> 
             <table class="table table-responsive table-responsive-large" style="width:100%" id="sampleTable">
                 <tr>
-                    <th class="d-none d-md-table-cell">Name</th>
-                    <td>{{ $referral[0]->name }}</td>
+                    <th class="d-none d-md-table-cell">Refer Date</th>
+                    <td>{{ $referral[0]->created_at }}</td>
                 </tr>
                 <tr>
-                    <th class="d-none d-md-table-cell">Phone</th>
-                    <td>{{ $referral[0]->phone_number }}</td>
+                    <th class="d-none d-md-table-cell">Recommender</th>
+                    <td>{{ $referral[0]->referred_by }}</td>
                 </tr>
                 <tr>
-                    <th class="d-none d-md-table-cell">Referr To</th>
+                    <th class="d-none d-md-table-cell">Refer From</th>
                     <td>{{ $referral[0]->referr_to }}</td>
                 </tr>
                 <tr>
-                    <th class="d-none d-md-table-cell">Age</th>
-                    <td>{{ $referral[0]->age }}</td>
-                </tr>
-                <tr>
-                    <th class="d-none d-md-table-cell">Referr From</th>
+                    <th class="d-none d-md-table-cell">Refer To</th>
                     <td>{{ $referral[0]->referr_from }}</td>
                 </tr>
                 <tr>
-                    <th class="d-none d-md-table-cell">Preferred Therapist/Psychiatrist</th>
-                    <td>{{ $referral[0]->preferred_therapist_or_psychiatrist }}</td>
+                    <th class="d-none d-md-table-cell">Client ID</th>
+                    <td>{{ $referral[0]->unique_id }}</td>
                 </tr>
                 <tr>
-                    <th class="d-none d-md-table-cell">Preferre Time</th>
-                    <td>{{ $referral[0]->preferred_time }}</td>
+                    <th class="d-none d-md-table-cell">Client Name</th>
+                    <td>{{ $referral[0]->name }}</td>
+                </tr>
+                <tr>
+                    <th class="d-none d-md-table-cell">Reason for Therapy</th>
+                    <td>{{ $referral[0]->reason_for_therapy }}</td>
+                </tr>
+                <tr>
+                    <th class="d-none d-md-table-cell">FA</th>
+                    <td>{{ $referral[0]->financial }}</td>
+                </tr>
+                <tr>
+                    <th class="d-none d-md-table-cell">Referral Nature</th>
+                    <td>{{ $referral[0]->Referral_types }}</td>
+                </tr>
+                <tr>
+                    <th class="d-none d-md-table-cell">Emergency Contact No</th>
+                    <td>{{ $referral[0]->phone_number_two }}</td>
                 </tr>
             </table>
         </div>
@@ -88,17 +100,6 @@
                             <div class="form-group col-6">
                                 <label for="exampleFormControlInput7">Reason</label>
                                 <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->reason_for_therapy }}" id="exampleFormControlInput7" >
-                            </div>
-
-                            <div class="form-group col-6">
-                                <label for="exampleFormControlSelect3">Consultent</label>
-                                <select class="form-control" name="referred_therapist_or_psychiatrist_user_id" value=""
-                                    id="exampleFormControlSelect3">
-                                    <option value="" disabled selected hidden>Consultent</option>
-                                    @foreach ($consultants as $consultant)
-                                    <option value="{{ $consultant->user_id }}">{{ $consultant->full_name }}</option>
-                                    @endforeach
-                                </select>
                             </div>
                             <button type="submit" class="btn btn-danger">Reffer</button>
                         </form>
