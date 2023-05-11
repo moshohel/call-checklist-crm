@@ -33,11 +33,11 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="form-group col-6">
+                {{-- <div class="form-group col-6">
                     <label for="exampleFormControlInput1">Diagnosis</label>
                     <input type="text" name="referr_from" value="{{ $referral[0]->diagnosis }}" class="form-control"
                         id="exampleFormControlInput1">
-                </div>
+                </div> --}}
 
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput7">Preferred Contultent</label>

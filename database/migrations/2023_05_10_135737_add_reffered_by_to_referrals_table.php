@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddImageFieldsToVividialUsersTable extends Migration
+class AddRefferedByToReferralsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddImageFieldsToVividialUsersTable extends Migration
      */
     public function up()
     {
-        Schema::table('vicidial_users', function (Blueprint $table) {
-            $table->string('image')->nullable();
+        Schema::table('referrals', function (Blueprint $table) {
+            $table->string('referred_by')->nullable();
+            $table->string('id_of_who_referred')->nullable();
         });
     }
 
@@ -25,7 +26,7 @@ class AddImageFieldsToVividialUsersTable extends Migration
      */
     public function down()
     {
-        Schema::table('vicidial_users', function (Blueprint $table) {
+        Schema::table('referrals', function (Blueprint $table) {
             //
         });
     }

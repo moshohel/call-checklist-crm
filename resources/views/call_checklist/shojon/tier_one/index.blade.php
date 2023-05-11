@@ -37,7 +37,7 @@
                             <th> Sex </th>
                             <th> Age </th>
                             <th class="text-center"> Location </th>
-                            <th class="text-center"> call Type </th>
+                            <th class="text-center"> Call Type </th>
                             <th class="text-center">Action</th>
                              
                         </tr>

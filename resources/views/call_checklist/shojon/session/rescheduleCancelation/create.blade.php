@@ -3,7 +3,7 @@
 @section('content')
 <div class="card card-default">
     <div class="card-header card-header-border-bottom">
-        <h2>Reschedule Cancelation</h2>
+        <h2>Reschedule/Cancelation</h2>
     </div>
 
     <div class="card-body">
@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group col-md-6 col-sm-12">
                     <label for="exampleFormControlInput1">Reason</label>
-                    <textarea class="form-control" name="reason" cols="40" rows="2"></textarea>
+                    <textarea class="form-control" name="reason" cols="40" rows="2" required></textarea>
                 </div>
                 <div class="form-group col-md-4 col-sm-12">
                     <label for="exampleFormControlInput1">Full Name</label>

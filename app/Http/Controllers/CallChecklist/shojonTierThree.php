@@ -14,13 +14,14 @@ class shojonTierThree extends Controller
 
     public function tireThreefromblade($uniqueid, $session_id)
     {
-        // dd($session_id);
+        // dd($uniqueid);
         $uniqueid = $uniqueid;
         $pageTitle = $this->pageTitle;
         $session_id = $session_id;
         $last = null;
         $districts = DB::table('districts')->get();
         $newPatient = DB::table('patients')->where('unique_id', $uniqueid)->first();
+        // dd($newPatient);
         return view('call_checklist.shojon.tierThree.create', compact('pageTitle', 'last', 'districts', 'session_id', 'uniqueid', 'newPatient'));
     }
     public function tireThreepatientlist()
@@ -29,9 +30,10 @@ class shojonTierThree extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->all());
+        dd($request);
+        // dd($request->client_id);
         if ($request->next_session_date && $request->next_session_time) {
-            $this->nextSession($request->caller_id, $request->next_session_date, $request->next_session_time);
+            $this->nextSession($request->client_id, $request->next_session_date, $request->next_session_time);
         }
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
@@ -115,13 +117,14 @@ class shojonTierThree extends Controller
 
         DB::table('shojon_tire_threes')->insert($data);
         $id = $request['session_id'];
+        // dd($id);
         $session = Session::find($id);
         $session->session_taken = "DONE";
         $session->save();
         $user_id = auth()->user()->user_id;
 
         // return redirect()->route('call_checklist.shojon.TierThreePatientlist')->with('success', 'Tire three insert successfull');
-        return redirect()->route('user.show', $user_id)->with('success', 'insert successfull');
+        return redirect()->route('user.show', $user_id)->with('success', 'Session taken successfull');
     }
     function nextSession($id, $date, $time)
     {

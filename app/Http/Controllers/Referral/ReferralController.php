@@ -17,7 +17,7 @@ class ReferralController extends Controller
         return view('call_checklist.referral.index', compact('referrals'));
     }
 
-    public function create() 
+    public function create()
     {
         return view('call_checklist.referral.create');
     }
@@ -36,6 +36,8 @@ class ReferralController extends Controller
         $data->preferred_time = $request->preferred_time;
         $data->preferred_therapist_or_psychiatrist = $request->preferred_therapist_or_psychiatrist;
         $data->financial = $request->Financial;
+        $data->referred_by =  auth()->user()->full_name;
+        $data->id_of_who_referred = auth()->user()->user_id;
         // $data->therapist_or_psychiatrist = $request->therapist_or_psychiatrist;
         $data->save();
 
@@ -84,6 +86,7 @@ class ReferralController extends Controller
 
     public function referConsultant(Request $request, $id)
     {
+        // dd($request);
         $user_id = $request->referred_therapist_or_psychiatrist_user_id;
         $consultant = DB::select("SELECT full_name, user_id, user as user_name FROM vicidial_users WHERE user_id = $user_id");
         // dd($consultant[0]->full_name);
@@ -92,6 +95,7 @@ class ReferralController extends Controller
         $referral->referred_therapist_or_psychiatrist = $consultant[0]->full_name;
         $referral->referred_therapist_or_psychiatrist_user_name = $consultant[0]->user_name;
         $referral->referred_therapist_or_psychiatrist_user_id = $request->referred_therapist_or_psychiatrist_user_id;
+        // dd($referral);
         $referral->save();
         session()->flash('success', 'Referred successfully');
 

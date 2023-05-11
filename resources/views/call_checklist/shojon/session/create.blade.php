@@ -39,6 +39,11 @@
                 </div>
 
                 <div class="form-group col-3">
+                    <label for="exampleFormControlInput2">Secondary Mobile Number</label>
+                    <input type="number" name="phone" class="form-control" readonly id="exampleFormControlInput2" value="{{ $referral->phone_number_two }}">
+                </div>
+
+                <div class="form-group col-3">
                     <label for="exampleFormControlInput5">Preferred Time - </label>
                     <input type="text" name="preferred_time" class="form-control" readonly id="exampleFormControlInput5" value="{{ $referral->preferred_time }}">
                 </div>

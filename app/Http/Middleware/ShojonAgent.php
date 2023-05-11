@@ -17,15 +17,18 @@ class ShojonAgent
     {
         $user = auth()->user();
 
-        if(!$user) return redirect()->route('login');
+        if (!$user) return redirect()->route('login');
 
         if (($user->user_level == 9) && ($user->user_group == 'ADMIN')) {
             return $next($request);
         }
 
-        if(($user->user_level == 1) && ($user->user_group == 'SHOJON') ) {
+        if (($user->user_level == 1) && ($user->user_group == 'SHOJON')) {
             return $next($request);
         }
-        return response()->json('You Need to be shojon agent');
+        if (($user->user_level == 1) && ($user->user_group == 'MHW')) {
+            return $next($request);
+        }
+        return response()->json('You Need to be shojon agent User');
     }
 }

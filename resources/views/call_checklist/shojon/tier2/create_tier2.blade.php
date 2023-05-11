@@ -566,7 +566,7 @@
          </label>
      </label>
      @include('call_checklist.shojon.tier2._referral_tier_three')
- </div>
+    </div>
 
  <div class="form-control">
     <label class="control-label" for="client_referral">

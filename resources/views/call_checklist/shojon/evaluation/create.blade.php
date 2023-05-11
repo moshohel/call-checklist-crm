@@ -44,6 +44,7 @@
        <div class="col-md-12">
         <div class="form-group">
          <label for="validationCustom01" class="form-label"><b>Counselor's Skill Assessment Checklist</b></label>
+         <p>Instructions - Tick the basic skills statement to indicate your opinion on whether the Para-counselor has used the following skills when providing primary mental health care to the client on phone. If you wish, write your side comments or observations in the comments box.</p>
          <table class="table table-bordered border-primary" id="dynamic_field_formulation">
           <thead>
             <tr>
@@ -177,6 +178,7 @@
    <div class="col-md-12">
     <div class="form-group">
      <label for="validationCustom01" class="form-label"><b>Observation of the Client’s response:</b></label>
+     <p>Instructions - Tick the response statements to indicate your opinion on whether the caller responded in following way when Para-counselor was providing the primary mental health care in the phone. If you wish, write your side comments or observations in the comments box.</p>
      @php $types = ['','','','','']; @endphp
 
      <table class="table table-bordered border-primary" id="dynamic_field_formulation">
