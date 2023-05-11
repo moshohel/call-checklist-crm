@@ -12,14 +12,14 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Exports\ShojonTierTowExport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Session;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
 
 class Tier2Controller extends Controller
 {
     protected $pageTitle = 'Shojon Tier 2 Service';
     protected $pageTitleUpdate = 'Shojon Tier 2 Update';
 
-    public function tireOnefromblade($uniqueid) 
+    public function tireOnefromblade($uniqueid)
     {
         $uniqueid = $uniqueid;
         $pageTitle = $this->pageTitle;
@@ -63,7 +63,7 @@ class Tier2Controller extends Controller
             $this->sendSms($request->message, $request->phone_number);
         }
         if ($request->next_session_date && $request->next_session_time) {
-            $this->nextSession($request->client_id,$request->next_session_date, $request->next_session_time);
+            $this->nextSession($request->client_id, $request->next_session_date, $request->next_session_time);
         }
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
@@ -151,15 +151,15 @@ class Tier2Controller extends Controller
         // return redirect()->back()->with('success', 'insert successfull');
         return redirect()->route('user.show', $user_id)->with('success', 'insert successfull');
     }
-    function nextSession($id,$date,$time){
+    function nextSession($id, $date, $time)
+    {
         $session = Session::where('unique_id', $id)->first();
-       
+
         $duplicatePost = $session->replicate();
         $duplicatePost->session_date = $date;
         $duplicatePost->session_time = $time;
-        $duplicatePost->session_taken ="NO";
+        $duplicatePost->session_taken = "NO";
         $duplicatePost->save();
-
     }
     private function sendSms($message, $phone)
     {
@@ -227,7 +227,7 @@ class Tier2Controller extends Controller
     public function TierTwoUpdate(Request $request)
     {
         if ($request->next_session_date && $request->next_session_time) {
-            $this->nextSession($request->client_id,$request->next_session_date, $request->next_session_time);
+            $this->nextSession($request->client_id, $request->next_session_date, $request->next_session_time);
         }
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
@@ -307,7 +307,7 @@ class Tier2Controller extends Controller
             if ($data) {
                 foreach ($data as $key => $row) {
                     $output .=
-                    '<tr>
+                        '<tr>
                     <td>' . $key . '</td>
                     <td>' . $row->referr_to . '</td>
                     <td>' . $row->referr_from . '</td>
@@ -345,7 +345,7 @@ class Tier2Controller extends Controller
                     for ($i = 1; $i <= $array_size; $i++) {
                         if ($i == 1) {
                             $output .=
-                            '<tr>
+                                '<tr>
                             <td>' . $key . '</td>
                             <td>' . $row->project_name . '</td>
                             <td>' . $row->counselor_name . '</td>
@@ -387,7 +387,7 @@ class Tier2Controller extends Controller
                             </tr>';
                         } else {
                             $output .=
-                            '<tr style ="border-collapse: collapse;">
+                                '<tr style ="border-collapse: collapse;">
                             <td></td>
                             <td></td>
                             <td></td>
@@ -473,7 +473,7 @@ class Tier2Controller extends Controller
         $data->learning = $request->learning_session;
         $data->save();
     }
-    public function ReferralSave_form(Request $request)
+    public function ReferralSave_form(Request $request) 
     {
         $data = new Referral;
         $data->referr_to = $request->referral_to;
@@ -490,5 +490,9 @@ class Tier2Controller extends Controller
         $data->Referral_types = $request->Referral_types;
         $data->preferred_therapist_or_psychiatrist = $request->Therapist;
         $data->save();
+    }
+    public function ReferralSave_form_tier_two(Request $request)
+    {
+        dd($request->all());
     }
 }

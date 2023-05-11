@@ -15,7 +15,9 @@
       enctype="multipart/form-data" autocomplete="off">
       @csrf
       <div class="tile-body">
+        <label for="validationCustom01" class="form-label"><b>General Information</b></label>
        <div class="row g-4">
+        {{-- <label for="form-label">General Information</label> --}}
         <div class="col-md-3">
           <label for="validationCustom01" class="form-label">Observer's Name:</label>
           <input type="text" class="form-control" name="name" placeholder="Observer's Name" required>
@@ -244,7 +246,7 @@ Rate between 0 and 10 where 0 means not very effective and 10 means maximum effe
   <input type="number" class="form-control" name="rating_score" placeholder="Rating Score" min="0" max="10" required>
 </div> 
 <div class="col-md-6">
-  <label for="validationCustom01" class="form-label">Recommendation</label>
+  <label for="validationCustom01" class="form-label">Special Recommendations / Future Action Plans</label>
   {{-- <input type="textarea" class="form-control" name="recommendation"> --}}
   <textarea id="recommendation" name="recommendation" rows="4" cols="50" required>
   </textarea>

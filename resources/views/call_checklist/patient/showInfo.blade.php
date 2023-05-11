@@ -38,81 +38,27 @@
                     <li class="nav-item">
                         <a class="nav-link active show" id="queries_Details-tab" data-toggle="tab"
                             href="#queries_Details" role="tab" aria-controls="queries_Details"
-                            aria-selected="true">Patient History</a>
+                            aria-selected="true">Tier 1</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tier2-tab" data-toggle="tab" href="#tier2" role="tab"
+                            aria-controls="tier2" aria-selected="false">Tier 2</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tier3-tab" data-toggle="tab" href="#tier3" role="tab"
+                            aria-controls="tier3" aria-selected="false">Tier 3</a>
                     </li>
                 </ul>
                 <div class="tab-content px-3 px-xl-5" id="myTabContent">
                     <div class="tab-pane fade active show" id="queries_Details" role="tabpanel"
                         aria-labelledby="queries_Details-tab">
-                        <div id="accordion" class="accordion">
-                            @foreach ($previous_data as $query)
-                            <div class="card">
-                                <div class="card-header collapsible-title" id="headingThree"
-                                    style="background-color: #f2f2f2;">
-                                    <button class="btn btn-link collapsed" data-toggle="collapse"
-                                        data-target="#collapseThree{{ $query->id }}" aria-expanded="false"
-                                        aria-controls="collapseThree{{ $query->id }}">
-                                        Query #
-                                    </button>
-                                </div>
-                                <div id="collapseThree{{ $query->id}}" class="collapse"
-                                    aria-labelledby="headingThree{{ $query->id }}"
-                                    data-parent="#accordion{{ $query->id }}">
-                                    <div class="card-body">
-                                        <div class="media mt-1 profile-reportDetails-media">
-                                            <div class="media-body">
-                                                <h5 class="mt-0 text-dark" style="text-align: center;">
-                                                    Query of {{ $query->name }}
-                                                </h5>
-                                                <table class="table table-striped table-responsive table-details">
-                                                    <tbody>
-                                                        {{-- <tr>
-                                                            <td>$query->ID</td>
-                                                            <td>{{ $query->id }}</td>
-                                                        </tr> --}}
-                                                        <tr>
-                                                            <td>call_received</td>
-                                                            <td>{{ $query->call_received }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>occupation</td>
-                                                            <td>{{ $query->occupation }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>call_type</td>
-                                                            <td>{{ $query->call_type }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>main_reason_for_calling</td>
-                                                            <td>{{ $query->main_reason_for_calling }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>mental_illness_diagnosis</td>
-                                                            <td>{{ $query->mental_illness_diagnosis }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td> ghq</td>
-                                                            <td>{{ $query->ghq }}</td>
-                                                        </tr>
-
-                                                        <tr>
-                                                            <td>suicidal_risk</td>
-                                                            <td>{{ $query->suicidal_risk }}</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>client_referral</td>
-                                                            <td>{{ $query->client_referral }}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
+                        @include('call_checklist.patient._tier_one')
+                    </div>
+                    <div class="tab-pane fade" id="tier2" role="tabpanel" aria-labelledby="tier2-tab">
+                        @include('call_checklist.patient._tier_two')
+                    </div>
+                    <div class="tab-pane fade" id="tier3" role="tabpanel" aria-labelledby="tier3-tab">
+                        @include('call_checklist.patient._tier_three')
                     </div>
                 </div>
             </div>

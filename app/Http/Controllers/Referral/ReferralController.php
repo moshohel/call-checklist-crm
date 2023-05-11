@@ -71,7 +71,15 @@ class ReferralController extends Controller
 
     public function update(Request $request, $id)
     {
-        dd($request);
+        // dd($id);
+
+        $referral = Referral::find($id);
+        $data = $request->only($referral->getFillable());
+        $referral->fill($data);
+        $referral->save();
+        session()->flash('success', 'Edited successfully !!');
+        // return redirect()->route('admin.products');
+        return redirect()->route('referrals');
     }
 
     public function referConsultant(Request $request, $id)

@@ -47,10 +47,10 @@ class PatientController extends Controller
 
         $str = '';
         if ($unique_id != '') {
-            $str .= " and patients.unique_id ='$unique_id' ";
+            $str .= " and patients.unique_id like '$unique_id%' ";
         }
         if ($phone_number != '') {
-            $str .= " and patients.phone_number ='$phone_number' ";
+            $str .= " and patients.phone_number like '$phone_number%' ";
         }
         if ($from_date != '') {
             $str .= " and DATE(patients.created_at) >= '$from_date' ";
@@ -77,6 +77,7 @@ class PatientController extends Controller
         // additional_query is the query string for filtering data 
         // form submit calles search which genarate this Query String 
         $additional_query = $request->additional_query;
+        // dd($request->additional_query);
         // $patients = DB::select("SELECT consultants.name as consultant_name, patients.* FROM patients LEFT JOIN consultants ON consultants.id= patients.consultant_id WHERE 1 $additional_query limit $start ,$length");
         $patients = DB::select("SELECT * FROM patients WHERE 1 $additional_query limit $start ,$length");
         $count_result = DB::select("SELECT count(*) as total FROM patients WHERE 1 $additional_query ");
@@ -123,7 +124,7 @@ class PatientController extends Controller
             if ($data) {
                 foreach ($data as $key => $row) {
                     $output .=
-                    '<tr>
+                        '<tr>
                     <td>' . $key . '</td>
                     <td>' . $row->caller_id . '</td>
                     <td>' . $row->caller_name . '</td>
@@ -168,7 +169,8 @@ class PatientController extends Controller
     {
         return view('call_checklist.patient.pupup', compact('number'));
     }
-    public function cilent_calls(Request $request){
+    public function cilent_calls(Request $request)
+    {
         $data = new Cilent_call;
         $data->number = $request->Number;
         $data->date = date('Y-m-d H:i:s');
@@ -197,8 +199,8 @@ class PatientController extends Controller
             if ($data) {
                 foreach ($data as $key => $row) {
                     $output .=
-                    '<tr>
-                    <td class="text-center">' . $key+1 . '</td>
+                        '<tr>
+                    <td class="text-center">' . $key + 1 . '</td>
                     <td class="text-center">' . $row->number . '</td>
                     <td class="text-center">' . $row->date . '</td>
                     </tr>';
@@ -206,7 +208,7 @@ class PatientController extends Controller
                 return response()->json($output);
             }
         }
-    return view('call_checklist.patient.popup');
+        return view('call_checklist.patient.popup');
     }
     // new 
     public function create($number)
@@ -256,8 +258,9 @@ class PatientController extends Controller
     {
         // dd($unique_id);
         $patient = DB::table('patients')
-        ->where('unique_id', '=', $unique_id)
-        ->get();
+            ->where('unique_id', '=', $unique_id)
+            ->first();
+        // dd($patient);
         // $patient = Patient::distinct()->get(['unique_id']);
         // dd($patient);
         // return view('pages.patient.show')->with('patient', $patient);
@@ -280,10 +283,12 @@ class PatientController extends Controller
         $patient = DB::select("SELECT * FROM `patients` WHERE unique_id = '$unique_id'");
         // $previous_data = DB::select("SELECT * FROM shojon_tier_ones WHERE unique_id = '$unique_id'");
         $previous_data = ShojonTierOne::where('caller_id', '=', $unique_id)->get();
+        $tierTwo = DB::select("SELECT * FROM `sojon_tier2s` WHERE caller_id = '$unique_id'");
+        $tierThree = DB::select("SELECT * FROM `shojon_tire_threes` WHERE caller_id = '$unique_id'");
 
         // $queries = DB::select("SELECT * FROM queries WHERE phone = $phone");
         // dd($previous_data);
-        return view('call_checklist.patient.showInfo', compact('pageTitle', 'previous_data', 'patient'));
+        return view('call_checklist.patient.showInfo', compact('pageTitle', 'previous_data', 'patient', 'tierTwo', 'tierThree'));
     }
 
     /**
@@ -314,10 +319,9 @@ class PatientController extends Controller
     public function update(Request $request, $id)
     {
         $patient = Patient::find($id);
-        //   dd($patient);
         $data = $request->only($patient->getFillable());
         $patient->fill($data);
-        $patient->updated_by = auth()->id();
+        $patient->updated_by = auth()->user()->user_id;
         $patient->save();
         session()->flash('success', 'Patient Edited successfully !!');
         // return redirect()->route('admin.products');
@@ -333,7 +337,7 @@ class PatientController extends Controller
     public function delete($id)
     {
         $patient = Patient::find($id);
-        if (!is_null($patient)) { 
+        if (!is_null($patient)) {
             $patient->delete();
         }
 

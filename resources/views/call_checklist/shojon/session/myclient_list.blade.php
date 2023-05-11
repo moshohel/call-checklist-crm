@@ -26,7 +26,7 @@
                         <!-- <td class="d-none d-md-table-cell text-dark">fghfds</td> -->
                         <td class="d-none d-md-table-cell text-dark">sdfgf</td>
                         <td>
-                            <a href="{{ route('patient.show', [ $patient->id]) }}" class="btn btn-info btn-default">Info</a>
+                            <a href="{{ route('patient.show', [ $patient->unique_id]) }}" class="btn btn-info btn-default">Info</a>
                         </td>
 
                     </tr>

@@ -6,14 +6,16 @@
     <div class="card-header card-header-border-bottom">
         <h2>Call From - {{ $number }}</h2>
     </div>
+    @include('call_checklist.partials.messages')
     <div class="card-body">
         <div>
             @include('call_checklist.partials.messages')
         </div>
         <div class="row">
-
             <div class="col-md-6 col-xl-4 card-body text-center" style="height: 15ch;">
-                <a href="{{ route('patient.create',$number) }}" class="btn btn-primary text-center" style="width: 100%; height: 100%;">New Client</a>
+                <a href="{{ route('patient.create',$number) }}" class="btn btn-primary text-center" style="width: 100%; height: 100%;">
+                    <p style="margin-top: 1rem">New Client</p>
+                </a>
             </div>
             <div class="col-md-6 col-xl-4 card-body text-center " style="height: 15ch;">
                 <a href="{{ route('patients') }}"

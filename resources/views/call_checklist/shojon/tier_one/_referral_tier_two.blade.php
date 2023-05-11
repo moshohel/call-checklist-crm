@@ -7,7 +7,7 @@
 	          <span aria-hidden="true">&times;</span>
 	        </button>
         </div>
-          <form id="_referral_tier_two_form">
+          <form id="_referral_tier_two_form"> 
             @csrf
             <div class="modal-body">
               <div class="row g-2">

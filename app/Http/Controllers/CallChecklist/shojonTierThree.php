@@ -15,12 +15,13 @@ class shojonTierThree extends Controller
     public function tireThreefromblade($uniqueid, $session_id)
     {
         // dd($session_id);
-
+        $uniqueid = $uniqueid;
         $pageTitle = $this->pageTitle;
         $session_id = $session_id;
         $last = null;
         $districts = DB::table('districts')->get();
-        return view('call_checklist.shojon.tierThree.create', compact('pageTitle', 'last', 'districts', 'session_id'));
+        $newPatient = DB::table('patients')->where('unique_id', $uniqueid)->first();
+        return view('call_checklist.shojon.tierThree.create', compact('pageTitle', 'last', 'districts', 'session_id', 'uniqueid', 'newPatient'));
     }
     public function tireThreepatientlist()
     {
@@ -28,9 +29,9 @@ class shojonTierThree extends Controller
     }
     public function store(Request $request)
     {
-        dd($request->caller_id);
+        dd($request->all());
         if ($request->next_session_date && $request->next_session_time) {
-            $this->nextSession($request->caller_id,$request->next_session_date, $request->next_session_time);
+            $this->nextSession($request->caller_id, $request->next_session_date, $request->next_session_time);
         }
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
@@ -122,15 +123,15 @@ class shojonTierThree extends Controller
         // return redirect()->route('call_checklist.shojon.TierThreePatientlist')->with('success', 'Tire three insert successfull');
         return redirect()->route('user.show', $user_id)->with('success', 'insert successfull');
     }
-    function nextSession($id,$date,$time){ 
-        $session = Session::where('unique_id',$id)->first();
-       
+    function nextSession($id, $date, $time)
+    {
+        $session = Session::where('unique_id', $id)->first();
+
         $duplicatePost = $session->replicate();
         $duplicatePost->session_date = $date;
         $duplicatePost->session_time = $time;
-        $duplicatePost->session_taken ="NO";
+        $duplicatePost->session_taken = "NO";
         $duplicatePost->save();
-
     }
 
     public function tireThreeList(Request $request)
@@ -147,9 +148,9 @@ class shojonTierThree extends Controller
         return view('call_checklist.shojon.tierThree.client_details', compact('data'));
     }
 
-    public function TierTwoUpdate(Request $request)
+    public function tireThreeUpdate(Request $request)
     {
-        
+
         if ($request['occupation'] == "on") {
             $request['occupation'] = $request['other_occupation'];
         }
@@ -211,10 +212,10 @@ class shojonTierThree extends Controller
         $data['name_of_agency'] = $request->NameOfAgency;
         $data['client_referral'] = $request->client_referral;
         $data['session_plan'] = $request->next_session_plan;
-        $data['session_summary'] = $request->session_summary;
+        $data['next_session_time'] = $request->session_summary;
         $data['next_session_date'] = $request->next_session;
 
-        DB::table('sojon_tier2s')->where('id', $request->id)->update($data);
+        DB::table('shojon_tire_threes')->where('id', $request->id)->update($data);
 
         return redirect()->back()->with('success', 'Update successfully!');
     }

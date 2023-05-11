@@ -31,83 +31,87 @@
                 <input type="hidden" name="duration" value="#">
 
                 <input type="hidden" name="session_id" value="{{ $session_id }}">
-
-                <div class="form-group">
-                    <label class="control-label" for="phone_number"><b>Phone Number:</b></label><br>
-                    <input class="form-control" type="text" name="phone_number" id="phone_number"
-                    value="1">
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <label for="phone_number" class="form-label"><b>Phone Number</b></label>
+                        <input type="number" class="form-control" readonly name="phone_number"value="#" >
+                    </div>
+                    <div class="col-md-3">
+                        <label for="client_name" class="form-label"><b>Client Name</b></label>
+                        <input type="text" class="form-control" name="client_name" readonly value="{{$newPatient->name}}">
+                        <input type="hidden" class="form-control" name="client_id" value="{{ $uniqueid }}">
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @php $types = ['Male','Female','LGBTQ','Others']; @endphp 
+                            <label for="sex" class="form-label"><b>Sex</b></label>
+                            <select class="form-control" readonly  name="sex" required>
+                                <option disabled selected>Select Sex</option>
+                                @foreach($types as $item)
+                                @if($newPatient->sex == $item)
+                                <option selected value="{{$item}}">{{$item}}</option>
+                                @else
+                                <option value="{{$item}}">{{$item}}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @php $types = ['0-12','13-19','20-30','30-40','40-65','65+','Don’t know.','Don’t want to share']; @endphp 
+                            <label for="age" class="form-label"><b>Age</b></label>
+                            <select class="form-control" readonly name="age" required>
+                                <option disabled selected>Select age</option>
+                                @foreach($types as $item)
+                                @if($newPatient->age == $item)
+                                <option selected value="{{$item}}">{{$item}}</option>
+                                @else
+                                <option value="{{$item}}">{{$item}}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="caller_id"><b>Caller ID:</b></label>
-                    <input class="form-control" type="text" name="caller_id" id="caller_id"
-                    value="{{}}"
-                    placeholder="Enter caller name"/>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="caller_name"><b>Caller Name:</b></label>
-                    <input class="form-control" type="text" name="caller_name" id="caller_name"
-                    value="{{ old('caller_name',$last? $last->caller_name : null) }}"
-                    placeholder="Enter caller name"/>
-                </div>
+                <hr>
 
                 <input type="hidden" name="referrence_id" value="1">
 
-
-                <div class="form-group">
-                    <label class="control-label" for="sex"><b>Sex:</label>
-                        @php $types = ['Male', 'Female', 'Intersex', 'Others']; @endphp
-                        <select name="sex" id="sex" list="sex_list"
-                        class="form-control @error('sex') is-invalid @enderror">
-                        <datalist id="sex_list">
-                            <option value="">Select Sex</option>
-                            @foreach($types as $item)
-                            @if($last && ($last->sex == $item))
-                            <option value="{{ $item }}" selected>{{ $item }}</option>
-                            @else
-                            <option value="{{ $item }}">{{ $item }}</option>
-                            @endif
-                            @endforeach
-                        </datalist>
-                    </select>
-                    @error('sex') {{ $message }} @enderror
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label" for="age"><b>Age: </label><br>
-                        @php $types = ['0-12','13-19', '20-30', '31-40', '41-65', '65+', 'Do not know', 'Do not want to share']; @endphp
-                        <select name="age" id="age" list="age_list"
-                        class="form-control @error('age') is-invalid @enderror">
-                        <datalist id="age_list">
-                            <option value="">Select Age</option>
-                            @foreach($types as $item)
-                            @if( $last && ($last->age == $item))
-                            <option selected value="{{ $item }}">{{ $item }}</option>
-                            @else
-                            <option value="{{ $item }}">{{ $item }}</option>
-                            @endif
-                            @endforeach
-                        </datalist>
-                    </select>
-                    @error('age') {{ $message }} @enderror
-                </div>
-                <div>
-                    <label class="control-label" for="district"><b>Location:</label>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <select type="text" class="form-control" name="location" list="location_list">
-                                        <option disabled selected="">Select districts</option>
-                                        @foreach ($districts as $item)
-                                        <option value="{{ $item->name }}">{{ $item->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                @error('district') {{ $message }} @enderror
-                            </div>
+                <div class="row g-4">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower Class', 'Lower Class']; @endphp 
+                            <label for="validationCustom01" class="form-label"><b>Socio-economic Status (SES)</b></label>
+                            <select class="form-control" readonly  name="socio_economic">
+                                <option disabled selected>Select Socio-economic</option>
+                                @foreach($types as $item)
+                                @if($newPatient->socio_economic_status ==$item )
+                                <option selected value="{{$item}}">{{$item}}</option>
+                                @else
+                                <option value="{{$item}}">{{$item}}</option>
+                                @endif
+                                @endforeach
+                            </select>
                         </div>
                     </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="validationCustom01" class="form-label"><b>Location</b></label>
+                            <select class="form-control" readonly  name="location" required>
+                                <option disabled selected>Select Location</option>
+                                @foreach($districts as $item)
+                                @if($newPatient->location == $item->name)
+                                <option selected value="{{$item->name}}">{{$item->name}}</option>
+                                @else
+                                <option value="{{$item->name}}">{{$item->name}}</option>
+                                @endif
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <hr>
 
                     <div class="form-group">
                         <label class="control-label" for="socio_economic_status"><b>Socio-economic
@@ -127,7 +131,7 @@
                             @endforeach
                         </datalist>
                     </select>
-                </div>
+                    </div>
 
                 <div class="form-group">
                     <label class="control-label" for="occupation"><b>1. Occupation:</label>

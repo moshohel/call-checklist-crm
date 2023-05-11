@@ -27,10 +27,7 @@
                         <datalist id="sex_list">
                             <option value="">Select Sex</option>
                             @foreach($types as $item)
-
-
                             <option value="{{ $item }}">{{ $item }}</option>
-
                             @endforeach
                         </datalist>
                     </select>
@@ -58,7 +55,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group" @error('district') is-invalid @enderror">
-                                <select type="text" class="form-control" required name="location" list="location_list" value="">
+                                <input type="text" class="form-control" required name="location" list="location_list" value="">
                                 <datalist id="location_list">
                                     <option selected disabled value="">Select Location</option>
                                     @foreach ($districts as $item)
@@ -77,10 +74,10 @@
 
                 <div class="form-group col-6">
                     <label class="control-label" for="socio_economic_status"><b>Socio-economic
-                            Status:</b></label>
+                            Status: <span class="required">*</span></b></label>
                     @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower
                     Class', 'Lower Class']; @endphp
-                    <select name="socio_economic_status" required list="socio_economic_status_list" id="socio_economic_status"
+                    <select name="socio_economic_status" list="socio_economic_status_list" required id="socio_economic_status"
                         class="form-control">
 
                         <datalist id="socio_economic_status_list">
@@ -98,8 +95,8 @@
             </div>
 
             <div class="form-footer pt-4 mt-4">
-                <button type="submit" class="btn btn-primary btn-default">Add Client</button>
-                <button type="submit" class="btn btn-secondary btn-default">Cancel</button>
+                <button type="submit" class="btn btn-primary btn-default">Proceed</button>
+                {{-- <button type="submit" class="btn btn-secondary btn-default">Cancel</button> --}}
             </div>
         </form>
     </div>

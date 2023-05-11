@@ -50,7 +50,7 @@
                 <i class="treeview-indicator fa fa-angle-right"></i>
             </a>
             <ul class="treeview-menu">
-                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON")|| (auth()->user()->user_group == "Supervisor"))
+                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON")|| (auth()->user()->user_group == "Supervisor") || (auth()->user()->user_group == "MHW"))
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">
@@ -58,7 +58,6 @@
                         <span class="app-menu__label">Dashboard tier -1 </span>
                     </a>
                 </li>
-                @endif
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.manual_form') }}">
@@ -66,6 +65,7 @@
                         <span class="app-menu__label">Add - Tier 1 </span>
                     </a>
                 </li>
+                @endif
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
                         href="{{ route('call_checklist.shojon.TierOneList') }}">
