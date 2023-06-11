@@ -93,7 +93,7 @@
   // console.log('{{ env('BASE_URL') }}'+"/patient/paging");
   $("#search-btn").click(function(){
     // $("#print_pdf").show();
-    // $("#print_excel").show();
+    // $("#print_excel").show(); 
   });
 });
 

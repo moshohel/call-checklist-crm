@@ -122,59 +122,39 @@
                     <label class="control-label" for="occupation"><b>1. Occupation</b></label>
                     @php $types = ['Student', 'Job holder', 'Businessperson', 'Housewife', 'Unemployed', 'Retired', 'Could not tell']; @endphp
                     <div class="form-control @error('occupation') is-invalid @enderror">
+                       @foreach($types as $item)
+                       @if($previous_data->occupation == $item)
+                       <input type="radio" name="occupation" value="{{ $item }}" checked="checked"
+                       onclick="ShowOccupationBox()"/>
+                       @else
+                       <input type="radio" name="occupation" value="{{ $item }}"
+                       onclick="ShowOccupationBox()"/>
+                       @endif
+                       {{ $item }}
+                       <br>
+                       @endforeach
+                       <input type="radio" id="chkOccupation" name="occupation"
+                       onclick="ShowOccupationBox()"/>
+                       Other (please explain)
 
-                        @foreach($types as $item)
-                        @if((old('occupation') == $item))
-                        <input type="radio" name="occupation" value="{{ $item }}" checked="checked"
-                        onclick="ShowOccupationBox()"/>
-                        @else
-                        <input type="radio" name="occupation" value="{{ $item }}"
-                        onclick="ShowOccupationBox()"/> {{ $item }}
-                        <br>
-                        @endif
-                        @endforeach
-                        <input type="radio" id="chkOccupation" name="occupation"
-                        onclick="ShowOccupationBox()"/>
-                        Other (please explain)
-
-                        <span id="OccupationBox" style="display: none;">
-                            <input class="form-control" type="text" name="other_occupation"
-                            value=""
-                            placeholder="Explain"/>
-                        </span>
-                    </div>
-                    @error('occupation') {{ $message }} @enderror
+                       <span id="OccupationBox" style="display: none;">
+                        <input class="form-control" type="text" name="other_occupation"
+                        value=""
+                        placeholder="Explain"/>
+                    </span>
                 </div>
-                <div class="form-group">
-                    <label class="control-label" for="Educational_Qualification"><b> 2. Educational Qualification:</b></label>
-                    @php $types = ['Pre-primary(Jr/Sr KG or equivalent)', 'Primary (1st-5th)', 'Secondary (5th-SSC)', 'Higher Secondary ( 11th- HSC)', 'Graduate (degree and Hons)', 'Post-Graduate and above','Never been to school','Don’t know','Other']; @endphp
-                    <select name="Educational_Qualification" list="Educational_Qualification"
-                    id="Educational_Qualification" required class="form-control">
-
-                    <datalist id="Educational_Qualification">
-                        <option value="" selected disabled><b>Select Educational Qualification</b></option>
-                        @foreach($types as $item)
-                        @if( old('Educational_Qualification') == $item))
-                        <option value="{{ $item }}">{{ $item }}</option>
-                        @else
-                        <option value="{{ $item }}">{{ $item }}</option>
-                        @endif
-                        @endforeach
-                    </datalist>
-                </select>
+                @error('occupation') {{ $message }} @enderror
             </div>
-
             <div class="form-group">
-                <label class="control-label" for="Marital_Status"><b>3. Marital Status</b></label>
-                @php $types = ['Single', 'Married', 'Divorced', 'Separated', 'Don’t know', 'Don’t want to share']; @endphp
-                <select name="Marital_Status" list="Marital_Status"
-                id="Marital_Status" class="form-control">
-
-                <datalist id="Marital_Status">
-                    <option value="" selected disabled>Select Marital Status</option>
+                <label class="control-label" for="Educational_Qualification"><b> 2. Educational Qualification:</b></label>
+                @php $types = ['Pre-primary(Jr/Sr KG or equivalent)', 'Primary (1st-5th)', 'Secondary (5th-SSC)', 'Higher Secondary ( 11th- HSC)', 'Graduate (degree and Hons)', 'Post-Graduate and above','Never been to school','Don’t know','Other']; @endphp
+                <select name="Educational_Qualification" list="Educational_Qualification"
+                id="Educational_Qualification" required class="form-control">
+                <datalist id="Educational_Qualification">
+                    <option value="" selected disabled><b>Select Educational Qualification</b></option>
                     @foreach($types as $item)
-                    @if( old('Marital_Status') == $item))
-                    <option value="{{ $item }}">{{ $item }}</option>
+                    @if($previous_data->education == $item)
+                    <option selected value="{{ $item }}">{{ $item }}</option>
                     @else
                     <option value="{{ $item }}">{{ $item }}</option>
                     @endif
@@ -184,85 +164,103 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="Session_Number"><b>4. Session Number</b></label>
-            @php $types = ['1st session', '2nd session', '3rd session', '4th session', '6th session', '7th session','8th session','8th session','9th session','10th session','Last session']; @endphp
-            <div class="form-control @error('Session_Number') is-invalid @enderror">
-
+            <label class="control-label" for="Marital_Status"><b>3. Marital Status</b></label>
+            @php $types = ['Single', 'Married', 'Divorced', 'Separated', 'Don’t know', 'Don’t want to share']; @endphp
+            <select name="Marital_Status" list="Marital_Status"
+            id="Marital_Status" class="form-control">
+            <datalist id="Marital_Status">
+                <option value="" selected disabled>Select Marital Status</option>
                 @foreach($types as $item)
-                @if((old('Session_Number') == $item))
-                <input type="radio" name="Session_Number" required value="{{ $item }}" checked="checked"
-                onclick="ShowSessionBox()"/>
+                @if($previous_data->marital == $item)
+                <option selected value="{{ $item }}">{{ $item }}</option>
                 @else
-                <input type="radio" name="Session_Number" required value="{{ $item }}"
-                onclick="ShowSessionBox()"/>
+                <option value="{{ $item }}">{{ $item }}</option>
                 @endif
-                {{ $item }}
-                <br>
                 @endforeach
-                <input type="radio" id="chkSession" name="Session_Number"
-                onclick="ShowSessionBox()"/>
-                Other (please explain)
+            </datalist>
+        </select>
+    </div>
 
-                <span id="SessionBox" style="display: none;">
-                    <input class="form-control" type="text" name="other_Session_Number"
-                    value=""
-                    placeholder="Explain"/>
-                </span>
-            </div>
-            @error('Session_Number') {{ $message }} @enderror
+    <div class="form-group">
+        <label class="control-label" for="Session_Number"><b>4. Session Number</b></label>
+        @php $types = ['1st session', '2nd session', '3rd session', '4th session', '6th session', '7th session','8th session','8th session','9th session','10th session','Last session']; @endphp
+        <div class="form-control @error('Session_Number') is-invalid @enderror">
+
+            @foreach($types as $item)
+            @if((old('Session_Number') == $item))
+            <input type="radio" name="Session_Number" required value="{{ $item }}" checked="checked"
+            onclick="ShowSessionBox()"/>
+            @else
+            <input type="radio" name="Session_Number" required value="{{ $item }}"
+            onclick="ShowSessionBox()"/>
+            @endif
+            {{ $item }}
+            <br>
+            @endforeach
+            <input type="radio" id="chkSession" name="Session_Number"
+            onclick="ShowSessionBox()"/>
+            Other (please explain)
+
+            <span id="SessionBox" style="display: none;">
+                <input class="form-control" type="text" name="other_Session_Number"
+                value=""
+                placeholder="Explain"/>
+            </span>
         </div>
-
-        <div class="form-group">
-            <label class="control-label" for="distress_rating"><b>5. Distress Rating</b> <br>[0 means
-            lowest wellbeing, 10 means Highest wellbeing] </label>
-            {{-- <div class="col-md-auto"> --}}
-                {{-- <input class="form-control @error('distress_rating') is-invalid @enderror" type="text"
-                name="distress_rating" id="sliderPre" class="slider"/> --}}
-                {{-- <input class="form-control @error('distress_rating') is-invalid @enderror" type="number" name="distress_rating" min="1" max="10" value="0"> --}}
-
-                <select name="distress_rating" required 
-                class="form-control @error('distress_rating') is-invalid @enderror">
-                <option value="">Select a Value</option>
-                @for ($i = 0; $i < 11; $i++)
-                @if( old('distress_rating') && (old('distress_rating') == $i))
-                <option value={{ $i }} selected> {{ $i }} </option>
-                @else
-                <option value={{ $i }}>{{ $i }}</option>
-                @endif
-                @endfor
-            </select>
-        {{-- </div> --}}
-        @error('distress_rating') {{ $message }} @enderror
+        @error('Session_Number') {{ $message }} @enderror
     </div>
 
     <div class="form-group">
-        <label class="control-label" for="ghq"><b>6. WHO-5 wellbeing question and scale</b></label> 
+        <label class="control-label" for="distress_rating"><b>5. Distress Rating</b> <br>[0 means
+        lowest wellbeing, 10 means Highest wellbeing] </label>
+        {{-- <div class="col-md-auto"> --}}
+            {{-- <input class="form-control @error('distress_rating') is-invalid @enderror" type="text"
+            name="distress_rating" id="sliderPre" class="slider"/> --}}
+            {{-- <input class="form-control @error('distress_rating') is-invalid @enderror" type="number" name="distress_rating" min="1" max="10" value="0"> --}}
 
-        <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Questionniare</a>
-        <br>
-        @include('call_checklist.shojon.tier2.questrion_from')
-        <input type="text" id="ghq" name="ghq" value="{{old('ghq','Incomplete')}}"
-        style="text-align:center;" readonly>           
-    </div>
+            <select name="distress_rating" required 
+            class="form-control @error('distress_rating') is-invalid @enderror">
+            <option value="">Select a Value</option>
+            @for ($i = 0; $i < 11; $i++)
+            @if( old('distress_rating') && (old('distress_rating') == $i))
+            <option value={{ $i }} selected> {{ $i }} </option>
+            @else
+            <option value={{ $i }}>{{ $i }}</option>
+            @endif
+            @endfor
+        </select>
+    {{-- </div> --}}
+    @error('distress_rating') {{ $message }} @enderror
+</div>
 
-    <div class="form-group">
-        <label class="control-label"><b>7. Presenting Problems list and problem rating</b></label><br>
-        <table class="table table-bordered border-primary" id="dynamic_field">
-            <thead>
-                <tr> 
-                  <th scope="col">Symptoms</th>
-                  <th scope="col">Severity ( Rate in 0-100)</th>
-                  <th scope="col">Action</th>
-              </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><input type="text" name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" /></td>  
-              <td><input type="text" name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" /></td> 
-              <td><button type="button" name="add" id="add" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
+<div class="form-group">
+    <label class="control-label" for="ghq"><b>6. WHO-5 wellbeing question and scale</b></label> 
+
+    <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Questionniare</a>
+    <br>
+    @include('call_checklist.shojon.tier2.questrion_from')
+    <input type="text" id="ghq" name="ghq" value="{{old('ghq','Incomplete')}}"
+    style="text-align:center;" readonly>           
+</div>
+
+<div class="form-group">
+    <label class="control-label"><b>7. Presenting Problems list and problem rating</b></label><br>
+    <table class="table table-bordered border-primary" id="dynamic_field">
+        <thead>
+            <tr> 
+              <th scope="col">Symptoms</th>
+              <th scope="col">Severity ( Rate in 0-100)</th>
+              <th scope="col">Action</th>
           </tr>
-      </tbody> 
-  </table> 
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="text" name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" /></td>  
+          <td><input type="text" name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" /></td> 
+          <td><button type="button" name="add" id="add" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
+      </tr>
+  </tbody> 
+</table> 
 </div>
 
 <div class="form-group">
@@ -435,21 +433,21 @@
     @php $types = ['Depression scale','Anxiety','Social Interaction Anxiety scale ','Obsessive- compulsive disorder ','Beck hopelessness scale','Cognitive distortion scale','Depression, Anxiety, stress scale','Somatic complaint scale','Event'];@endphp       
     <div class="form-control @error('PsychometricToolscore') is-invalid @enderror">
         <label class="control-label">Tool Name:</label><br>
-            <div class="form-control @error('PsychometricTool') is-invalid @enderror">
-                @foreach($types as $item)
-                @if( old('hearing_source') == $item)
-                <input type="radio" name="PsychometricTool" value="{{ $item }}"
-                onclick="showPresentCotinuation()" checked="checked"/>
-                @else
-                <input type="radio" name="PsychometricTool" value="{{ $item }}"
-                onclick="showPresentCotinuation()"/>
-                @endif
-                {{ $item }}
-                <br>
-                @endforeach
-            </div>
+        <div class="form-control @error('PsychometricTool') is-invalid @enderror">
+            @foreach($types as $item)
+            @if( old('hearing_source') == $item)
+            <input type="radio" name="PsychometricTool" value="{{ $item }}"
+            onclick="showPresentCotinuation()" checked="checked"/>
+            @else
+            <input type="radio" name="PsychometricTool" value="{{ $item }}"
+            onclick="showPresentCotinuation()"/>
+            @endif
+            {{ $item }}
+            <br>
+            @endforeach
+        </div>
         <label class="control-label">Score:</label><br>
-            <input type="text" name="Psychometricscore" class="form-control">
+        <input type="text" name="Psychometricscore" class="form-control">
     </div>
     @error('PsychometricToolscore') {{ $message }} @enderror
 </div>
@@ -566,7 +564,7 @@
          </label>
      </label>
      @include('call_checklist.shojon.tier2._referral_tier_three')
-    </div>
+ </div>
 
  <div class="form-control">
     <label class="control-label" for="client_referral">
@@ -650,12 +648,12 @@
                         <div class="row">
                             <div class="col">
                               <input type="date" class="form-control" name="next_session_date">
-                            </div>
-                            <div class="col">
+                          </div>
+                          <div class="col">
                               <input type="time" class="form-control" name="next_session_time">
-                            </div>
-                        </div>
-                        <br>
+                          </div>
+                      </div>
+                      <br>
                         <!-- <label class="control-label"style="width: 90%;">
                             <input type="date" name="next_session" class="form-control">
 

@@ -18,11 +18,11 @@
                 </tr>
                 <tr>
                     <th class="d-none d-md-table-cell">Refer From</th>
-                    <td>{{ $referral[0]->referr_to }}</td>
+                    <td>{{ $referral[0]->referr_from }}</td>
                 </tr>
                 <tr>
                     <th class="d-none d-md-table-cell">Refer To</th>
-                    <td>{{ $referral[0]->referr_from }}</td>
+                    <td>{{ $referral[0]->referr_to }}</td>
                 </tr>
                 <tr>
                     <th class="d-none d-md-table-cell">Client ID</th>
@@ -101,6 +101,7 @@
                                 <label for="exampleFormControlInput7">Reason</label>
                                 <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->reason_for_therapy }}" id="exampleFormControlInput7" >
                             </div>
+                            
                             <button type="submit" class="btn btn-danger">Reffer</button>
                         </form>
                     </div>

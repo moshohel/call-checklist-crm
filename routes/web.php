@@ -66,7 +66,7 @@ Route::group(['prefix' => 'patient'], function () {
     Route::get('/reassign', [PatientController::class, 'createReassignRequest'])->name('patient.reassign')->middleware('auth');
 
     Route::get('/', 'Patient\PatientController@index')->name('patients')->middleware('auth');
-    Route::get('/show/{unique_id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');
+    // Route::get('/show/{unique_id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');
     Route::get('/showInfo/{phone}', 'Patient\PatientController@showInfo')->name('patient.showInfo')->middleware('auth');
     Route::get('/paging', 'Patient\PatientController@paging')->name('patient.paging')->middleware('auth');
     Route::get('/search', 'Patient\PatientController@search')->name('patient.search')->middleware('auth');
@@ -261,9 +261,9 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::group(['middleware' => 'shojon_agent'], function () {
             });
         });
-    });
+});
 
-    Route::get('sms_test/{message}/{phone_number}', 'CallChecklist\ShojonController@sendSms');
+Route::get('sms_test/{message}/{phone_number}', 'CallChecklist\ShojonController@sendSms');
 });
 
 Auth::routes();

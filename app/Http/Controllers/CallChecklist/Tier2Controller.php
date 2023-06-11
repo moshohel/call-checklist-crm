@@ -25,7 +25,7 @@ class Tier2Controller extends Controller
         $pageTitle = $this->pageTitle;
         $districts = DB::table('districts')->orderBy('name', 'ASC')->get();
         $newPatient = DB::table('patients')->where('unique_id', $uniqueid)->first();
-        return view('call_checklist.shojon.tier_one.create', compact('pageTitle', 'districts', 'uniqueid', 'newPatient'));
+        // return view('call_checklist.shojon.tier_one.create', compact('pageTitle', 'districts', 'uniqueid', 'newPatient','previous_data'));
     }
 
     public function tire2fromblade($uniqueid, $session_id)
@@ -48,7 +48,8 @@ class Tier2Controller extends Controller
             //     $last = $previous_data->last();
             // }
             // $districts = DB::table('districts')->get();
-            return view('call_checklist.shojon.tier2.create_tier2', compact('pageTitle', 'districts', 'uniqueid', 'newPatient', 'session_id'));
+            $previous_data = DB::table('sojon_tier2s')->where('caller_id',$uniqueid)->latest()->first();
+            return view('call_checklist.shojon.tier2.create_tier2', compact('pageTitle', 'districts', 'uniqueid', 'newPatient', 'session_id','previous_data'));
         } catch (ModelNotFoundException $exception) {
             return back()->withError($exception->getMessage())->withInput();
         } catch (\Exception $e) {

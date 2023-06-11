@@ -93,7 +93,7 @@
                                         </td
                                     </tr>
                                     <tr>
-                                        <td>WHO</td>
+                                        <td>GHQ-score</td>
                                         <td>{{ $query->who }}</td>
                                     </tr>
                                     <tr>

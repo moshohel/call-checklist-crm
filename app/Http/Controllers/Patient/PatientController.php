@@ -94,13 +94,12 @@ class PatientController extends Controller
             $id = $item->id;
             $phone = $item->phone_number;
             $unique_id = $item->unique_id;
-            $view_button = "<a href='patient/show/$unique_id' class='btn btn-info m-1'>Actions</a>";
             // $tier_two = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#ReferralModal'>R-Tier 2</a>";
             // $tier_three = "<a href='#' class='btn btn-info' data-toggle='modal' data-target='#ReferralModal'>R-Tier 3</a>";
             $showInfo = "<a href='patient/showInfo/$unique_id' class='btn btn-info m-1'>History</a>";
             $output[] = array(
                 $item->name, $item->phone_number, $item->sex, $item->age, $item->location,
-                $item->unique_id, $item->service_providers_name, $item->created_at, "$showInfo&nbsp;&nbsp;$view_button&nbsp;&nbsp;"
+                $item->unique_id, $item->service_providers_name, $item->created_at, "$showInfo&nbsp;&nbsp;"
             );
         }
 
@@ -110,7 +109,7 @@ class PatientController extends Controller
             "recordsFiltered" => $recordsFiltered,
             "data"            => $output   // total data array
         );
-        echo json_encode($json_data);
+        echo json_encode($json_data); 
     }
 
     /**
@@ -260,18 +259,18 @@ class PatientController extends Controller
      * @param  \App\Patient  $patient
      * @return \Illuminate\Http\Response
      */
-    public function show($unique_id)
-    {
-        // dd($unique_id);
-        $patient = DB::table('patients')
-            ->where('unique_id', '=', $unique_id)
-            ->first();
-        // dd($patient);
-        // $patient = Patient::distinct()->get(['unique_id']);
-        // dd($patient);
-        // return view('pages.patient.show')->with('patient', $patient);
-        return view('call_checklist.patient.show', compact('patient'));
-    }
+    // public function show($unique_id)
+    // {
+    //     // dd($unique_id);
+    //     $patient = DB::table('patients')
+    //         ->where('unique_id', '=', $unique_id)
+    //         ->first();
+    //     // dd($patient);
+    //     // $patient = Patient::distinct()->get(['unique_id']);
+    //     // dd($patient);
+    //     // return view('pages.patient.show')->with('patient', $patient);
+    //     return view('call_checklist.patient.show', compact('patient'));
+    // }
 
     public function showInfo($unique_id)
     {
