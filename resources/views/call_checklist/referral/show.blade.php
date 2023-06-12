@@ -6,7 +6,7 @@
         <h2>Reffer</h2>
     </div>
     <div class="card-body">
-        <div class="" id="recent-orders"> 
+        <div class="" id="recent-orders">
             <table class="table table-responsive table-responsive-large" style="width:100%" id="sampleTable">
                 <tr>
                     <th class="d-none d-md-table-cell">Refer Date</th>
@@ -50,9 +50,9 @@
                 </tr>
             </table>
         </div>
-        
+
         <div class="row">
-            
+
             <div class="col">
 
                 <a href="#deleteModal{{ $referral[0]->id }}" data-toggle="modal" class="btn btn-danger">Reffer</a>
@@ -69,38 +69,58 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{!! route("referral.referConsultant", $referral[0]->id) !!}" method="post" enctype="multipart/form-data">
+                        <form action="{!! route("referral.referConsultant", $referral[0]->id) !!}" method="post"
+                            enctype="multipart/form-data">
                             {{ csrf_field() }}
 
                             <div class="form-group col-6">
                                 <label for="exampleFormControlInput7">Preferred Consultant</label>
-                                <input type="text" class="form-control" name="preferred_therapist_or_psychiatrist" readonly  value="{{ $referral[0]->preferred_therapist_or_psychiatrist }}" id="exampleFormControlInput7" >
+                                <input type="text" class="form-control" name="preferred_therapist_or_psychiatrist"
+                                    readonly value="{{ $referral[0]->preferred_therapist_or_psychiatrist }}"
+                                    id="exampleFormControlInput7">
                             </div>
 
                             <div class="form-group col-6">
                                 <label for="exampleFormControlInput7">Preferred Time</label>
-                                <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->preferred_time }}" id="exampleFormControlInput7" >
+                                <input type="text" class="form-control" name="preferred_time" readonly
+                                    value="{{ $referral[0]->preferred_time }}" id="exampleFormControlInput7">
                             </div>
 
                             <div class="form-group col-6">
                                 <label for="exampleFormControlInput7">Gender</label>
-                                <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->gender }}" id="exampleFormControlInput7" >
+                                <input type="text" class="form-control" name="preferred_time" readonly
+                                    value="{{ $referral[0]->gender }}" id="exampleFormControlInput7">
                             </div>
 
                             <div class="form-group col-6">
                                 <label for="exampleFormControlInput7">Referral types</label>
-                                <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->Referral_types }}" id="exampleFormControlInput7" >
+                                <input type="text" class="form-control" name="preferred_time" readonly
+                                    value="{{ $referral[0]->Referral_types }}" id="exampleFormControlInput7">
                             </div>
 
                             {{-- <div class="form-group col-6">
                                 <label for="exampleFormControlInput7">Diagnosis</label>
-                                <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->diagnosis }}" id="exampleFormControlInput7" >
+                                <input type="text" class="form-control" name="preferred_time" readonly
+                                    value="{{ $referral[0]->diagnosis }}" id="exampleFormControlInput7">
                             </div> --}}
 
                             <div class="form-group col-6">
                                 <label for="exampleFormControlInput7">Reason</label>
-                                <input type="text" class="form-control" name="preferred_time" readonly  value="{{ $referral[0]->reason_for_therapy }}" id="exampleFormControlInput7" >
+                                <input type="text" class="form-control" name="preferred_time" readonly
+                                    value="{{ $referral[0]->reason_for_therapy }}" id="exampleFormControlInput7">
                             </div>
+
+                            <div class="form-group col-6">
+                                <label for="exampleFormControlSelect3">Consultent</label>
+                                <select class="form-control" name="referred_therapist_or_psychiatrist_user_id" value=""
+                                        id="exampleFormControlSelect3">
+                                    <option value="" disabled selected hidden>Consultent</option>
+                                    @foreach ($consultants as $consultant)
+                                        <option value="{{ $consultant->user_id }}">{{ $consultant->full_name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+
                             <button type="submit" class="btn btn-danger">Reffer</button>
                         </form>
                     </div>
@@ -111,6 +131,6 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 @endsection

@@ -124,7 +124,21 @@ class PatientController extends Controller
         if ($request->ajax()) {
             $output = '';
 
-            $data = ShojonTierOne::where('caller_id', 'like', $request->Search . '%')->orWhere('phone_number', 'like', $request->Search . '%')->orWhere('caller_name', 'like', $request->Search . '%')->where('created_at', '>=', $date)->get();
+            $request = $request;
+            // $data = ShojonTierOne::where('created_at', '>=', $date)->where('caller_id', 'like', $request->Search . '%')->orWhere('phone_number', 'like', $request->Search . '%')->orWhere('caller_name', 'like', $request->Search . '%')->get();
+
+            $Search = $request->Search;
+
+            $d = ShojonTierOne::where(function ($query) {
+                $query->where('created_at', '>=', \Carbon\Carbon::today()->subDays(7));
+            })->where(function ($query) use ($Search) {
+                $query->where('caller_id', 'like', $Search . '%')
+                    ->orWhere('phone_number', 'like', $Search . '%')
+                    ->orWhere('caller_name', 'like', $Search . '%');
+            });
+
+            $data = $d->get();
+
             if ($data) {
                 foreach ($data as $key => $row) {
                     $output .=
@@ -182,6 +196,7 @@ class PatientController extends Controller
     }
     public function createReassignRequest(Request $request)
     {
+
         $s_id = Session::where('unique_id', $request->unique_id)->where('session_taken', 'No')->first();
         if ($s_id) {
             $data = new Reassign_request;
@@ -351,5 +366,10 @@ class PatientController extends Controller
 
         //   return back();
         return redirect()->route('patients');
+    }
+
+    public function cilentCallForm()
+    {
+        return view("call_checklist.patient.__cilent_call_form");
     }
 }

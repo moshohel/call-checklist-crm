@@ -21,7 +21,7 @@ class User extends Authenticatable
     public $timestamps = false;
 
     protected $fillable = [
-        'user', 'pass', 'user_level', 'full_name', 'user_group', 'image', 'user_id',
+        'user', 'pass', 'user_level', 'full_name', 'user_group', 'image', 'user_id', 'email', 'age', 'gender', 'designation', 'job_location', 'contact_number', 'contact_number_has_whatsapp', 'e_signature', 'bmdc_reg_number',
     ];
 
     /**

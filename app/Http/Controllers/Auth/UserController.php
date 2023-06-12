@@ -80,20 +80,30 @@ class UserController extends Controller
      */
     public function update(Request $request, $user_id)
     {
+        // dd($request);
         global $image;
         $request->validate([
             'full_name' => ['required', 'string', 'max:255'],
-            // 'user' => ['required', 'unique:vicidial_users', 'string', 'max:255'],
-            // 'user_type' => ['required', 'string', 'max:255'],
-            // 'user_group' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            // 'email' => ['string', 'email', 'max:255', 'unique:vicidial_users'],
             'pass' => ['required', 'string', 'min:8'],
+            'designation' => ['string', 'max:255', 'nullable'],
+            'gender' => ['string', 'max:15', 'nullable'],
+            'age' => ['numeric', 'max:110', 'nullable'],
+            'contact_number' => ['numeric', 'max:99999999999'],
+            'job_location' => ['string', 'max:255', 'nullable'],
+            'bmdc_reg_number' => ['string', 'max:255', 'nullable'],
         ]);
         // Post::where('id', 3)->$data = array();
         if ($request->file('image')) {
             $file = $request->file('image');
             $filename = date('YmdHi') . $file->getClientOriginalName();
             $file->move(public_path('Image/Profile'), $filename);
+        }
+
+        if ($request->file('e_signature')) {
+            $file = $request->file('e_signature');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('Image/e_signature'), $filename);
         }
 
         // if ($request->image) {
@@ -111,10 +121,18 @@ class UserController extends Controller
         // $user = User::whereUserId($user_id)->get();
         $user = User::where('user_id', $user_id)->first();
         // dd($user);
-        // dd($user->user_id);
+        if ($request->email != '' && $user->email != $request->email) {
+            $request->validate([
+                'email' => ['string', 'email', 'max:255', 'unique:vicidial_users'],
+            ]);
+        }
+
         $data = $request->only($user->getFillable());
         if ($request->file('image')) {
             $data['image'] = date('YmdHi') . $data['image']->getClientOriginalName();
+        }
+        if ($request->file('e_signature')) {
+            $data['e_signature'] = date('YmdHi') . $data['e_signature']->getClientOriginalName();
         }
         // print_r($data['name'], '\n');
         // dd($data);

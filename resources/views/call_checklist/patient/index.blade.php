@@ -112,7 +112,18 @@
         // url: '{{ route("patient.paging") }}'
         ,type: 'GET'
         ,data:{_token: CSRF_TOKEN,additional_query: additional_query} //,'records_total': records_total
-    }
+    },
+    // "columns": [
+    //                 { "data": "Name", "orderable": true },
+    //                 { "data": "Phone", "orderable": false }
+                    
+    //             ],
+    // "order": [[0, "asc"]]
+    // "aoColumnDefs": [
+    //     {
+    //     "sType": "string"
+    //     }
+    //   ]
   });
 }
 

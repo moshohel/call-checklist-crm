@@ -61,6 +61,7 @@ Route::group(['prefix' => 'patient'], function () {
     Route::get('/popup/{referrence_id}/{number}', [PatientController::class, 'pupup'])->name('patient.popup')->middleware('shojon_agent');
     Route::get('/livesearch', [PatientController::class, 'searchExisting'])->middleware('auth');
     Route::get('/cilent_call', [PatientController::class, 'cilent_calls'])->name('patient.cilent_call')->middleware('auth');
+    Route::get('/cilent_call_form', [PatientController::class, 'cilentCallForm'])->name('patient.cilentCallForm')->middleware('auth');
     Route::get('/cilent_call_Number', [PatientController::class, 'allcilent_calls_number'])->middleware('auth');
     Route::get('/create/{number}', [PatientController::class, 'create'])->name('patient.create')->middleware('auth');
     Route::get('/reassign', [PatientController::class, 'createReassignRequest'])->name('patient.reassign')->middleware('auth');
@@ -113,7 +114,7 @@ Route::group(['prefix' => 'session'], function () {
     Route::get('/create/{unique_id}/{id}', 'Session\SessionController@create')->name('session.create');
     Route::get('/edit/{unique_id}/{id}', 'Session\SessionController@edit')->name('session.edit');
     Route::post('/create/{unique_id}/{id}', 'Session\SessionController@store')->name('session.store');
-    Route::post('/edit/{id}', 'Session\SessionController@update')->name('session.update');
+    Route::post('/edit/{request_id}/{doctor_id}', 'Session\SessionController@update')->name('session.update');
     Route::post('/referConsultant/{id}', 'Session\SessionController@referConsultant')->name('session.referConsultant');
     Route::get('/delete/{id}', 'Session\SessionController@delete')->name('session.delete');
 
@@ -173,6 +174,8 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('/tier-one-details/{id}', [TierOneController::class, 'TierOneClientDetails'])->name('call_checklist.shojon.TierOneview');
             Route::get('/tier-one-edit/{caller_id}', [TierOneController::class, 'TierOneclientUpdate'])->name('call_checklist.shojon.TierOneedit');
             Route::post('/tier-One-update', [TierOneController::class, 'TierOneUpdate'])->name('call_checklist.shojon.tierOne_update');
+
+            Route::get('/referral_table', [TierOneController::class, 'referral_table']);
         });
     });
 
@@ -221,7 +224,7 @@ Route::group(['prefix' => 'call-checklist'], function () {
             // Route::get('/tier-one-edit/{caller_id}', [TierOneController::class, 'TierOneclientUpdate'])->name('call_checklist.shojon.TierOneedit');
             // Route::post('/tier-One-update', [TierOneController::class, 'TierOneUpdate'])->name('call_checklist.shojon.tierOne_update');
 
-            Route::get('/referral_table', [TierOneController::class, 'referral_table']);
+            // Route::get('/referral_table', [TierOneController::class, 'referral_table']);
             // Route::get('/termination_table', [TierOneController::class, 'termination_table']);
 
             //tire 2 route 
@@ -246,14 +249,6 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('/details/{id}', [shojonTierThree::class, 'clientDetails'])->name('shojon.tireThree.view');
             Route::get('/edit/{id}', [shojonTierThree::class, 'clientUpdate'])->name('shojon.tireThree.edit');
             Route::post('/update', [shojonTierThree::class, 'TierTwoUpdate'])->name('shojon.tireThree.update');
-
-            ///test route
-
-            // Route::get('/user/info',[AygasController::class,'userInfo'])->name('user.info');
-            // Route::get('dashboard', function()call_checklist.shojon.Patientlist
-            // {
-            //     echo " test ------------";
-            // })->name('call_checklist.kpr.dashboard');
 
             Route::group(['middleware' => 'shojon_admin'], function () {
             });

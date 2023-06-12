@@ -8,7 +8,7 @@
     <div>
         <h1><i class="fa fa-tags"></i> {{ $pageTitle }}</h1>
     </div>
-</div> 
+</div>
 
 
 
@@ -43,7 +43,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            @php $types = ['Male','Female','LGBTQ','Others']; @endphp 
+                            @php $types = ['Male','Female','LGBTQ','Others']; @endphp
                             <label for="validationCustom01" class="form-label"><b>Sex</b></label>
                             <select class="form-control" readonly  name="sex" required>
                                 <option disabled selected>Select Sex</option>
@@ -60,7 +60,7 @@
 
                     <div class="col-md-3">
                         <div class="form-group">
-                            @php $types = ['0-12','13-19','20-30','30-40','40-65','65+','Don’t know.','Don’t want to share']; @endphp 
+                            @php $types = ['0-12','13-19','20-30','30-40','40-65','65+','Don’t know.','Don’t want to share']; @endphp
                             <label for="validationCustom01" class="form-label"><b>Age</b></label>
                             <select class="form-control" readonly name="age" required>
                                 <option disabled selected>Select age</option>
@@ -84,7 +84,7 @@
                 <div class="row g-4">
                     <div class="col-md-3">
                         <div class="form-group">
-                            @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower Class', 'Lower Class']; @endphp 
+                            @php $types = ['Upper', 'Upper Middle Class', 'Middle Class', 'Lower Middle Class', 'Upper Lower Class', 'Lower Class']; @endphp
                             <label for="validationCustom01" class="form-label"><b>Socio-economic Status (SES)</b></label>
                             <select class="form-control" readonly  name="socio_economic">
                                 <option disabled selected>Select Socio-economic</option>
@@ -146,7 +146,7 @@
                     @error('occupation') {{ $message }} @enderror
                 </div>
                 <div class="form-group">
-                    <label class="control-label" for="Educational_Qualification"><b> 2. Educational Qualification:</b></label>
+                    <label class="control-label" for="Educational_Qualification"><span class="required">*</span><b> 2. Educational Qualification:</b></label>
                     @php $types = ['Pre-primary(Jr/Sr KG or equivalent)', 'Primary (1st-5th)', 'Secondary (5th-SSC)', 'Higher Secondary ( 11th- HSC)', 'Graduate (degree and Hons)', 'Post-Graduate and above','Never been to school','Don’t know','Other']; @endphp
                     <select name="Educational_Qualification" list="Educational_Qualification"
                     id="Educational_Qualification" required class="form-control">
@@ -184,7 +184,7 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="Session_Number"><b>4. Session Number</b></label>
+            <label class="control-label" for="Session_Number"><span class="required">*</span><b>4. Session Number</b></label>
             @php $types = ['1st session', '2nd session', '3rd session', '4th session', '6th session', '7th session','8th session','8th session','9th session','10th session','Last session']; @endphp
             <div class="form-control @error('Session_Number') is-invalid @enderror">
 
@@ -213,14 +213,14 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label" for="distress_rating"><b>5. Distress Rating</b> <br>[0 means
+            <label class="control-label" for="distress_rating"><span class="required">*</span><b>5. Distress Rating</b> <br>[0 means
             lowest wellbeing, 10 means Highest wellbeing] </label>
             {{-- <div class="col-md-auto"> --}}
                 {{-- <input class="form-control @error('distress_rating') is-invalid @enderror" type="text"
                 name="distress_rating" id="sliderPre" class="slider"/> --}}
                 {{-- <input class="form-control @error('distress_rating') is-invalid @enderror" type="number" name="distress_rating" min="1" max="10" value="0"> --}}
 
-                <select name="distress_rating" required 
+                <select name="distress_rating" required
                 class="form-control @error('distress_rating') is-invalid @enderror">
                 <option value="">Select a Value</option>
                 @for ($i = 0; $i < 11; $i++)
@@ -236,20 +236,20 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label" for="ghq"><b>6. WHO-5 wellbeing question and scale</b></label> 
+        <label class="control-label" for="ghq"><b>6. WHO-5 wellbeing question and scale</b></label>
 
         <a href="#" class="btn btn-info btn-sm edit" data-id="#" data-toggle="modal" data-target="#editModal" >Questionniare</a>
         <br>
         @include('call_checklist.shojon.tier2.questrion_from')
         <input type="text" id="ghq" name="ghq" value="{{old('ghq','Incomplete')}}"
-        style="text-align:center;" readonly>           
+        style="text-align:center;" readonly>
     </div>
 
     <div class="form-group">
         <label class="control-label"><b>7. Presenting Problems list and problem rating</b></label><br>
         <table class="table table-bordered border-primary" id="dynamic_field">
             <thead>
-                <tr> 
+                <tr>
                   <th scope="col">Symptoms</th>
                   <th scope="col">Severity ( Rate in 0-100)</th>
                   <th scope="col">Action</th>
@@ -257,16 +257,16 @@
           </thead>
           <tbody>
             <tr>
-              <td><input type="text" name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" /></td>  
-              <td><input type="text" name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" /></td> 
+              <td><input type="text" name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" /></td>
+              <td><input type="text" name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" /></td>
               <td><button type="button" name="add" id="add" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
           </tr>
-      </tbody> 
-  </table> 
+      </tbody>
+  </table>
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="Problem_duration"><b>8. Problem duration:</b></label>
+    <label class="control-label" for="Problem_duration"><span class="required">*</span><b>8. Problem duration:</b></label>
     @php $types = ['<1 month', '1 to 3 months', '4 to 6 months ', '6 to 12 month ', '12 to 24 months ', '<24 month','More than 5 years','More than 10 years ','Don’t know','Other']; @endphp
     <select name="Problem_duration" required list="Problem_duration"
     id="Problem_duration" class="form-control">
@@ -285,20 +285,20 @@
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="Problem_duration"><b>9. Illness/ problem history:</b></label>  
+  <label class="control-label" for="Problem_duration"><b>9. Illness/ problem history:</b></label>
   <textarea class="form-control" name="problem_history">
 
   </textarea>
 </div>
 <div class="form-group">
-  <label class="control-label" for="Problem_duration"><b>10. Family History:</b></label>  
+  <label class="control-label" for="Problem_duration"><b>10. Family History:</b></label>
   <textarea class="form-control" name="Family_History">
 
   </textarea>
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="suicidal_risk"><b>11. Does the client have suicidal Ideation?</b></label>
+    <label class="control-label" for="suicidal_risk"><span class="required">*</span><b>11. Does the client have suicidal Ideation?</b></label>
     @php $types = ['Yes', 'No', 'Don’t know']; @endphp
     <select name="suicidal_risk" required id="suicidal_risk" list="suicidal_risk_list"
     class="form-control @error('suicidal_risk') is-invalid @enderror">
@@ -317,7 +317,7 @@
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="self_harm_history"><b>12. Does the client have any self-harm history?</b></label>
+    <label class="control-label" for="self_harm_history"><span class="required">*</span><b>12. Does the client have any self-harm history?</b></label>
     @php $types = ['Yes', 'No']; @endphp
     <select name="self_harm_history" required id="self_harm_history" list="suicidal_risk_list"
     class="form-control @error('self_harm_history') is-invalid @enderror">
@@ -354,7 +354,7 @@
 
 
 <div class="form-group">
-    <label class="control-label" for="PresentCotinuation"><b>14. Present Continuation of Psychiatric Medication:</b>
+    <label class="control-label" for="PresentCotinuation"><span class="required">*</span><b>14. Present Continuation of Psychiatric Medication:</b>
     </label><br>
     @php $types = ['Yes','No']; @endphp
     <div class="form-control @error('hearing_source') is-invalid @enderror">
@@ -399,7 +399,7 @@
         @endforeach
         <input type="checkbox" id="chkSecondaryReason" name="Physical_Concern_history"
         onclick="ShowSecondaryReasonBox()"/>
-        Others (please explain)<br> 
+        Others (please explain)<br>
 
         <span id="SecondaryReasonBox" style="display: none;">
             <input class="form-control" type="text" name="other_Physical_Concern_history[]"
@@ -412,7 +412,7 @@
 
 <div class="form-group">
     <label class="control-label" for="current_differential_diagnosis"><b>17. Current Differential Diagnosis:</b></label>
-    @php $types = ['Major Depressive Disorder', 'Anxiety Disorder', 'Panic Disorder','Obsessive Compulsive Disorder','Social Anxiety Disorder','Eating Disorder','Insomnia/sleep related disorder','Schizophrenia','Bipolar Disorder','Personality Disorder','Autism spectrum disorder','Attention deficit hyperactivity disorder','Learning disorder (LD)','Dementia','Alzheimer','Phobia','Post-traumatic stress disorder (PTSD)','Substance Abuse Disorder','Sexual disorder','Gender Identity disorder','Conversion disorder','Conduct','No']; @endphp     
+    @php $types = ['Major Depressive Disorder', 'Anxiety Disorder', 'Panic Disorder','Obsessive Compulsive Disorder','Social Anxiety Disorder','Eating Disorder','Insomnia/sleep related disorder','Schizophrenia','Bipolar Disorder','Personality Disorder','Autism spectrum disorder','Attention deficit hyperactivity disorder','Learning disorder (LD)','Dementia','Alzheimer','Phobia','Post-traumatic stress disorder (PTSD)','Substance Abuse Disorder','Sexual disorder','Gender Identity disorder','Conversion disorder','Conduct','No']; @endphp
     <div class="form-control @error('current_differential_diagnosis') is-invalid @enderror">
         @foreach($types as $item)
         <input type="checkbox" name="current_differential_diagnosis[]" value="{{ $item }}"> {{ $item }}<br>
@@ -432,7 +432,7 @@
 <div class="form-group">
     <label class="control-label" for="PsychometricToolscore"><b>18. Psychometric Tool score & Interpretation</b>
     </label><br>
-    @php $types = ['Depression scale','Anxiety','Social Interaction Anxiety scale ','Obsessive- compulsive disorder ','Beck hopelessness scale','Cognitive distortion scale','Depression, Anxiety, stress scale','Somatic complaint scale','Event'];@endphp       
+    @php $types = ['Depression scale','Anxiety','Social Interaction Anxiety scale ','Obsessive- compulsive disorder ','Beck hopelessness scale','Cognitive distortion scale','Depression, Anxiety, stress scale','Somatic complaint scale','Event'];@endphp
     <div class="form-control @error('PsychometricToolscore') is-invalid @enderror">
         <label class="control-label">Tool Name:</label><br>
             <div class="form-control @error('PsychometricTool') is-invalid @enderror">
@@ -455,7 +455,7 @@
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="Problem_duration"><b> 19. Client’s Expectation from therapy:</b></label>  
+  <label class="control-label" for="Problem_duration"><b> 19. Client’s Expectation from therapy:</b></label>
   <textarea class="form-control" name="therapy">
 
   </textarea>
@@ -475,14 +475,14 @@
       </thead>
       <tbody>
         <tr>
-           <td><input type="text" name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td>  
-           <td><input type="text" name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td> 
-           <td><input type="text" name="Perpetuating[]" placeholder="Perpetuating factor" class="form-control name_list" /></td> 
-           <td><input type="text" name="Protective[]" placeholder="ProtectiveFactor" class="form-control name_list" /></td> 
+           <td><input type="text" name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td>
+           <td><input type="text" name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td>
+           <td><input type="text" name="Perpetuating[]" placeholder="Perpetuating factor" class="form-control name_list" /></td>
+           <td><input type="text" name="Protective[]" placeholder="ProtectiveFactor" class="form-control name_list" /></td>
            <td><button type="button" name="addmore" id="addmore_formulation" class="btn btn-success"><i class="fa-solid fa-plus"></i></button></td>
        </tr>
-   </tbody> 
-</table>  
+   </tbody>
+</table>
 </div>
 <div class="form-group">
     <label class="control-label" for="TreatmentGoal"><b>20. Treatment Goal </b>
@@ -503,21 +503,21 @@
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="Problem_duration"><b>21. Intervention:</b></label>  
+  <label class="control-label" for="Problem_duration"><b>21. Intervention:</b></label>
   <textarea class="form-control" name="Intervention">
 
   </textarea>
 </div>
 
 <div class="form-group">
-  <label class="control-label" for="Problem_duration"><b>22. Homework:</b></label>  
+  <label class="control-label" for="Problem_duration"><b>22. Homework:</b></label>
   <textarea class="form-control" required name="Homework">
 
   </textarea>
 </div>
 
 <div class="form-group">
-    <label class="control-label" for="useful_effective"><b>23. How useful and effective do you think the call has been for you? 
+    <label class="control-label" for="useful_effective"><span class="required">*</span><b>23. How useful and effective do you think the call has been for you?
     </b></label><br>
     @php $types = ['Very useful and effective','Useful, but not so effective', 'Quite useful and effective', 'Neither useful, nor effective', 'No comment/Cannot decide']; @endphp
     <div class="form-control @error('useful_effective') is-invalid @enderror">
@@ -531,7 +531,7 @@
         @endif
         {{ $item }}
         <br>
-        @endforeach 
+        @endforeach
     </div>
     @error('useful_effective') {{ $message }} @enderror
 </div>
@@ -571,7 +571,7 @@
  <div class="form-control">
     <label class="control-label" for="client_referral">
         <input type="radio" id="chkSHOJONTierTwo" class="TierTwoChe" name="External_referral" value="Yes" onclick="ShowSHOJONTierTwoExternalreferralBox()"/>
-        External referral  
+        External referral
     </label>
     <label id="SHOJONTierTwoBox" class="TierTwo">
         <div class="form-control">
@@ -602,7 +602,7 @@
                     </span>
                 </div>
             </div>
-        </label>   
+        </label>
     </div>
 </div>
 
@@ -660,10 +660,10 @@
                             <input type="date" name="next_session" class="form-control">
 
                         </label><br> -->
-                        <label class="control-label"> 
+                        <label class="control-label">
                             <a href="#" class="btn btn-primary btn-sm Termination_form " data-id="#" data-toggle="modal" data-target="#TerminationModal" >Termination</a>
                         </label>
-                        @include('call_checklist.shojon.tier2.Termination_form')    
+                        @include('call_checklist.shojon.tier2.Termination_form')
                     </label>
                 </div>
                 @error('TreatmentGoal') {{ $message }} @enderror
@@ -781,33 +781,33 @@
 </script>
 
 <script>
-    $(document).ready(function(){      
+    $(document).ready(function(){
      var postURL = "<?php echo url('addmore'); ?>";
-     var i=1;  
-     $('#add').click(function(){  
-        i++;  
-        $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text"  name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" /></td><td><input type="text"  name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
-    });  
-     $(document).on('click', '.btn_remove', function(){  
-        var button_id = $(this).attr("id");   
-        $('#row'+button_id+'').remove();  
-    });  
- }); 
+     var i=1;
+     $('#add').click(function(){
+        i++;
+        $('#dynamic_field').append('<tr id="row'+i+'" class="dynamic-added"><td><input type="text"  name="Symptoms[]" placeholder="Symptoms" class="form-control name_list" /></td><td><input type="text"  name="Severity[]" placeholder="Severity ( Rate in 0-100)" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');
+    });
+     $(document).on('click', '.btn_remove', function(){
+        var button_id = $(this).attr("id");
+        $('#row'+button_id+'').remove();
+    });
+ });
 </script>
 
 <script>
-    $(document).ready(function(){      
+    $(document).ready(function(){
      var postURL = "<?php echo url('multipulField_formulation'); ?>";
-     var i=1;  
-     $('#addmore_formulation').click(function(){  
-        i++;  
-        $('#dynamic_field_formulation').append('<tr id="row_formulation'+i+'" class="dynamic-added"><td><input type="text"  name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td><td><input type="text"  name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td><td><input type="text"  name="Perpetuating[]" placeholder="Perpetuating  factor" class="form-control name_list" /></td><td><input type="text"  name="Protective[]" placeholder="Protective Factor" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove_formulation">X</button></td></tr>');  
-    });  
-     $(document).on('click', '.btn_remove_formulation', function(){  
-        var button_id_formulation = $(this).attr("id");   
-        $('#row_formulation'+button_id_formulation+'').remove();  
-    });  
- }); 
+     var i=1;
+     $('#addmore_formulation').click(function(){
+        i++;
+        $('#dynamic_field_formulation').append('<tr id="row_formulation'+i+'" class="dynamic-added"><td><input type="text"  name="Predisposing[]" placeholder="Predisposing Factor" class="form-control name_list" /></td><td><input type="text"  name="Precipitatory[]" placeholder="Precipitatory factor" class="form-control name_list" /></td><td><input type="text"  name="Perpetuating[]" placeholder="Perpetuating  factor" class="form-control name_list" /></td><td><input type="text"  name="Protective[]" placeholder="Protective Factor" class="form-control name_list" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove_formulation">X</button></td></tr>');
+    });
+     $(document).on('click', '.btn_remove_formulation', function(){
+        var button_id_formulation = $(this).attr("id");
+        $('#row_formulation'+button_id_formulation+'').remove();
+    });
+ });
 </script>
 <script>
     $(document).ready(function () {
@@ -978,5 +978,5 @@
             $('.TierThree').hide();
         }
     });
-    
+
 </script>

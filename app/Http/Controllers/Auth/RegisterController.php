@@ -68,8 +68,17 @@ class RegisterController extends Controller
             'user' => ['required', 'unique:vicidial_users', 'string', 'max:255'],
             // 'user_type' => ['required', 'string', 'max:255'],
             'user_group' => ['required', 'string', 'max:255'],
-            // 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+
+            'email' => ['string', 'email', 'max:255', 'unique:vicidial_users'],
+            // 'pass' => ['required', 'string', 'min:8'],
+            'designation' => ['string', 'max:255', 'nullable'],
+            'gender' => ['string', 'max:15', 'nullable'],
+            'age' => ['numeric', 'max:110', 'nullable'],
+            'contact_number' => ['numeric', 'max:99999999999'],
+            'job_location' => ['string', 'max:255', 'nullable'],
+            'bmdc_reg_number' => ['string', 'max:255', 'nullable'],
+
         ]);
     }
 
@@ -90,8 +99,22 @@ class RegisterController extends Controller
         $user->pass = $data['password'];
         $user->user_group = $data['user_group'];
 
+        $user->email = $data['email'];
+        $user->designation = $data['designation'];
+        $user->gender = $data['gender'];
+        $user->age = $data['age'];
+        $user->contact_number = $data['contact_number'];
+        $user->job_location = $data['job_location'];
+        $user->bmdc_reg_number = $data['bmdc_reg_number'];
+        // $user->contact_number_has_whatsapp = $data['contact_number_has_whatsapp'];
+
+
         if (array_key_exists("image", $data)) {
             $user->image = date('YmdHi') . $data['image']->getClientOriginalName();
+        }
+
+        if (array_key_exists("e_signature", $data)) {
+            $user->e_signature = date('YmdHi') . $data['e_signature']->getClientOriginalName();
         }
         if ($user->user_group == "MHW") {
             $user->user_level = 1;
@@ -121,6 +144,12 @@ class RegisterController extends Controller
             $file = $request->file('image');
             $filename = date('YmdHi') . $file->getClientOriginalName();
             $file->move(public_path('Image/Profile'), $filename);
+        }
+
+        if ($request->file('e_signature')) {
+            $file = $request->file('e_signature');
+            $filename = date('YmdHi') . $file->getClientOriginalName();
+            $file->move(public_path('Image/e_signature'), $filename);
         }
 
         $this->validator($request->all())->validate();

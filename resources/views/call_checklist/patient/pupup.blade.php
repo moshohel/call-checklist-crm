@@ -6,7 +6,7 @@
     <div class="card-header card-header-border-bottom">
         <h2>Call From - {{ $number }}</h2>
     </div>
-    @include('call_checklist.partials.messages')
+
     <div class="card-body">
         <div>
             @include('call_checklist.partials.messages')

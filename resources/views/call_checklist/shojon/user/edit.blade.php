@@ -22,8 +22,9 @@
                             <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                                 <span class="d-none d-sm-block">Upload new photo</span>
                                 <i class="bx bx-upload d-block d-sm-none"></i>
-                                <input type="file" id="image" name="image" class="account-file-input" accept="image/png, image/jpeg" />
-                                
+                                <input type="file" id="image" name="image" class="account-file-input"
+                                    accept="image/png, image/jpeg" />
+
                             </label>
                             <p class="text-muted mb-0">Allowed JPG, GIF or PNG.</p>
                         </div>
@@ -46,36 +47,96 @@
                         id="exampleFormControlInput1">
                 </div>
 
-                {{-- <div class="form-group col-6" style="display: none">
-                    <label for="exampleFormControlInput2">User Name</label>
-                    <input type="text" name="user" value="{{ $user[0]->user }}" class="form-control"
-                        id="exampleFormControlInput2">
-                </div> --}}
-
                 <div class="form-group col-6">
                     <label for="exampleFormControlInput3">Password</label>
                     <input type="password" name="pass" value="{{ $user[0]->pass }}" class="form-control"
                         id="exampleFormControlInput3">
                 </div>
-                
-                <div class="form-group col-6" style="display: none">
-                    @if ( auth()->user()->user_group == "ADMIN")
-                    <label for="exampleFormControlInput5">User type</label>
-                    <select class="form-control" name="user_group" id="exampleFormControlSelect3" readonly>
-                        <option value="">- Select User Type -</option>
-                        <?php 
-                          $user_group_dropdown=array('MHW'=>'MHW','SHOJON'=>'SHOJON', 'Supervisor'=>'Supervisor', 'Therapist'=>'Therapist', 'Psychiatrist'=>'Psychiatrist', 'ADMIN'=>'ADMIN');
-                          foreach ($user_group_dropdown as $key => $value) {
-                              $selected="";
-                              if($user[0]->user_group==$key){
-                                 $selected="selected";
-                              }
-                              echo "<option value='$key' $selected >$value</option>";
-                              
-                          }
-                        ?>
-                    </select>
-                    @endif
+
+                <div class="form-group col-6">
+                    <label for="exampleFormControlInput2">Email</label>
+                    <input type="email" name="email" value="{{ $user[0]->email }}" class="form-control"
+                        id="exampleFormControlInput2">
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="exampleFormControlInput2">Designation</label>
+                    <input type="text" name="designation" value="{{ $user[0]->designation }}" class="form-control"
+                        id="exampleFormControlInput2">
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="exampleFormControlInput2">Gender</label>
+                    <input type="text" name="gender" value="{{ $user[0]->gender }}" class="form-control"
+                        id="exampleFormControlInput2">
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="exampleFormControlInput2">Age</label>
+                    <input type="number" name="age" value="{{ $user[0]->age }}" class="form-control" min="18" max="110"
+                        id="exampleFormControlInput2">
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="exampleFormControlInput2">Job location</label>
+                    <input type="text" name="job_location" value="{{ $user[0]->job_location }}" class="form-control"
+                        id="exampleFormControlInput2">
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="exampleFormControlInput2">Contact Number</label>
+                    <input type="number" name="contact_number" value="{{ $user[0]->contact_number }}" min="9999999"
+                        max="99999999999" class="form-control" id="exampleFormControlInput2">
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="exampleFormControlInput2">BMDC Reg number</label>
+                    <input type="text" name="bmdc_reg_number" value="{{ $user[0]->bmdc_reg_number }}"
+                        class="form-control" id="exampleFormControlInput2">
+                </div>
+
+                <div class="col-md-6 col-sm-12 mb-2">
+                    <label for="exampleFormControlSelect5">Contact number has whatsapp</label>
+                    <div class="card card-default">
+                        <div class="card-body">
+
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="contact_number_has_whatsapp"
+                                        value="YES" {{ ($user[0]->contact_number_has_whatsapp=="YES")? "checked" : "" }}
+                                    required>YES
+                                </label>
+                            </div>
+
+                            <div class="form-check-inline">
+                                <label class="form-check-label">
+                                    <input type="radio" class="form-check-input" name="contact_number_has_whatsapp"
+                                        value="NO" {{ ($user[0]->contact_number_has_whatsapp=="NO")? "checked" : "" }}
+                                    required>NO
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <label class="form-label"> E-Signature </label>
+                    <div class="d-flex">
+                        <div class="row">
+                            <div class="rounded-circle col-2" style="width: 10%; margin-right: 2em;">
+                                <img src="{{asset('Image/e_signature/'.$user[0]->e_signature )}}" alt="user image">
+                            </div>
+
+                            <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                <span class="d-none d-sm-block">Change E-Signature</span>
+                                <i class="bx bx-upload d-block d-sm-none"></i>
+                                <input type="file" id="e_signature" name="e_signature" class="account-file-input"
+                                    accept="image/png, image/jpeg" />
+                            </label>
+
+                        </div>
+                    </div>
                 </div>
 
             </div>
