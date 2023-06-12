@@ -18,11 +18,11 @@
                 </tr>
                 <tr>
                     <th class="d-none d-md-table-cell">Refer From</th>
-                    <td>{{ $referral[0]->referr_to }}</td>
+                    <td>{{ $referral[0]->referr_from }}</td>
                 </tr>
                 <tr>
                     <th class="d-none d-md-table-cell">Refer To</th>
-                    <td>{{ $referral[0]->referr_from }}</td>
+                    <td>{{ $referral[0]->referr_to }}</td>
                 </tr>
                 <tr>
                     <th class="d-none d-md-table-cell">Client ID</th>
@@ -69,7 +69,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{!! route("referral.referConsultant", $referral[0]->id) !!}" method="post"
+                        <form action="{!! route('referral.referConsultant', $referral[0]->id) !!}" method="post"
                             enctype="multipart/form-data">
                             {{ csrf_field() }}
 
@@ -113,10 +113,10 @@
                             <div class="form-group col-6">
                                 <label for="exampleFormControlSelect3">Consultent</label>
                                 <select class="form-control" name="referred_therapist_or_psychiatrist_user_id" value=""
-                                        id="exampleFormControlSelect3">
+                                    id="exampleFormControlSelect3">
                                     <option value="" disabled selected hidden>Consultent</option>
                                     @foreach ($consultants as $consultant)
-                                        <option value="{{ $consultant->user_id }}">{{ $consultant->full_name }}</option>
+                                    <option value="{{ $consultant->user_id }}">{{ $consultant->full_name }}</option>
                                     @endforeach
                                 </select>
                             </div>

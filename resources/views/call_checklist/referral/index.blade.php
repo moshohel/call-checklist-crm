@@ -39,8 +39,8 @@
               <td class="d-none d-md-table-cell text-dark">{{ $key+1 }}</td>
               <td class="d-none d-md-table-cell text-dark">{{ $referral->created_at }}</td>
               <td class="d-none d-md-table-cell text-dark">{{ $referral->referred_by }}</td>
-              <td class="d-none d-md-table-cell text-dark">{{ $referral->referr_to }}</td>
               <td class="d-none d-md-table-cell text-dark">{{ $referral->referr_from }}</td>
+              <td class="d-none d-md-table-cell text-dark">{{ $referral->referr_to }}</td>
               <td class="d-none d-md-table-cell text-dark">{{ $referral->unique_id }}</td>
               <td class="d-none d-md-table-cell text-dark">{{ $referral->name }}</td>
 
