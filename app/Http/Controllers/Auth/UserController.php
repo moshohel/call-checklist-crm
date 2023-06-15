@@ -40,6 +40,7 @@ class UserController extends Controller
         $sessions = DB::table('sessions')
             ->where('therapist_or_psychiatrist_user_id', '=', $user_id)
             ->where('session_taken', '=', 'NO')
+            ->where('canceled', '=', 'NO')
             ->orderBy('id', 'DESC')
             ->get();
         $rescheduleOrCancelations = DB::table('reschedule_or_cancelations')

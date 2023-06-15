@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\RescheduleOrCancelation;
 use App\Models\ShojonTierOne;
 use Illuminate\Database\Eloquent\Model;
+use App\User;
 
 class SessionController extends Controller
 {
@@ -85,17 +86,22 @@ class SessionController extends Controller
         $session = Session::where('unique_id', '=', $unique_id)
             ->where('therapist_or_psychiatrist_user_id', '=', $doctor_id)
             ->where('session_taken', '=', 'NO')
-            ->get();
-        // ->toSql();
-        print_r('doctor id -' . $doctor_id . 'client id - ' . $unique_id);
-        dd($session);
+            ->orderBy('id', 'DESC')
+            ->first();
+
+        $data = $request->only($session->getFillable());
+        $session->fill($data);
+        // $session->updated_by = auth()->user()->user_id;
+        $session->save();
+
         $data = array();
         $data['status'] = "DONE";
         DB::table('reschedule_or_cancelations')->where('id', $request_id)->update($data);
-        $d = DB::table('reschedule_or_cancelations')->where('id', $request_id)->get();
-        // dd($d);
-        return redirect()->back();
-        // return redirect('user.show', auth()->user()->user_id);
+        // $d = DB::table('reschedule_or_cancelations')->where('id', $request_id)->get();
+
+        session()->flash('success', 'Submitted successfully !!');
+        // return redirect()->back();
+        return redirect()->route('user.show', auth()->user()->user_id);
     }
 
     public function sessionRescheduleCancelation()
@@ -129,12 +135,21 @@ class SessionController extends Controller
         $session = Session::where('unique_id', '=', $unique_id)
             ->where('therapist_or_psychiatrist_user_id', '=', $doctor_id)
             ->where('session_taken', '=', 'NO')
+            ->orderBy('id', 'DESC')
             ->first();
-        // ->toSql();
-        // print_r('doctor id -' . $doctor_id . 'client id - ' . $unique_id);
-        // dd($session);
-        if ($session) {
-            // dd($session);
+        // dd($session->id);
+
+        if ($session !== null && $session->session_taken != "DONE") {
+            $doctor_name = User::where('user_id', '=', $doctor_id)->get();
+            $doctor_name = User::find($doctor_id);
+            $doctor_name =  DB::table('vicidial_users')
+                ->where('user_id', '=', $doctor_id)
+                ->select('vicidial_users.full_name')
+                ->get();
+
+            // dd($doctor_name[0]->full_name);
+            // if ($session) {
+
             $rescheduleOrCancelation = new RescheduleOrCancelation();
             $data = $request->only($rescheduleOrCancelation->getFillable());
             $rescheduleOrCancelation->fill($data);
@@ -143,13 +158,15 @@ class SessionController extends Controller
             } else {
                 $rescheduleOrCancelation->reshedule_request = 1;
             }
+            $rescheduleOrCancelation->therapist_or_psychiatrist = $doctor_name[0]->full_name;
+            $rescheduleOrCancelation->session_id = $session->id;
             $rescheduleOrCancelation->save();
             $consultants = DB::select('SELECT full_name, user_id, user as user_name FROM vicidial_users WHERE user_group="Psychiatrist" or user_group="Therapist"');
             // return view('call_checklist.shojon.session.rescheduleCancelation.index', compact('consultants'));
             session()->flash('success', 'Request submitted successfully !!');
             return redirect()->route('patient.popup', [$reff, $phone_number]);
         }
-        session()->flash('error', 'Client ID or Doctor Name incorrect!!');
+        session()->flash('error', 'Client ID Incorrent or Doctor Name Incorrect or Session already taken!!');
         return redirect()->back();
     }
 
@@ -198,6 +215,25 @@ class SessionController extends Controller
      */
     public function sessionCancelation($id)
     {
-        //
+        $session = Session::find($id);
+        $session->canceled = "YES";
+        $session->canceled_by = auth()->user()->user_id;
+        $session->canceled_by_id = auth()->user()->full_name;
+        $session->save();
+
+        $cancel_request = RescheduleOrCancelation::where('session_id', '=', $session->id)
+            ->where('status', '=', 'NOT DONE')
+            ->where('cancelation_request', '=', 1)
+            ->where('therapist_or_psychiatrist_user_id', '=', $session->therapist_or_psychiatrist_user_id)
+            ->first();
+
+        if ($cancel_request) {
+
+            $cancel_request->status = 'DONE';
+            $cancel_request->save();
+        }
+        // dd($cancel_request[0]->status);
+        session()->flash('success', 'Session Canceled successfully !!');
+        return redirect()->route('user.show', auth()->user()->user_id);
     }
 }

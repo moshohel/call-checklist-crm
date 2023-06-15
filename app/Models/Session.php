@@ -9,6 +9,8 @@ class Session extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = "id";
+
     protected $fillable = [
         'referr_to',
         'referr_from',

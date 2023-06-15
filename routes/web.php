@@ -67,7 +67,7 @@ Route::group(['prefix' => 'patient'], function () {
     Route::get('/reassign', [PatientController::class, 'createReassignRequest'])->name('patient.reassign')->middleware('auth');
 
     Route::get('/', 'Patient\PatientController@index')->name('patients')->middleware('auth');
-    // Route::get('/show/{unique_id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');
+    Route::get('/show/{unique_id}', 'Patient\PatientController@show')->name('patient.show')->middleware('auth');
     Route::get('/showInfo/{phone}', 'Patient\PatientController@showInfo')->name('patient.showInfo')->middleware('auth');
     Route::get('/paging', 'Patient\PatientController@paging')->name('patient.paging')->middleware('auth');
     Route::get('/search', 'Patient\PatientController@search')->name('patient.search')->middleware('auth');
@@ -117,14 +117,14 @@ Route::group(['prefix' => 'session'], function () {
     Route::post('/edit/{request_id}/{doctor_id}', 'Session\SessionController@update')->name('session.update');
     Route::post('/referConsultant/{id}', 'Session\SessionController@referConsultant')->name('session.referConsultant');
     Route::get('/delete/{id}', 'Session\SessionController@delete')->name('session.delete');
+    Route::get('/session/cancelation/{session_id}', 'Session\SessionController@sessionCancelation')->name('session.sessionCancelation');
 
     Route::get('/reschedule/cancelation/{number}', 'Session\SessionController@sessionRescheduleCancelationForm')->name('session.rescheduleOrCancelationForm');
     Route::post('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelationStore')->name('session.rescheduleOrCancelationStore');
     Route::get('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelation')->name('session.rescheduleOrCancelations');
     Route::get('/reschedule/cancelation/show/{id}', 'Session\SessionController@sessionRescheduleCancelationShow')->name('session.sessionRescheduleCancelationShow');
 
-    Route::post('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelationStore')->name('session.rescheduleOrCancelationStore');
-    Route::get('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelation')->name('session.rescheduleOrCancelations');
+    // Route::post('/reschedule/cancelation/', 'Session\SessionController@sessionRescheduleCancelationStore')->name('session.rescheduleOrCancelationStore');
 });
 
 // Calendar routes
@@ -256,9 +256,9 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::group(['middleware' => 'shojon_agent'], function () {
             });
         });
-});
+    });
 
-Route::get('sms_test/{message}/{phone_number}', 'CallChecklist\ShojonController@sendSms');
+    Route::get('sms_test/{message}/{phone_number}', 'CallChecklist\ShojonController@sendSms');
 });
 
 Auth::routes();

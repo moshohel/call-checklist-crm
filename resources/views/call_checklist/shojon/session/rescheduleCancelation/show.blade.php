@@ -95,10 +95,14 @@
             {{-- <div class="col">
                 <a href="{{ route('patient.edit', $rescheduleOrCancelation->id) }}" class='btn btn-info'>Edit</a>
             </div> --}}
+
+            @if ( $rescheduleOrCancelation->cancelation_request )
+
             <div class="col">
                 <a href="#deleteModal{{ $rescheduleOrCancelation->id }}" data-toggle="modal"
                     class="btn btn-danger">Cancel the Session</a>
             </div>
+            @endif
             <div class="col">
                 <p class='btn btn-info' id="two"> Reschedule </p>
             </div>
@@ -110,13 +114,14 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Are sure to delete?</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Are you sure to Cancel?</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="{!! route('patient.delete', $rescheduleOrCancelation->id) !!}" method="get">
+                        <form action="{!! route('session.sessionCancelation', $rescheduleOrCancelation->session_id) !!}"
+                            method="get">
                             {{ csrf_field() }}
                             <button type="submit" class="btn btn-danger">Sure!!! You want to Cancel the Session</button>
                         </form>
@@ -151,7 +156,7 @@
                 <div class="form-group col-3">
                     <label for="exampleFormControlInput1">Client ID</label>
                     @if(isset($rescheduleOrCancelation->unique_id))
-                    <input type="text" class="form-control" name="client_id" readonly
+                    <input type="text" class="form-control" name="unique_id" readonly
                         value="{{ $rescheduleOrCancelation->unique_id }}">
                     @endif
                 </div>
