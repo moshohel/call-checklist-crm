@@ -239,4 +239,10 @@ class shojonTierThree extends Controller
         $data->therapist = $request->Therapist;
         $data->save();
     }
+
+    public function prescriptionForm()
+
+    {
+        return view('call_checklist.shojon.tierThree.prescription_form');
+    }
 }

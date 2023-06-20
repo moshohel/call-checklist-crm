@@ -249,6 +249,7 @@ Route::group(['prefix' => 'call-checklist'], function () {
             Route::get('/details/{id}', [shojonTierThree::class, 'clientDetails'])->name('shojon.tireThree.view');
             Route::get('/edit/{id}', [shojonTierThree::class, 'clientUpdate'])->name('shojon.tireThree.edit');
             Route::post('/update', [shojonTierThree::class, 'TierTwoUpdate'])->name('shojon.tireThree.update');
+            Route::get('/prescription', [shojonTierThree::class, 'prescriptionForm'])->name('shojon.tireThree.prescriptionForm');
 
             Route::group(['middleware' => 'shojon_admin'], function () {
             });
