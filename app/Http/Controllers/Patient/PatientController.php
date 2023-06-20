@@ -109,7 +109,7 @@ class PatientController extends Controller
             "recordsFiltered" => $recordsFiltered,
             "data"            => $output   // total data array
         );
-        echo json_encode($json_data); 
+        echo json_encode($json_data);
     }
 
     /**
@@ -307,7 +307,7 @@ class PatientController extends Controller
         $tierThree = DB::select("SELECT * FROM `shojon_tire_threes` WHERE caller_id = '$unique_id'");
 
         // $queries = DB::select("SELECT * FROM queries WHERE phone = $phone");
-        // dd($previous_data);
+        // dd($tierThree);
         return view('call_checklist.patient.showInfo', compact('pageTitle', 'previous_data', 'patient', 'tierTwo', 'tierThree'));
     }
 

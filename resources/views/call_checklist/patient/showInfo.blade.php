@@ -13,7 +13,7 @@
             <div class="profile-content-left pt-5 pb-3 px-3 px-xl-5">
                 <div class="contact-info pt-4">
                     <h3 class="text-dark mb-1">Patient Information</h3>
-                    
+
                     <p class="text-dark font-weight-medium pt-4 mb-2"> Name</p>
                     <p>{{ $patient[0]->name }}</p>
                     <p class="text-dark font-weight-medium pt-4 mb-2">Phone</p>
@@ -36,8 +36,8 @@
 
                     <li class="nav-item">
                         <a class="nav-link active show" id="queries_Details-tab" data-toggle="tab"
-                            href="#queries_Details" role="tab" aria-controls="queries_Details"
-                            aria-selected="true">Tier 1</a>
+                            href="#queries_Details" role="tab" aria-controls="queries_Details" aria-selected="true">Tier
+                            1</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="tier2-tab" data-toggle="tab" href="#tier2" role="tab"

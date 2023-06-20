@@ -131,9 +131,13 @@
                         'Could not tell']; @endphp
                         <div class="form-control @error('occupation') is-invalid @enderror">
                             @foreach($types as $item)
-                            @if($previous_data->occupation == $item)
+                            @if(isset( $previous_data->occupation))
+                            {
+                            @if( $previous_data->occupation == $item )
                             <input type="radio" name="occupation" value="{{ $item }}" checked="checked"
                                 onclick="ShowOccupationBox()" />
+                            @endif
+                            }
                             @else
                             <input type="radio" name="occupation" value="{{ $item }}" onclick="ShowOccupationBox()" />
                             @endif
@@ -161,8 +165,12 @@
                             <datalist id="Educational_Qualification">
                                 <option value="" selected disabled><b>Select Educational Qualification</b></option>
                                 @foreach($types as $item)
-                                @if($previous_data->education == $item)
-                                <option selected value="{{ $item }}">{{ $item }}</option>
+                                @if(isset($previous_data->education))
+                                {
+                                @if( $previous_data->education == $item )
+                                <option value="{{ $item }}" selected>{{ $item }}</option>
+                                @endif
+                                }
                                 @else
                                 <option value="{{ $item }}">{{ $item }}</option>
                                 @endif
@@ -179,8 +187,12 @@
                             <datalist id="Marital_Status">
                                 <option value="" selected disabled>Select Marital Status</option>
                                 @foreach($types as $item)
-                                @if($previous_data->marital == $item)
-                                <option selected value="{{ $item }}">{{ $item }}</option>
+                                @if(isset($previous_data->marital))
+                                {
+                                @if( $previous_data->marital == $item )
+                                <option value="{{ $item }}" selected>{{ $item }}</option>
+                                @endif
+                                }
                                 @else
                                 <option value="{{ $item }}">{{ $item }}</option>
                                 @endif

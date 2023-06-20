@@ -1,7 +1,7 @@
 <div id="accordion" class="accordion">
     @php($i = 1)
-    @if(isset($usersType))
-    @foreach ($previous_data as $query)
+    @if(isset($tierThree))
+    @foreach ($tierThree as $query)
     <?php
         $dia=json_decode($query->diagnosis,true);
         $con=json_decode($query->concern_history,true);
@@ -67,12 +67,37 @@
                                     <td>{{ $query->session }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Distress</td>
-                                    <td>{{ $query->distress }}</td>
+                                    <td>Appearance</td>
+                                    <td>{{ $query->appearance }}</td>
                                 </tr>
                                 <tr>
-                                    <td>WHO</td>
-                                    <td>{{ $query->WHO }}</td>
+                                    <td>Behavior</td>
+                                    <td>{{ $query->behavior }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Speech</td>
+                                    <td>{{ $query->speech }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Affect</td>
+                                    <td>{{ $query->affect }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Thought</td>
+                                    <td>{{ $query->thought }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Perception</td>
+                                    <td>{{ $query->perception }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Cognition</td>
+                                    <td>{{ $query->cognition }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Judgement</td>
+                                    <td>{{ $query->judgement }}</td>
                                 </tr>
 
                                 <tr>
@@ -93,6 +118,19 @@
                                     <td>{{ $query->family_history }}</td>
                                 </tr>
 
+                                <tr>
+                                    <td>Birth history</td>
+                                    <td>{{ $query->birth_history }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Problem history</td>
+                                    <td>{{ $query->problem_history }}</td>
+                                </tr>
+
+                                <tr>
+                                    <td>Substance history</td>
+                                    <td>{{ $query->substance_history }}</td>
+                                </tr>
                                 <tr>
                                     <td>Suicidal ideation</td>
                                     <td>{{ $query->suicidal_ideation }}</td>
@@ -116,8 +154,8 @@
                                     @endif
                                 </tr>
                                 <tr>
-                                    <td>Psychiatric medication</td>
-                                    <td>{{ $query->psychiatric_medication }}</td>
+                                    <td>Previous medication</td>
+                                    <td>{{ $query->previous_medication }}</td>
                                 </tr>
 
                                 <tr>
@@ -156,65 +194,65 @@
                                 </tr>
 
                                 <tr>
-                                    <td>Tool name</td>
-                                    <td>{{ $query->tool_name }}</td>
+                                    <td>Prescribed medications</td>
+                                    <td>{{ $query->prescribed_medications }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Score</td>
-                                    <td>{{ $query->score }}</td>
+                                    <td>Psychotherapy session suggested</td>
+                                    <td>{{ $query->psychotherapy_session_suggested }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Therapy</td>
-                                    <td>{{ $query->therapy }}</td>
+                                    <td>Client ability buy medicine</td>
+                                    <td>{{ $query->client_ability_buy_medicine }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Predisposing</td>
-                                    <td>{{ $query->predisposing }}</td>
+                                    <td>Suitable session type</td>
+                                    <td>{{ $query->suitable_session_type }}</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td>Precipitatory</td>
                                     <td>{{ $query->precipitatory }}</td>
-                                </tr>
+                                </tr> --}}
 
-                                <tr>
+                                {{-- <tr>
                                     <td>Perpetuating</td>
                                     <td>{{ $query->perpetuating }}</td>
-                                </tr>
-                                <tr>
+                                </tr> --}}
+                                {{-- <tr>
                                     <td>Protective</td>
                                     <td>{{ $query->protective }}</td>
-                                </tr>
+                                </tr> --}}
 
-                                <tr>
+                                {{-- <tr>
                                     <td>Short term</td>
                                     <td>{{ $query->short_term }}</td>
-                                </tr>
-                                <tr>
+                                </tr> --}}
+                                {{-- <tr>
                                     <td>Long term</td>
                                     <td>{{ $query->long_term }}</td>
-                                </tr>
+                                </tr> --}}
 
-                                <tr>
+                                {{-- <tr>
                                     <td>Intervention</td>
                                     <td>{{ $query->intervention }}</td>
-                                </tr>
-                                <tr>
+                                </tr> --}}
+                                {{-- <tr>
                                     <td>Homework</td>
                                     <td>{{ $query->homework }}</td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <td>Effective</td>
                                     <td>{{ $query->effective }}</td>
                                 </tr>
-                                <tr>
+                                {{-- <tr>
                                     <td>Internal referral</td>
                                     <td>{{ $query->internal_referral }}</td>
-                                </tr>
+                                </tr> --}}
 
-                                <tr>
+                                {{-- <tr>
                                     <td>External referral</td>
                                     <td>{{ $query->external_referral }}</td>
-                                </tr>
+                                </tr> --}}
                                 <tr>
                                     <td>Reason for referral</td>
                                     <td>{{ $query->reason_for_referral }}</td>

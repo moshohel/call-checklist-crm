@@ -34,333 +34,333 @@
             <ul class="treeview-menu">
                 <li>
                     <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="{{ route('call_checklist.shojon.manual_form') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Shojon Manual Entry</span>
-                    </a>
-                </li>
-            </ul>
-            @endif
-        </li>
+                    href="{{ route('call_checklist.shojon.manual_form') }}">
+                    <i class="app-menu__icon fa fa-wpforms"></i>
+                    <span class="app-menu__label">Shojon Manual Entry</span>
+                </a>
+            </li>
+        </ul>
         @endif
+    </li>
+    @endif
 
-        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") ||
-        (auth()->user()->user_group == "MHW"))
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
-                <span class="app-menu__label">Tier 1</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
+    @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") ||
+    (auth()->user()->user_group == "MHW"))
+    <li class="treeview">
+        <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
+            <span class="app-menu__label">Tier 1</span>
+            <i class="treeview-indicator fa fa-angle-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON")||
+            (auth()->user()->user_group == "Supervisor") || (auth()->user()->user_group == "MHW"))
+            <li>
+                <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+                href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">Dashboard tier -1 </span>
             </a>
-            <ul class="treeview-menu">
-                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON")||
-                (auth()->user()->user_group == "Supervisor") || (auth()->user()->user_group == "MHW"))
-                <li>
-                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="{{ route('call_checklist.shojon.tierOne.dashboard') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Dashboard tier -1 </span>
-                    </a>
-                </li>
-                <li>
-                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="{{ route('call_checklist.shojon.manual_form') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Add - Tier 1 </span>
-                    </a>
-                </li>
-                @endif
-                <li>
-                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="{{ route('call_checklist.shojon.TierOneList') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Client List - Tier 1 </span>
-                    </a>
-                </li>
-
-                <li>
-                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="{{ route('patient.cilentCallForm') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Cilent Call Add </span>
-                    </a>
-                </li>
-
-            </ul>
         </li>
-        @endif
+        <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+            href="{{ route('call_checklist.shojon.manual_form') }}">
+            <i class="app-menu__icon fa fa-wpforms"></i>
+            <span class="app-menu__label">Add - Tier 1 </span>
+        </a>
+    </li>
+    @endif
+    <li>
+        <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+        href="{{ route('call_checklist.shojon.TierOneList') }}">
+        <i class="app-menu__icon fa fa-wpforms"></i>
+        <span class="app-menu__label">Client List - Tier 1 </span>
+    </a>
+</li>
 
-        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
-                <span class="app-menu__label">Tier 2</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
+<li>
+    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+    href="{{ route('patient.cilentCallForm') }}">
+    <i class="app-menu__icon fa fa-wpforms"></i>
+    <span class="app-menu__label">Cilent Call Add </span>
+</a>
+</li>
+
+</ul>
+</li>
+@endif
+
+@if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+<li class="treeview">
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
+        <span class="app-menu__label">Tier 2</span>
+        <i class="treeview-indicator fa fa-angle-right"></i>
+    </a>
+    <ul class="treeview-menu">
+
+        <li>
+            <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+            href="#">
+            <i class="app-menu__icon fa fa-wpforms"></i>
+            <span class="app-menu__label">Dashboard tier - 2 </span>
+        </a>
+    </li>
+    {{-- <li>
+        <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+        href="{{ route('call_checklist.shojon.tier2') }}">
+        <i class="app-menu__icon fa fa-wpforms"></i>
+        <span class="app-menu__label">Add Patient - Tier 2 </span>
+    </a>
+</li> --}}
+<li>
+    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
+    href="{{ route('call_checklist.shojon.Patientlist') }}">
+    <i class="app-menu__icon fa fa-wpforms"></i>
+    <span class="app-menu__label">Patient List - Tier 2 </span>
+</a>
+</li>
+
+</ul>
+</li>
+<li class="treeview">
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
+        <span class="app-menu__label">Tier 3</span>
+        <i class="treeview-indicator fa fa-angle-right"></i>
+    </a>
+    <ul class="treeview-menu">
+
+<!--         <li>
+            <a class="app-menu__item" href="{{ route('call_checklist.shojon.tierThree') }}">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">Add Patient - Tier 3 </span>
             </a>
-            <ul class="treeview-menu">
-
-                <li>
-                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="#">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Dashboard tier - 2 </span>
-                    </a>
-                </li>
-                {{-- <li>
-                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="{{ route('call_checklist.shojon.tier2') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Add Patient - Tier 2 </span>
-                    </a>
-                </li> --}}
-                <li>
-                    <a class="app-menu__item {{ Route::currentRouteName() == 'call_checklist.shojon.create' ? 'active' : '' }}"
-                        href="{{ route('call_checklist.shojon.Patientlist') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Patient List - Tier 2 </span>
-                    </a>
-                </li>
-
-            </ul>
-        </li>
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
-                <span class="app-menu__label">Tier 3</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
+        </li>  -->
+        <li>
+            <a class="app-menu__item" href="{{ route('shojon.tierThreeList') }}">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">Patient List - Tier 3</span>
             </a>
-            <ul class="treeview-menu">
-
-                {{-- <li>
-                    <a class="app-menu__item" href="{{ route('call_checklist.shojon.tierThree') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Add Patient - Tier 3 </span>
-                    </a>
-                </li> --}}
-                <li>
-                    <a class="app-menu__item" href="{{ route('shojon.tierThreeList') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Patient List - Tier 3</span>
-                    </a>
-                </li>
-
-            </ul>
         </li>
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
-                <span class="app-menu__label">Call Evaluation</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-
-                <li>
-                    <a class="app-menu__item" href=" {{ route('call_checklist.shojon.callEvaluation') }} ">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Evaluation</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="app-menu__item" href=" {{ route('call_checklist.shojon.eva_index') }} ">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Evaluation List</span>
-                    </a>
-                </li>
-
-            </ul>
-        </li>
-        @endif
-
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
-                <span class="app-menu__label">Shojon Patient</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="app-menu__item" href="{{ route('patients') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Patients</span>
-                    </a>
-                </li>
-            </ul>
-            {{-- <ul class="treeview-menu">
-                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
-                <li>
-                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
-                        == "SHOJON") ? 'active' : '' }}"
-                        href="#">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">New Patient</span>
-                    </a>
-                </li>
-                @endif
-            </ul> --}}
-        </li>
-
-        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "KPR") ||
-        (auth()->user()->user_group == "SHOJON"))
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
-                <span class="app-menu__label">Report</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "KPR"))
-                <li>
-                    <a class="app-menu__item" href="{{ route('call_checklist.kpr.index') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">KPR Report</span>
-                    </a>
-                </li>
-                @endif
-            </ul>
-            <ul class="treeview-menu">
-                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
-                <li>
-                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
-                        == "SHOJON") ? 'active' : '' }}"
-                        href="{{ route('call_checklist.shojon.index') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Shojon Report</span>
-                    </a>
-                </li>
-                @endif
-            </ul>
-        </li>
-        @endif
-
-        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON" ||
-        (auth()->user()->user_group == "MHW")))
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
-                <span class="app-menu__label">Reschedule / Cancelation</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="app-menu__item" href="{{ route('session.rescheduleOrCancelations') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">List</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        @endif
-        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "Supervisor"))
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
-                <span class="app-menu__label">Reassign Request</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="app-menu__item" href="{{ route('reassign.requests') }}">
-                        <i class="app-menu__icon fa fa-wpforms"></i>
-                        <span class="app-menu__label">Reassign List</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        @endif
-
-        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") ||
-        (auth()->user()->user_group == "Supervisor"))
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-retweet"></i>
-                <span class="app-menu__label">Referrals</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li>
-                    <a class="app-menu__item" href="{{ route('referrals') }}">
-                        <i class="app-menu__icon fa fa-list"></i>
-                        <span class="app-menu__label">Referral List</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="treeview-menu">
-                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
-                <li>
-                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
-                        == "SHOJON") ? 'active' : '' }}"
-                        href="{{ route('referral.create') }}">
-                        <i class="app-menu__icon fa fa-plus-circle"></i>
-                        <span class="app-menu__label">New Referral</span>
-                    </a>
-                </li>
-                @endif
-            </ul>
-        </li>
-        @endif
-
-        <li class="treeview">
-            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-circle"></i>
-                <span class="app-menu__label">User</span>
-                <i class="treeview-indicator fa fa-angle-right"></i>
-            </a>
-            @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") ||
-            (auth()->user()->user_group == "Psychiatrist") || (auth()->user()->user_group == "Therapist"))
-            <ul class="treeview-menu">
-                <li>
-                    <a class="app-menu__item" href="{{ route('call_checklist.shojon.doctor.dashboard') }}">
-                        <i class="app-menu__icon fa fa-user-circle"></i>
-                        <span class="app-menu__label">Doctor Dashboard</span>
-                    </a>
-                </li>
-            </ul>
-            @endif
-            @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
-            <ul class="treeview-menu">
-                <li>
-                    <a class="app-menu__item" href="{{ route('users') }}">
-                        <i class="app-menu__icon fa fa-user-circle"></i>
-                        <span class="app-menu__label">User List</span>
-                    </a>
-                </li>
-            </ul>
-            @endif
-            <ul class="treeview-menu">
-
-                <li>
-                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
-                        == "SHOJON") ? 'active' : '' }}"
-                        href="{{ route('user.edit', auth()->user()->user_id) }}">
-                        <i class="app-menu__icon fa fa-user-circle"></i>
-                        <span class="app-menu__label">Profile</span>
-                    </a>
-                </li>
-
-                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
-                <li>
-                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
-                        == "SHOJON") ? 'active' : '' }}"
-                        href="{{ route('register') }}">
-                        <i class="app-menu__icon fa fa-user-circle"></i>
-                        <span class="app-menu__label">New User</span>
-                    </a>
-                </li>
-                @endif
-
-                @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") ||
-                (auth()->user()->user_group == "Psychiatrist") || (auth()->user()->user_group == "Therapist"))
-                <li>
-                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
-                        == "SHOJON") ? 'active' : '' }}"
-                        href="{{ route('user.show', auth()->user()->user_id) }}">
-                        <i class="app-menu__icon fa fa-user-circle"></i>
-                        <span class="app-menu__label">Client Details</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
-                        == "SHOJON") ? 'active' : '' }}"
-                        href="{{ route('calendar.index') }}">
-                        <i class="app-menu__icon fa fa-user-circle"></i>
-                        <span class="app-menu__label">Calendar</span>
-                    </a>
-                </li>
-                @endif
-            </ul>
-
-        </li>
-
 
     </ul>
+</li>
+<li class="treeview">
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-list"></i>
+        <span class="app-menu__label">Call Evaluation</span>
+        <i class="treeview-indicator fa fa-angle-right"></i>
+    </a>
+    <ul class="treeview-menu">
+
+        <li>
+            <a class="app-menu__item" href=" {{ route('call_checklist.shojon.callEvaluation') }} ">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">Evaluation</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item" href=" {{ route('call_checklist.shojon.eva_index') }} ">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">Evaluation List</span>
+            </a>
+        </li>
+
+    </ul>
+</li>
+@endif
+
+<li class="treeview">
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
+        <span class="app-menu__label">Shojon Patient</span>
+        <i class="treeview-indicator fa fa-angle-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li>
+            <a class="app-menu__item" href="{{ route('patients') }}">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">Patients</span>
+            </a>
+        </li>
+    </ul>
+    {{-- <ul class="treeview-menu">
+        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+        <li>
+            <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                == "SHOJON") ? 'active' : '' }}"
+                href="#">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">New Patient</span>
+            </a>
+        </li>
+        @endif
+    </ul> --}}
+</li>
+
+@if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "KPR") ||
+(auth()->user()->user_group == "SHOJON"))
+<li class="treeview">
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
+        <span class="app-menu__label">Report</span>
+        <i class="treeview-indicator fa fa-angle-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "KPR"))
+        <li>
+            <a class="app-menu__item" href="{{ route('call_checklist.kpr.index') }}">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">KPR Report</span>
+            </a>
+        </li>
+        @endif
+    </ul>
+    <ul class="treeview-menu">
+        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+        <li>
+            <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                == "SHOJON") ? 'active' : '' }}"
+                href="{{ route('call_checklist.shojon.index') }}">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">Shojon Report</span>
+            </a>
+        </li>
+        @endif
+    </ul>
+</li>
+@endif
+
+@if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON" ||
+(auth()->user()->user_group == "MHW")))
+<li class="treeview">
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
+        <span class="app-menu__label">Reschedule / Cancelation</span>
+        <i class="treeview-indicator fa fa-angle-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li>
+            <a class="app-menu__item" href="{{ route('session.rescheduleOrCancelations') }}">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">List</span>
+            </a>
+        </li>
+    </ul>
+</li>
+@endif
+@if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "Supervisor"))
+<li class="treeview">
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-book"></i>
+        <span class="app-menu__label">Reassign Request</span>
+        <i class="treeview-indicator fa fa-angle-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li>
+            <a class="app-menu__item" href="{{ route('reassign.requests') }}">
+                <i class="app-menu__icon fa fa-wpforms"></i>
+                <span class="app-menu__label">Reassign List</span>
+            </a>
+        </li>
+    </ul>
+</li>
+@endif
+
+@if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") ||
+(auth()->user()->user_group == "Supervisor"))
+<li class="treeview">
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-retweet"></i>
+        <span class="app-menu__label">Referrals</span>
+        <i class="treeview-indicator fa fa-angle-right"></i>
+    </a>
+    <ul class="treeview-menu">
+        <li>
+            <a class="app-menu__item" href="{{ route('referrals') }}">
+                <i class="app-menu__icon fa fa-list"></i>
+                <span class="app-menu__label">Referral List</span>
+            </a>
+        </li>
+    </ul>
+    <ul class="treeview-menu">
+        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+        <li>
+            <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                == "SHOJON") ? 'active' : '' }}"
+                href="{{ route('referral.create') }}">
+                <i class="app-menu__icon fa fa-plus-circle"></i>
+                <span class="app-menu__label">New Referral</span>
+            </a>
+        </li>
+        @endif
+    </ul>
+</li>
+@endif
+
+<li class="treeview">
+    <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-user-circle"></i>
+        <span class="app-menu__label">User</span>
+        <i class="treeview-indicator fa fa-angle-right"></i>
+    </a>
+    @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") ||
+    (auth()->user()->user_group == "Psychiatrist") || (auth()->user()->user_group == "Therapist"))
+    <ul class="treeview-menu">
+        <li>
+            <a class="app-menu__item" href="{{ route('call_checklist.shojon.doctor.dashboard') }}">
+                <i class="app-menu__icon fa fa-user-circle"></i>
+                <span class="app-menu__label">Doctor Dashboard</span>
+            </a>
+        </li>
+    </ul>
+    @endif
+    @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+    <ul class="treeview-menu">
+        <li>
+            <a class="app-menu__item" href="{{ route('users') }}">
+                <i class="app-menu__icon fa fa-user-circle"></i>
+                <span class="app-menu__label">User List</span>
+            </a>
+        </li>
+    </ul>
+    @endif
+    <ul class="treeview-menu">
+
+        <li>
+            <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                == "SHOJON") ? 'active' : '' }}"
+                href="{{ route('user.edit', auth()->user()->user_id) }}">
+                <i class="app-menu__icon fa fa-user-circle"></i>
+                <span class="app-menu__label">Profile</span>
+            </a>
+        </li>
+
+        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON"))
+        <li>
+            <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                == "SHOJON") ? 'active' : '' }}"
+                href="{{ route('register') }}">
+                <i class="app-menu__icon fa fa-user-circle"></i>
+                <span class="app-menu__label">New User</span>
+            </a>
+        </li>
+        @endif
+
+        @if( (auth()->user()->user_group == "ADMIN") || (auth()->user()->user_group == "SHOJON") ||
+        (auth()->user()->user_group == "Psychiatrist") || (auth()->user()->user_group == "Therapist"))
+        <li>
+            <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                == "SHOJON") ? 'active' : '' }}"
+                href="{{ route('user.show', auth()->user()->user_id) }}">
+                <i class="app-menu__icon fa fa-user-circle"></i>
+                <span class="app-menu__label">Client Details</span>
+            </a>
+        </li>
+        <li>
+            <a class="app-menu__item {{ (auth()->user()->user_group == " ADMIN") || (auth()->user()->user_group
+                == "SHOJON") ? 'active' : '' }}"
+                href="{{ route('calendar.index') }}">
+                <i class="app-menu__icon fa fa-user-circle"></i>
+                <span class="app-menu__label">Calendar</span>
+            </a>
+        </li>
+        @endif
+    </ul>
+
+</li>
+
+
+</ul>
 </aside>
