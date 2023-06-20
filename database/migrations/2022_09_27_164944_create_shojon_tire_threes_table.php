@@ -49,7 +49,7 @@ class CreateShojonTireThreesTable extends Migration
             $table->text('family_history')->nullable();
             $table->text('substance_history')->nullable();
             $table->string('suicidal_ideation')->nullable();
-            $table->string('self_harm_history')->nullable();
+            $table->string('self_harm_history')->nullable(); 
             $table->text('diagnosis')->nullable();
             $table->string('previous_medication')->nullable();
             $table->string('name_of_medicine')->nullable();

@@ -15,6 +15,7 @@
 			    <label for="validationCustom01" class="form-label">Project name:</label>
 			    <input type="text" class="form-control" name="project_name"  placeholder="Project name">
 			</div>
+			<input type="hidden" name="flag" value="tier3">
 	       	<div class="col-md-3">
 			    <label for="validationCustom01" class="form-label">Counselor name:</label>
 			    <input type="text" class="form-control" name="Counselor_name" placeholder="Counselor name" >
@@ -168,53 +169,3 @@
      </div>
   </div>
 </div>
-<script type="text/javascript">
-	$(document).ready(function(){
-         ShowTerminationBox();
-	});
-	function ShowTerminationBox(){
-		 var radio = document.getElementById("chkTermination");
-        var Box = document.getElementById("terminationBox");
-        Box.style.display = radio.checked ? "block" : "none";
-        var other = Box.getElementsByTagName('input')[0];
-        radio.checked ? other.setAttribute('required', "required") : other.removeAttribute('required');
-	}
-</script>
-<script type="text/javascript">
-	$(document).ready(function(){
-        $('#_termination_tier_three_from').on('submit',function(e){
-            e.preventDefault();
-            $.ajax({
-            	type:"POST",
-            	url: '{{ route('call_checklist.shojon.termination_form') }}',
-            	data:$('#_termination_tier_three_from').serialize(),
-            	success:function(response){
-            		console.log(response)
-            		$('#TerminationModaltier_three').modal('hide')
-            		alert("Termination save successfully");
-            	},
-            	error:function(error)
-            	{
-            		console.log(error)
-            		alert("Termination not save");
-            	}
-
-            });
-        });
-	});
-</script>
-
-<script>
-    $(document).ready(function(){      
-       var postURL = "<?php echo url('multipulField_Terminationtt'); ?>";
-       var i=1;  
-       $('#addmore_terminationtt').click(function(){  
-            i++;  
-            $('#dynamic_field_terminationtt').append('<tr id="row_terminationtt'+i+'" class="dynamic-added"><td><input type="text" name="Scheduled[]" placeholder="Scheduled Factor" class="form-control name_list" /></td>  <td><input type="text" name="Attended[]" placeholder="Attended" class="form-control name_list" /></td> <td><input type="text" name="Cancelled[]" placeholder="Cancelled" class="form-control name_list" /></td><td><input type="text" name="notAttend[]" placeholder="Not attend" class="form-control name_list" /></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove_terminationtt">X</button></td></tr>');  
-       });  
-       $(document).on('click', '.btn_remove_terminationtt', function(){  
-            var button_id_terminationtt = $(this).attr("id");   
-            $('#row_terminationtt'+button_id_terminationtt+'').remove();  
-       });  
-     }); 
-</script>
